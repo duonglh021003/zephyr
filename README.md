@@ -2,7 +2,6 @@
 
 ## link
 ```
-http://zephyz.lovestoblog.com/
+zephyz.lovestoblog.com
 ```
 
-```
