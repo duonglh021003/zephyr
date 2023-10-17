@@ -1,6 +1,6 @@
 # Config
 
-## link
+## link website
 ```
 zephyz.lovestoblog.com
 ```
