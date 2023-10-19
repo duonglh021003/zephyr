@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.example.demo.entity.Staff;
 import com.example.demo.service.StaffService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping(value = "/zephyr")
-public class login {
+public class LoginController {
 
     @Autowired
     private StaffService staffService;
@@ -22,15 +23,15 @@ public class login {
     }
 
 
-    @PostMapping("/staff/sign-in")
+    @PostMapping("/staff/home")
     public String signIn(@RequestParam("phoneNumber") String phoneNumber,
                          @RequestParam("password") String password,
                          Model model
     ) {
-
+        Staff staff = staffService.detailPhone(phoneNumber);
+        model.addAttribute("staff", staff);
         return staffService.login(phoneNumber, password);
     }
-
 
 
 }

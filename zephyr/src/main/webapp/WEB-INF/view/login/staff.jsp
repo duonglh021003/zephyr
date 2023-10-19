@@ -302,7 +302,7 @@
 
                 <div style="margin-top: 100px; " >
                     <h2 style="text-align: center; margin-right: 80px">Login</h2>
-                    <form action="/zephyr/staff/sign-in" method="post" style="margin-top: 50px ">
+                    <form action="/zephyr/staff/home" method="post" style="margin-top: 50px ">
                         <div class="row" >
                             <div class="col-md-4"></div>
                             <div class="col-md-4">

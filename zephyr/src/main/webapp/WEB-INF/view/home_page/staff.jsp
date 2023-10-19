@@ -40,8 +40,8 @@
                             <span class="count bg-success"></span>
                         </div>
                         <div class="profile-name">
-                            <h5 class="mb-0 font-weight-normal" value=" ${staff.name}></h5>
-                            <span>admin</span>
+                            <h5 class="mb-0 font-weight-normal">${staff.name}</h5>
+                            <span>${staff.position.name}</span>
                         </div>
                     </div>
                     <a href="#" id="profile-dropdown" data-toggle="dropdown"><i class="mdi mdi-dots-vertical"></i></a>
@@ -142,7 +142,7 @@
                 </a>
                 <div class="collapse" id="staff">
                     <ul class="nav flex-column sub-menu">
-                        <li class="nav-item"><a class="nav-link" href=""> index </a></li>
+                        <li class="nav-item"><a class="nav-link" href="/zephyr/staff/index"> index </a></li>
                         <li class="nav-item"><a class="nav-link" href=""> add </a></li>
                         <li class="nav-item"><a class="nav-link" href=""> list delete </a></li>
                         <li class="nav-item"><a class="nav-link" href=""> position </a></li>
@@ -401,7 +401,7 @@
                             <div class="navbar-profile">
                                 <img class="img-xs rounded-circle"
                                      src="${pageContext.request.contextPath}/assets/images/10.jpg" alt="">
-                                <p class="mb-0 d-none d-sm-block navbar-profile-name" value=" ${staff.name}">Lê Huy Dương</p>
+                                <p class="mb-0 d-none d-sm-block navbar-profile-name">${staff.name}</p>
                                 <i class="mdi mdi-menu-down d-none d-sm-block"></i>
                             </div>
                         </a>
@@ -447,7 +447,7 @@
         <%--    include     --%>
         <div class="main-panel">
             <div class="content-wrapper">
-                <%@include file="../login/table.jsp" %>
+                <jsp:include page="${ view }"/>
             </div>
         </div>
 
@@ -462,7 +462,6 @@
     <%--        </footer>--%>
     <!-- main-panel ends -->
 </div>
-
 
 
 <script src="${pageContext.request.contextPath}/assets/vendors/js/vendor.bundle.base.js"></script>

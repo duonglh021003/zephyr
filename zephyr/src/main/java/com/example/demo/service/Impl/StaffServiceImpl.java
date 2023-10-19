@@ -30,11 +30,20 @@ public class StaffServiceImpl implements StaffService {
         if (staff == null) {
             return "login/staff";
         } else if (phoneNumber.equalsIgnoreCase(staff.getPhoneNumber()) && password.equalsIgnoreCase(staff.getPassword())) {
-            return "redirect:/zephyr/staff/home-page";
+            return "home_page/staff";
         } else {
             return "login/staff";
         }
     }
 
+    @Override
+    public Staff detailPhone(String phoneNumber) {
+        for(Staff staff: staffRepository.findAll()){
+            if(staff.getPhoneNumber().equalsIgnoreCase(phoneNumber)){
+                return staff;
+            }
+        }
+        return null;
+    }
 
 }
