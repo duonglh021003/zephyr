@@ -13,6 +13,12 @@ user_create NVARCHAR(200) DEFAULT NULL, -- người tạo
 user_update NVARCHAR(200) DEFAULT NULL, -- người sửa
 staff_status INT DEFAULT 1, -- trạng thái
 )
+insert into position values
+('ma0001',N'admin','2002-12-12','2002-12-12',N'dương',N'dương',DEFAULT),
+('ma0002',N'nhân viên','2002-12-12','2002-12-12',N'dương',N'dương',DEFAULT)
+select *
+from 
+position
 GO
 -- NhanVien
 CREATE TABLE staff(
@@ -31,14 +37,30 @@ staff_password VARCHAR(MAX) DEFAULT NULL, -- mật khẩu
 staff_status INT DEFAULT 1, -- trạng thái
 id_position BIGINT , -- id chức vụ
 )
+insert into staff values
+('ma0001',N'Lê Huy Dương','2002-12-12','0339115608','d@gmail.com',N'true',N'phú mỹ',N'mỹ đình 2',N'nam từ liêm',N'HN','1',DEFAULT,1),
+('ma0002',N'Nhân Viên 02','2002-12-12','0898629635','02@gmail.com',N'false',N'phú mỹ',N'mỹ đình 2',N'nam từ liêm',N'HN','1',DEFAULT,2),
+('ma0003',N'Nhân Viên 03','2002-12-12','1234567890','03@gmail.com',N'true',N'phú mỹ',N'mỹ đình 2',N'nam từ liêm',N'HN','1',DEFAULT,2)
+select *
+from 
+staff
 GO
 -- hạng
 CREATE TABLE ranks(
 id BIGINT IDENTITY(1,1) PRIMARY KEY ,
 code VARCHAR(200) UNIQUE, -- mã
-accumulated_score INT DEFAULT NULL, -- điểm tích luỹ
+ranks_name NVARCHAR(200) DEFAULT NULL, -- tên
+point INT DEFAULT NULL, -- điểm
 staff_status INT DEFAULT 1, -- trạng thái
 )
+insert into ranks values
+('ma0001',N'vàng',500,DEFAULT),
+('ma0002',N'bạch kim',1000,DEFAULT),
+('ma0003',N'kim cương',2000,DEFAULT)
+select *
+from 
+ranks
+
 GO
 --khách hàng
 CREATE TABLE client(
@@ -49,10 +71,19 @@ date_of_birth DATE DEFAULT NULL, -- ngày sinh
 phone_number VARCHAR(200) DEFAULT NULL, -- sđt
 gmail VARCHAR(200) DEFAULT NULL, -- gmail
 gender NVARCHAR(200) DEFAULT NULL, -- giới tính
+point_use INT DEFAULT NULL,-- điểm sử dụng 
+accumulated_score INT DEFAULT NULL, -- điểm tích luỹ
 staff_password VARCHAR(MAX) DEFAULT NULL, -- mật khẩu
 staff_status INT DEFAULT 1, -- trạng thái
 id_ranks BIGINT , -- id hạng
 )
+insert into client values
+('ma0001',N'Khách Hàng 01','2002-12-12','0898629635','01@gmail.com',N'true',50,600,'1',DEFAULT,1),
+('ma0002',N'Khách Hàng 02','2002-12-12','0898629635','02@gmail.com',N'true',50,700,'1',DEFAULT,1),
+('ma0003',N'Khách Hàng 03','2002-12-12','0898629635','03@gmail.com',N'true',50,800,'1',DEFAULT,1)
+select *
+from 
+client
 GO
 -- địa chỉ
 CREATE TABLE client_address(
@@ -67,6 +98,14 @@ city NVARCHAR(200) DEFAULT NULL, -- thành phố
 staff_status INT DEFAULT 1, -- trạng thái
 id_client BIGINT , -- id client
 )
+insert into client_address values
+('ma0001',N'Khách Hàng 01','0898629635',N'phú mỹ',N'mỹ đình 2',N'nam từ liêm',N'HN',DEFAULT,1),
+('ma0002',N'Khách Hàng 02','0898629635',N'phú mỹ',N'mỹ đình 2',N'nam từ liêm',N'HN',DEFAULT,2),
+('ma0003',N'Khách Hàng 02','0898629635',N'phú mỹ',N'mỹ đình 2',N'nam từ liêm',N'HN',0,2),
+('ma0004',N'Khách Hàng 03','0898629635',N'phú mỹ',N'mỹ đình 2',N'nam từ liêm',N'HN',DEFAULT,3)
+select *
+from 
+client_address
 GO
 -- sản phẩm
 CREATE TABLE product(
@@ -79,6 +118,13 @@ user_create NVARCHAR(200) DEFAULT NULL, -- người tạo
 user_update NVARCHAR(200) DEFAULT NULL, -- người sửa
 product_status INT DEFAULT 1, -- trạng thái
 )
+insert into product values
+('ma0001',N'đầm 01','2002-12-12','2002-12-12',N'dương',N'dương',DEFAULT),
+('ma0002',N'đầm 02','2002-12-12','2002-12-12',N'dương',N'dương',DEFAULT),
+('ma0003',N'đầm 03','2002-12-12','2002-12-12',N'dương',N'dương',DEFAULT)
+select *
+from 
+product
 GO
 --xuất xứ
 CREATE TABLE origin(
@@ -91,6 +137,13 @@ user_create NVARCHAR(200) DEFAULT NULL, -- người tạo
 user_update NVARCHAR(200) DEFAULT NULL, -- người sửa
 origin_status INT DEFAULT 1, -- trạng thái
 )
+insert into origin values
+('ma0001',N'việt nam','2002-12-12','2002-12-12',N'dương',N'dương',DEFAULT),
+('ma0002',N'trung quốc','2002-12-12','2002-12-12',N'dương',N'dương',DEFAULT),
+('ma0003',N'nhật bản','2002-12-12','2002-12-12',N'dương',N'dương',DEFAULT)
+select *
+from 
+origin
 GO
 -- màu sắc
 CREATE TABLE color(
@@ -103,6 +156,13 @@ user_create NVARCHAR(200) DEFAULT NULL, -- người tạo
 user_update NVARCHAR(200) DEFAULT NULL, -- người sửa
 color_status INT DEFAULT 1, -- trạng thái
 )
+insert into color values
+('ma0001',N'trắng','2002-12-12','2002-12-12',N'dương',N'dương',DEFAULT),
+('ma0002',N'đen','2002-12-12','2002-12-12',N'dương',N'dương',DEFAULT),
+('ma0003',N'vàng','2002-12-12','2002-12-12',N'dương',N'dương',DEFAULT)
+select *
+from 
+color
 GO
 -- size
 CREATE TABLE size(
@@ -115,6 +175,14 @@ user_create NVARCHAR(200) DEFAULT NULL, -- người tạo
 user_update NVARCHAR(200) DEFAULT NULL, -- người sửa
 size_status INT DEFAULT 1, -- trạng thái
 )
+insert into size values
+('ma0001',N'S','2002-12-12','2002-12-12',N'dương',N'dương',DEFAULT),
+('ma0002',N'M','2002-12-12','2002-12-12',N'dương',N'dương',DEFAULT),
+('ma0003',N'L','2002-12-12','2002-12-12',N'dương',N'dương',DEFAULT),
+('ma0004',N'XL','2002-12-12','2002-12-12',N'dương',N'dương',DEFAULT)
+select *
+from 
+size
 GO
 -- ChiTietSP
 CREATE TABLE product_details(
@@ -130,6 +198,13 @@ id_origin BIGINT , -- id xuất xứ
 id_color BIGINT , -- id màu sắc
 id_size BIGINT , -- id size
 )
+insert into product_details values
+(N'link ảnh',N'không',101,200.000,299.000,DEFAULT,1,1,1,1),
+(N'link ảnh',N'không',201,300.000,399.000,DEFAULT,2,1,1,1),
+(N'link ảnh',N'không',301,400.000,499.000,DEFAULT,3,1,1,1)
+select *
+from 
+product_details
 GO
 -- phiếu giảm giá
 CREATE TABLE voucher(
@@ -140,12 +215,20 @@ date_begin DATE DEFAULT NULL, -- ngày bắt đầu
 date_end DATE DEFAULT NULL, -- ngày kết thúc
 minimum_price DECIMAL(20,3) DEFAULT NULL, -- giá tối thiểu
 maximum_price DECIMAL(20,3) DEFAULT NULL, --	giá đối đa
+reduced_price DECIMAL(20,3) DEFAULT NULL, --	giá trị giảm
 date_create DATE DEFAULT NULL, -- ngày tạo
 date_update DATE DEFAULT NULL, -- ngày sửa
 user_create NVARCHAR(200) DEFAULT NULL, -- người tạo
 user_update NVARCHAR(200) DEFAULT NULL, -- người sửa
 voucher_status INT DEFAULT 1, -- trạng thái
 )
+insert into voucher values
+('ma0001',N'voucher 15','2002-12-12','2002-12-12',0.000,100.000,15.000,'2002-12-12','2002-12-12',N'dương',N'dương',DEFAULT),
+('ma0002',N'voucher 20','2002-12-12','2002-12-12',0.000,100.000,20.000,'2002-12-12','2002-12-12',N'dương',N'dương',DEFAULT),
+('ma0003',N'voucher 25','2002-12-12','2002-12-12',0.000,100.000,25.000,'2002-12-12','2002-12-12',N'dương',N'dương',DEFAULT)
+select *
+from 
+voucher
 GO
 -- yêu thích 
 CREATE TABLE favourite(
@@ -156,6 +239,13 @@ date_update DATE DEFAULT NULL, -- ngày sửa
 favourite_status INT DEFAULT 1, -- trạng thái
 id_client BIGINT , -- id khách hàng
 )
+insert into favourite values
+('ma0001','2002-12-12','2002-12-12',DEFAULT,1),
+('ma0002','2002-12-12','2002-12-12',DEFAULT,2),
+('ma0003','2002-12-12','2002-12-12',DEFAULT,3)
+select *
+from 
+favourite
 GO
 -- yêu thích chi tiết
 CREATE TABLE favourite_details(
@@ -165,6 +255,15 @@ favourite_details_status INT DEFAULT 1, -- trạng thái
 id_favourite BIGINT , -- id yêu thích
 id_product_details BIGINT, -- id chi tiết sản phẩm
 )
+insert into favourite_details values
+('2002-12-12',DEFAULT,1,1),
+('2002-12-12',DEFAULT,1,2),
+('2002-12-12',DEFAULT,2,3),
+('2002-12-12',DEFAULT,3,2),
+('2002-12-12',DEFAULT,3,3)
+select *
+from 
+favourite_details
 GO
 -- giỏ hàng 
 CREATE TABLE shopping_cart(
@@ -174,6 +273,13 @@ total_shopping_cart DECIMAL(20,3) DEFAULT NULL, -- tổng tiền giỏ hàng
 shopping_cart_status INT DEFAULT 1, -- trạng thái
 id_client BIGINT , -- id khách hàng
 )
+insert into shopping_cart values
+('ma0001',200,DEFAULT,1),
+('ma0002',300,DEFAULT,2),
+('ma0003',400,DEFAULT,3)
+select *
+from 
+shopping_cart
 GO
 -- giỏ hàng chi tiết
 CREATE TABLE detailed_shopping_cart(
@@ -186,6 +292,16 @@ detailed_shopping_cart_status INT DEFAULT 1, -- trạng thái
 id_shopping_cart BIGINT , -- id giỏ hàng
 id_product_details BIGINT, -- id chi tiết sản phẩm
 )
+insert into detailed_shopping_cart values
+(1,399.000,399.000,'2002-12-12',DEFAULT,1,2),
+(2,499.000,799.000,'2002-12-12',DEFAULT,1,3),
+(1,299.000,299.000,'2002-12-12',DEFAULT,2,1),
+(1,299.000,299.000,'2002-12-12',DEFAULT,3,1),
+(1,399.000,399.000,'2002-12-12',DEFAULT,3,2)
+
+select *
+from 
+detailed_shopping_cart
 GO
 -- hoá đơn 
 CREATE TABLE invoice(
@@ -203,6 +319,13 @@ id_client_address BIGINT, -- id địa chỉ
 id_voucher BIGINT , -- id phiếu giảm giá
 id_staff BIGINT , -- id nhân viên
 )
+insert into invoice values
+('ma0001','2002-12-12',999.000,999.000,1000.000,1.000,N'không',DEFAULT,1,1,1,1),
+('ma0002','2002-12-12',999.000,999.000,1000.000,1.000,N'không',DEFAULT,2,2,1,2),
+('ma0003','2002-12-12',999.000,999.000,1000.000,1.000,N'không',DEFAULT,1,1,1,1)
+select *
+from 
+invoice
 GO
 -- hoá đơn chi tiết
 CREATE TABLE detailed_invoice(
@@ -214,6 +337,15 @@ detailed_shopping_cart_status INT DEFAULT 1, -- trạng thái
 id_invoice BIGINT , -- id hoá đơn
 id_product_details BIGINT, -- id chi tiết sản phẩm
 )
+insert into detailed_invoice values
+(1,399.000,399.000,DEFAULT,1,2),
+(2,499.000,799.000,DEFAULT,1,3),
+(1,299.000,299.000,DEFAULT,2,1),
+(1,299.000,299.000,DEFAULT,3,1),
+(1,399.000,399.000,DEFAULT,3,2)
+select *
+from 
+detailed_invoice
 GO
 -- phiếu giao hàng
 CREATE TABLE delivery_notes(
@@ -229,6 +361,13 @@ delivery_notes_status INT DEFAULT 1, -- trạng thái
 id_invoice BIGINT , -- id hoá đơn
 id_client_address BIGINT, -- id địa chỉ
 )
+insert into delivery_notes values
+('ma0001',N'khách hàng 01','0898629635','2002-12-12','2002-12-12','2002-12-12',N'không',DEFAULT,1,1),
+('ma0002',N'khách hàng 02','0898629635','2002-12-12','2002-12-12','2002-12-12',N'không',DEFAULT,1,2),
+('ma0003',N'khách hàng 03','0898629635','2002-12-12','2002-12-12','2002-12-12',N'không',DEFAULT,1,3)
+select *
+from 
+delivery_notes
 GO
 -- phiếu đổi hàng
 CREATE TABLE exchange_note(
@@ -241,6 +380,12 @@ reason VARCHAR(MAX) DEFAULT NULL, -- lý do
 exchange_note_status INT DEFAULT 1, -- trạng thái
 id_invoice BIGINT , -- id hoá đơn
 )
+insert into exchange_note values
+('ma0001','2002-12-12','2002-12-12',N'không',N'không',DEFAULT,1)
+
+select *
+from 
+exchange_note
 GO
 
 -- ChiTietSP - sản phẩm
