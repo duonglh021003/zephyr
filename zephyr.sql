@@ -34,17 +34,45 @@ commune NVARCHAR(200) DEFAULT NULL, -- xã
 district NVARCHAR(200) DEFAULT NULL, -- huyện
 city NVARCHAR(200) DEFAULT NULL, -- thành phố 
 staff_password VARCHAR(MAX) DEFAULT NULL, -- mật khẩu
+date_create DATE DEFAULT NULL, -- ngày tạo
+date_update DATE DEFAULT NULL, -- ngày sửa
+user_create NVARCHAR(200) DEFAULT NULL, -- người tạo
+user_update NVARCHAR(200) DEFAULT NULL, -- người sửa
 staff_status INT DEFAULT 1, -- trạng thái
 id_position BIGINT , -- id chức vụ
 )
 insert into staff values
-('ma0001',N'Lê Huy Dương','2002-12-12','0339115608','d@gmail.com',N'true',N'phú mỹ',N'mỹ đình 2',N'nam từ liêm',N'HN','1',DEFAULT,1),
-('ma0002',N'Nhân Viên 02','2002-12-12','0898629635','02@gmail.com',N'false',N'phú mỹ',N'mỹ đình 2',N'nam từ liêm',N'HN','1',DEFAULT,2),
-('ma0003',N'Nhân Viên 03','2002-12-12','1234567890','03@gmail.com',N'true',N'phú mỹ',N'mỹ đình 2',N'nam từ liêm',N'HN','1',DEFAULT,2)
+('ma0001',N'Lê Huy Dương','2002-12-12','0339115608','d@gmail.com',N'true',N'phú mỹ',N'mỹ đình 2',N'nam từ liêm',N'HN','1','2002-12-12','2002-12-12',N'dương',N'dương',DEFAULT,1),
+('ma0002',N'Nhân Viên 02','2002-12-12','0898629635','02@gmail.com',N'false',N'phú mỹ',N'mỹ đình 2',N'nam từ liêm',N'HN','1','2002-12-12','2002-12-12',N'dương',N'dương',DEFAULT,2),
+('ma0003',N'Nhân Viên 03','2002-12-12','0312345678','03@gmail.com',N'true',N'phú mỹ',N'mỹ đình 2',N'nam từ liêm',N'HN','1','2002-12-12','2002-12-12',N'dương',N'dương',DEFAULT,2),
+('ma0004',N'Nhân Viên 04','2002-12-12','0412345678','02@gmail.com',N'false',N'phú mỹ',N'mỹ đình 2',N'nam từ liêm',N'HN','1','2002-12-12','2002-12-12',N'dương',N'dương',DEFAULT,2),
+('ma0005',N'Nhân Viên 05','2002-12-12','0512345678','03@gmail.com',N'true',N'phú mỹ',N'mỹ đình 2',N'nam từ liêm',N'HN','1','2002-12-12','2002-12-12',N'dương',N'dương',DEFAULT,2),
+('ma0006',N'Nhân Viên 06','2002-12-12','0612345678','02@gmail.com',N'false',N'phú mỹ',N'mỹ đình 2',N'nam từ liêm',N'HN','1','2002-12-12','2002-12-12',N'dương',N'dương',DEFAULT,2),
+('ma0007',N'Nhân Viên 07','2002-12-12','0712345678','03@gmail.com',N'true',N'phú mỹ',N'mỹ đình 2',N'nam từ liêm',N'HN','1','2002-12-12','2002-12-12',N'dương',N'dương',DEFAULT,2),
+('ma0008',N'Nhân Viên 08','2002-12-12','0812345678','02@gmail.com',N'false',N'phú mỹ',N'mỹ đình 2',N'nam từ liêm',N'HN','1','2002-12-12','2002-12-12',N'dương',N'dương',DEFAULT,2),
+('ma0009',N'Nhân Viên 09','2002-12-12','0912345678','03@gmail.com',N'true',N'phú mỹ',N'mỹ đình 2',N'nam từ liêm',N'HN','1','2002-12-12','2002-12-12',N'dương',N'dương',DEFAULT,2),
+('ma00010',N'Nhân Viên 10','2002-12-12','1012345678','02@gmail.com',N'false',N'phú mỹ',N'mỹ đình 2',N'nam từ liêm',N'HN','1','2002-12-12','2002-12-12',N'dương',N'dương',DEFAULT,2),
+('ma00011',N'Nhân Viên 11','2002-12-12','1112345678','03@gmail.com',N'true',N'phú mỹ',N'mỹ đình 2',N'nam từ liêm',N'HN','1','2002-12-12','2002-12-12',N'dương',N'dương',DEFAULT,2),
+('ma00012',N'Nhân Viên 12','2002-12-12','1212345678','02@gmail.com',N'false',N'phú mỹ',N'mỹ đình 2',N'nam từ liêm',N'HN','1','2002-12-12','2002-12-12',N'dương',N'dương',DEFAULT,2),
+('ma00013',N'Nhân Viên 13','2002-12-12','1312345678','03@gmail.com',N'true',N'phú mỹ',N'mỹ đình 2',N'nam từ liêm',N'HN','1','2002-12-12','2002-12-12',N'dương',N'dương',DEFAULT,2),
+('ma00014',N'Nhân Viên 14','2002-12-12','1412345678','02@gmail.com',N'false',N'phú mỹ',N'mỹ đình 2',N'nam từ liêm',N'HN','1','2002-12-12','2002-12-12',N'dương',N'dương',DEFAULT,2),
+('ma00015',N'Nhân Viên 15','2002-12-12','1512345678','03@gmail.com',N'true',N'phú mỹ',N'mỹ đình 2',N'nam từ liêm',N'HN','1','2002-12-12','2002-12-12',N'dương',N'dương',DEFAULT,2),
+('ma00016',N'Nhân Viên 16','2002-12-12','1612345678','02@gmail.com',N'false',N'phú mỹ',N'mỹ đình 2',N'nam từ liêm',N'HN','1','2002-12-12','2002-12-12',N'dương',N'dương',DEFAULT,2),
+('ma00017',N'Nhân Viên 17','2002-12-12','1712345678','03@gmail.com',N'true',N'phú mỹ',N'mỹ đình 2',N'nam từ liêm',N'HN','1','2002-12-12','2002-12-12',N'dương',N'dương',DEFAULT,2),
+('ma00018',N'Nhân Viên 18','2002-12-12','1812345678','02@gmail.com',N'false',N'phú mỹ',N'mỹ đình 2',N'nam từ liêm',N'HN','1','2002-12-12','2002-12-12',N'dương',N'dương',DEFAULT,2),
+('ma00019',N'Nhân Viên 19','2002-12-12','1912345678','03@gmail.com',N'true',N'phú mỹ',N'mỹ đình 2',N'nam từ liêm',N'HN','1','2002-12-12','2002-12-12',N'dương',N'dương',DEFAULT,2),
+('ma00020',N'Nhân Viên 20','2002-12-12','2012345678','02@gmail.com',N'false',N'phú mỹ',N'mỹ đình 2',N'nam từ liêm',N'HN','1','2002-12-12','2002-12-12',N'dương',N'dương',DEFAULT,2),
+('ma00021',N'Nhân Viên 21','2002-12-12','2112345678','03@gmail.com',N'true',N'phú mỹ',N'mỹ đình 2',N'nam từ liêm',N'HN','1','2002-12-12','2002-12-12',N'dương',N'dương',DEFAULT,2),
+('ma00022',N'Nhân Viên 22','2002-12-12','2298629635','02@gmail.com',N'false',N'phú mỹ',N'mỹ đình 2',N'nam từ liêm',N'HN','1','2002-12-12','2002-12-12',N'dương',N'dương',0,2),
+('ma00023',N'Nhân Viên 23','2002-12-12','2312345678','03@gmail.com',N'true',N'phú mỹ',N'mỹ đình 2',N'nam từ liêm',N'HN','1','2002-12-12','2002-12-12',N'dương',N'dương',0,2),
+('ma00024',N'Nhân Viên 24','2002-12-12','2412345678','02@gmail.com',N'false',N'phú mỹ',N'mỹ đình 2',N'nam từ liêm',N'HN','1','2002-12-12','2002-12-12',N'dương',N'dương',0,2),
+('ma00025',N'Nhân Viên 25','2002-12-12','2512345678','03@gmail.com',N'true',N'phú mỹ',N'mỹ đình 2',N'nam từ liêm',N'HN','1','2002-12-12','2002-12-12',N'dương',N'dương',0,2),
+('ma00026',N'Nhân Viên 26','2002-12-12','2612345678','02@gmail.com',N'false',N'phú mỹ',N'mỹ đình 2',N'nam từ liêm',N'HN','1','2002-12-12','2002-12-12',N'dương',N'dương',0,2),
+('ma00027',N'Nhân Viên 27','2002-12-12','2712345678','03@gmail.com',N'true',N'phú mỹ',N'mỹ đình 2',N'nam từ liêm',N'HN','1','2002-12-12','2002-12-12',N'dương',N'dương',0,2)
 select *
 from 
 staff
-GO
+
 -- hạng
 CREATE TABLE ranks(
 id BIGINT IDENTITY(1,1) PRIMARY KEY ,
@@ -74,13 +102,17 @@ gender NVARCHAR(200) DEFAULT NULL, -- giới tính
 point_use INT DEFAULT NULL,-- điểm sử dụng 
 accumulated_score INT DEFAULT NULL, -- điểm tích luỹ
 staff_password VARCHAR(MAX) DEFAULT NULL, -- mật khẩu
+date_create DATE DEFAULT NULL, -- ngày tạo
+date_update DATE DEFAULT NULL, -- ngày sửa
+user_create NVARCHAR(200) DEFAULT NULL, -- người tạo
+user_update NVARCHAR(200) DEFAULT NULL, -- người sửa
 staff_status INT DEFAULT 1, -- trạng thái
 id_ranks BIGINT , -- id hạng
 )
 insert into client values
-('ma0001',N'Khách Hàng 01','2002-12-12','0898629635','01@gmail.com',N'true',50,600,'1',DEFAULT,1),
-('ma0002',N'Khách Hàng 02','2002-12-12','0898629635','02@gmail.com',N'true',50,700,'1',DEFAULT,1),
-('ma0003',N'Khách Hàng 03','2002-12-12','0898629635','03@gmail.com',N'true',50,800,'1',DEFAULT,1)
+('ma0001',N'Khách Hàng 01','2002-12-12','0898629635','01@gmail.com',N'true',50,600,'1','2002-12-12','2002-12-12',N'dương',N'dương',DEFAULT,1),
+('ma0002',N'Khách Hàng 02','2002-12-12','0898629635','02@gmail.com',N'true',50,700,'1','2002-12-12','2002-12-12',N'dương',N'dương',DEFAULT,1),
+('ma0003',N'Khách Hàng 03','2002-12-12','0898629635','03@gmail.com',N'true',50,800,'1','2002-12-12','2002-12-12',N'dương',N'dương',DEFAULT,1)
 select *
 from 
 client
@@ -192,6 +224,10 @@ describe NVARCHAR(50) DEFAULT NULL, -- mô tả
 inventory INT DEFAULT NULL, -- số lượng tồn
 import_price DECIMAL(20,3) DEFAULT NULL, -- giá nhập
 price DECIMAL(20,3) DEFAULT NULL, -- giá bán
+date_create DATE DEFAULT NULL, -- ngày tạo
+date_update DATE DEFAULT NULL, -- ngày sửa
+user_create NVARCHAR(200) DEFAULT NULL, -- người tạo
+user_update NVARCHAR(200) DEFAULT NULL, -- người sửa
 product_details_status INT DEFAULT 1, -- trạng thái
 id_product BIGINT , -- id sản phẩm
 id_origin BIGINT , -- id xuất xứ 
@@ -199,9 +235,9 @@ id_color BIGINT , -- id màu sắc
 id_size BIGINT , -- id size
 )
 insert into product_details values
-(N'link ảnh',N'không',101,200.000,299.000,DEFAULT,1,1,1,1),
-(N'link ảnh',N'không',201,300.000,399.000,DEFAULT,2,1,1,1),
-(N'link ảnh',N'không',301,400.000,499.000,DEFAULT,3,1,1,1)
+(N'link ảnh',N'không',101,200.000,299.000,'2002-12-12','2002-12-12',N'dương',N'dương',DEFAULT,1,1,1,1),
+(N'link ảnh',N'không',201,300.000,399.000,'2002-12-12','2002-12-12',N'dương',N'dương',DEFAULT,2,1,1,1),
+(N'link ảnh',N'không',301,400.000,499.000,'2002-12-12','2002-12-12',N'dương',N'dương',DEFAULT,3,1,1,1)
 select *
 from 
 product_details
