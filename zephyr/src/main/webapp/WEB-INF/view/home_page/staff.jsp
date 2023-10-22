@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
+
 <head>
     <title>Title</title>
 
@@ -19,6 +20,7 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/style.css"/>
 
 </head>
+
 <body>
 
 <div class="container-scroller">
@@ -40,58 +42,58 @@
                             <span class="count bg-success"></span>
                         </div>
                         <div class="profile-name">
-                            <h5 class="mb-0 font-weight-normal" value=" ${staff.name}></h5>
-                            <span>admin</span>
+                            <h5 class="mb-0 font-weight-normal">${detailStaff.name}</h5>
+                            <span>${detailStaff.position.name}</span>
                         </div>
                     </div>
-                    <a href="#" id="profile-dropdown" data-toggle="dropdown"><i class="mdi mdi-dots-vertical"></i></a>
-                    <div class="dropdown-menu dropdown-menu-right sidebar-dropdown preview-list"
-                         aria-labelledby="profile-dropdown">
-                        <a href="#" class="dropdown-item preview-item">
-                            <div class="preview-thumbnail">
-                                <div class="preview-icon bg-dark rounded-circle">
-                                    <i class="mdi mdi-settings text-primary"></i>
-                                </div>
+                    <a href=" #" id="profile-dropdown" data-toggle="dropdown"><i class="mdi mdi-dots-vertical"></i></a>
+                            <div class="dropdown-menu dropdown-menu-right sidebar-dropdown preview-list"
+                                 aria-labelledby="profile-dropdown">
+                                <a href="#" class="dropdown-item preview-item">
+                                    <div class="preview-thumbnail">
+                                        <div class="preview-icon bg-dark rounded-circle">
+                                            <i class="mdi mdi-settings text-primary"></i>
+                                        </div>
+                                    </div>
+                                    <div class="preview-item-content">
+                                        <p class="preview-subject ellipsis mb-1 text-small">Account settings</p>
+                                    </div>
+                                </a>
+                                <div class="dropdown-divider"></div>
+                                <a href="#" class="dropdown-item preview-item">
+                                    <div class="preview-thumbnail">
+                                        <div class="preview-icon bg-dark rounded-circle">
+                                            <i class="mdi mdi-onepassword  text-info"></i>
+                                        </div>
+                                    </div>
+                                    <div class="preview-item-content">
+                                        <p class="preview-subject ellipsis mb-1 text-small">Change Password</p>
+                                    </div>
+                                </a>
+                                <div class="dropdown-divider"></div>
+                                <a href="#" class="dropdown-item preview-item">
+                                    <div class="preview-thumbnail">
+                                        <div class="preview-icon bg-dark rounded-circle">
+                                            <i class="mdi mdi-calendar-today text-success"></i>
+                                        </div>
+                                    </div>
+                                    <div class="preview-item-content">
+                                        <p class="preview-subject ellipsis mb-1 text-small">To-do list</p>
+                                    </div>
+                                </a>
                             </div>
-                            <div class="preview-item-content">
-                                <p class="preview-subject ellipsis mb-1 text-small">Account settings</p>
-                            </div>
-                        </a>
-                        <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item preview-item">
-                            <div class="preview-thumbnail">
-                                <div class="preview-icon bg-dark rounded-circle">
-                                    <i class="mdi mdi-onepassword  text-info"></i>
-                                </div>
-                            </div>
-                            <div class="preview-item-content">
-                                <p class="preview-subject ellipsis mb-1 text-small">Change Password</p>
-                            </div>
-                        </a>
-                        <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item preview-item">
-                            <div class="preview-thumbnail">
-                                <div class="preview-icon bg-dark rounded-circle">
-                                    <i class="mdi mdi-calendar-today text-success"></i>
-                                </div>
-                            </div>
-                            <div class="preview-item-content">
-                                <p class="preview-subject ellipsis mb-1 text-small">To-do list</p>
-                            </div>
-                        </a>
-                    </div>
-                </div>
+                        </div>
             </li>
 
             <li class="nav-item nav-category">
-                <%--                <span class="nav-link">Navigation</span>--%>
+                <%-- <span class="nav-link">Navigation</span>--%>
             </li>
 
             <li class="nav-item menu-items">
                 <a class="nav-link" href="index.html">
-              <span class="menu-icon">
-                <i class="mdi mdi-speedometer"></i>
-              </span>
+                        <span class="menu-icon">
+                            <i class="mdi mdi-speedometer"></i>
+                        </span>
                     <span class="menu-title">sell</span>
                 </a>
             </li>
@@ -99,44 +101,47 @@
             <li class="nav-item menu-items">
                 <a class="nav-link" data-toggle="collapse" href="#product" aria-expanded="false"
                    aria-controls="ui-basic">
-              <span class="menu-icon">
-                <i class="mdi mdi-laptop"></i>
-              </span>
-                    <span class="menu-title">product </span>
+                        <span class="menu-icon">
+                            <i class="mdi mdi-laptop"></i>
+                        </span>
+                    <span class="menu-title">Thông Tin Sản Phẩm </span>
                     <i class="menu-arrow"></i>
                 </a>
                 <div class="collapse" id="product">
                     <ul class="nav flex-column sub-menu">
-                        <li class="nav-item"><a class="nav-link" href=""> index </a></li>
-                        <li class="nav-item"><a class="nav-link" href=""> add </a></li>
-                        <li class="nav-item"><a class="nav-link" href=""> list delete </a></li>
+                        <li class="nav-item"><a class="nav-link" href="/zephyr/productdetail"> Chi Tiết Sản Phẩm
+                        </a></li>
+                        <li class="nav-item"><a class="nav-link" href="/zephyr/product"> Sản Phẩm </a></li>
+                        <li class="nav-item"><a class="nav-link" href="/zephyr/origin"> Nhà Sản Xuất </a></li>
+                        <li class="nav-item"><a class="nav-link" href="/zephyr/color"> Màu Sắc </a></li>
+                        <li class="nav-item"><a class="nav-link" href="/zephyr/size"> Kích Cỡ </a></li>
                     </ul>
                 </div>
             </li>
 
             <li class="nav-item menu-items">
                 <a class="nav-link" href="index.html">
-              <span class="menu-icon">
-                <i class="mdi mdi-speedometer"></i>
-              </span>
+                        <span class="menu-icon">
+                            <i class="mdi mdi-speedometer"></i>
+                        </span>
                     <span class="menu-title">invoice</span>
                 </a>
             </li>
 
             <li class="nav-item menu-items">
                 <a class="nav-link" href="index.html">
-              <span class="menu-icon">
-                <i class="mdi mdi-speedometer"></i>
-              </span>
+                        <span class="menu-icon">
+                            <i class="mdi mdi-speedometer"></i>
+                        </span>
                     <span class="menu-title">shopping cart</span>
                 </a>
             </li>
 
             <li class="nav-item menu-items">
                 <a class="nav-link" data-toggle="collapse" href="#staff" aria-expanded="false" aria-controls="auth">
-              <span class="menu-icon">
-                <i class="mdi mdi-playlist-play"></i>
-              </span>
+                        <span class="menu-icon">
+                            <i class="mdi mdi-playlist-play"></i>
+                        </span>
                     <span class="menu-title">staff</span>
                     <i class="menu-arrow"></i>
                 </a>
@@ -151,10 +156,11 @@
             </li>
 
             <li class="nav-item menu-items">
-                <a class="nav-link" data-toggle="collapse" href="#client" aria-expanded="false" aria-controls="auth">
-              <span class="menu-icon">
-                <i class="mdi mdi-playlist-play"></i>
-              </span>
+                <a class="nav-link" data-toggle="collapse" href="#client" aria-expanded="false"
+                   aria-controls="auth">
+                        <span class="menu-icon">
+                            <i class="mdi mdi-playlist-play"></i>
+                        </span>
                     <span class="menu-title">client</span>
                     <i class="menu-arrow"></i>
                 </a>
@@ -170,10 +176,11 @@
             </li>
 
             <li class="nav-item menu-items">
-                <a class="nav-link" data-toggle="collapse" href="#voucher" aria-expanded="false" aria-controls="auth">
-              <span class="menu-icon">
-                <i class="mdi mdi-playlist-play"></i>
-              </span>
+                <a class="nav-link" data-toggle="collapse" href="#voucher" aria-expanded="false"
+                   aria-controls="auth">
+                        <span class="menu-icon">
+                            <i class="mdi mdi-playlist-play"></i>
+                        </span>
                     <span class="menu-title">voucher</span>
                     <i class="menu-arrow"></i>
                 </a>
@@ -188,10 +195,11 @@
             </li>
 
             <li class="nav-item menu-items">
-                <a class="nav-link" data-toggle="collapse" href="#exchange" aria-expanded="false" aria-controls="auth">
-              <span class="menu-icon">
-                <i class="mdi mdi-playlist-play"></i>
-              </span>
+                <a class="nav-link" data-toggle="collapse" href="#exchange" aria-expanded="false"
+                   aria-controls="auth">
+                        <span class="menu-icon">
+                            <i class="mdi mdi-playlist-play"></i>
+                        </span>
                     <span class="menu-title">exchange</span>
                     <i class="menu-arrow"></i>
                 </a>
@@ -207,27 +215,27 @@
 
             <li class="nav-item menu-items">
                 <a class="nav-link" href="index.html">
-              <span class="menu-icon">
-                <i class="mdi mdi-speedometer"></i>
-              </span>
+                        <span class="menu-icon">
+                            <i class="mdi mdi-speedometer"></i>
+                        </span>
                     <span class="menu-title">statistical</span>
                 </a>
             </li>
 
             <li class="nav-item menu-items">
                 <a class="nav-link" href="index.html">
-              <span class="menu-icon">
-                <i class="mdi mdi-speedometer"></i>
-              </span>
+                        <span class="menu-icon">
+                            <i class="mdi mdi-speedometer"></i>
+                        </span>
                     <span class="menu-title">delivery notes</span>
                 </a>
             </li>
 
             <li class="nav-item menu-items">
                 <a class="nav-link" href="/zephyr/admin/table">
-              <span class="menu-icon">
-                <i class="mdi mdi-table-large"></i>
-              </span>
+                        <span class="menu-icon">
+                            <i class="mdi mdi-table-large"></i>
+                        </span>
                     <span class="menu-title">Tables</span>
                 </a>
             </li>
@@ -243,7 +251,8 @@
                 <!-- <a class="navbar-brand brand-logo-mini" href="index.html"><img src="assets/images/logo-mini.svg" alt="logo" /></a> -->
             </div>
             <div class="navbar-menu-wrapper flex-grow d-flex align-items-stretch">
-                <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
+                <button class="navbar-toggler navbar-toggler align-self-center" type="button"
+                        data-toggle="minimize">
                     <span class="mdi mdi-menu"></span>
                 </button>
                 <ul class="navbar-nav w-100">
@@ -401,7 +410,8 @@
                             <div class="navbar-profile">
                                 <img class="img-xs rounded-circle"
                                      src="${pageContext.request.contextPath}/assets/images/10.jpg" alt="">
-                                <p class="mb-0 d-none d-sm-block navbar-profile-name" value=" ${staff.name}">Lê Huy Dương</p>
+                                <p class="mb-0 d-none d-sm-block navbar-profile-name" value=" ${staff.name}">Lê Huy
+                                    Dương</p>
                                 <i class="mdi mdi-menu-down d-none d-sm-block"></i>
                             </div>
                         </a>
@@ -444,25 +454,25 @@
             </div>
         </nav>
 
-        <%--    include     --%>
+        <%-- include --%>
         <div class="main-panel">
             <div class="content-wrapper">
-                <%@include file="../login/table.jsp" %>
+                <jsp:include page="${main}"/>
             </div>
         </div>
 
     </div>
 
-    <%--        <footer class="footer">--%>
-    <%--            <div class="d-sm-flex justify-content-center justify-content-sm-between">--%>
-    <%--                <span class="text-muted d-block text-center text-sm-left d-sm-inline-block">Copyright © bootstrapdash.com 2020</span>--%>
-    <%--                <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center"> Free <a--%>
-    <%--                        href="" target="_blank">Bootstrap admin templates</a> from Bootstrapdash.com</span>--%>
-    <%--            </div>--%>
-    <%--        </footer>--%>
+    <%-- <footer class="footer">--%>
+    <%-- <div class="d-sm-flex justify-content-center justify-content-sm-between">--%>
+    <%-- <span class="text-muted d-block text-center text-sm-left d-sm-inline-block">Copyright ©
+        bootstrapdash.com 2020</span>--%>
+    <%-- <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center"> Free <a--%>
+    <%-- href="" target="_blank">Bootstrap admin templates</a> from Bootstrapdash.com</span>--%>
+    <%-- </div>--%>
+    <%-- </footer>--%>
     <!-- main-panel ends -->
 </div>
-
 
 
 <script src="${pageContext.request.contextPath}/assets/vendors/js/vendor.bundle.base.js"></script>
@@ -470,7 +480,8 @@
 <script src="${pageContext.request.contextPath}/assets/vendors/chart.js/Chart.min.js"></script>
 <script src="${pageContext.request.contextPath}/assets/vendors/progressbar.js/progressbar.min.js"></script>
 <script src="${pageContext.request.contextPath}/assets/vendors/jvectormap/jquery-jvectormap.min.js"></script>
-<script src="${pageContext.request.contextPath}/assets/vendors/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
+<script
+        src="${pageContext.request.contextPath}/assets/vendors/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
 <script src="${pageContext.request.contextPath}/assets/vendors/owl-carousel-2/owl.carousel.min.js"></script>
 
 <script src="${pageContext.request.contextPath}/assets/js/off-canvas.js"></script>
@@ -482,4 +493,5 @@
 <script src="${pageContext.request.contextPath}/assets/js/dashboard.js"></script>
 </div>
 </body>
+
 </html>
