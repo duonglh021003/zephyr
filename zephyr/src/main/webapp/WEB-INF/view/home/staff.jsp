@@ -40,8 +40,8 @@
                             <span class="count bg-success"></span>
                         </div>
                         <div class="profile-name">
-                            <h5 class="mb-0 font-weight-normal">${staff.name}</h5>
-                            <span>${staff.position.name}</span>
+                            <h5 class="mb-0 font-weight-normal">${staffSession.name}</h5>
+                            <span>${staffSession.position.name}</span>
                         </div>
                     </div>
                     <a href="#" id="profile-dropdown" data-toggle="dropdown"><i class="mdi mdi-dots-vertical"></i></a>
@@ -135,16 +135,17 @@
             <li class="nav-item menu-items">
                 <a class="nav-link" data-toggle="collapse" href="#staff" aria-expanded="false" aria-controls="auth">
               <span class="menu-icon">
-                <i class="mdi mdi-playlist-play"></i>
+                <i class="mdi mdi-account-circle"></i>
               </span>
                     <span class="menu-title">staff</span>
                     <i class="menu-arrow"></i>
                 </a>
                 <div class="collapse" id="staff">
                     <ul class="nav flex-column sub-menu">
-                        <li class="nav-item"><a class="nav-link" href="/zephyr/staff/index"> index </a></li>
-                        <li class="nav-item"><a class="nav-link" href=""> add </a></li>
-                        <li class="nav-item"><a class="nav-link" href=""> list delete </a></li>
+                        <li class="nav-item"><a class="nav-link" href="/zephyr/admin/staff/index"> index </a></li>
+                        <li class="nav-item"><a class="nav-link" href="/zephyr/admin/staff/view-add"> add </a></li>
+                        <li class="nav-item"><a class="nav-link" href="/zephyr/admin/staff/list-delete"> list
+                            delete </a></li>
                         <li class="nav-item"><a class="nav-link" href=""> position </a></li>
                     </ul>
                 </div>
@@ -153,16 +154,16 @@
             <li class="nav-item menu-items">
                 <a class="nav-link" data-toggle="collapse" href="#client" aria-expanded="false" aria-controls="auth">
               <span class="menu-icon">
-                <i class="mdi mdi-playlist-play"></i>
+                <i class="mdi mdi-account-box-outline"></i>
               </span>
                     <span class="menu-title">client</span>
                     <i class="menu-arrow"></i>
                 </a>
                 <div class="collapse" id="client">
                     <ul class="nav flex-column sub-menu">
-                        <li class="nav-item"><a class="nav-link" href=""> index </a></li>
-                        <li class="nav-item"><a class="nav-link" href=""> add </a></li>
-                        <li class="nav-item"><a class="nav-link" href=""> list delete </a></li>
+                        <li class="nav-item"><a class="nav-link" href="/zephyr/admin/client/index?id=1"> index </a></li>
+                        <li class="nav-item"><a class="nav-link" href="/zephyr/admin/client/view-add"> add </a></li>
+                        <li class="nav-item"><a class="nav-link" href="/zephyr/admin/client/list-delete?id=1"> list delete </a></li>
                         <li class="nav-item"><a class="nav-link" href=""> address </a></li>
                         <li class="nav-item"><a class="nav-link" href=""> list like </a></li>
                     </ul>
@@ -401,7 +402,7 @@
                             <div class="navbar-profile">
                                 <img class="img-xs rounded-circle"
                                      src="${pageContext.request.contextPath}/assets/images/10.jpg" alt="">
-                                <p class="mb-0 d-none d-sm-block navbar-profile-name">${staff.name}</p>
+                                <p class="mb-0 d-none d-sm-block navbar-profile-name"></p>
                                 <i class="mdi mdi-menu-down d-none d-sm-block"></i>
                             </div>
                         </a>
@@ -420,14 +421,14 @@
                                 </div>
                             </a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item preview-item">
+                            <a class="dropdown-item preview-item" href="/zephyr/admin/login">
                                 <div class="preview-thumbnail">
                                     <div class="preview-icon bg-dark rounded-circle">
                                         <i class="mdi mdi-logout text-danger"></i>
                                     </div>
                                 </div>
                                 <div class="preview-item-content">
-                                    <p class="preview-subject mb-1">Log out</p>
+                                        <p class="preview-subject mb-1"> Log out </p>
                                 </div>
                             </a>
                             <div class="dropdown-divider"></div>
@@ -465,20 +466,21 @@
 
 
 <script src="${pageContext.request.contextPath}/assets/vendors/js/vendor.bundle.base.js"></script>
-
 <script src="${pageContext.request.contextPath}/assets/vendors/chart.js/Chart.min.js"></script>
 <script src="${pageContext.request.contextPath}/assets/vendors/progressbar.js/progressbar.min.js"></script>
 <script src="${pageContext.request.contextPath}/assets/vendors/jvectormap/jquery-jvectormap.min.js"></script>
 <script src="${pageContext.request.contextPath}/assets/vendors/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
 <script src="${pageContext.request.contextPath}/assets/vendors/owl-carousel-2/owl.carousel.min.js"></script>
-
 <script src="${pageContext.request.contextPath}/assets/js/off-canvas.js"></script>
 <script src="${pageContext.request.contextPath}/assets/js/hoverable-collapse.js"></script>
 <script src="${pageContext.request.contextPath}/assets/js/misc.js"></script>
 <script src="${pageContext.request.contextPath}/assets/js/settings.js"></script>
 <script src="${pageContext.request.contextPath}/assets/js/todolist.js"></script>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/apiAddress.js"></script>
 <script src="${pageContext.request.contextPath}/assets/js/dashboard.js"></script>
+
 </div>
 </body>
 </html>

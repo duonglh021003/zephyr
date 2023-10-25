@@ -1,7 +1,9 @@
 package com.example.demo.controller;
 
+
 import com.example.demo.entity.Staff;
 import com.example.demo.service.StaffService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,19 +19,35 @@ public class LoginController {
     @Autowired
     private StaffService staffService;
 
-    @GetMapping("/staff/login")
+
+    @GetMapping("/admin/login")
     public String login() {
         return "login/staff";
     }
 
 
-    @PostMapping("/staff/home")
+    @PostMapping("/staff/homell")
     public String signIn(@RequestParam("phoneNumber") String phoneNumber,
                          @RequestParam("password") String password,
                          Model model
     ) {
+
         Staff staff = staffService.detailPhone(phoneNumber);
         model.addAttribute("staff", staff);
+
+        return staffService.login(phoneNumber, password);
+
+    }
+
+    @PostMapping("/admin/home")
+    public String signIn(@RequestParam("phoneNumberLogin") String phoneNumber,
+                         @RequestParam("password") String password,
+                         Model model,
+                         HttpSession session) {
+
+        Staff staff = staffService.detailPhone(phoneNumber);
+        model.addAttribute("staffSession", staff);
+        session.setAttribute("staffSession", staff);
         return staffService.login(phoneNumber, password);
     }
 

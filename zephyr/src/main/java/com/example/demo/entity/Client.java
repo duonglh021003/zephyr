@@ -15,18 +15,19 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.time.LocalDate;
 
-@Table(name = "staff")
+@Table(name = "client")
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
-@ToString
 @Builder
-public class Staff {
+@ToString
+public class Client {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,11 +37,11 @@ public class Staff {
     @Column(name = "code")
     private String code;
 
-    @Column(name = "staff_name")
+    @Column(name = "client_name")
     private String name;
 
     @Column(name = "date_of_birth")
-    private String dateOfBirth;
+    private LocalDate dateOfBirth;
 
     @Column(name = "phone_number")
     private String phoneNumber;
@@ -51,17 +52,11 @@ public class Staff {
     @Column(name = "gender")
     private String gender;
 
-    @Column(name = "staff_address")
-    private String address;
+    @Column(name = "point_use")
+    private Double pointUsr;
 
-    @Column(name = "commune")
-    private String commune;
-
-    @Column(name = "district")
-    private String district;
-
-    @Column(name = "city")
-    private String city;
+    @Column(name = "accumulated_score")
+    private Double accumulatedScore;
 
     @Column(name = "staff_password")
     private String password;
@@ -82,6 +77,35 @@ public class Staff {
     private Integer status;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_position", referencedColumnName = "id")
-    private Position position;
+    @JoinColumn(name = "id_ranks", referencedColumnName = "id")
+    private Rank rank;
+
+    public String clickRank() {
+        String ranks;
+        if (0 <= accumulatedScore && accumulatedScore <= 500) {
+             ranks = "Đồng hành";
+        } else if (501 <= accumulatedScore && accumulatedScore <= 1000) {
+            ranks = "Thân thiết";
+        } else if (1001 <= accumulatedScore && accumulatedScore <= 2000) {
+            ranks = "Tri kỷ";
+        } else {
+            ranks = "Vip";
+        }
+        return ranks;
+    }
+
+    public Integer idRank(){
+        Integer idranks;
+        if(clickRank().equalsIgnoreCase("Đồng hành")){
+            idranks = 1;
+        }else if(clickRank().equalsIgnoreCase("Thân thiết")){
+            idranks = 2;
+        }else if(clickRank().equalsIgnoreCase("Tri kỷ")){
+            idranks = 3;
+        }else {
+            idranks = 4;
+        }
+        return idranks;
+    }
+
 }

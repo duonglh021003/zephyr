@@ -17,7 +17,6 @@
 
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/style.css"/>
 
-
 </head>
 <body>
 
@@ -300,15 +299,16 @@
         <div class="main-panel">
             <div class="content-wrapper">
 
-                <div style="margin-top: 100px; " >
+                <div style="margin-top: 100px; ">
                     <h2 style="text-align: center; margin-right: 80px">Login</h2>
-                    <form action="/zephyr/staff/home" method="post" style="margin-top: 50px ">
-                        <div class="row" >
+                    <form action="/zephyr/admin/home" method="post" style="margin-top: 50px ">
+                        <div class="row">
                             <div class="col-md-4"></div>
                             <div class="col-md-4">
-                                <div class="mb-3" >
+                                <div class="mb-3">
                                     <label for="username">account: </label>
-                                    <input type="text" id="username" name="phoneNumber"  required style="margin-left: 10px">
+                                    <input type="text" id="username" name="phoneNumberLogin" required
+                                           style="margin-left: 10px">
                                 </div>
                             </div>
 
@@ -321,7 +321,8 @@
                                 <div class="mb-3">
                                     <div class="mb-3">
                                         <label for="password">password: </label>
-                                        <input type="password" name="password" id="password"  required>
+                                        <input type="password" name="password" id="password" required>
+                                        <%--  <button id="togglePasswordButton" type="button"  ></button>--%>
                                     </div>
                                 </div>
                             </div>
@@ -333,7 +334,9 @@
                             <div class="col-md-4">
                                 <div class="mb-3">
                                     <div class="mb-3">
-                                        <button type="submit" style="margin-left: 120px; background: blue; color: white">Đăng nhập</button>
+                                        <button type="submit"
+                                                style="margin-left: 120px; background: blue; color: white">Đăng nhập
+                                        </button>
                                     </div>
                                 </div>
                             </div>

@@ -12,7 +12,7 @@
         <div class="card-body">
             <div style="margin-bottom: 30px">
                 <span><a href="/zephyr/admin/staff/index">Staff</a></span>
-                <span style="color: #C0C0C0"> / index</span>
+                <span style="color: #C0C0C0"> / delete</span>
             </div>
             <div class="table-responsive">
                 <table class="table table-bordered">
@@ -30,10 +30,6 @@
                         <th> district </th>
                         <th> city </th>
                         <th> password </th>
-                        <th> dateCreate </th>
-                        <th> dateUpdate </th>
-                        <th> userCreate </th>
-                        <th> userUpdate </th>
                         <th> status </th>
                         <th> position </th>
                         <th> acction </th>
@@ -50,31 +46,27 @@
                             <td>${staff.dateOfBirth}</td>
                             <td>${staff.phoneNumber}</td>
                             <td>${staff.gmail}</td>
-                            <td>${staff.gender == true ? "nam" : "nữ"}</td>
+                            <td>${staff.gender  == true ? "nam" : "nữ"}</td>
                             <td>${staff.address}</td>
                             <td>${staff.commune}</td>
                             <td>${staff.district}</td>
                             <td>${staff.city}</td>
                             <td>${staff.password}</td>
-                            <td>${staff.dateCreate}</td>
-                            <td>${staff.dateUpdate}</td>
-                            <td>${staff.userCreate}</td>
-                            <td>${staff.userUpdate}</td>
                             <td>${staff.status == 1 ? "đang hoạt động" : "ngừng hoạt động"}</td>
                             <td>${staff.position.name}</td>
                             <td>
-                                <a class="btn btn-default" href="/zephyr/admin/staff/view-update?id=${staff.id}"  >update</a>
-                                <a class="btn btn-default" href="/zephyr/admin/staff/delete?id=${staff.id}" onclick="if(!confirm('Bạn có muốn xoá?')){return false}else{alert('xoá thành công');}">delete</a>
+                                <a class="btn btn-default" href="/zephyr/admin/staff/restore?id=${staff.id}"
+                                   onclick="if(!confirm('Bạn có muốn khôi phục?')){return false}else{alert('khôi phục thành công');}">khôi phục</a>
                             </td>
                         </tr>
                     </c:forEach>
                     </tbody>
                 </table>
-                <nav aria-label="Page navigation example" style="margin-left: 950px; margin-top: 20px">
+                <nav aria-label="Page navigation example" style="margin-left: 500px; margin-top: 20px">
                     <ul class="pagination" >
                         <c:forEach begin="0" end="${ listStaff.totalPages -1}" varStatus="loop" >
                             <li class="page-item"  >
-                                <a class="page-link" href="/zephyr/admin/staff/index?page=${loop.begin + loop.count - 1}" >
+                                <a class="page-link" href="/zephyr/admin/staff/list-delete?page=${loop.begin + loop.count - 1}" >
                                         ${loop.begin + loop.count }
                                 </a>
                             </li>
@@ -85,16 +77,6 @@
         </div>
     </div>
 </div>
-
-<script>
-    function update() {
-        if (!confirm('Bạn có muốn xoá?')) {
-            return false
-        } else {
-            alert('xoá thành công');
-        }
-    }
-</script>
 
 </body>
 </html>

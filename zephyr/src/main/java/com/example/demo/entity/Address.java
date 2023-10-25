@@ -18,15 +18,15 @@ import lombok.ToString;
 
 import java.time.LocalDate;
 
-@Table(name = "staff")
+@Table(name = "client_address")
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
-@ToString
 @Builder
-public class Staff {
+@ToString
+public class Address {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,23 +36,14 @@ public class Staff {
     @Column(name = "code")
     private String code;
 
-    @Column(name = "staff_name")
+    @Column(name = "client_name")
     private String name;
-
-    @Column(name = "date_of_birth")
-    private String dateOfBirth;
 
     @Column(name = "phone_number")
     private String phoneNumber;
 
-    @Column(name = "gmail")
-    private String gmail;
-
-    @Column(name = "gender")
-    private String gender;
-
-    @Column(name = "staff_address")
-    private String address;
+    @Column(name = "client_address")
+    private String clientAddress;
 
     @Column(name = "commune")
     private String commune;
@@ -63,25 +54,15 @@ public class Staff {
     @Column(name = "city")
     private String city;
 
-    @Column(name = "staff_password")
-    private String password;
-
     @Column(name = "date_create")
     private LocalDate dateCreate;
 
-    @Column(name = "date_update")
-    private LocalDate dateUpdate;
-
-    @Column(name = "user_create")
-    private String userCreate;
-
-    @Column(name = "user_update")
-    private String userUpdate;
-
-    @Column(name = "staff_status")
+    @Column(name = "address_status")
     private Integer status;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_position", referencedColumnName = "id")
-    private Position position;
+    @JoinColumn(name = "id_client", referencedColumnName = "id")
+    private Client client;
+
+
 }
