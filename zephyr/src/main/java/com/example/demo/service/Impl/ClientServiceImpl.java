@@ -47,4 +47,30 @@ public class ClientServiceImpl implements ClientService {
     public List<Address> findAllById(Long id) {
         return clientRepository.findAllById(id);
     }
+
+    @Override
+    public String login(String gmail) {
+        Client client = clientRepository.findStaffByGmail(gmail);
+        if (client == null) {
+            return "login/client";
+        } else if (gmail.equalsIgnoreCase(client.getGmail())) {
+            return "redirect:/zephyr/home";
+        } else {
+            return "login/client";
+        }
+
+    }
+
+    @Override
+    public Client detailGmail(String gmail) {
+        for (Client client : clientRepository.findAll()) {
+            if (client.getGmail().equalsIgnoreCase(gmail)) {
+                return client;
+            }
+        }
+        return null;
+    }
+
+
+
 }

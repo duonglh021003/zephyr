@@ -1,7 +1,4 @@
-﻿CREATE DATABASE zephyr
-
-USE zephyr
-GO
+﻿
 -- ChucVu
 CREATE TABLE position(
 id BIGINT IDENTITY(1,1) PRIMARY KEY ,
@@ -111,11 +108,11 @@ staff_status INT DEFAULT 1, -- trạng thái
 id_ranks BIGINT , -- id hạng
 )
 insert into client values
-('ma0001',N'Khách Hàng 01','2002-12-12','0898629635','01@gmail.com',N'true',50,600,'1','2002-12-12','2002-12-12',N'dương',N'dương',DEFAULT,1),
-('ma0002',N'Khách Hàng 02','2002-12-12','0898629635','02@gmail.com',N'true',50,700,'1','2002-12-12','2002-12-12',N'dương',N'dương',DEFAULT,1),
-('ma0003',N'Khách Hàng 03','2002-12-12','0898629635','03@gmail.com',N'true',50,800,'1','2002-12-12','2002-12-12',N'dương',N'dương',DEFAULT,3),
-('ma0004',N'Khách Hàng 04','2002-12-12','0898629635','01@gmail.com',N'true',50,600,'1','2002-12-12','2002-12-12',N'dương',N'dương',DEFAULT,1),
-('ma0005',N'Khách Hàng 05','2002-12-12','0898629635','02@gmail.com',N'true',50,700,'1','2002-12-12','2002-12-12',N'dương',N'dương',DEFAULT,2),
+('ma0001',N'Khách Hàng 01','2002-12-12','0898629635','duongcf2k3@gmail.com',N'true',50,600,'1','2002-12-12','2002-12-12',N'dương',N'dương',DEFAULT,1),
+('ma0002',N'Khách Hàng 02','2002-12-12','0898629635','duong021003@gmail.com',N'true',50,700,'1','2002-12-12','2002-12-12',N'dương',N'dương',DEFAULT,1),
+('ma0003',N'Khách Hàng 03','2002-12-12','0898629635','duonglhph22902@fpt.edu.vn',N'true',50,800,'1','2002-12-12','2002-12-12',N'dương',N'dương',DEFAULT,3),
+('ma0004',N'Khách Hàng 04','2002-12-12','0898629635','01@gmail.com',N'true',50,600,'1','2002-12-12','2002-12-12',N'dương',N'dương',0,1),
+('ma0005',N'Khách Hàng 05','2002-12-12','0898629635','02@gmail.com',N'true',50,700,'1','2002-12-12','2002-12-12',N'dương',N'dương',0,2),
 ('ma0006',N'Khách Hàng 06','2002-12-12','0898629635','03@gmail.com',N'true',50,800,'1','2002-12-12','2002-12-12',N'dương',N'dương',DEFAULT,3),
 ('ma0007',N'Khách Hàng 07','2002-12-12','0898629635','03@gmail.com',N'true',50,800,'1','2002-12-12','2002-12-12',N'dương',N'dương',DEFAULT,2)
 select *

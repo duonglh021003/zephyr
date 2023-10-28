@@ -21,35 +21,28 @@ public class LoginController {
 
 
     @GetMapping("/admin/login")
-    public String login() {
+    public String loginAdmin() {
         return "login/staff";
     }
 
-
-    @PostMapping("/staff/homell")
-    public String signIn(@RequestParam("phoneNumber") String phoneNumber,
-                         @RequestParam("password") String password,
-                         Model model
-    ) {
-
-        Staff staff = staffService.detailPhone(phoneNumber);
-        model.addAttribute("staff", staff);
-
-        return staffService.login(phoneNumber, password);
-
+    @GetMapping("/login")
+    public String loginClient() {
+        return "login/client";
     }
 
     @PostMapping("/admin/home")
-    public String signIn(@RequestParam("phoneNumberLogin") String phoneNumber,
-                         @RequestParam("password") String password,
-                         Model model,
-                         HttpSession session) {
+    public String homeAdmin(@RequestParam("phoneNumberLogin") String phoneNumber,
+                            @RequestParam("password") String password,
+                            Model model,
+                            HttpSession session) {
 
         Staff staff = staffService.detailPhone(phoneNumber);
         model.addAttribute("staffSession", staff);
         session.setAttribute("staffSession", staff);
         return staffService.login(phoneNumber, password);
     }
+
+
 
 
 }

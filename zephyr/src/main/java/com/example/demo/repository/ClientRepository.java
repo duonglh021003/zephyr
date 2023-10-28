@@ -2,6 +2,7 @@ package com.example.demo.repository;
 
 import com.example.demo.entity.Address;
 import com.example.demo.entity.Client;
+import com.example.demo.entity.Staff;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -13,6 +14,8 @@ import java.util.List;
 
 @Repository
 public interface ClientRepository extends JpaRepository<Client, Long> {
+    Client findStaffByGmail(String gmail);
+
     Page<Client> findAllByStatus(int status, Pageable pageable);
 
     @Query("select DISTINCT addres from Address addres\n" +

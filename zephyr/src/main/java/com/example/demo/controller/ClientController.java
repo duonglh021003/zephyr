@@ -1,10 +1,8 @@
 package com.example.demo.controller;
 
 import com.example.demo.entity.Client;
-import com.example.demo.entity.Staff;
 import com.example.demo.repository.ClientRepository;
 import com.example.demo.repository.RankRepository;
-import com.example.demo.service.AddressService;
 import com.example.demo.service.ClientService;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
