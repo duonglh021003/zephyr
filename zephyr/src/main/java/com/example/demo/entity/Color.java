@@ -49,7 +49,7 @@ public class Color {
     @Column(name = "user_update")
     private String userUpdate;
 
-    @Column(name = "product_status")
+    @Column(name = "color_status")
     private Integer status;
 
 }

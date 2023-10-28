@@ -1,5 +1,6 @@
 package com.example.demo.entity;
 
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -15,7 +16,7 @@ import lombok.ToString;
 
 import java.time.LocalDate;
 
-@Table(name = "product")
+@Table(name = "origin")
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
@@ -23,7 +24,7 @@ import java.time.LocalDate;
 @Setter
 @Builder
 @ToString
-public class Product {
+public class Origin {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,7 +34,7 @@ public class Product {
     @Column(name = "code")
     private String code;
 
-    @Column(name = "product_name")
+    @Column(name = "origin_name")
     private String name;
 
     @Column(name = "date_create")
@@ -48,6 +49,7 @@ public class Product {
     @Column(name = "user_update")
     private String userUpdate;
 
-    @Column(name = "product_status")
+    @Column(name = "origin_status")
     private Integer status;
+
 }

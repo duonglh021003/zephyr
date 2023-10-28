@@ -15,15 +15,15 @@ import lombok.ToString;
 
 import java.time.LocalDate;
 
-@Table(name = "product")
+@Table(name = "size")
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
-@Builder
 @ToString
-public class Product {
+@Builder
+public class Size {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,7 +33,7 @@ public class Product {
     @Column(name = "code")
     private String code;
 
-    @Column(name = "product_name")
+    @Column(name = "size_name")
     private String name;
 
     @Column(name = "date_create")
@@ -48,6 +48,7 @@ public class Product {
     @Column(name = "user_update")
     private String userUpdate;
 
-    @Column(name = "product_status")
+    @Column(name = "size_status")
     private Integer status;
+
 }
