@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping(value = "/zephyr")
 public class ViewClientController {
 
-    @GetMapping("/shop")
+    @GetMapping("/shop11")
     public String shop(Model model){
 
         model.addAttribute("viewClient", "/WEB-INF/view/include/shop.jsp");

@@ -24,9 +24,7 @@ public class LoginClientController {
     private GoogleUtils googleUtils;
 
     @GetMapping("/home")
-    public String homeClient(HttpSession session, Model model) {
-        String clientName = (String) session.getAttribute("clientSession.name");
-        model.addAttribute("clientSession", clientName);
+    public String homeClient(Model model) {
         model.addAttribute("viewClient", "/WEB-INF/view/home/client.jsp");
         return "layout/client";
     }
@@ -41,11 +39,9 @@ public class LoginClientController {
             return "login";
         } else {
 
-
             String accessToken = googleUtils.getToken(code);
             GooglePojo googlePojo = googleUtils.getUserInfo(accessToken);
             gmail = googlePojo.getEmail();
-
 
             Client client = clientService.detailGmail(googlePojo.getEmail());
             model.addAttribute("clientSession", client);

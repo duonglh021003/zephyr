@@ -35,8 +35,9 @@ public class StaffController {
                         Model model,
                         HttpSession session) {
 
-        String staffName = (String) session.getAttribute("staffSession.name");
-        model.addAttribute("staffSession", staffName);
+        Staff staff = (Staff) session.getAttribute("staffSession");
+        model.addAttribute("staffSession", staff);
+        System.out.println("MMMMMMMMMMMMMMMMMMMMMMM: " + staff);
         Pageable pageable = PageRequest.of(number, 6);
         Page<Staff> pageStaff = staffService.getAll(pageable);
         model.addAttribute("listStaff", pageStaff);

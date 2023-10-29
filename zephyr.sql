@@ -1,4 +1,7 @@
-﻿
+﻿CREATE DATABASE zephyr
+
+USE zephyr
+GO
 -- ChucVu
 CREATE TABLE position(
 id BIGINT IDENTITY(1,1) PRIMARY KEY ,
@@ -86,67 +89,6 @@ insert into ranks values
 select *
 from 
 ranks 
-
-GO
---khách hàng
-CREATE TABLE client(
-id BIGINT IDENTITY(1,1) PRIMARY KEY,
-code VARCHAR(200) UNIQUE, -- mã
-client_name NVARCHAR(200) DEFAULT NULL, -- tên
-date_of_birth DATE DEFAULT NULL, -- ngày sinh
-phone_number VARCHAR(200) DEFAULT NULL, -- sđt
-gmail VARCHAR(200) DEFAULT NULL, -- gmail
-gender NVARCHAR(200) DEFAULT NULL, -- giới tính
-point_use INT DEFAULT NULL,-- điểm sử dụng 
-accumulated_score INT DEFAULT NULL, -- điểm tích luỹ
-staff_password VARCHAR(MAX) DEFAULT NULL, -- mật khẩu
-date_create DATE DEFAULT NULL, -- ngày tạo
-date_update DATE DEFAULT NULL, -- ngày sửa
-user_create NVARCHAR(200) DEFAULT NULL, -- người tạo
-user_update NVARCHAR(200) DEFAULT NULL, -- người sửa
-staff_status INT DEFAULT 1, -- trạng thái
-id_ranks BIGINT , -- id hạng
-)
-insert into client values
-('ma0001',N'Khách Hàng 01','2002-12-12','0898629635','duongcf2k3@gmail.com',N'true',50,600,'1','2002-12-12','2002-12-12',N'dương',N'dương',DEFAULT,1),
-('ma0002',N'Khách Hàng 02','2002-12-12','0898629635','duong021003@gmail.com',N'true',50,700,'1','2002-12-12','2002-12-12',N'dương',N'dương',DEFAULT,1),
-('ma0003',N'Khách Hàng 03','2002-12-12','0898629635','duonglhph22902@fpt.edu.vn',N'true',50,800,'1','2002-12-12','2002-12-12',N'dương',N'dương',DEFAULT,3),
-('ma0004',N'Khách Hàng 04','2002-12-12','0898629635','01@gmail.com',N'true',50,600,'1','2002-12-12','2002-12-12',N'dương',N'dương',0,1),
-('ma0005',N'Khách Hàng 05','2002-12-12','0898629635','02@gmail.com',N'true',50,700,'1','2002-12-12','2002-12-12',N'dương',N'dương',0,2),
-('ma0006',N'Khách Hàng 06','2002-12-12','0898629635','03@gmail.com',N'true',50,800,'1','2002-12-12','2002-12-12',N'dương',N'dương',DEFAULT,3),
-('ma0007',N'Khách Hàng 07','2002-12-12','0898629635','03@gmail.com',N'true',50,800,'1','2002-12-12','2002-12-12',N'dương',N'dương',DEFAULT,2)
-select *
-from 
-client
-GO
--- địa chỉ
-CREATE TABLE client_address(
-id BIGINT IDENTITY(1,1) PRIMARY KEY,
-code VARCHAR(200) UNIQUE, -- mã
-client_name NVARCHAR(200) DEFAULT NULL, -- tên
-phone_number VARCHAR(200) DEFAULT NULL, -- sđt
-client_address NVARCHAR(MAX) DEFAULT NULL, -- địa chỉ
-commune NVARCHAR(200) DEFAULT NULL, -- xã
-district NVARCHAR(200) DEFAULT NULL, -- huyện
-city NVARCHAR(200) DEFAULT NULL, -- thành phố 
-date_create DATE DEFAULT NULL, -- ngày tạo
-address_status INT DEFAULT 0, -- trạng thái
-id_client BIGINT , -- id client
-)
-insert into client_address values
-('ma0001',N'Khách Hàng 01','0898629635',N'phú mỹ',N'mỹ đình 2',N'nam từ liêm',N'HN','2002-12-12',1,1),
-('ma0002',N'Khách Hàng 02','0898629635',N'phú mỹ',N'mỹ đình 2',N'nam từ liêm',N'HN','2002-12-12',DEFAULT,2),
-('ma0003',N'Khách Hàng 02','0898629635',N'phú mỹ',N'mỹ đình 2',N'nam từ liêm',N'HN','2002-12-12',1,2),
-('ma0004',N'Khách Hàng 03','0898629635',N'phú mỹ',N'mỹ đình 2',N'nam từ liêm',N'HN','2002-12-12',DEFAULT,3),
-('ma0005',N'Khách Hàng 01','0898629635',N'phú mỹ',N'mỹ đình 2',N'nam từ liêm',N'HN','2002-12-12',DEFAULT,1),
-('ma0006',N'Khách Hàng 03','0898629635',N'phú mỹ',N'mỹ đình 2',N'nam từ liêm',N'HN','2002-12-12',1,3),
-('ma0007',N'Khách Hàng 04','0898629635',N'phú mỹ',N'mỹ đình 2',N'nam từ liêm',N'HN','2002-12-12',1,4),
-('ma0008',N'Khách Hàng 05','0898629635',N'phú mỹ',N'mỹ đình 2',N'nam từ liêm',N'HN','2002-12-12',1,5),
-('ma0009',N'Khách Hàng 06','0898629635',N'phú mỹ',N'mỹ đình 2',N'nam từ liêm',N'HN','2002-12-12',1,6),
-('ma00010',N'Khách Hàng 07','0898629635',N'phú mỹ',N'mỹ đình 2',N'nam từ liêm',N'HN','2002-12-12',1,7)
-select *
-from 
-client_address
 GO
 -- sản phẩm
 CREATE TABLE product(
@@ -162,7 +104,11 @@ product_status INT DEFAULT 1, -- trạng thái
 insert into product values
 ('ma0001',N'đầm 01','2002-12-12','2002-12-12',N'dương',N'dương',DEFAULT),
 ('ma0002',N'đầm 02','2002-12-12','2002-12-12',N'dương',N'dương',DEFAULT),
-('ma0003',N'đầm 03','2002-12-12','2002-12-12',N'dương',N'dương',DEFAULT)
+('ma0003',N'đầm 03','2002-12-12','2002-12-12',N'dương',N'dương',DEFAULT),
+('ma0004',N'đầm 04','2002-12-12','2002-12-12',N'dương',N'dương',DEFAULT),
+('ma0005',N'đầm 05','2002-12-12','2002-12-12',N'dương',N'dương',DEFAULT),
+('ma0006',N'đầm 06','2002-12-12','2002-12-12',N'dương',N'dương',DEFAULT),
+('ma0007',N'đầm 07','2002-12-12','2002-12-12',N'dương',N'dương',DEFAULT)
 select *
 from 
 product
@@ -198,9 +144,11 @@ user_update NVARCHAR(200) DEFAULT NULL, -- người sửa
 color_status INT DEFAULT 1, -- trạng thái
 )
 insert into color values
-('ma0001',N'trắng','2002-12-12','2002-12-12',N'dương',N'dương',DEFAULT),
-('ma0002',N'đen','2002-12-12','2002-12-12',N'dương',N'dương',DEFAULT),
-('ma0003',N'vàng','2002-12-12','2002-12-12',N'dương',N'dương',DEFAULT)
+('ma0001',N'Black','2002-12-12','2002-12-12',N'dương',N'dương',DEFAULT),
+('ma0002',N'White','2002-12-12','2002-12-12',N'dương',N'dương',DEFAULT),
+('ma0003',N'Red','2002-12-12','2002-12-12',N'dương',N'dương',DEFAULT),
+('ma0004',N'Blue','2002-12-12','2002-12-12',N'dương',N'dương',DEFAULT),
+('ma0005',N'Green','2002-12-12','2002-12-12',N'dương',N'dương',DEFAULT)
 select *
 from 
 color
@@ -217,10 +165,11 @@ user_update NVARCHAR(200) DEFAULT NULL, -- người sửa
 size_status INT DEFAULT 1, -- trạng thái
 )
 insert into size values
-('ma0001',N'S','2002-12-12','2002-12-12',N'dương',N'dương',DEFAULT),
-('ma0002',N'M','2002-12-12','2002-12-12',N'dương',N'dương',DEFAULT),
-('ma0003',N'L','2002-12-12','2002-12-12',N'dương',N'dương',DEFAULT),
-('ma0004',N'XL','2002-12-12','2002-12-12',N'dương',N'dương',DEFAULT)
+('ma0001',N'XS','2002-12-12','2002-12-12',N'dương',N'dương',DEFAULT),
+('ma0002',N'S','2002-12-12','2002-12-12',N'dương',N'dương',DEFAULT),
+('ma0003',N'M','2002-12-12','2002-12-12',N'dương',N'dương',DEFAULT),
+('ma0004',N'L','2002-12-12','2002-12-12',N'dương',N'dương',DEFAULT),
+('ma0005',N'XL','2002-12-12','2002-12-12',N'dương',N'dương',DEFAULT)
 select *
 from 
 size
@@ -244,9 +193,16 @@ id_color BIGINT , -- id màu sắc
 id_size BIGINT , -- id size
 )
 insert into product_details values
-(N'link ảnh',N'không',101,200.000,299.000,'2002-12-12','2002-12-12',N'dương',N'dương',DEFAULT,1,1,1,1),
-(N'link ảnh',N'không',201,300.000,399.000,'2002-12-12','2002-12-12',N'dương',N'dương',DEFAULT,2,1,1,1),
-(N'link ảnh',N'không',301,400.000,499.000,'2002-12-12','2002-12-12',N'dương',N'dương',DEFAULT,3,1,1,1)
+(N'1.jpg',N'không',101,200.000,299.000,'2002-12-12','2002-12-12',N'dương',N'dương',DEFAULT,1,1,1,1),
+(N'2.jpg',N'không',201,300.000,399.000,'2002-12-12','2002-12-12',N'dương',N'dương',DEFAULT,2,1,1,1),
+(N'3.jpg',N'không',301,400.000,499.000,'2002-12-12','2002-12-12',N'dương',N'dương',DEFAULT,3,1,1,1),
+(N'4.jpg',N'không',401,500.000,599.000,'2002-12-12','2002-12-12',N'dương',N'dương',DEFAULT,4,1,1,1),
+(N'5.jpg',N'không',501,600.000,699.000,'2002-12-12','2002-12-12',N'dương',N'dương',DEFAULT,5,1,1,1),
+(N'6.jpg',N'không',601,700.000,799.000,'2002-12-12','2002-12-12',N'dương',N'dương',DEFAULT,6,1,1,1),
+(N'7.jpg',N'không',701,800.000,899.000,'2002-12-12','2002-12-12',N'dương',N'dương',DEFAULT,7,1,1,1),
+(N'8.jpg',N'không',801,900.000,999.000,'2002-12-12','2002-12-12',N'dương',N'dương',DEFAULT,1,1,1,1),
+(N'9.jpg',N'không',101,800.000,899.000,'2002-12-12','2002-12-12',N'dương',N'dương',DEFAULT,3,1,1,1),
+(N'10.jpg',N'không',101,800.000,899.000,'2002-12-12','2002-12-12',N'dương',N'dương',DEFAULT,5,1,1,1)
 select *
 from 
 product_details
@@ -316,15 +272,79 @@ id BIGINT IDENTITY(1,1) PRIMARY KEY ,
 code VARCHAR(200) UNIQUE, -- mã
 total_shopping_cart DECIMAL(20,3) DEFAULT NULL, -- tổng tiền giỏ hàng
 shopping_cart_status INT DEFAULT 1, -- trạng thái
-id_client BIGINT , -- id khách hàng
 )
 insert into shopping_cart values
-('ma0001',200,DEFAULT,1),
-('ma0002',300,DEFAULT,2),
-('ma0003',400,DEFAULT,3)
+('ma0001',200,DEFAULT),
+('ma0002',300,DEFAULT),
+('ma0003',400,DEFAULT),
+('ma0004',500,DEFAULT),
+('ma0005',600,DEFAULT),
+('ma0006',700,DEFAULT),
+('ma0007',800,DEFAULT)
 select *
 from 
 shopping_cart
+GO
+--khách hàng
+CREATE TABLE client(
+id BIGINT IDENTITY(1,1) PRIMARY KEY,
+code VARCHAR(200) UNIQUE, -- mã
+client_name NVARCHAR(200) DEFAULT NULL, -- tên
+date_of_birth DATE DEFAULT NULL, -- ngày sinh
+phone_number VARCHAR(200) DEFAULT NULL, -- sđt
+gmail VARCHAR(200) DEFAULT NULL, -- gmail
+gender NVARCHAR(200) DEFAULT NULL, -- giới tính
+point_use INT DEFAULT NULL,-- điểm sử dụng 
+accumulated_score INT DEFAULT NULL, -- điểm tích luỹ
+staff_password VARCHAR(MAX) DEFAULT NULL, -- mật khẩu
+date_create DATE DEFAULT NULL, -- ngày tạo
+date_update DATE DEFAULT NULL, -- ngày sửa
+user_create NVARCHAR(200) DEFAULT NULL, -- người tạo
+user_update NVARCHAR(200) DEFAULT NULL, -- người sửa
+staff_status INT DEFAULT 1, -- trạng thái
+id_ranks BIGINT , -- id hạng
+id_shopping_cart BIGINT , -- id giỏ hàng
+)
+insert into client values
+('ma0001',N'Khách Hàng 01','2002-12-12','0898629635','duongcf2k3@gmail.com',N'true',50,600,'1','2002-12-12','2002-12-12',N'dương',N'dương',DEFAULT,1,1),
+('ma0002',N'Khách Hàng 02','2002-12-12','0898629635','duong021003@gmail.com',N'true',50,700,'1','2002-12-12','2002-12-12',N'dương',N'dương',DEFAULT,1,2),
+('ma0003',N'Khách Hàng 03','2002-12-12','0898629635','duonglhph22902@fpt.edu.vn',N'true',50,800,'1','2002-12-12','2002-12-12',N'dương',N'dương',DEFAULT,3,3),
+('ma0004',N'Khách Hàng 04','2002-12-12','0898629635','01@gmail.com',N'true',50,600,'1','2002-12-12','2002-12-12',N'dương',N'dương',0,1,4),
+('ma0005',N'Khách Hàng 05','2002-12-12','0898629635','02@gmail.com',N'true',50,700,'1','2002-12-12','2002-12-12',N'dương',N'dương',0,2,5),
+('ma0006',N'Khách Hàng 06','2002-12-12','0898629635','03@gmail.com',N'true',50,800,'1','2002-12-12','2002-12-12',N'dương',N'dương',DEFAULT,3,6),
+('ma0007',N'Khách Hàng 07','2002-12-12','0898629635','03@gmail.com',N'true',50,800,'1','2002-12-12','2002-12-12',N'dương',N'dương',DEFAULT,2,7)
+select *
+from 
+client
+GO
+-- địa chỉ
+CREATE TABLE client_address(
+id BIGINT IDENTITY(1,1) PRIMARY KEY,
+code VARCHAR(200) UNIQUE, -- mã
+client_name NVARCHAR(200) DEFAULT NULL, -- tên
+phone_number VARCHAR(200) DEFAULT NULL, -- sđt
+client_address NVARCHAR(MAX) DEFAULT NULL, -- địa chỉ
+commune NVARCHAR(200) DEFAULT NULL, -- xã
+district NVARCHAR(200) DEFAULT NULL, -- huyện
+city NVARCHAR(200) DEFAULT NULL, -- thành phố 
+date_create DATE DEFAULT NULL, -- ngày tạo
+address_status INT DEFAULT 0, -- trạng thái
+id_client BIGINT , -- id client
+)
+insert into client_address values
+('ma0001',N'Khách Hàng 01','0898629635',N'phú mỹ',N'mỹ đình 2',N'nam từ liêm',N'HN','2002-12-12',1,1),
+('ma0002',N'Khách Hàng 02','0898629635',N'phú mỹ',N'mỹ đình 2',N'nam từ liêm',N'HN','2002-12-12',DEFAULT,2),
+('ma0003',N'Khách Hàng 02','0898629635',N'phú mỹ',N'mỹ đình 2',N'nam từ liêm',N'HN','2002-12-12',1,2),
+('ma0004',N'Khách Hàng 03','0898629635',N'phú mỹ',N'mỹ đình 2',N'nam từ liêm',N'HN','2002-12-12',DEFAULT,3),
+('ma0005',N'Khách Hàng 01','0898629635',N'phú mỹ',N'mỹ đình 2',N'nam từ liêm',N'HN','2002-12-12',DEFAULT,1),
+('ma0006',N'Khách Hàng 03','0898629635',N'phú mỹ',N'mỹ đình 2',N'nam từ liêm',N'HN','2002-12-12',1,3),
+('ma0007',N'Khách Hàng 04','0898629635',N'phú mỹ',N'mỹ đình 2',N'nam từ liêm',N'HN','2002-12-12',1,4),
+('ma0008',N'Khách Hàng 05','0898629635',N'phú mỹ',N'mỹ đình 2',N'nam từ liêm',N'HN','2002-12-12',1,5),
+('ma0009',N'Khách Hàng 06','0898629635',N'phú mỹ',N'mỹ đình 2',N'nam từ liêm',N'HN','2002-12-12',1,6),
+('ma00010',N'Khách Hàng 07','0898629635',N'phú mỹ',N'mỹ đình 2',N'nam từ liêm',N'HN','2002-12-12',1,7)
+select *
+from 
+client_address
 GO
 -- giỏ hàng chi tiết
 CREATE TABLE detailed_shopping_cart(
@@ -445,6 +465,8 @@ ALTER TABLE product_details ADD FOREIGN KEY(id_size) REFERENCES size(id)
 ALTER TABLE staff ADD FOREIGN KEY(id_position) REFERENCES position(id)
 -- khách hàng - hạng
 ALTER TABLE client ADD FOREIGN KEY(id_ranks) REFERENCES ranks(id)
+-- khách hàng - giỏ hàng
+ALTER TABLE client ADD FOREIGN KEY(id_shopping_cart) REFERENCES shopping_cart(id)
 -- địa chỉ - khách hàng 
 ALTER TABLE client_address ADD FOREIGN KEY(id_client) REFERENCES client(id)
 -- yêu thích - khách hàng 
@@ -453,8 +475,6 @@ ALTER TABLE favourite ADD FOREIGN KEY(id_client) REFERENCES client(id)
 ALTER TABLE favourite_details ADD FOREIGN KEY(id_favourite) REFERENCES favourite(id)
 -- yêu thích chi tiết - sản phẩm
 ALTER TABLE favourite_details ADD FOREIGN KEY(id_product_details) REFERENCES product_details(id)
--- giỏ hàng - khách hàng
-ALTER TABLE shopping_cart ADD FOREIGN KEY(id_client) REFERENCES client(id)
 -- giỏ hàng chi tiết - sản phẩm
 ALTER TABLE detailed_shopping_cart ADD FOREIGN KEY(id_product_details) REFERENCES product_details(id)
 -- giỏ hàng chi tiết - giỏ hàng

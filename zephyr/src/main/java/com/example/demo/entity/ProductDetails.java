@@ -2,9 +2,12 @@ package com.example.demo.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -30,11 +33,8 @@ public class ProductDetails {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "code")
-    private String code;
-
     @Column(name = "images")
-    private String name;
+    private String images;
 
     @Column(name = "describe")
     private String describe;
@@ -43,10 +43,10 @@ public class ProductDetails {
     private String inventory;
 
     @Column(name = "import_price")
-    private String importPrice;
+    private Double importPrice;
 
     @Column(name = "price")
-    private String price;
+    private Double price;
 
     @Column(name = "date_create")
     private LocalDate dateCreate;
@@ -62,5 +62,21 @@ public class ProductDetails {
 
     @Column(name = "product_details_status")
     private Integer status;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_product", referencedColumnName = "id")
+    private Product product;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_origin", referencedColumnName = "id")
+    private Origin origin;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_color", referencedColumnName = "id")
+    private Color color;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_size", referencedColumnName = "id")
+    private Size size;
 
 }

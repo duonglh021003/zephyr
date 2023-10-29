@@ -76,9 +76,13 @@ public class Client {
     @Column(name = "staff_status")
     private Integer status;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_ranks", referencedColumnName = "id")
     private Rank rank;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "id_shopping_cart", referencedColumnName = "id")
+    private ShoppingCart shoppingCart;
 
     public String clickRank() {
         String ranks;
