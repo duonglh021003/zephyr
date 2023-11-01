@@ -1,7 +1,10 @@
 package com.example.demo.service;
 
 
+import com.example.demo.entity.Client;
 import com.example.demo.entity.DetailedShoppingCart;
+import com.example.demo.entity.ProductDetails;
+import com.example.demo.entity.ShoppingCart;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -19,5 +22,10 @@ public interface DetailedShoppingCartService {
 
     void update(DetailedShoppingCart detailedShoppingCart, Long id);
 
+    void add(DetailedShoppingCart detailedShoppingCart);
+
+    void delete(Long id);
+
+    List<DetailedShoppingCart> findByIdProduct(ShoppingCart shoppingCart, ProductDetails productDetails);
 
 }

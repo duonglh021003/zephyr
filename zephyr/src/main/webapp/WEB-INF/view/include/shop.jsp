@@ -30,7 +30,7 @@
             <div class="bg-light p-4 mb-30">
                 <form action="/zephyr/shop/search" method="get">
                     <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                        <input type="checkbox"  class="custom-control-input" checked id="price-all">
+                        <input type="checkbox" name="price" value="01"  class="custom-control-input" checked id="price-all">
                         <label class="custom-control-label" for="price-all">All Price</label>
                         <span class="badge border font-weight-normal">1000</span>
                     </div>
@@ -60,6 +60,7 @@
                         <label class="custom-control-label" for="price-5">$400 - $500</label>
                         <span class="badge border font-weight-normal">168</span>
                     </div>
+                    <button>a</button>
                 </form>
             </div>
             <!-- Price End -->
@@ -179,18 +180,21 @@
                 <div class="col-lg-4 col-md-6 col-sm-6 pb-1">
                     <div class="product-item bg-light mb-4">
                         <div class="product-img position-relative overflow-hidden">
+
                             <img class="img-fluid w-100" src="/assets/images/client/${productDetails.images}" alt="">
                             <div class="product-action">
-                                 <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
+                                 <a class="btn btn-outline-dark btn-square" href="/zephyr/shopping-cart/add?id=${productDetails.id}" methods="get"
+                                    onclick="if(!confirm('Bạn có muốn thêm sản phẩm vào giỏ hàng?')){return false}else{alert('thêm thành công');}"><i class="fa fa-shopping-cart"></i></a>
                                 <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
                                 <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-sync-alt"></i></a>
                                 <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-search"></i></a>
                             </div>
                         </div>
                         <div class="text-center py-4">
-                            <a class="h6 text-decoration-none text-truncate" href="">${productDetails.product.name}</a>
+                            <h6 class="h6 text-decoration-none text-truncate" >inventory: ${productDetails.inventory}</h6>
+                            <a class="h6 text-decoration-none text-truncate" href="/zephyr/shop/shop-detail?id=${productDetails.product.id}">${productDetails.product.name}</a>
                             <div class="d-flex align-items-center justify-content-center mt-2">
-                                <h5>${productDetails.price}</h5><h6 class="text-muted ml-2"><del>$123.00</del></h6>
+                                <h5>${productDetails.price}0</h5><h6 class="text-muted ml-2"><del>$123.00</del></h6>
                             </div>
                             <div class="d-flex align-items-center justify-content-center mb-1">
 
@@ -230,7 +234,7 @@
 </div>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="${pageContext.request.contextPath}/assets/jsInclude/shop.js"></script>
+
 
 </body>
 </html>

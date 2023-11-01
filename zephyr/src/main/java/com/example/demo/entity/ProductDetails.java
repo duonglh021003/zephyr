@@ -8,6 +8,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.NamedNativeQuery;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -40,7 +41,7 @@ public class ProductDetails {
     private String describe;
 
     @Column(name = "inventory")
-    private String inventory;
+    private Integer inventory;
 
     @Column(name = "import_price")
     private Double importPrice;

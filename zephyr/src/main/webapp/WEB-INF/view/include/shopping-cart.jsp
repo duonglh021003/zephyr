@@ -51,6 +51,7 @@
                                 </button>
                                 </form>
                             </div>
+
                             <input  type="text" name="quantity" class="form-control form-control-sm bg-secondary border-0 text-center"
                                    value="${detailShopping.quantity}">
                             <div class="input-group-btn">
@@ -64,11 +65,14 @@
                     </td>
                     <td class="align-middle">${detailShopping.subTotal()}00</td>
                     <td class="align-middle">
-                        <button class="btn btn-sm btn-danger"><i class="fa fa-times"></i></button>
+
+                        <a href="/zephyr/shopping-cart/delete?id=${detailShopping.id}"
+                           onclick="if(!confirm('Bạn có xoá sản phẩm khỏi giỏ hàng?')){return false}else{alert('xoá thành công');}">
+                            <button class="btn btn-sm btn-danger"><i class="fa fa-times"></i></button>
+                        </a>
                     </td>
                 </tr>
                 </c:forEach>
-
                 </tbody>
             </table>
         </div>
