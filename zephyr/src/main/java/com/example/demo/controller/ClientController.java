@@ -147,6 +147,7 @@ public class ClientController {
 
         String staffName = (String) session.getAttribute("staffSession.name");
         model.addAttribute("staffSession", staffName);
+
         clientService.update(client, Long.valueOf(id));
         return "redirect:/zephyr/admin/client/index?id=1";
     }

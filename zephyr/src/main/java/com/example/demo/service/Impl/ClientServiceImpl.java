@@ -49,6 +49,12 @@ public class ClientServiceImpl implements ClientService {
     }
 
     @Override
+    public List<Address> findAllByIdAndStatus(Long id) {
+        return clientRepository.findAllByIdAndStatus(id);
+    }
+
+
+    @Override
     public String login(String gmail) {
         Client client = clientRepository.findStaffByGmail(gmail);
         if (client == null) {

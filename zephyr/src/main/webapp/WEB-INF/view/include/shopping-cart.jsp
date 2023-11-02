@@ -109,7 +109,7 @@
                         <h5>${totalShoppingCart}00</h5>
 
                     </div>
-                    <button class="btn btn-block btn-primary font-weight-bold my-3 py-3">order</button>
+                    <a class="btn btn-block btn-primary font-weight-bold my-3 py-3" href="/zephyr/shop/order">order</a>
                 </div>
 
             </div>

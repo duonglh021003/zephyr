@@ -333,7 +333,7 @@ id_ranks BIGINT , -- id hạng
 id_shopping_cart BIGINT , -- id giỏ hàng
 )
 insert into client values
-('ma0001',N'Khách Hàng 01','2002-12-12','0898629635','duongcf2k3@gmail.com',N'true',50,600,'1','2002-12-12','2002-12-12',N'dương',N'dương',DEFAULT,1,1),
+('ma0001',N'Hà Thị Kim Nhung','2002-12-12','0898629635','duongcf2k3@gmail.com',N'true',50,600,'1','2002-12-12','2002-12-12',N'dương',N'dương',DEFAULT,1,1),
 ('ma0002',N'Khách Hàng 02','2002-12-12','0898629635','duong021003@gmail.com',N'true',50,700,'1','2002-12-12','2002-12-12',N'dương',N'dương',DEFAULT,1,2),
 ('ma0003',N'Khách Hàng 03','2002-12-12','0898629635','duonglhph22902@fpt.edu.vn',N'true',50,800,'1','2002-12-12','2002-12-12',N'dương',N'dương',DEFAULT,3,3),
 ('ma0004',N'Khách Hàng 04','2002-12-12','0898629635','01@gmail.com',N'true',50,600,'1','2002-12-12','2002-12-12',N'dương',N'dương',0,1,4),
@@ -402,6 +402,8 @@ id BIGINT IDENTITY(1,1) PRIMARY KEY ,
 code VARCHAR(200) UNIQUE, -- mã
 date_create DATE DEFAULT NULL, -- ngày tạo
 total_invoice DECIMAL(20,3) DEFAULT NULL, -- tổng tiền hoá đơn
+point DECIMAL(20,3) DEFAULT NULL, -- điểm
+shipping_money DECIMAL(20,3) DEFAULT NULL, -- tiền ship
 into_money DECIMAL(20,3) DEFAULT NULL, -- thành tiền
 client_give_money DECIMAL(20,3) DEFAULT NULL, --  tiền khách đưa
 return_client_money DECIMAL(20,3) DEFAULT NULL, --  tiền trả khách
@@ -413,12 +415,12 @@ id_voucher BIGINT , -- id phiếu giảm giá
 id_staff BIGINT , -- id nhân viên
 )
 insert into invoice values
-('ma0001','2002-12-12',999.000,999.000,1000.000,1.000,N'không',DEFAULT,1,1,1,1),
-('ma0002','2002-12-12',999.000,999.000,1000.000,1.000,N'không',DEFAULT,2,2,1,2),
-('ma0003','2002-12-12',999.000,999.000,1000.000,1.000,N'không',DEFAULT,1,1,1,1)
+('ma0001','2002-12-12',999.000,999.000,0.000,0.000,1000.000,1.000,N'không',DEFAULT,1,1,1,1),
+('ma0002','2002-12-12',999.000,999.000,0.000,0.000,1000.000,1.000,N'không',DEFAULT,2,2,1,2),
+('ma0003','2002-12-12',999.000,999.000,0.000,0.000,1000.000,1.000,N'không',DEFAULT,1,1,1,1)
 select *
 from 
-invoice
+client
 GO
 -- hoá đơn chi tiết
 CREATE TABLE detailed_invoice(

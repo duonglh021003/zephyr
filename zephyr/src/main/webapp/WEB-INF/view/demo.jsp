@@ -4,7 +4,10 @@
     <title>Title</title>
 </head>
 <body>
-
+<%
+    Long id = Long.valueOf(request.getAttribute("id").toString());
+    out.print("Id: " + id);
+%>
 
 
 </body>

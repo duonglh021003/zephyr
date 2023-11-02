@@ -23,6 +23,8 @@ public interface ClientService {
 
     List<Address> findAllById(Long id);
 
+    List<Address> findAllByIdAndStatus(Long id);
+
     String login(String gmail);
 
     Client detailGmail(String gmail);

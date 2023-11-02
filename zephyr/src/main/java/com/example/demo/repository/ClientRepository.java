@@ -23,4 +23,10 @@ public interface ClientRepository extends JpaRepository<Client, Long> {
             "where client.id = :id")
     List<Address> findAllById(@Param("id") Long id);
 
+    @Query("select DISTINCT addres from Address addres\n" +
+            "inner join  Client client on addres.client.id = client.id\n" +
+            "where client.id = :id " +
+            "AND addres.status = 1")
+    List<Address> findAllByIdAndStatus(@Param("id") Long id);
+
 }

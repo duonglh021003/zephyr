@@ -96,7 +96,10 @@
             </div>
         </div>
         <div class="col-md-3">
-
+            <div class="mb-3">
+                <label class="form-label">rank</label> <br>
+                <input type="text" name="shoppingCart" class="form-control" value="${client.shoppingCart.id}"/>
+            </div>
         </div>
     </div>
 
