@@ -39,6 +39,11 @@ public class DetailedShoppingCartServiceImpl implements DetailedShoppingCartServ
     }
 
     @Override
+    public List<DetailedShoppingCart> findAllShoppingDetail(Long id) {
+        return detailedShoppingCartRepository.findAllShoppingDetail(id);
+    }
+
+    @Override
     public void update(DetailedShoppingCart detailedShoppingCart, Long id) {
         detailedShoppingCartRepository.save(detailedShoppingCart);
     }

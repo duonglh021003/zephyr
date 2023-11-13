@@ -14,5 +14,5 @@ public interface VoucherService {
 
     void delete(Long id);
 
-    Voucher detail(Long id);
+    Voucher detailCode(String code);
 }

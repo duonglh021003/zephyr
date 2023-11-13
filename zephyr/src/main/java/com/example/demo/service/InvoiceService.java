@@ -16,4 +16,25 @@ public interface InvoiceService {
 
     Invoice detail(Long id);
 
+    Invoice detailCode(String code);
+
+    List<Invoice> findByInvoiceMax(Long id);
+
+
+    List<Invoice> findByInvoiceStatusAll(Long id);
+
+    List<Invoice> findByInvoiceStatus1(Long id);
+
+    List<Invoice> findByInvoiceStatus2(Long id);
+
+    List<Invoice> findByInvoiceStatus3(Long id);
+
+    List<Invoice> findByInvoiceStatus4(Long id);
+
+    List<Invoice> findByInvoiceStatus5(Long id);
+
+    List<Invoice> findByInvoiceStatus6(Long id);
+
+    List<Invoice> findByInvoiceStatus7(Long id);
+
 }

@@ -151,89 +151,168 @@
             <div class="bg-light p-30 mb-5">
                 <div class="row">
 
+                    <table class="table table-light table-borderless table-hover text-center mb-0">
+                        <thead class="thead-dark">
+                        <tr>
+                            <th>#</th>
+                            <th>Products</th>
+                            <th>Price</th>
+                            <th>Quantity</th>
+                            <th>Sub total</th>
+                            <th>Remove</th>
+                        </tr>
+                        </thead>
+                        <tbody class="align-middle">
+
+
+                        <c:forEach items="${ listDetailShoppingCart }" var="detailShopping" varStatus="i">
+                            <tr>
+                                <td>${i.index + 1}</td>
+                                <td class="align-middle"><img src="/assets/images/client/${detailShopping.productDetails.images}" alt="" style="width: 50px;"> ${detailShopping.productDetails.product.name}</td>
+                                <td class="align-middle">${detailShopping.unitPrice}00</td>
+                                <td class="align-middle">
+                                    <div class="input-group quantity mx-auto" style="width: 100px;">
+                                        <div class="input-group-btn">
+                                            <form action="/zephyr/shopping-cart/less?id=${detailShopping.id}" method="post">
+                                                <button class="btn btn-sm btn-primary btn-minus" >
+                                                    <i class="fa fa-minus"></i>
+                                                </button>
+                                            </form>
+                                        </div>
+
+                                        <input  type="text" name="quantity" class="form-control form-control-sm bg-secondary border-0 text-center"
+                                                value="${detailShopping.quantity}">
+                                        <div class="input-group-btn">
+                                            <form action="/zephyr/shopping-cart/plus?id=${detailShopping.id}" method="post">
+                                                <button class="btn btn-sm btn-primary btn-plus">
+                                                    <i class="fa fa-plus"></i>
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="align-middle">${detailShopping.subTotal()}00</td>
+                                <td class="align-middle">
+
+                                    <a href="/zephyr/shopping-cart/delete?id=${detailShopping.id}"
+                                       onclick="if(!confirm('Bạn có xoá sản phẩm khỏi giỏ hàng?')){return false}else{alert('xoá thành công');}">
+                                        <button class="btn btn-sm btn-danger"><i class="fa fa-times"></i></button>
+                                    </a>
+                                </td>
+                            </tr>
+                        </c:forEach>
+                        </tbody>
+                    </table>
+
+
                 </div>
             </div>
 
             <div class="collapse mb-5" id="shipping-address">
-
                 <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Shipping Address</span></h5>
                 <div class="bg-light p-30">
-
-                    <div class="row">
-
-                    </div>
-
+                    <div class="row"></div>
                 </div>
             </div>
         </div>
+
         <div class="col-lg-4">
-            <form class="mb-30" action="">
+
+            <form class="mb-30" action="/zephyr/shop/order/voucher/add" method="post">
                 <div class="input-group">
-                    <input type="text" class="form-control border-0 p-4" placeholder="Coupon Code">
+                    <input type="text" class="form-control border-0 p-4" name="voucher" placeholder="mã giảm giá">
                     <div class="input-group-append">
                         <button class="btn btn-primary">Apply Coupon</button>
                     </div>
                 </div>
             </form>
+            <p>điểm bạn hiện có: </p>
+            <form class="mb-30" action="/zephyr/shop/order/point-usr/add" method="post">
+                <div class="input-group">
+                    <c:forEach items="${ listInvoice }" var="idInvoice">
+                    <input type="text" class="form-control border-0 p-4"  style="border: none;outline: none;" name="point" value="${idInvoice.client.pointUsr}">
+                    <div class="input-group-append">
+                        <button class="btn btn-primary">USE</button>
+                    </div>
+                    </c:forEach>
+                </div>
+            </form>
+
+            <form action="/zephyr/shop/order/update" method="post">
             <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Order Total</span></h5>
             <div class="bg-light p-30 mb-5">
 
-                <div class="border-bottom">
-                    <h6 class="mb-3">Products</h6>
-                    <div class="d-flex justify-content-between">
-                        <p>Product Name 1</p>
-                        <p>$150</p>
-                    </div>
-                    <div class="d-flex justify-content-between">
-                        <p>Product Name 2</p>
-                        <p>$150</p>
-                    </div>
-                    <div class="d-flex justify-content-between">
-                        <p>Product Name 3</p>
-                        <p>$150</p>
-                    </div>
-                </div>
-                <div class="border-bottom pt-3 pb-2">
+                    <c:forEach items="${ listInvoice }" var="invoice" varStatus="i">
+                <div class="border-bottom pt-3 pb-2" style="margin-top: -20px;line-height: 10px">
+
                     <div class="d-flex justify-content-between mb-3">
-                        <h6>Subtotal</h6>
-                        <h6>$150</h6>
+                        <h6>mã hoá đơn: </h6>
+                        <input style="border: none;outline: none;color: red" name="code" value="${invoice.code}">
                     </div>
-                    <div class="d-flex justify-content-between">
-                        <h6 class="font-weight-medium">Shipping</h6>
-                        <h6 class="font-weight-medium">$10</h6>
+                    <hr>
+                    <div class="d-flex justify-content-between mb-3">
+                        <p>giờ tạo: </p>
+                        <input style="border: none;outline: none;" name="hourMinute" value="${invoice.hourMinute}">
+                    </div>
+                    <hr>
+                    <div class="d-flex justify-content-between mb-3">
+                        <p>ngày tạo: </p>
+                        <input style="border: none;outline: none;" name="dateCreate" value="${invoice.dateCreate}">
+                    </div>
+                    <hr>
+                    <div class="d-flex justify-content-between mb-3">
+                        <p>tổng tiền hoá đơn: </p>
+                        <input style="border: none;outline: none;" name="totalInvoice" value="${invoice.totalInvoice}00">
+                    </div>
+                    <hr>
+                    <div class="d-flex justify-content-between mb-3">
+                        <p>điểm sử dụng: </p>
+                        <input style="border: none;outline: none;" name="point" value="${invoice.point}00">
+                    </div>
+                    <hr>
+                    <div class="d-flex justify-content-between mb-3">
+                        <p>tiền phiếu giảm giá: </p>
+                        <input style="border: none;outline: none;" name="point" value="${invoice.detailVoucherClient.reducedPrice}00">
+                    </div>
+                    <hr>
+                    <div class="d-flex justify-content-between mb-3">
+                        <p>tiền ship: </p>
+                        <input style="border: none;outline: none;" name="shippingMoney" value="${invoice.shippingMoney}00">
+                    </div>
+                    <hr>
+                    <div class="d-flex justify-content-between mb-3">
+                        <h6>thành tiền: </h6>
+                        <input style="border: none;outline: none;" name="intoMoney" value="${invoice.intoMoney}00">
+                    </div>
+                    <hr>
+                    <div class="d-flex justify-content-between mb-3">
+                        <p>ghi chú: </p>
+                        <textarea style="height: 50px" name="note" >${invoice.note}</textarea>
                     </div>
                 </div>
-                <div class="pt-2">
-                    <div class="d-flex justify-content-between mt-2">
-                        <h5>Total</h5>
-                        <h5>$160</h5>
-                    </div>
-                </div>
+
+                    </c:forEach>
+
             </div>
+
             <div class="mb-5">
                 <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Payment</span></h5>
                 <div class="bg-light p-30">
                     <div class="form-group">
                         <div class="custom-control custom-radio">
-                            <input type="radio" class="custom-control-input" name="payment" id="paypal">
-                            <label class="custom-control-label" for="paypal">Paypal</label>
+                            <input type="radio" name="payment" checked value="1" /> Thanh toán khi nhận hàng
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="custom-control custom-radio">
-                            <input type="radio" class="custom-control-input" name="payment" id="directcheck">
-                            <label class="custom-control-label" for="directcheck">Direct Check</label>
+                            <input type="radio" name="payment"  value="0" /> Chuyển khoản ngân hàng
                         </div>
                     </div>
-                    <div class="form-group mb-4">
-                        <div class="custom-control custom-radio">
-                            <input type="radio" class="custom-control-input" name="payment" id="banktransfer">
-                            <label class="custom-control-label" for="banktransfer">Bank Transfer</label>
-                        </div>
-                    </div>
-                    <button class="btn btn-block btn-primary font-weight-bold py-3">Place Order</button>
+                    <button class="btn btn-block btn-primary font-weight-bold py-3"
+                            onclick="if(!confirm('Bạn có chắc chắn muốn đặt hàng?')){return false}else{alert('đặt hàng thành công');}">Place Order</button>
                 </div>
             </div>
+            </form>
         </div>
     </div>
 </div>

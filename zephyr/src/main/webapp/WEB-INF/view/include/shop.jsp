@@ -60,7 +60,6 @@
                         <label class="custom-control-label" for="price-5">$400 - $500</label>
                         <span class="badge border font-weight-normal">168</span>
                     </div>
-                    <button>a</button>
                 </form>
             </div>
             <!-- Price End -->
@@ -185,7 +184,8 @@
                             <div class="product-action">
                                  <a class="btn btn-outline-dark btn-square" href="/zephyr/shopping-cart/add?id=${productDetails.id}" methods="get"
                                     onclick="if(!confirm('Bạn có muốn thêm sản phẩm vào giỏ hàng?')){return false}else{alert('thêm thành công');}"><i class="fa fa-shopping-cart"></i></a>
-                                <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
+                                <a class="btn btn-outline-dark btn-square" href="/zephyr/favourite-detail/add?id=${productDetails.id}" methods="get"
+                                   onclick="if(!confirm('Bạn có muốn thêm sản phẩm vào danh sách yêu thích?')){return false}else{alert('thêm thành công');}"><i class="far fa-heart"></i></a>
                                 <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-sync-alt"></i></a>
                                 <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-search"></i></a>
                             </div>
@@ -233,7 +233,8 @@
     </div>
 </div>
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<%--<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>--%>
+
 
 
 </body>

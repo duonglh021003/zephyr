@@ -19,5 +19,8 @@ public interface ShoppingCartService {
 
     List<Double> getTotal(Long id);
 
+    void update(ShoppingCart shoppingCart, Long id);
+
+    void add(ShoppingCart shoppingCart);
 
 }

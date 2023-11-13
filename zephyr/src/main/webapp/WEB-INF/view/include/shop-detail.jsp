@@ -65,24 +65,30 @@
                 <div class="d-flex mb-3">
                     <strong class="text-dark mr-3">Sizes:</strong>
                     <div class="custom-control custom-radio custom-control-inline">
-                        <input type="radio" name="size" value="1" class="custom-control-input" id="size-1" name="size">
-                        <label class="custom-control-label" for="size-1">XS</label>
+                        <input type="radio" name="size" value="1" checked class="custom-control-input" id="size-1" name="size">
+                        <label class="custom-control-label" for="size-1">S</label>
                     </div>
                     <div class="custom-control custom-radio custom-control-inline">
                         <input type="radio" name="size" value="2" class="custom-control-input" id="size-2" name="size">
-                        <label class="custom-control-label" for="size-2">S</label>
+                        <label class="custom-control-label" for="size-2">M</label>
                     </div>
                     <div class="custom-control custom-radio custom-control-inline">
                         <input type="radio" name="size" value="3" class="custom-control-input" id="size-3" name="size">
-                        <label class="custom-control-label" for="size-3">M</label>
+                        <label class="custom-control-label" for="size-3">L</label>
                     </div>
                     <div class="custom-control custom-radio custom-control-inline">
                         <input type="radio" name="size" value="4" class="custom-control-input" id="size-4" name="size">
-                        <label class="custom-control-label" for="size-4">L</label>
+                        <label class="custom-control-label" for="size-4">XL</label>
                     </div>
                     <div class="custom-control custom-radio custom-control-inline">
                         <input type="radio" name="size" value="5" class="custom-control-input" id="size-5" name="size">
-                        <label class="custom-control-label" for="size-5">XL</label>
+                        <label class="custom-control-label" for="size-5">XXL</label>
+                    </div>
+
+                    <div class="custom-control custom-radio custom-control-inline">
+                        <td>
+                            <a style="color: blue;" data-dismiss="modal" data-toggle="modal" data-target="#myModalSize">bảng size</a>
+                        </td>
                     </div>
 
 <%--                    <c:forEach items="${listSizeShopDetail}" var="size">--%>
@@ -97,7 +103,7 @@
                     <strong class="text-dark mr-3">Colors:</strong>
 
                     <div class="custom-control custom-radio custom-control-inline">
-                        <input type="radio" name="color" value="1" class="custom-control-input" id="color-1" name="color">
+                        <input type="radio" name="color" value="1" checked class="custom-control-input" id="color-1" name="color">
                         <label class="custom-control-label" for="color-1">Black</label>
                     </div>
                     <div class="custom-control custom-radio custom-control-inline">
@@ -127,20 +133,19 @@
                 <div class="d-flex align-items-center mb-4 pt-2">
                     <div class="input-group quantity mr-3" style="width: 130px;">
                         <div class="input-group-btn">
-                            <button class="btn btn-primary btn-minus">
-                                <i class="fa fa-minus"></i>
-                            </button>
-                        </div>
-                        <input type="text" class="form-control bg-secondary border-0 text-center" value="1">
-                        <div class="input-group-btn">
-                            <button class="btn btn-primary btn-plus">
-                                <i class="fa fa-plus"></i>
-                            </button>
-                        </div>
-                    </div>
-                    <button class="btn btn-primary px-3"><i class="fa fa-shopping-cart mr-1"></i> Add To
-                        Cart</button>
 
+                        </div>
+                        <input type="number" class="form-control bg-secondary border-0 text-center" name="quantity" value="1">
+
+                    </div>
+                    <button class="btn btn-primary px-3" onclick="if(!confirm('Bạn có muốn thêm sản phẩm vào giỏ hàng?')){return false}else{alert('thêm thành công');}"><i class="fa fa-shopping-cart mr-1"></i> Add To
+                        Cart</button>
+                    <c:forEach items="${listProductShopDetail}" var="idProduct">
+                    <a style="margin-left: 30px;height: 35px" class="btn btn-sm btn-danger" href="/zephyr/favourite-detail/add?id=${idProduct.id}"
+                       onclick="if(!confirm('Bạn có muốn mua sản phẩm này ngay?')){return false}else{alert('thêm thành công');}">
+                        Buy now
+                    </a>
+                    </c:forEach>
                 </div>
                 </form>
                 <div class="d-flex pt-2">
@@ -162,9 +167,23 @@
                 </div>
             </div>
         </div>
-
-
     </div>
+
+<%--    modal size --%>
+
+    <div class="modal fade" id="myModalSize" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <img class="w-100 h-100" style="width: 300px;height: 300px"
+                    src="${pageContext.request.contextPath}/assets/images/client/size.png" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+<%--    end moadl size--%>
 
     <div class="row px-xl-5">
         <div class="col">

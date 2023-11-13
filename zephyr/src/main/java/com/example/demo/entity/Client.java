@@ -84,6 +84,10 @@ public class Client {
     @JoinColumn(name = "id_shopping_cart", referencedColumnName = "id")
     private ShoppingCart shoppingCart;
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "id_favourite", referencedColumnName = "id")
+    private Favourite favourite;
+
     public String clickRank() {
         String ranks;
         if (0 <= accumulatedScore && accumulatedScore <= 500) {

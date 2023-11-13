@@ -2,9 +2,11 @@ package com.example.demo.controller;
 
 import com.example.demo.entity.Client;
 import com.example.demo.entity.DetailedShoppingCart;
+import com.example.demo.entity.Invoice;
 import com.example.demo.entity.ProductDetails;
 import com.example.demo.service.ClientService;
 import com.example.demo.service.DetailedShoppingCartService;
+import com.example.demo.service.InvoiceService;
 import com.example.demo.service.ProductDetailsService;
 import com.example.demo.service.ShoppingCartService;
 import jakarta.servlet.http.HttpSession;
@@ -35,6 +37,9 @@ public class ShoppingCartController {
     @Autowired
     private ProductDetailsService productDetailsService;
 
+    @Autowired
+    private InvoiceService invoiceService;
+
     @GetMapping("/shopping-cart")
     public String shoppingCart(
             Model model,
@@ -57,6 +62,10 @@ public class ShoppingCartController {
         model.addAttribute("totalShoppingCart", total);
         model.addAttribute("listDetailShoppingCart", list);
         model.addAttribute("listSubTotal", list);
+
+        for(Invoice invoice02 : invoiceService.findByInvoiceStatus1(client.getId())){
+            invoiceService.delete(invoice02.getId());
+        }
 
 
         model.addAttribute("viewClient", "/WEB-INF/view/include/shopping-cart.jsp");

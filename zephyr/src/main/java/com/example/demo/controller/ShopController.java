@@ -43,14 +43,15 @@ public class ShopController {
     @GetMapping("/shop")
     public String index(@RequestParam(defaultValue = "0", name = "page") Integer number,
                         Model model
-                        ) {
+    ) {
 
         Pageable pageable = PageRequest.of(number, 9);
-        Page<ProductDetails> pageProductDetails = productDetailsService.getAll(pageable);
+        Page<ProductDetails> pageProductDetails = productDetailsService.findAllByDisplay(pageable);
         model.addAttribute("listProductDetails", pageProductDetails);
-        for (ProductDetails productDetails : pageProductDetails){
+        for (ProductDetails productDetails : pageProductDetails) {
             List<ProductDetails> list = productDetailsService.findAllByProductAndColorAndSize(productDetails.getProduct().getId(), 10L, 1L);
-             }
+        }
+
         model.addAttribute("viewClient", "/WEB-INF/view/include/shop.jsp");
 
         return "layout/client";

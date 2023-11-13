@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-@Table(name = "invoice")
+@Table(name = "detailed_invoice")
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
@@ -31,49 +31,24 @@ public class DetailedInvoice {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "code")
-    private String code;
+    @Column(name = "quantity")
+    private Integer quantity;
 
-    @Column(name = "date_create")
-    private String dateCreate;
+    @Column(name = "unit_price")
+    private Double unitPrice;
 
-    @Column(name = "total_invoice")
-    private String totalInvoice;
+    @Column(name = "capital_sum")
+    private Double capitalSum;
 
-    @Column(name = "point")
-    private String point;
-
-    @Column(name = "shipping_money")
-    private String shippingMoney;
-
-    @Column(name = "into_money")
-    private String intoMoney;
-
-    @Column(name = "client_give_money")
-    private String clientGiveMoney;
-
-    @Column(name = "return_client_money")
-    private String returnClientMoney;
-
-    @Column(name = "note")
-    private String note;
-
-    @Column(name = "invoice_status")
-    private String status;
+    @Column(name = "detailed_shopping_cart_status")
+    private Integer status;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_client", referencedColumnName = "id")
-    private Client client;
+    @JoinColumn(name = "id_invoice", referencedColumnName = "id")
+    private Invoice invoice;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_client_address", referencedColumnName = "id")
-    private Address address;
+    @JoinColumn(name = "id_product_details", referencedColumnName = "id")
+    private ProductDetails productDetails;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_voucher", referencedColumnName = "id")
-    private Voucher voucher;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_staff", referencedColumnName = "id")
-    private Staff staff;
 }

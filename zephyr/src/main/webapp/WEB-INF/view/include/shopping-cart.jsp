@@ -40,7 +40,8 @@
                 <c:forEach items="${ listDetailShoppingCart }" var="detailShopping" varStatus="i">
                 <tr>
                     <td>${i.index + 1}</td>
-                    <td class="align-middle"><img src="/assets/images/client/${detailShopping.productDetails.images}" alt="" style="width: 50px;"> ${detailShopping.productDetails.product.name}</td>
+                    <td class="align-middle"><img src="/assets/images/client/${detailShopping.productDetails.images}" alt="" style="width: 50px">
+                            ${detailShopping.productDetails.product.name}(${detailShopping.productDetails.size.name}, ${detailShopping.productDetails.color.name})</td>
                     <td class="align-middle">${detailShopping.unitPrice}00</td>
                     <td class="align-middle">
                         <div class="input-group quantity mx-auto" style="width: 100px;">
@@ -78,20 +79,20 @@
         </div>
 
         <div class="col-lg-4">
-            <form class="mb-30" action="">
-                <div class="input-group">
-                    <input type="text" class="form-control border-0 p-4" placeholder="Coupon Code">
-                    <div class="input-group-append">
-                        <button class="btn btn-primary">Apply Coupon</button>
-                    </div>
-                </div>
-            </form>
             <h5 class="section-title position-relative text-uppercase mb-3"><span
                     class="bg-secondary pr-3">Cart Summary</span></h5>
             <div class="bg-light p-30 mb-5">
                 <div class="border-bottom pb-2">
+                    <h6>Product</h6>
                     <div class="d-flex justify-content-between mb-3">
-                        <h6>Subtotal</h6>
+                        <table>
+                            <c:forEach items="${ listSubTotal }" var="total" varStatus="i">
+                                <tr>
+                                    <td><p>${total.productDetails.product.name}</p></td>
+                                </tr>
+                            </c:forEach>
+                        </table>
+
                         <table>
                         <c:forEach items="${ listSubTotal }" var="total" varStatus="i">
                             <tr>
@@ -109,7 +110,7 @@
                         <h5>${totalShoppingCart}00</h5>
 
                     </div>
-                    <a class="btn btn-block btn-primary font-weight-bold my-3 py-3" href="/zephyr/shop/order">order</a>
+                    <a class="btn btn-block btn-primary font-weight-bold my-3 py-3" href="/zephyr/shop/order/add">order</a>
                 </div>
 
             </div>

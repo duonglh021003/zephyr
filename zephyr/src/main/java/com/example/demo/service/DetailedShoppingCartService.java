@@ -20,6 +20,8 @@ public interface DetailedShoppingCartService {
 
     List<DetailedShoppingCart> findAllById(Long id);
 
+    List<DetailedShoppingCart> findAllShoppingDetail(Long id);
+
     void update(DetailedShoppingCart detailedShoppingCart, Long id);
 
     void add(DetailedShoppingCart detailedShoppingCart);

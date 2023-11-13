@@ -64,6 +64,9 @@ public class ProductDetails {
     @Column(name = "product_details_status")
     private Integer status;
 
+    @Column(name = "display")
+    private Integer display;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_product", referencedColumnName = "id")
     private Product product;

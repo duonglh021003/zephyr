@@ -97,9 +97,26 @@
         </div>
         <div class="col-md-3">
             <div class="mb-3">
-                <label class="form-label">rank</label> <br>
+                <label class="form-label">shoppingCart</label> <br>
                 <input type="text" name="shoppingCart" class="form-control" value="${client.shoppingCart.id}"/>
             </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            <div class="mb-3">
+                <label class="form-label">Favourite</label> <br>
+                <input type="text" name="favourite" class="form-control" value="${client.favourite.id}"/>
+            </div>
+        </div>
+        <div class="col-md-3">
+
+        </div>
+        <div class="col-md-3">
+
+        </div>
+        <div class="col-md-3">
+
         </div>
     </div>
 

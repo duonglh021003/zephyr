@@ -48,5 +48,15 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
         return totalValues;
     }
 
+    @Override
+    public void update(ShoppingCart shoppingCart, Long id) {
+        shoppingCartRepository.save(shoppingCart);
+    }
+
+    @Override
+    public void add(ShoppingCart shoppingCart) {
+        shoppingCartRepository.save(shoppingCart);
+    }
+
 
 }

@@ -27,5 +27,11 @@ public interface DetailedShoppingCartRepository extends JpaRepository<DetailedSh
                                                @Param("idProductdetail")ProductDetails idProductdetail);
 
 
+    @Query(value = "select shoppingDetail.*\n" +
+            "from\n" +
+            "shopping_cart shopping join client c on shopping.id = c.id_shopping_cart\n" +
+            "join detailed_shopping_cart shoppingDetail on shopping.id = shoppingDetail.id_shopping_cart\n" +
+            "where c.id = ?1", nativeQuery = true)
+    List<DetailedShoppingCart> findAllShoppingDetail(@Param("id") Long id);
 
 }

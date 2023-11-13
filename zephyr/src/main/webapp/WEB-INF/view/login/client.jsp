@@ -9,20 +9,19 @@
 
 <div class="container" id="container">
     <div class="form-container sign-up">
-        <form>
+        <form action="/zephyr/sing-up" method="post">
             <h1>Create Account</h1>
             <div class="social-icons">
-                <a href="https://accounts.google.com/o/oauth2/auth?scope=email&redirect_uri=http://localhost:8080/zephyr/login-google&response_type=code
-    &client_id=153843096255-br2111i6ib20lvae8f8ueflqm34g7djm.apps.googleusercontent.com&approval_prompt=force"
+                <a href=""
                    class="icon"><i class="fa-brands fa-google-plus-g"></i></a>
                 <a href="#" class="icon"><i class="fa-brands fa-facebook-f"></i></a>
                 <a href="#" class="icon"><i class="fa-brands fa-github"></i></a>
                 <a href="#" class="icon"><i class="fa-brands fa-linkedin-in"></i></a>
             </div>
             <span>or use your email for registeration</span>
-            <input type="text" placeholder="Name">
-            <input type="email" placeholder="Email">
-            <input type="password" placeholder="Password">
+            <input type="text" placeholder="Name" name="name">
+            <input type="text" placeholder="Email" name="gmail">
+            <input type="password" placeholder="Password" name="password">
             <button>Sign Up</button>
         </form>
     </div>

@@ -106,19 +106,18 @@
                         <div class="navbar-nav mr-auto py-0">
                             <a href="/zephyr/home" class="nav-item nav-link active">Home</a>
                             <a href="/zephyr/shop" class="nav-item nav-link">Shop</a>
-                            <a href="detail.html" class="nav-item nav-link">Shop Detail</a>
-                            <div class="nav-item dropdown">
-                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages <i
-                                        class="fa fa-angle-down mt-1"></i></a>
-                                <div class="dropdown-menu bg-primary rounded-0 border-0 m-0">
-                                    <a href="cart.html" class="dropdown-item">Shopping Cart</a>
-                                    <a href="checkout.html" class="dropdown-item">Checkout</a>
-                                </div>
-                            </div>
+                            <a href="/zephyr/voucher" class="nav-item nav-link">zephyr voucher</a>
                             <a href="contact.html" class="nav-item nav-link">Contact</a>
+                            <a href="/zephyr/purchase-order" class="nav-item nav-link">purchase order</a>
                         </div>
                         <div class="navbar-nav ml-auto py-0 d-none d-lg-block">
-                            <a href="" class="btn px-0">
+                            <a href="/zephyr/detail-voucher-client" class="btn px-0">
+                                <img class="img-xs rounded-circle" style="width: 20px;height: 20px"
+                                     src="${pageContext.request.contextPath}/assets/images/client/voucher.png" alt="">
+                                <span class="badge text-secondary border border-secondary rounded-circle"
+                                      style="padding-bottom: 2px;">0</span>
+                            </a>
+                            <a href="/zephyr/favourite-detail" class="btn px-0 ml-3">
                                 <i class="fas fa-heart text-primary"></i>
                                 <span class="badge text-secondary border border-secondary rounded-circle"
                                       style="padding-bottom: 2px;">0</span>

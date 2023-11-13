@@ -41,8 +41,6 @@ public class ShopDetailController {
         ProductDetails idProductDetails = productDetailsService.detail(id);
         List<ProductDetails> list = productDetailsService.findAllByProductDetail(id);
 
-        System.out.println("ccccccccccccccccccc     " + productDetailsService.findAllByProduct(id));
-        System.out.println("bbbbbbbbbbbbbbbb        " + list);
 
         for (ProductDetails productDetails : list) {
 
@@ -69,6 +67,7 @@ public class ShopDetailController {
     public String demo(@RequestParam("product") Long idProduct,
                        @RequestParam("size") Long idSize,
                        @RequestParam("color") Long idColor,
+                       @RequestParam("quantity") Integer quantity,
                        HttpSession session,
                        Model model) {
 
@@ -79,7 +78,7 @@ public class ShopDetailController {
 
         for (ProductDetails productDetails : list) {
             DetailedShoppingCart detailedShoppingCart = DetailedShoppingCart.builder()
-                    .quantity(1)
+                    .quantity(quantity)
                     .unitPrice(productDetails.getPrice())
                     .dateCreate(localDate)
                     .status(1)

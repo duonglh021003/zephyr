@@ -30,6 +30,8 @@ public interface ProductDetailsService {
 
     List<ProductDetails> findGroupByProduct(Long id);
 
+    Page<ProductDetails> findAllByDisplay(Pageable pageable);
+
 
 
 

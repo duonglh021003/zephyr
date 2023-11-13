@@ -31,10 +31,10 @@ public class Voucher {
     private Long id;
 
     @Column(name = "code")
-    private Long code;
+    private String code;
 
     @Column(name = "voucher_name")
-    private Long name;
+    private String name;
 
     @Column(name = "date_begin")
     private LocalDate dateBegin;
@@ -43,13 +43,13 @@ public class Voucher {
     private LocalDate dateEnd;
 
     @Column(name = "minimum_price")
-    private Long minPrice;
+    private Double minPrice;
 
     @Column(name = "maximum_price")
-    private Long maxPrice;
+    private Double maxPrice;
 
     @Column(name = "reduced_price")
-    private Long reducedPrice;
+    private Double reducedPrice;
 
     @Column(name = "date_create")
     private LocalDate dateCreate;
