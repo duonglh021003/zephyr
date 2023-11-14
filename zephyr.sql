@@ -488,7 +488,7 @@ insert into invoice values
 ('ma0003','8:00','2002-12-12',999.000,999.000,0.000,0.000,1000.000,1.000,N'không',5,1,1,1,1,1,1)
 select *
 from 
-client
+invoice
 GO
 -- hoá đơn chi tiết
 CREATE TABLE detailed_invoice(
@@ -513,24 +513,42 @@ GO
 -- phiếu giao hàng
 CREATE TABLE delivery_notes(
 id BIGINT IDENTITY(1,1) PRIMARY KEY ,
-code VARCHAR(200) UNIQUE, -- mã
 client_name NVARCHAR(200) DEFAULT NULL, -- tên người nhận
 phone_number VARCHAR(200) DEFAULT NULL, -- sđt người nhận
+address_client NVARCHAR(200) DEFAULT NULL, -- địa chỉ nhận hàng
 date_order DATE DEFAULT NULL, -- ngày đặt hàng
 date_deliver DATE DEFAULT NULL, -- ngày giao
 date_receive DATE DEFAULT NULL, -- ngày nhận
 note NVARCHAR(200) DEFAULT NULL, -- ghi chú
 delivery_notes_status INT DEFAULT 1, -- trạng thái
-id_invoice BIGINT , -- id hoá đơn
-id_client_address BIGINT, -- id địa chỉ
 )
 insert into delivery_notes values
-('ma0001',N'khách hàng 01','0898629635','2002-12-12','2002-12-12','2002-12-12',N'không',DEFAULT,1,1),
-('ma0002',N'khách hàng 02','0898629635','2002-12-12','2002-12-12','2002-12-12',N'không',DEFAULT,1,2),
-('ma0003',N'khách hàng 03','0898629635','2002-12-12','2002-12-12','2002-12-12',N'không',DEFAULT,1,3)
+(N'khách hàng 01','0898629635',N'HN','2002-12-12','2002-12-12','2002-12-12',N'không',DEFAULT),
+(N'khách hàng 02','0898629635',N'HN','2002-12-12','2002-12-12','2002-12-12',N'không',DEFAULT),
+(N'khách hàng 03','0898629635',N'HN','2002-12-12','2002-12-12','2002-12-12',N'không',DEFAULT)
 select *
 from 
 delivery_notes
+GO
+-- phiếu giao hàng chi tiết
+CREATE TABLE detail_delivery_notes(
+id BIGINT IDENTITY(1,1) PRIMARY KEY ,
+detail_delivery_notes_name NVARCHAR(MAX) DEFAULT NULL, -- tên
+progress NVARCHAR(200) DEFAULT NULL, -- quá trình
+hour_minute VARCHAR(200) DEFAULT NULL, -- giờ phút tạo
+date_create DATE DEFAULT NULL, -- ngày tạo
+note NVARCHAR(200) DEFAULT NULL, -- ghi chú
+delivery_notes_status INT DEFAULT 1, -- trạng thái
+id_invoice BIGINT , -- id hoá đơn
+id_delivery_notes BIGINT, -- id phiếu giao hàng
+)
+insert into detail_delivery_notes values
+(N'Đơn Hàng Đã Đặt',N'1','8:10','2002-12-12',N'không',DEFAULT,1,1),
+(N'Đã Xác Nhận Đơn Hàng',N'1','8:10','2002-12-12',N'không',DEFAULT,1,1),
+(N'Đã Giao Cho ĐVVC',N'1','8:10','2002-12-12',N'không',DEFAULT,1,1)
+select *
+from 
+detail_delivery_notes
 GO
 -- phiếu đổi hàng
 CREATE TABLE exchange_note(
@@ -597,10 +615,10 @@ ALTER TABLE invoice ADD FOREIGN KEY(id_voucher_client_detail) REFERENCES voucher
 ALTER TABLE detailed_invoice ADD FOREIGN KEY(id_product_details) REFERENCES product_details(id)
 -- hoá đơn chi tiết - hoá đơn
 ALTER TABLE detailed_invoice ADD FOREIGN KEY(id_invoice) REFERENCES invoice(id)
--- phiếu giao hàng - hoá đơn
-ALTER TABLE delivery_notes ADD FOREIGN KEY(id_invoice) REFERENCES invoice(id)
--- phiếu giao hàng - địa chỉ
-ALTER TABLE delivery_notes ADD FOREIGN KEY(id_client_address) REFERENCES client_address(id)
+-- phiếu giao hàng chi tiết - hoá đơn
+ALTER TABLE detail_delivery_notes ADD FOREIGN KEY(id_invoice) REFERENCES invoice(id)
+-- phiếu giao hàng chi tiết - phiếu giao hàng
+ALTER TABLE detail_delivery_notes ADD FOREIGN KEY(id_delivery_notes) REFERENCES delivery_notes(id)
 -- phiếu đổi hàng - hoá đơn
 ALTER TABLE exchange_note ADD FOREIGN KEY(id_invoice) REFERENCES invoice(id)
 

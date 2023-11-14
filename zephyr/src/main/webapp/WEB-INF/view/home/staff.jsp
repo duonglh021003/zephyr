@@ -134,11 +134,11 @@
             </li>
 
             <li class="nav-item menu-items">
-                <a class="nav-link" href="index.html">
+                <a class="nav-link" href="/zephyr/admin/delivery-notes/index">
               <span class="menu-icon">
                 <i class="mdi mdi-speedometer"></i>
               </span>
-                    <span class="menu-title">shopping cart</span>
+                    <span class="menu-title">delivery notes</span>
                 </a>
             </li>
 

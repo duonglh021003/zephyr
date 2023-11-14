@@ -40,4 +40,9 @@ public class AddressServiceImpl implements AddressService {
     public Address detail(Long id) {
         return addressRepository.getById(id);
     }
+
+    @Override
+    public List<Address> findAllAddress(Long id) {
+        return addressRepository.findAllAddress(id);
+    }
 }

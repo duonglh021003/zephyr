@@ -37,4 +37,10 @@ public interface InvoiceService {
 
     List<Invoice> findByInvoiceStatus7(Long id);
 
+    List<Invoice> findAllByStatus2();
+
+    List<Invoice> findAllByInvoice(Long id);
+
+    List<Invoice> findAllByIdStaff(Long id);
+
 }

@@ -25,7 +25,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping(value = "/zephyr/shop")
-public class ShopDetailController {
+public class DetailShopController {
 
     @Autowired
     private ProductDetailsService productDetailsService;

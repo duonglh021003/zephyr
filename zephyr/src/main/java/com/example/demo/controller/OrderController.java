@@ -115,7 +115,7 @@ public class OrderController {
             shoppingCartService.update(shoppingCart, idShopping);
         }
 
-        intoMoney = total - 15.00;
+        intoMoney = total + 15.00;
         List<Address> addresses = clientService.findAllByIdAndStatus(client.getId());
         Address address = addresses.isEmpty() ? null : addresses.get(0);
 
@@ -219,7 +219,15 @@ public class OrderController {
                 detailVoucherClientService.update(detailVoucherClient, detailVoucherClient.getId());
             }
         }
-        
+
+        Client client0001 = clientService.detail(client.getId());
+        Double getPoints = intoMoney / 100 + intoMoney*(client.getRank().getPercent() / 100);
+        Double getPointUsrs = getPoints + (client0001.getPointUsr() - point);
+
+        Double accumulatedScore = intoMoney / 100;
+        Double getAccumulatedScores = accumulatedScore + client0001.getAccumulatedScore();
+        client.setPointUsr(getPointUsrs);
+        client.setAccumulatedScore(getAccumulatedScores);
 
         clientService.update(client, client.getId());
         invoiceService.update(invoice, invoice01.getId());
@@ -282,7 +290,7 @@ public class OrderController {
             } else {
                 point = invoice1.getPoint();
             }
-            intoMoney = invoice1.getTotalInvoice() - detailVoucherClient.getReducedPrice() - invoice1.getShippingMoney() - point;
+            intoMoney = invoice1.getTotalInvoice() - detailVoucherClient.getReducedPrice() + invoice1.getShippingMoney() - point;
             invoice1.setIntoMoney(intoMoney);
             invoice1.setDetailVoucherClient(detailVoucherClient);
             System.out.println("aaaaaaaaaaaaaaaaaaaaaaa     " + invoice1);
@@ -312,7 +320,7 @@ public class OrderController {
             } else {
                 voucher = invoice1.getDetailVoucherClient().getReducedPrice();
             }
-            intoMoney = invoice1.getTotalInvoice() - voucher - invoice1.getShippingMoney() - point;
+            intoMoney = invoice1.getTotalInvoice() - voucher + invoice1.getShippingMoney() - point;
             invoice1.setPoint(point);
             invoice1.setIntoMoney(intoMoney);
             invoiceService.update(invoice1, invoice1.getId());

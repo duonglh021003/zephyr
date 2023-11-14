@@ -95,4 +95,19 @@ public class InvoiceServiceImpl implements InvoiceService {
     public List<Invoice> findByInvoiceStatus7(Long id) {
         return invoiceRepository.findByInvoiceStatus7(id);
     }
+
+    @Override
+    public List<Invoice> findAllByStatus2() {
+        return invoiceRepository.findAllByStatus(2);
+    }
+
+    @Override
+    public List<Invoice> findAllByInvoice(Long id) {
+        return invoiceRepository.findAllByInvoice(id);
+    }
+
+    @Override
+    public List<Invoice> findAllByIdStaff(Long id) {
+        return invoiceRepository.findAllByIdStaff(id);
+    }
 }

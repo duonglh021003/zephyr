@@ -18,7 +18,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping(value = "/zephyr/favourite-detail")
-public class FavouriteDetailController {
+public class DetailFavouriteController {
 
     @Autowired
     private DetailFavouriteService detailFavouriteService;

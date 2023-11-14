@@ -35,8 +35,6 @@
                 </tr>
                 </thead>
                 <tbody class="align-middle">
-
-
                 <c:forEach items="${ listDetailShoppingCart }" var="detailShopping" varStatus="i">
                 <tr>
                     <td>${i.index + 1}</td>

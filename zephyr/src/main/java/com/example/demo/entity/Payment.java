@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-@Table(name = "id_payment")
+@Table(name = "payment")
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor

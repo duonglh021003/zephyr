@@ -1,5 +1,6 @@
 package com.example.demo.repository;
 
+import com.example.demo.entity.DetailVoucherClient;
 import com.example.demo.entity.DetailedShoppingCart;
 import com.example.demo.entity.Invoice;
 import com.example.demo.entity.ProductDetails;
@@ -12,6 +13,8 @@ import java.util.List;
 
 @Repository
 public interface InvoiceRepository extends JpaRepository<Invoice, Long> {
+
+    List<Invoice> findAllByStatus(int status);
 
     @Query(value = "SELECT i.*\n" +
             "FROM invoice i\n" +
@@ -70,4 +73,19 @@ public interface InvoiceRepository extends JpaRepository<Invoice, Long> {
             "invoice i\n" +
             "where i.id_client = ?1 and i.invoice_status = '7'", nativeQuery = true)
     List<Invoice> findByInvoiceStatus7(@Param("id") Long id);
+
+
+    @Query(value = "select i.*\n" +
+            "from\n" +
+            "invoice i\n" +
+            "where i.id = ?1", nativeQuery = true)
+    List<Invoice> findAllByInvoice(@Param("id") Long id);
+
+    @Query(value = "select i.*\n" +
+            "from invoice i\n" +
+            "where i.id_staff = ?1 AND i.invoice_status != '5'", nativeQuery = true)
+    List<Invoice> findAllByIdStaff(@Param("id") Long id);
+
+
+
 }
