@@ -621,3 +621,7 @@ ALTER TABLE detail_delivery_notes ADD FOREIGN KEY(id_invoice) REFERENCES invoice
 ALTER TABLE detail_delivery_notes ADD FOREIGN KEY(id_delivery_notes) REFERENCES delivery_notes(id)
 -- phiếu đổi hàng - hoá đơn
 ALTER TABLE exchange_note ADD FOREIGN KEY(id_invoice) REFERENCES invoice(id)
+
+
+
+
