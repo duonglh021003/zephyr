@@ -96,9 +96,10 @@ public interface InvoiceRepository extends JpaRepository<Invoice, Long> {
             "where i.id_staff = ?1", nativeQuery = true)
     List<Invoice> findAllByIdStaffStatusAll(@Param("id") Long id);
 
+    // BEGIN THỐNG KÊ
 
-    @Query(value = "SELECT COUNT(*)\n" +
-            "FROM invoice i\n" +
+    @Query(value = "SELECT SUM(quantity)\n" +
+            "FROM invoice i join detailed_invoice di on i.id = di.id_invoice\n" +
             "WHERE CONVERT(DATE, date_create) = CONVERT(DATE, GETDATE()) " +
             "AND i.invoice_status = 5", nativeQuery = true)
     List<Integer> findAllStatisticalProductDay();
@@ -134,4 +135,54 @@ public interface InvoiceRepository extends JpaRepository<Invoice, Long> {
             "WHERE YEAR(date_create) = YEAR(GETDATE()) AND i.invoice_status = 5", nativeQuery = true)
     List<Integer> findAllStatisticalQuantityYEARPresent();
 
+
+    @Query(value = "SELECT i.*\n" +
+            "FROM invoice i\n" +
+            "WHERE CONVERT(DATE, date_create) = CONVERT(DATE, GETDATE()) " +
+            "AND i.invoice_status = 5", nativeQuery = true)
+    List<Invoice> findAllStatisticalInvoiceProductDay();
+
+    // sô lượng hoá đơn trong 1 tháng hiện tại
+    @Query(value = "SELECT i.*\n" +
+            "FROM invoice i \n" +
+            "WHERE MONTH(date_create) = MONTH(GETDATE()) " +
+            "AND YEAR(date_create) = YEAR(GETDATE()) " +
+            "AND i.invoice_status = 5", nativeQuery = true)
+    List<Invoice> findAllStatisticalInvoiceMonth();
+
+    // sô lượng hoá đơn trong 1 năm hiện tại
+    @Query(value = "SELECT i.*\n" +
+            "FROM invoice i \n" +
+            "WHERE YEAR(date_create) = YEAR(GETDATE()) " +
+            "AND i.invoice_status = 5", nativeQuery = true)
+    List<Invoice> findAllStatisticalInvoiceYear();
+
+    // thống kê tổng tiền trong 1 năm khi search
+    @Query(value = "SELECT SUM(into_money) AS total_amount\n" +
+            "FROM invoice i \n" +
+            "WHERE YEAR(date_create) = ?1 AND i.invoice_status = 5", nativeQuery = true)
+    List<Double> findAllStatisticalSearchYear(@Param("year") Integer year);
+
+    // số lượng hoá đơn trong 1 năm khi search
+    @Query(value = "SELECT i.*\n" +
+            "FROM invoice i \n" +
+            "WHERE YEAR(date_create) = ?1 AND i.invoice_status = 5", nativeQuery = true)
+    List<Invoice> findAllStatisticalInvoiceSearchYear(@Param("year") Integer year);
+
+    // số lượng sản phẩm trong 1 năm search
+    @Query(value = "SELECT SUM(quantity)\n" +
+            "FROM invoice i join detailed_invoice di on i.id = di.id_invoice\t\n" +
+            "WHERE YEAR(date_create) = ?1 AND i.invoice_status = 5", nativeQuery = true)
+    List<Integer> findAllStatisticalQuantitySearchYear(@Param("year") Integer year);
+    // END THỐNG KÊ
+
+
+    // SELL OF
+
+    @Query(value = "select i.*\n" +
+            "from invoice i\n" +
+            "where i.invoice_status = 0", nativeQuery = true)
+    List<Invoice> findAllByStatus0();
+
+    // END SELL OFF
 }

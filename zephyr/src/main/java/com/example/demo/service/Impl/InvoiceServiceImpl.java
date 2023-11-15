@@ -56,6 +56,11 @@ public class InvoiceServiceImpl implements InvoiceService {
     }
 
     @Override
+    public List<Invoice> findAllByStatus0() {
+        return invoiceRepository.findAllByStatus0();
+    }
+
+    @Override
     public List<Invoice> findByInvoiceStatusAll(Long id) {
         return invoiceRepository.findByInvoiceStatusAll(id);
     }
@@ -122,6 +127,21 @@ public class InvoiceServiceImpl implements InvoiceService {
     }
 
     @Override
+    public List<Invoice> findAllStatisticalInvoiceProductDay() {
+        return invoiceRepository.findAllStatisticalInvoiceProductDay();
+    }
+
+    @Override
+    public List<Invoice> findAllStatisticalInvoiceMonth() {
+        return invoiceRepository.findAllStatisticalInvoiceMonth();
+    }
+
+    @Override
+    public List<Invoice> findAllStatisticalInvoiceYear() {
+        return invoiceRepository.findAllStatisticalInvoiceYear();
+    }
+
+    @Override
     public List<Integer> findAllStatisticalProductDay() {
         return invoiceRepository.findAllStatisticalProductDay();
     }
@@ -149,6 +169,21 @@ public class InvoiceServiceImpl implements InvoiceService {
     @Override
     public List<Integer> findAllStatisticalQuantityYEARPresent() {
         return invoiceRepository.findAllStatisticalQuantityYEARPresent();
+    }
+
+    @Override
+    public List<Double> findAllStatisticalSearchYear(Integer year) {
+        return invoiceRepository.findAllStatisticalSearchYear(year);
+    }
+
+    @Override
+    public List<Invoice> findAllStatisticalInvoiceSearchYear(Integer year) {
+        return invoiceRepository.findAllStatisticalInvoiceSearchYear(year);
+    }
+
+    @Override
+    public List<Integer> findAllStatisticalQuantitySearchYear(Integer year) {
+        return invoiceRepository.findAllStatisticalQuantitySearchYear(year);
     }
 
 

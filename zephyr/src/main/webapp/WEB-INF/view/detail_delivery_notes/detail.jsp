@@ -53,7 +53,8 @@
 </div>
 <div style="margin-left: 80%; margin-top: 20px;margin-bottom: 20px">
     <c:forEach items="${ listDetailDeliveryNote }" var="detailDeliceryNote">
-    <a class="btn btn-success" type="button" href="/zephyr/admin/detail-delivery-notes/add?id=${detailDeliceryNote.id}">
+    <a class="btn btn-success" type="button" href="/zephyr/admin/detail-delivery-notes/add?id=${detailDeliceryNote.id}"
+       onclick="if(!confirm('Bạn có muốn sang bước kế tiếp?')){return false}else{alert('thành công');}">
         NEXT
     </a>
     </c:forEach>

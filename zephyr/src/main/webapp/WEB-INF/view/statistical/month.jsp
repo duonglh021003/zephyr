@@ -66,6 +66,7 @@
                             <a href="/zephyr/admin/statistical/revenue-in-month">
                                 <span class="mdi mdi-arrow-top-right icon-item"></span>
                             </a>
+
                         </div>
                     </div>
                 </div>
@@ -73,6 +74,9 @@
                 <div class="row" style="margin-top: 10px">
                     <div class="col-9">
                         <h6 class="text-muted font-weight-normal">Revenue in month</h6>
+                    </div>
+                    <div class="col-3">
+                        <a type="button" class="btn btn-success">filter</a>
                     </div>
                 </div>
 
@@ -131,7 +135,7 @@
                                 <td class="align-middle">${invoice.dateCreate}</td>
                                 <td class="align-middle">${invoice.intoMoney}00</td>
                                 <td class="align-middle">
-                                    <a href="/zephyr/admin/statistical/detail?id=${invoice.id}">
+                                    <a href="/zephyr/admin/statistical/revenue-in-month/detail?id=${invoice.id}">
                                         <button class="btn btn-info">detail</button>
                                     </a>
                                 </td>
@@ -182,6 +186,5 @@
         </div>
     </div>
 </div>
-
 </body>
 </html>

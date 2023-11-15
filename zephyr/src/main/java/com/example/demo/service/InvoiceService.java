@@ -20,6 +20,8 @@ public interface InvoiceService {
 
     List<Invoice> findByInvoiceMax(Long id);
 
+    List<Invoice> findAllByStatus0();
+
 
     List<Invoice> findByInvoiceStatusAll(Long id);
 
@@ -47,6 +49,12 @@ public interface InvoiceService {
 
     List<Invoice> findAllByIdStaffStatusAll(Long id);
 
+    List<Invoice> findAllStatisticalInvoiceProductDay();
+
+    List<Invoice> findAllStatisticalInvoiceMonth();
+
+    List<Invoice> findAllStatisticalInvoiceYear();
+
     List<Integer> findAllStatisticalProductDay();
 
     List<Double> findAllStatisticalIntoMoneyDAYPresent();
@@ -58,4 +66,10 @@ public interface InvoiceService {
     List<Double> findAllStatisticalIntoMoneyYEARPresent();
 
     List<Integer> findAllStatisticalQuantityYEARPresent();
+
+    List<Double> findAllStatisticalSearchYear(Integer year);
+
+    List<Invoice> findAllStatisticalInvoiceSearchYear(Integer year);
+
+    List<Integer> findAllStatisticalQuantitySearchYear(Integer year);
 }

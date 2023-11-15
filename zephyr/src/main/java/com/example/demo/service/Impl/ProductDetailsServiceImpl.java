@@ -65,6 +65,11 @@ public class ProductDetailsServiceImpl implements ProductDetailsService {
         return productDetailsRepository.findAllByDisplay(1, pageable);
     }
 
+    @Override
+    public List<ProductDetails> findAllByDisplaySell() {
+        return productDetailsRepository.findAllByDisplaySell();
+    }
+
 
     @Override
     public List<ProductDetails> findAllByProductAndColorAndSize(Long product, Long size, Long color) {

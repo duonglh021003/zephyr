@@ -66,4 +66,11 @@ public interface ProductDetailsRepository extends JpaRepository<ProductDetails, 
 
     Page<ProductDetails> findAllByDisplay(int display, Pageable pageable);
 
+
+    @Query(value = "select pd.*\n" +
+            "from product_details pd\n" +
+            "where pd.display = 1", nativeQuery = true)
+    List<ProductDetails> findAllByDisplaySell();
+
+
 }

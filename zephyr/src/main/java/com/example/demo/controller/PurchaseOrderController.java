@@ -29,6 +29,10 @@ public class PurchaseOrderController {
 
         model.addAttribute("listInvoice", invoiceService.findByInvoiceStatusAll(client.getId()));
         model.addAttribute("listInvoiceStatus02", invoiceService.findByInvoiceStatus2(client.getId()));
+        model.addAttribute("listInvoiceStatus03", invoiceService.findByInvoiceStatus3(client.getId()));
+        model.addAttribute("listInvoiceStatus04", invoiceService.findByInvoiceStatus4(client.getId()));
+        model.addAttribute("listInvoiceStatus05", invoiceService.findByInvoiceStatus5(client.getId()));
+        model.addAttribute("listInvoiceStatus07", invoiceService.findByInvoiceStatus7(client.getId()));
 
         model.addAttribute("viewClient", "/WEB-INF/view/include/purchase-order.jsp");
         return "layout/client";
