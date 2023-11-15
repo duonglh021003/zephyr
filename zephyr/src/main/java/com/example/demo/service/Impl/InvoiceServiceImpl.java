@@ -110,4 +110,46 @@ public class InvoiceServiceImpl implements InvoiceService {
     public List<Invoice> findAllByIdStaff(Long id) {
         return invoiceRepository.findAllByIdStaff(id);
     }
+
+    @Override
+    public List<Invoice> findAllByIdStaffStatus5(Long id) {
+        return invoiceRepository.findAllByIdStaffStatus5(id);
+    }
+
+    @Override
+    public List<Invoice> findAllByIdStaffStatusAll(Long id) {
+        return invoiceRepository.findAllByIdStaffStatusAll(id);
+    }
+
+    @Override
+    public List<Integer> findAllStatisticalProductDay() {
+        return invoiceRepository.findAllStatisticalProductDay();
+    }
+
+    @Override
+    public List<Double> findAllStatisticalIntoMoneyDAYPresent() {
+        return invoiceRepository.findAllStatisticalIntoMoneyDAYPresent();
+    }
+
+    @Override
+    public List<Integer> findAllStatisticalQuantityMONTHPresent() {
+        return invoiceRepository.findAllStatisticalQuantityMONTHPresent();
+    }
+
+    @Override
+    public List<Double> findAllStatisticalIntoMoneyMONTHPresent() {
+        return invoiceRepository.findAllStatisticalIntoMoneyMONTHPresent();
+    }
+
+    @Override
+    public List<Double> findAllStatisticalIntoMoneyYEARPresent() {
+        return invoiceRepository.findAllStatisticalIntoMoneyYEARPresent();
+    }
+
+    @Override
+    public List<Integer> findAllStatisticalQuantityYEARPresent() {
+        return invoiceRepository.findAllStatisticalQuantityYEARPresent();
+    }
+
+
 }

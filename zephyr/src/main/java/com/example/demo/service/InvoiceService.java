@@ -43,4 +43,19 @@ public interface InvoiceService {
 
     List<Invoice> findAllByIdStaff(Long id);
 
+    List<Invoice> findAllByIdStaffStatus5(Long id);
+
+    List<Invoice> findAllByIdStaffStatusAll(Long id);
+
+    List<Integer> findAllStatisticalProductDay();
+
+    List<Double> findAllStatisticalIntoMoneyDAYPresent();
+
+    List<Integer> findAllStatisticalQuantityMONTHPresent();
+
+    List<Double> findAllStatisticalIntoMoneyMONTHPresent();
+
+    List<Double> findAllStatisticalIntoMoneyYEARPresent();
+
+    List<Integer> findAllStatisticalQuantityYEARPresent();
 }

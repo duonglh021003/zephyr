@@ -37,7 +37,7 @@ public class PurchaseOrderController {
     @GetMapping("/update-status2")
     public String updateStatus2(@RequestParam("id") Long id){
         Invoice invoice = invoiceService.detail(id);
-        invoice.setStatus(6);
+        invoice.setStatus(7);
         invoiceService.update(invoice, invoice.getId());
 
         return "redirect:/zephyr/purchase-order";

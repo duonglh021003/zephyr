@@ -93,18 +93,20 @@ public class Invoice {
     public String getByStatus(){
         String byStatus;
         if(status == 0){
-            byStatus = "đã thanh toán";
-        }else if(status == 1){
             byStatus = "chưa thanh toán";
+        }else if(status == 1){
+            byStatus = "đặt hàng";
         }else if(status == 2){
             byStatus = "chờ xác nhận";
         }else if(status == 3){
             byStatus = "chờ lấy hàng";
         }else if(status == 4){
-            byStatus = "đang giao";
+            byStatus = "đang giao hàng";
         }else if(status == 5){
             byStatus = "đã nhận hàng";
         }else if(status == 6){
+            byStatus = "đã hoàn thành";
+        }else if(status == 7){
             byStatus = "đã huỷ";
         }else {
             byStatus = "đổi hàng";

@@ -124,11 +124,9 @@
                 </a>
                 <div class="collapse" id="invoice">
                     <ul class="nav flex-column sub-menu">
+                        <li class="nav-item"><a class="nav-link" href="/zephyr/admin/invoice/status-all"> All </a></li>
                         <li class="nav-item"><a class="nav-link" href="/zephyr/admin/invoice/wait-for-confirmation"> wait for confirmation</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/zephyr/admin/staff/view-add"> add </a></li>
-                        <li class="nav-item"><a class="nav-link" href="/zephyr/admin/staff/list-delete"> list
-                            delete </a></li>
-                        <li class="nav-item"><a class="nav-link" href=""> position </a></li>
+                        <li class="nav-item"><a class="nav-link" href="/zephyr/admin/invoice/received/status-5"> received </a></li>
                     </ul>
                 </div>
             </li>
@@ -217,7 +215,7 @@
             </li>
 
             <li class="nav-item menu-items">
-                <a class="nav-link" href="index.html">
+                <a class="nav-link" href="/zephyr/admin/statistical/index">
               <span class="menu-icon">
                 <i class="mdi mdi-speedometer"></i>
               </span>

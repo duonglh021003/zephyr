@@ -1,6 +1,5 @@
 package com.example.demo.controller;
 
-import com.example.demo.entity.Client;
 import com.example.demo.entity.DeliveryNotes;
 import com.example.demo.entity.DetailDeliveryNotes;
 import com.example.demo.entity.Invoice;
@@ -33,11 +32,40 @@ public class InvoiceController {
     @Autowired
     private DetailDeliveryNotesService detailDeliveryNotesService;
 
+    @GetMapping("/status-all")
+    public String statusAll(Model model, HttpSession session) {
+
+        Staff staff = (Staff) session.getAttribute("staffSession");
+        if (String.valueOf(staff).equalsIgnoreCase("null")) {
+            return "redirect:/zephyr/admin/login";
+        }
+        model.addAttribute("listInvoiceStatusAll", invoiceService.findAllByIdStaffStatusAll(staff.getId()));
+        model.addAttribute("view", "/WEB-INF/view/invoice/status-all.jsp");
+        return "home/staff";
+    }
+
     @GetMapping("/wait-for-confirmation")
     public String status2(Model model, HttpSession session) {
 
+        Staff staff = (Staff) session.getAttribute("staffSession");
+        if (String.valueOf(staff).equalsIgnoreCase("null")) {
+            return "redirect:/zephyr/admin/login";
+        }
         model.addAttribute("listInvoiceStatus02", invoiceService.findAllByStatus2());
         model.addAttribute("view", "/WEB-INF/view/invoice/status-02.jsp");
+        return "home/staff";
+    }
+
+    @GetMapping("/received/status-5")
+    public String status5(Model model, HttpSession session) {
+
+        Staff staff = (Staff) session.getAttribute("staffSession");
+        if (String.valueOf(staff).equalsIgnoreCase("null")) {
+            return "redirect:/zephyr/admin/login";
+        }
+
+        model.addAttribute("listInvoiceStatus05", invoiceService.findAllByIdStaffStatus5(staff.getId()));
+        model.addAttribute("view", "/WEB-INF/view/invoice/status-5.jsp");
         return "home/staff";
     }
 
@@ -53,11 +81,9 @@ public class InvoiceController {
         ZoneId zoneId = ZoneId.of("Asia/Ho_Chi_Minh");
         LocalTime currentTime = LocalTime.now(zoneId);
 
-
         Invoice invoice = invoiceService.detail(id);
         invoice.setStatus(3);
         invoice.setStaff(staff);
-//        invoiceService.update(invoice, id);
 
         String address = invoice.getAddress().getClientAddress() + ", " +
                 invoice.getAddress().getCommune() + ", " +
@@ -80,11 +106,11 @@ public class InvoiceController {
                 .build();
         deliveryNotesService.add(deliveryNotes);
 
-        System.out.println("aaaaaaaaaaaaaaaaaaaaaaa         "+deliveryNotes);
+        System.out.println("aaaaaaaaaaaaaaaaaaaaaaa         " + deliveryNotes);
 
         DetailDeliveryNotes detailDeliveryNotesStatus2 = DetailDeliveryNotes.builder()
                 .detailNotesName("Đơn Hàng Đã Đặt")
-                .progress("6.png")
+                .progress("3.png")
                 .hourMinute(invoice.getHourMinute())
                 .dateCreate(invoice.getDateCreate())
                 .note("không")
@@ -97,7 +123,7 @@ public class InvoiceController {
 
         DetailDeliveryNotes detailDeliveryNotesStatus3 = DetailDeliveryNotes.builder()
                 .detailNotesName("Đã Xác Nhận Đơn Hàng")
-                .progress("6.png")
+                .progress("3.png")
                 .hourMinute(currentTime.getHour() + ":" + currentTime.getMinute())
                 .dateCreate(localDate)
                 .note("không")

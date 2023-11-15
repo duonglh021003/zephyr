@@ -75,8 +75,16 @@ public class DetailDeliveryNotesController {
         Integer status = 0;
         if (deliveryNotes.getStatus() == 3) {
             name = "Đã Giao Cho ĐVVC ";
-            getprogresss = "7.png";
+            getprogresss = "4.png";
             status = 4;
+        } else if (deliveryNotes.getStatus() == 4) {
+            name = "Đã Nhận Được Hàng ";
+            getprogresss = "5.png";
+            status = 5;
+        }else if (deliveryNotes.getStatus() == 5) {
+            name = "Đơn Hàng Hoàn Thành ";
+            getprogresss = "6.png";
+            status = 6;
         }
 
         Invoice invoice = invoiceService.detail(deliveryNotes.getInvoice().getId());

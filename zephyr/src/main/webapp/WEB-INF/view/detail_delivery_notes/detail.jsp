@@ -11,11 +11,9 @@
             <nav class="breadcrumb bg-light mb-30">
                 <img style="width: 1100px"
                      src="${pageContext.request.contextPath}/assets/images/invoice/${images}" alt="">
-
             </nav>
             <span style="  border: none;outline: none; height: 50px; color: black; background: white; margin-top: -20px"
                   class="form-control">
-
                 <thead>
                 <tr>
                     <span style="margin-left: 20px">
@@ -98,7 +96,6 @@
                                     <td class="align-middle">${detailInvoice.quantity}</td>
                                     <td class="align-middle">${detailInvoice.capitalSum}00</td>
                                     <td class="align-middle">${detailInvoice.status}</td>
-
                                 </tr>
                             </c:forEach>
                             </tbody>

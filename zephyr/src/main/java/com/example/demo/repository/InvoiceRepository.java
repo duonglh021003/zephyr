@@ -86,6 +86,52 @@ public interface InvoiceRepository extends JpaRepository<Invoice, Long> {
             "where i.id_staff = ?1 AND i.invoice_status != '5'", nativeQuery = true)
     List<Invoice> findAllByIdStaff(@Param("id") Long id);
 
+    @Query(value = "select i.*\n" +
+            "from invoice i\n" +
+            "where i.id_staff = ?1 AND i.invoice_status = '5'", nativeQuery = true)
+    List<Invoice> findAllByIdStaffStatus5(@Param("id") Long id);
 
+    @Query(value = "select i.*\n" +
+            "from invoice i\n" +
+            "where i.id_staff = ?1", nativeQuery = true)
+    List<Invoice> findAllByIdStaffStatusAll(@Param("id") Long id);
+
+
+    @Query(value = "SELECT COUNT(*)\n" +
+            "FROM invoice i\n" +
+            "WHERE CONVERT(DATE, date_create) = CONVERT(DATE, GETDATE()) " +
+            "AND i.invoice_status = 5", nativeQuery = true)
+    List<Integer> findAllStatisticalProductDay();
+
+    @Query(value = "SELECT SUM(into_money)\n" +
+            "FROM invoice i\n" +
+            "WHERE CONVERT(DATE, date_create) = CONVERT(DATE, GETDATE()) " +
+            "AND i.invoice_status = 5", nativeQuery = true)
+    List<Double> findAllStatisticalIntoMoneyDAYPresent();
+
+    @Query(value = "SELECT SUM(into_money)\n" +
+            "FROM invoice i\n" +
+            "WHERE MONTH(date_create) = MONTH(GETDATE()) " +
+            "AND YEAR(date_create) = YEAR(GETDATE()) " +
+            "AND i.invoice_status = 5", nativeQuery = true)
+    List<Double> findAllStatisticalIntoMoneyMONTHPresent();
+
+    @Query(value = "SELECT SUM(quantity)\n" +
+            "FROM invoice i join detailed_invoice di on i.id = di.id_invoice\n" +
+            "WHERE MONTH(date_create) = MONTH(GETDATE()) " +
+            "AND YEAR(date_create) = YEAR(GETDATE()) " +
+            "AND i.invoice_status = 5", nativeQuery = true)
+    List<Integer> findAllStatisticalQuantityMONTHPresent();
+
+    @Query(value = "SELECT SUM(into_money) AS total_amount\n" +
+            "FROM invoice i\n" +
+            "WHERE YEAR(date_create) = YEAR(GETDATE()) " +
+            "AND i.invoice_status = 5", nativeQuery = true)
+    List<Double> findAllStatisticalIntoMoneyYEARPresent();
+
+    @Query(value = "SELECT SUM(quantity)\n" +
+            "FROM invoice i join detailed_invoice di on i.id = di.id_invoice\n" +
+            "WHERE YEAR(date_create) = YEAR(GETDATE()) AND i.invoice_status = 5", nativeQuery = true)
+    List<Integer> findAllStatisticalQuantityYEARPresent();
 
 }
