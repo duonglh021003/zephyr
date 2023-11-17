@@ -20,6 +20,8 @@ public interface ProductDetailsService {
 
     ProductDetails detail(Long id);
 
+    void add(ProductDetails productDetails);
+
     void update(ProductDetails productDetails, Long id);
 
     List<ProductDetails> getFindAll();

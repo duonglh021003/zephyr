@@ -36,6 +36,11 @@ public class ProductDetailsServiceImpl implements ProductDetailsService {
     }
 
     @Override
+    public void add(ProductDetails productDetails) {
+        productDetailsRepository.save(productDetails);
+    }
+
+    @Override
     public void update(ProductDetails productDetails, Long id) {
         productDetailsRepository.save(productDetails);
     }
