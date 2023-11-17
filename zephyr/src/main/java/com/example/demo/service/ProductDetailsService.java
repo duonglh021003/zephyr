@@ -32,6 +32,8 @@ public interface ProductDetailsService {
 
     Page<ProductDetails> findAllByDisplay(Pageable pageable);
 
+    Page<ProductDetails> findAllByStatus(Pageable pageable);
+
     List<ProductDetails> findAllByDisplaySell();
 
 

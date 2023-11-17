@@ -327,6 +327,12 @@ public class SellController {
             invoice.setTotalInvoice(total);
             invoice.setIntoMoney(intoMoney);
             invoiceService.update(invoice, idInvoice);
+
+            ProductDetails productDetails = productDetailsService.detail(detailedInvoice.getProductDetails().getId());
+            productDetails.setInventory(productDetails.getInventory() - quantity);
+            productDetailsService.update(productDetails, productDetails.getId());
+
+
         }
         return "redirect:/zephyr/admin/sell/invoice?id=" + invoice.getId();
     }
@@ -337,12 +343,33 @@ public class SellController {
         List<Invoice> list = invoiceService.findAllByIdDetailInvoice(id);
         Invoice invoice = list.isEmpty() ? null : list.get(0);
 
+        Double point = 0.0;
+        if (String.valueOf(invoice.getPoint()).equalsIgnoreCase("null")) {
+            point = 0.00;
+        } else {
+            point = invoice.getPoint();
+        }
+
+        Double voucher = 0.0;
+        if (String.valueOf(invoice.getVoucher()).equalsIgnoreCase("null")) {
+            voucher = 0.00;
+        } else {
+            voucher = invoice.getVoucher().getReducedPrice();
+        }
+
         List<Double> listtotalInvoice = detailedInvoiceService.capitalSumDetailInvoice(invoice.getId());
         Double totalInvoice = listtotalInvoice.get(0);
         DetailedInvoice detailedInvoice = detailedInvoiceService.detail(id);
-        Double total = totalInvoice - detailedInvoice.getCapitalSum();
-        invoice.setTotalInvoice(total);
+        Double intoMoney = totalInvoice - point - voucher - detailedInvoice.getCapitalSum();
+
+        invoice.setTotalInvoice(intoMoney);
+        invoice.setIntoMoney(intoMoney);
         invoiceService.update(invoice, invoice.getId());
+
+        ProductDetails productDetails = productDetailsService.detail(detailedInvoice.getProductDetails().getId());
+        productDetails.setInventory(productDetails.getInventory() + detailedInvoice.getQuantity());
+        productDetailsService.update(productDetails, productDetails.getId());
+
 
         detailedInvoiceService.delete(id);
         return "redirect:/zephyr/admin/sell/invoice?id=" + invoice.getId();
@@ -371,6 +398,9 @@ public class SellController {
         invoice.setStatus(5);
         invoiceService.update(invoice, invoice.getId());
 
+        Voucher voucher = voucherService.detail(invoice.getVoucher().getId());
+        voucher.setQuantity(voucher.getQuantity() - 1);
+        voucherService.update(voucher, voucher.getId());
 
         return "redirect:/zephyr/admin/sell/index";
     }

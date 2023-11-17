@@ -22,7 +22,7 @@ public class ProductDetailsServiceImpl implements ProductDetailsService {
 
     @Override
     public Page<ProductDetails> getAll(Pageable pageable) {
-        return productDetailsRepository.findAll(pageable);
+        return productDetailsRepository.findAllByStatus(1,pageable);
     }
 
     @Override
@@ -63,6 +63,11 @@ public class ProductDetailsServiceImpl implements ProductDetailsService {
     @Override
     public Page<ProductDetails> findAllByDisplay(Pageable pageable) {
         return productDetailsRepository.findAllByDisplay(1, pageable);
+    }
+
+    @Override
+    public Page<ProductDetails> findAllByStatus(Pageable pageable) {
+        return productDetailsRepository.findAllByStatus(1, pageable);
     }
 
     @Override

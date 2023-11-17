@@ -6,6 +6,7 @@ import com.example.demo.entity.Color;
 import com.example.demo.entity.Product;
 import com.example.demo.entity.ProductDetails;
 import com.example.demo.entity.Size;
+import com.example.demo.entity.Staff;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -71,6 +72,8 @@ public interface ProductDetailsRepository extends JpaRepository<ProductDetails, 
             "from product_details pd\n" +
             "where pd.display = 1", nativeQuery = true)
     List<ProductDetails> findAllByDisplaySell();
+
+    Page<ProductDetails> findAllByStatus(int status, Pageable pageable);
 
 
 }

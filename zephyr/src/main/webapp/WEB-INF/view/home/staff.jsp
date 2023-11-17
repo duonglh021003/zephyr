@@ -107,7 +107,7 @@
                 </a>
                 <div class="collapse" id="product">
                     <ul class="nav flex-column sub-menu">
-                        <li class="nav-item"><a class="nav-link" href=""> index </a></li>
+                        <li class="nav-item"><a class="nav-link" href="/zephyr/admin/product-detail/index"> index </a></li>
                         <li class="nav-item"><a class="nav-link" href=""> add </a></li>
                         <li class="nav-item"><a class="nav-link" href=""> list delete </a></li>
                     </ul>
