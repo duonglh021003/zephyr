@@ -19,5 +19,7 @@ public interface DetailedInvoiceService {
 
     List<DetailedInvoice> findAllByIdInvoice(Long id);
 
+    List<Double> capitalSumDetailInvoice(Long id);
+
 
 }

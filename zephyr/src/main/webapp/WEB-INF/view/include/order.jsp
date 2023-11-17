@@ -272,7 +272,7 @@
                     <hr>
                     <div class="d-flex justify-content-between mb-3">
                         <p>tiền phiếu giảm giá: </p>
-                        <input style="border: none;outline: none;" name="point" value="${invoice.detailVoucherClient.reducedPrice}00">
+                        <input style="border: none;outline: none;"  value="${invoice.detailVoucherClient.reducedPrice}00">
                     </div>
                     <hr>
                     <div class="d-flex justify-content-between mb-3">

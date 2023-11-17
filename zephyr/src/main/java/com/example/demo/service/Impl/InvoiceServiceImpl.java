@@ -127,6 +127,12 @@ public class InvoiceServiceImpl implements InvoiceService {
     }
 
     @Override
+    public List<Invoice> findAllByIdDetailInvoice(Long id) {
+        return invoiceRepository.findAllByIdDetailInvoice(id);
+    }
+
+
+    @Override
     public List<Invoice> findAllStatisticalInvoiceProductDay() {
         return invoiceRepository.findAllStatisticalInvoiceProductDay();
     }

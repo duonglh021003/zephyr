@@ -13,8 +13,8 @@
 <div class="col-lg-12 grid-margin stretch-card">
     <div class="card">
         <div class="card-body">
-            <a type="button" class="btn btn-success" href="/zephyr/admin/sell/add" style="margin-bottom: 20px">create invoice</a> <br>
-
+            <a type="button" class="btn btn-success" href="/zephyr/admin/sell/add" style="margin-bottom: 20px">create invoice</a>
+            <span style="width: 500px; margin-left: 28.5%" class="alert alert-danger">${ errorMessage }</span> <br>
             <c:forEach items="${ listInvoiceStatus0 }" var="invoiceStatus0" varStatus="i">
                 <a type="button" class="btn btn-light" href="/zephyr/admin/sell/invoice?id=${invoiceStatus0.id}">
                     <tr>

@@ -22,7 +22,6 @@ public interface InvoiceService {
 
     List<Invoice> findAllByStatus0();
 
-
     List<Invoice> findByInvoiceStatusAll(Long id);
 
     List<Invoice> findByInvoiceStatus1(Long id);
@@ -48,6 +47,8 @@ public interface InvoiceService {
     List<Invoice> findAllByIdStaffStatus5(Long id);
 
     List<Invoice> findAllByIdStaffStatusAll(Long id);
+
+    List<Invoice> findAllByIdDetailInvoice(Long id);
 
     List<Invoice> findAllStatisticalInvoiceProductDay();
 

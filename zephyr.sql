@@ -148,11 +148,11 @@ user_update NVARCHAR(200) DEFAULT NULL, -- người sửa
 color_status INT DEFAULT 1, -- trạng thái
 )
 insert into color values
-('ma0001',N'Black','2002-12-12','2002-12-12',N'dương',N'dương',DEFAULT),
-('ma0002',N'White','2002-12-12','2002-12-12',N'dương',N'dương',DEFAULT),
-('ma0003',N'Red','2002-12-12','2002-12-12',N'dương',N'dương',DEFAULT),
-('ma0004',N'Blue','2002-12-12','2002-12-12',N'dương',N'dương',DEFAULT),
-('ma0005',N'Green','2002-12-12','2002-12-12',N'dương',N'dương',DEFAULT)
+('ma0001',N'White','2002-12-12','2002-12-12',N'dương',N'dương',DEFAULT), -- trắng
+('ma0002',N'Beige','2002-12-12','2002-12-12',N'dương',N'dương',DEFAULT), -- be
+('ma0003',N'Pink','2002-12-12','2002-12-12',N'dương',N'dương',DEFAULT), -- hồng
+('ma0004',N'RosyBrown','2002-12-12','2002-12-12',N'dương',N'dương',DEFAULT), -- nâu
+('ma0005',N'Green','2002-12-12','2002-12-12',N'dương',N'dương',DEFAULT) -- xanh
 select *
 from 
 color
@@ -241,6 +241,7 @@ CREATE TABLE voucher(
 id BIGINT IDENTITY(1,1) PRIMARY KEY ,
 code VARCHAR(200) UNIQUE, -- mã
 voucher_name NVARCHAR(200) DEFAULT NULL, -- tên
+quantity INT DEFAULT NULL, -- số lượng
 date_begin DATE DEFAULT NULL, -- ngày bắt đầu
 date_end DATE DEFAULT NULL, -- ngày kết thúc
 minimum_price DECIMAL(20,3) DEFAULT NULL, -- giá tối thiểu
@@ -253,9 +254,13 @@ user_update NVARCHAR(200) DEFAULT NULL, -- người sửa
 voucher_status INT DEFAULT 1, -- trạng thái
 )
 insert into voucher values
-('voucher73487',N'voucher 15','2002-12-12','2002-12-12',0.000,100.000,15.000,'2002-12-12','2002-12-12',N'dương',N'dương',DEFAULT),
-('voucher92374',N'voucher 20','2002-12-12','2002-12-12',0.000,100.000,20.000,'2002-12-12','2002-12-12',N'dương',N'dương',DEFAULT),
-('voucher73465',N'voucher 25','2002-12-12','2002-12-12',0.000,100.000,25.000,'2002-12-12','2002-12-12',N'dương',N'dương',DEFAULT)
+('voucher43812',N'voucher 1',100,'2002-12-12','2002-12-12',0.000,300.000,10.000,'2002-12-12','2002-12-12',N'dương',N'dương',DEFAULT),
+('voucher92374',N'voucher 2',100,'2002-12-12','2002-12-12',300.000,1000.000,15.000,'2002-12-12','2002-12-12',N'dương',N'dương',DEFAULT),
+('voucher73465',N'voucher 3',100,'2002-12-12','2002-12-12',1000.000,2000.000,25.000,'2002-12-12','2002-12-12',N'dương',N'dương',DEFAULT),
+('voucher34254',N'voucher 4',100,'2002-12-12','2002-12-12',2000.000,3500.000,40.000,'2002-12-12','2002-12-12',N'dương',N'dương',DEFAULT),
+('voucher84267',N'voucher 5',100,'2002-12-12','2002-12-12',3500.000,6000.000,60.000,'2002-12-12','2002-12-12',N'dương',N'dương',DEFAULT),
+('voucher92384',N'voucher 6',100,'2002-12-12','2002-12-12',6000.000,10000.000,90.000,'2002-12-12','2002-12-12',N'dương',N'dương',DEFAULT),
+('voucher82375',N'voucher 7',100,'2002-12-12','2002-12-12',10000.000,0.000,130.000,'2002-12-12','2002-12-12',N'dương',N'dương',DEFAULT)
 select *
 from 
 voucher
@@ -347,13 +352,13 @@ id_shopping_cart BIGINT , -- id giỏ hàng
 id_favourite BIGINT , -- id yêu thích yêu thích
 )
 insert into client values
-('ma0001',N'Hà Thị Kim Nhung','2002-12-12','0898629635','duongcf2k3@gmail.com',N'true',50,600,'1','2002-12-12','2002-12-12',N'dương',N'dương',DEFAULT,1,1,1),
+('ma0001',N'Hà Thị Kim Nhung','2002-12-12','0339115608','duongcf2k3@gmail.com',N'true',50,600,'1','2002-12-12','2002-12-12',N'dương',N'dương',DEFAULT,1,1,1),
 ('ma0002',N'Khách Hàng 02','2002-12-12','0898629635','duong021003@gmail.com',N'true',50,700,'1','2002-12-12','2002-12-12',N'dương',N'dương',DEFAULT,1,2,2),
-('ma0003',N'Khách Hàng 03','2002-12-12','0898629635','duonglhph22902@fpt.edu.vn',N'true',50,800,'1','2002-12-12','2002-12-12',N'dương',N'dương',DEFAULT,3,3,3),
-('ma0004',N'Khách Hàng 04','2002-12-12','0898629635','01@gmail.com',N'true',50,600,'1','2002-12-12','2002-12-12',N'dương',N'dương',0,1,4,4),
-('ma0005',N'Khách Hàng 05','2002-12-12','0898629635','02@gmail.com',N'true',50,700,'1','2002-12-12','2002-12-12',N'dương',N'dương',0,2,5,5),
-('ma0006',N'Khách Hàng 06','2002-12-12','0898629635','03@gmail.com',N'true',50,800,'1','2002-12-12','2002-12-12',N'dương',N'dương',DEFAULT,3,6,6),
-('ma0007',N'Khách Hàng 07','2002-12-12','0898629635','03@gmail.com',N'true',50,800,'1','2002-12-12','2002-12-12',N'dương',N'dương',DEFAULT,2,7,7)
+('ma0003',N'Khách Hàng 03','2002-12-12','1234567890','duonglhph22902@fpt.edu.vn',N'true',50,800,'1','2002-12-12','2002-12-12',N'dương',N'dương',DEFAULT,3,3,3),
+('ma0004',N'Khách Hàng 04','2002-12-12','1234512345','01@gmail.com',N'true',50,600,'1','2002-12-12','2002-12-12',N'dương',N'dương',0,1,4,4),
+('ma0005',N'Khách Hàng 05','2002-12-12','1234512345','02@gmail.com',N'true',50,700,'1','2002-12-12','2002-12-12',N'dương',N'dương',0,2,5,5),
+('ma0006',N'Khách Hàng 06','2002-12-12','1234512345','03@gmail.com',N'true',50,800,'1','2002-12-12','2002-12-12',N'dương',N'dương',DEFAULT,3,6,6),
+('ma0007',N'Khách Hàng 07','2002-12-12','1234512345','03@gmail.com',N'true',50,800,'1','2002-12-12','2002-12-12',N'dương',N'dương',DEFAULT,2,7,7)
 select *
 from 
 client
@@ -410,7 +415,7 @@ address_status INT DEFAULT 0, -- trạng thái
 id_client BIGINT , -- id client
 )
 insert into client_address values
-('ma0001',N'Hà Thị Kim Nhung','0898629635',N'phú mỹ',N'Phường Mỹ Đình 2',N'Quận Nam Từ Liêm',N'Thành phố Hà Nội','2002-12-12',1,1),
+('ma0001',N'Hà Thị Kim Nhung','0339115608',N'phú mỹ',N'Phường Mỹ Đình 2',N'Quận Nam Từ Liêm',N'Thành phố Hà Nội','2002-12-12',1,1),
 ('ma0002',N'Khách Hàng 02','0898629635',N'phú mỹ',N'mỹ đình 2',N'nam từ liêm',N'HN','2002-12-12',DEFAULT,2),
 ('ma0003',N'Khách Hàng 02','0898629635',N'phú mỹ',N'mỹ đình 2',N'nam từ liêm',N'HN','2002-12-12',1,2),
 ('ma0004',N'Khách Hàng 03','0898629635',N'phú mỹ',N'mỹ đình 2',N'nam từ liêm',N'HN','2002-12-12',DEFAULT,3),

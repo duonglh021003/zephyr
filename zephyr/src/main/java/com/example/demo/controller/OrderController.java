@@ -167,7 +167,7 @@ public class OrderController {
                          @RequestParam("intoMoney") Double intoMoney,
                          @RequestParam("note") String note,
                          @RequestParam("payment") Long payment,
-                         Model model, HttpSession session, Double getPoint) {
+                         Model model, HttpSession session) {
 
         Payment payment1 = Payment.builder().id(payment).build();
 

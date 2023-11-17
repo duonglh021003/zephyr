@@ -15,4 +15,8 @@ public interface VoucherService {
     void delete(Long id);
 
     Voucher detailCode(String code);
+
+    Voucher detail(Long id);
+
+    List<Voucher> findAllByPrice(Double price);
 }

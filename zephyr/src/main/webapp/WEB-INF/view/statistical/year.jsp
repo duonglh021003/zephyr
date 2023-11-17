@@ -198,9 +198,7 @@
                         <div class="col-md-12">
                             <div class="mb-3">
                                 <input class="form-control" name="year" placeholder="year">
-
                             </div>
-
                         </div>
                     </div>
                 </div>

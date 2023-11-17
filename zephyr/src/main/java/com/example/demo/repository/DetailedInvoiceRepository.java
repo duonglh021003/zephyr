@@ -24,4 +24,10 @@ public interface DetailedInvoiceRepository extends JpaRepository<DetailedInvoice
             "where i.id = ?1", nativeQuery = true)
     List<Address> findAllAddress(@Param("id") Long id);
 
+    @Query(value = "select SUM(capital_sum)\n" +
+            "from\n" +
+            "detailed_invoice di join invoice i on di.id_invoice = i.id\n" +
+            "where i.id = ?1", nativeQuery = true)
+    List<Double> capitalSumDetailInvoice(@Param("id") Long id);
+
 }

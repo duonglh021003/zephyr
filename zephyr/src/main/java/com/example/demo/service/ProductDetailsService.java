@@ -35,9 +35,6 @@ public interface ProductDetailsService {
     List<ProductDetails> findAllByDisplaySell();
 
 
-
-
-
     List<ProductDetails> findAllByProductAndColorAndSize(Long product, Long size, Long color);
 
 }

@@ -51,4 +51,8 @@ public class DetailedInvoice {
     @JoinColumn(name = "id_product_details", referencedColumnName = "id")
     private ProductDetails productDetails;
 
+    public Double subTotalDetailInvoice(){
+        return this.unitPrice * this.quantity;
+    }
+
 }

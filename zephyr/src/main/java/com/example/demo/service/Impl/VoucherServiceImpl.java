@@ -44,4 +44,14 @@ public class VoucherServiceImpl implements VoucherService {
         }
         return null;
     }
+
+    @Override
+    public Voucher detail(Long id) {
+        return voucherRepository.getById(id);
+    }
+
+    @Override
+    public List<Voucher> findAllByPrice(Double price) {
+        return voucherRepository.findAllByPrice(price);
+    }
 }

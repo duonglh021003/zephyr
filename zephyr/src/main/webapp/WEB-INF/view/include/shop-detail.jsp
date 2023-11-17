@@ -104,19 +104,19 @@
 
                     <div class="custom-control custom-radio custom-control-inline">
                         <input type="radio" name="color" value="1" checked class="custom-control-input" id="color-1" name="color">
-                        <label class="custom-control-label" for="color-1">Black</label>
+                        <label class="custom-control-label" for="color-1">White</label>
                     </div>
                     <div class="custom-control custom-radio custom-control-inline">
                         <input type="radio" name="color" value="2" class="custom-control-input" id="color-2" name="color">
-                        <label class="custom-control-label" for="color-2">White</label>
+                        <label class="custom-control-label" for="color-2">Beige</label>
                     </div>
                     <div class="custom-control custom-radio custom-control-inline">
                         <input type="radio" name="color" value="3" class="custom-control-input" id="color-3" name="color">
-                        <label class="custom-control-label" for="color-3">Red</label>
+                        <label class="custom-control-label" for="color-3">Pink</label>
                     </div>
                     <div class="custom-control custom-radio custom-control-inline">
                         <input type="radio" name="color" value="4" class="custom-control-input" id="color-4" name="color">
-                        <label class="custom-control-label" for="color-4">Blue</label>
+                        <label class="custom-control-label" for="color-4">RosyBrown</label>
                     </div>
                     <div class="custom-control custom-radio custom-control-inline">
                         <input type="radio" name="color" value="5" class="custom-control-input" id="color-5" name="color">

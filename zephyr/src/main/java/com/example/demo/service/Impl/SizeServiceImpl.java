@@ -15,6 +15,11 @@ public class SizeServiceImpl implements SizeService {
     private SizeRepository sizeRepository;
 
     @Override
+    public List<Size> getAll() {
+        return sizeRepository.findAll();
+    }
+
+    @Override
     public List<Size> findByNameSize(Long id) {
         return sizeRepository.findByNameSize(id);
     }

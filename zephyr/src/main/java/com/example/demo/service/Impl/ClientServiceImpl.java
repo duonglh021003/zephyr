@@ -77,6 +77,15 @@ public class ClientServiceImpl implements ClientService {
         return null;
     }
 
+    @Override
+    public Client detailPhoneNumber(String phoneNumber) {
+        for (Client client : clientRepository.findAll()) {
+            if (client.getPhoneNumber().equalsIgnoreCase(phoneNumber)) {
+                return client;
+            }
+        }
+        return null;
+    }
 
 
 }

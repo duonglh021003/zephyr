@@ -29,4 +29,6 @@ public interface ClientService {
 
     Client detailGmail(String gmail);
 
+    Client detailPhoneNumber(String phoneNumber);
+
 }
