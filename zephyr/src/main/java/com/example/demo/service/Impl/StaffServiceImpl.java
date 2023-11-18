@@ -4,8 +4,6 @@ import com.example.demo.entity.Staff;
 import com.example.demo.repository.StaffRepository;
 import com.example.demo.service.StaffService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -30,7 +28,7 @@ public class StaffServiceImpl implements StaffService {
         if (staff == null) {
             return "login/staff";
         } else if (phoneNumber.equalsIgnoreCase(staff.getPhoneNumber()) && password.equalsIgnoreCase(staff.getPassword())) {
-            return "home/staff";
+            return "redirect:/zephyr/staff/home-page";
         } else {
             return "login/staff";
         }

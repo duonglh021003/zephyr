@@ -185,11 +185,14 @@ public interface InvoiceRepository extends JpaRepository<Invoice, Long> {
             "where i.invoice_status = 0", nativeQuery = true)
     List<Invoice> findAllByStatus0();
 
+<<<<<<< HEAD
     @Query(value = "select i.*\n" +
             "from\n" +
             "detailed_invoice di join invoice i on di.id_invoice = i.id\n" +
             "where di.id = ?1", nativeQuery = true)
     List<Invoice> findAllByIdDetailInvoice(@Param("id") Long id);
 
+=======
+>>>>>>> origin/huyenRequest
     // END SELL OFF
 }

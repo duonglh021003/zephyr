@@ -73,7 +73,10 @@ public interface ProductDetailsRepository extends JpaRepository<ProductDetails, 
             "where pd.display = 1", nativeQuery = true)
     List<ProductDetails> findAllByDisplaySell();
 
+<<<<<<< HEAD
     Page<ProductDetails> findAllByStatus(int status, Pageable pageable);
 
+=======
+>>>>>>> origin/huyenRequest
 
 }
