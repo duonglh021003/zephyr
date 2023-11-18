@@ -16,6 +16,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.time.LocalDate;
+
 @Table(name = "staff")
 @Entity
 @AllArgsConstructor
@@ -64,8 +66,20 @@ public class Staff {
     @Column(name = "staff_password")
     private String password;
 
+    @Column(name = "date_create")
+    private LocalDate dateCreate;
+
+    @Column(name = "date_update")
+    private LocalDate dateUpdate;
+
+    @Column(name = "user_create")
+    private String userCreate;
+
+    @Column(name = "user_update")
+    private String userUpdate;
+
     @Column(name = "staff_status")
-    private String status;
+    private Integer status;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_position", referencedColumnName = "id")
