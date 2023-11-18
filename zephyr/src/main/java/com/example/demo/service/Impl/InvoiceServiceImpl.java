@@ -126,14 +126,11 @@ public class InvoiceServiceImpl implements InvoiceService {
         return invoiceRepository.findAllByIdStaffStatusAll(id);
     }
 
-<<<<<<< HEAD
     @Override
     public List<Invoice> findAllByIdDetailInvoice(Long id) {
         return invoiceRepository.findAllByIdDetailInvoice(id);
     }
 
-=======
->>>>>>> origin/huyenRequest
 
     @Override
     public List<Invoice> findAllStatisticalInvoiceProductDay() {

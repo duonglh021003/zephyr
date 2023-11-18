@@ -8,7 +8,6 @@ import java.util.List;
 
 public interface StaffService {
 
-    List<Staff> getAll();
 
     Staff findStaff(String phoneNumber, String password);
 
