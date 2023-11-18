@@ -7,7 +7,7 @@
 </head>
 <body>
 <div style="margin-bottom: 30px">
-    <span><a href="/zephyr/admin/staff/index">Staff</a></span>
+    <span><a href="/zephyr/admin/staff/index">Product detail</a></span>
     <span style="color: #C0C0C0"> / index</span>
 </div>
 <div class="col-lg-12 grid-margin stretch-card">
