@@ -182,7 +182,7 @@ GO
 CREATE TABLE product_details(
 id BIGINT IDENTITY(1,1) PRIMARY KEY ,
 images NVARCHAR(200) DEFAULT NULL, -- image
-describe NVARCHAR(50) DEFAULT NULL, -- mô tả
+describe NVARCHAR(200) DEFAULT NULL, -- mô tả
 inventory INT DEFAULT NULL, -- số lượng tồn
 import_price DECIMAL(20,3) DEFAULT NULL, -- giá nhập
 price DECIMAL(20,3) DEFAULT NULL, -- giá bán
@@ -554,20 +554,6 @@ insert into detail_delivery_notes values
 select *
 from
 detail_delivery_notes
-GO
--- phiếu đổi hàng
-CREATE TABLE exchange_note(
-id BIGINT IDENTITY(1,1) PRIMARY KEY ,
-code VARCHAR(200) UNIQUE, -- mã
-date_by DATE DEFAULT NULL, -- ngày mua
-date_end DATE DEFAULT NULL, -- ngày kết thúc
-describe NVARCHAR(200) DEFAULT NULL, -- mô tả
-reason VARCHAR(MAX) DEFAULT NULL, -- lý do
-exchange_note_status INT DEFAULT 1, -- trạng thái
-id_invoice BIGINT , -- id hoá đơn
-)
-insert into exchange_note values
-('ma0001','2002-12-12','2002-12-12',N'không',N'không',DEFAULT,1)
 
 select *
 from
@@ -624,8 +610,7 @@ ALTER TABLE detailed_invoice ADD FOREIGN KEY(id_invoice) REFERENCES invoice(id)
 ALTER TABLE detail_delivery_notes ADD FOREIGN KEY(id_invoice) REFERENCES invoice(id)
 -- phiếu giao hàng chi tiết - phiếu giao hàng
 ALTER TABLE detail_delivery_notes ADD FOREIGN KEY(id_delivery_notes) REFERENCES delivery_notes(id)
--- phiếu đổi hàng - hoá đơn
-ALTER TABLE exchange_note ADD FOREIGN KEY(id_invoice) REFERENCES invoice(id)
+
 
 
 
