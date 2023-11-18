@@ -3,9 +3,7 @@ package com.example.demo.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.time.LocalDate;
-
-@Table(name = "position")
+@Table(name = "ranks")
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
@@ -13,7 +11,7 @@ import java.time.LocalDate;
 @Setter
 @ToString
 @Builder
-public class Position {
+public class Rank {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,21 +21,13 @@ public class Position {
     @Column(name = "code")
     private String code;
 
-    @Column(name = "position_name")
+    @Column(name = "ranks_name")
     private String name;
 
-    @Column(name = "date_create")
-    private LocalDate dateCreate;
-
-    @Column(name = "date_update")
-    private LocalDate dateUpdate;
-
-    @Column(name = "user_create")
-    private String userCreate;
-
-    @Column(name = "user_update")
-    private String userUpdate;
+    @Column(name = "ranks_percent")
+    private Double percent;
 
     @Column(name = "staff_status")
     private Integer status;
+
 }

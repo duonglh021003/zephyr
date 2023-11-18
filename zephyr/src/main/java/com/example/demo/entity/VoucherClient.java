@@ -5,7 +5,7 @@ import lombok.*;
 
 import java.time.LocalDate;
 
-@Table(name = "position")
+@Table(name = "voucher_client")
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
@@ -13,7 +13,7 @@ import java.time.LocalDate;
 @Setter
 @ToString
 @Builder
-public class Position {
+public class VoucherClient {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,8 +23,17 @@ public class Position {
     @Column(name = "code")
     private String code;
 
-    @Column(name = "position_name")
-    private String name;
+    @Column(name = "quantity")
+    private Integer quantity;
+
+    @Column(name = "date_begin")
+    private LocalDate dateBegin;
+
+    @Column(name = "date_end")
+    private LocalDate dateEnd;
+
+    @Column(name = "reduced_price")
+    private Double reducedPrice;
 
     @Column(name = "date_create")
     private LocalDate dateCreate;
@@ -38,6 +47,9 @@ public class Position {
     @Column(name = "user_update")
     private String userUpdate;
 
-    @Column(name = "staff_status")
+    @Column(name = "in_ranks")
+    private Long inRank;
+
+    @Column(name = "voucher_client_status")
     private Integer status;
 }

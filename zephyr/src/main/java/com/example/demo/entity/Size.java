@@ -5,7 +5,7 @@ import lombok.*;
 
 import java.time.LocalDate;
 
-@Table(name = "position")
+@Table(name = "size")
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
@@ -13,7 +13,7 @@ import java.time.LocalDate;
 @Setter
 @ToString
 @Builder
-public class Position {
+public class Size {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,7 +23,7 @@ public class Position {
     @Column(name = "code")
     private String code;
 
-    @Column(name = "position_name")
+    @Column(name = "size_name")
     private String name;
 
     @Column(name = "date_create")
@@ -38,6 +38,7 @@ public class Position {
     @Column(name = "user_update")
     private String userUpdate;
 
-    @Column(name = "staff_status")
+    @Column(name = "size_status")
     private Integer status;
+
 }

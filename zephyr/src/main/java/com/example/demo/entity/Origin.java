@@ -1,19 +1,20 @@
 package com.example.demo.entity;
 
+
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
 
-@Table(name = "position")
+@Table(name = "origin")
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
-@ToString
 @Builder
-public class Position {
+@ToString
+public class Origin {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,7 +24,7 @@ public class Position {
     @Column(name = "code")
     private String code;
 
-    @Column(name = "position_name")
+    @Column(name = "origin_name")
     private String name;
 
     @Column(name = "date_create")
@@ -38,6 +39,7 @@ public class Position {
     @Column(name = "user_update")
     private String userUpdate;
 
-    @Column(name = "staff_status")
+    @Column(name = "origin_status")
     private Integer status;
+
 }

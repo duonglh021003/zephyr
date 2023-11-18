@@ -5,15 +5,15 @@ import lombok.*;
 
 import java.time.LocalDate;
 
-@Table(name = "position")
+@Table(name = "color")
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
-@ToString
 @Builder
-public class Position {
+@ToString
+public class Color {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,7 +23,7 @@ public class Position {
     @Column(name = "code")
     private String code;
 
-    @Column(name = "position_name")
+    @Column(name = "color_name")
     private String name;
 
     @Column(name = "date_create")
@@ -38,6 +38,7 @@ public class Position {
     @Column(name = "user_update")
     private String userUpdate;
 
-    @Column(name = "staff_status")
+    @Column(name = "color_status")
     private Integer status;
+
 }
