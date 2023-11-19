@@ -63,7 +63,7 @@
                             <td>${staff.status == 1 ? "đang hoạt động" : "ngừng hoạt động"}</td>
                             <td>${staff.position.name}</td>
                             <td>
-                                <a class="btn btn-default" href="/zephyr/admin/staff/view-update?id=${staff.id}"  >update</a>
+                                <a class="btn btn-default" href="/zephyr/admin/staff/view-update?id=${staff.id}"  onclick="update()">update</a>
                                 <a class="btn btn-default" href="/zephyr/admin/staff/delete?id=${staff.id}" onclick="if(!confirm('Bạn có muốn xoá?')){return false}else{alert('xoá thành công');}">delete</a>
                             </td>
                         </tr>

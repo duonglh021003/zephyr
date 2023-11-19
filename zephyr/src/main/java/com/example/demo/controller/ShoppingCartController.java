@@ -49,7 +49,7 @@ public class ShoppingCartController {
 
         Client client = (Client) session.getAttribute("clientSession");
         if(String.valueOf(client).equalsIgnoreCase("null")){
-            return "redirect:/zephyr/login";
+            return "redirect:/zephyr/client-null/shopping-cart-null";
         }
         idShopping = client.getShoppingCart().getId();
         List<DetailedShoppingCart> list = detailedShoppingCartService.findAllById(idShopping);

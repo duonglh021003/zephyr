@@ -43,8 +43,9 @@
                     <div style="margin-top: -20px">
                         <section>
                             <option>
-                                <input type="text" name="product" value="${product.id}">
+                                <input type="text" name="product" value="${product.id}" id="product-input">
                             </option>
+                            <input name="id" type="hidden" value="${product.id}">
                             <h3>${product.name}</h3>
                         </section>
                     </div>
@@ -91,13 +92,6 @@
                         </td>
                     </div>
 
-<%--                    <c:forEach items="${listSizeShopDetail}" var="size">--%>
-<%--                        <div style="margin-left: 30px">--%>
-<%--                            <input type="radio" name="size" checked value="${size.id}">--%>
-<%--                            <label  >${size.name}</label>--%>
-<%--                        </div>--%>
-<%--                    </c:forEach>--%>
-
                 </div>
                 <div class="d-flex mb-4">
                     <strong class="text-dark mr-3">Colors:</strong>
@@ -122,23 +116,17 @@
                         <input type="radio" name="color" value="5" class="custom-control-input" id="color-5" name="color">
                         <label class="custom-control-label" for="color-5">Green</label>
                     </div>
-
-<%--                    <c:forEach items="${listColorShopDetail}" var="color">--%>
-<%--                        <div style="margin-left: 23px">--%>
-<%--                            <input type="radio" name="color" checked value="${color.color.id}">--%>
-<%--                            <label  >${color.color.name}</label>--%>
-<%--                        </div>--%>
-<%--                    </c:forEach>--%>
                 </div>
                 <div class="d-flex align-items-center mb-4 pt-2">
                     <div class="input-group quantity mr-3" style="width: 130px;">
                         <div class="input-group-btn">
 
                         </div>
-                        <input type="number" class="form-control bg-secondary border-0 text-center" name="quantity" value="1">
+                        <input type="number" class="form-control bg-secondary border-0 text-center" id="number" name="quantity" value="1">
 
                     </div>
-                    <button class="btn btn-primary px-3" onclick="if(!confirm('Bạn có muốn thêm sản phẩm vào giỏ hàng?')){return false}else{alert('thêm thành công');}"><i class="fa fa-shopping-cart mr-1"></i> Add To
+                    <button class="btn btn-primary px-3"
+                            onclick="if(!confirm('Bạn có muốn thêm sản phẩm này vào giỏ hàng?')){return false}else{alert('thêm thành công');}"><i class="fa fa-shopping-cart mr-1"></i> Add To
                         Cart</button>
                     <c:forEach items="${listProductShopDetail}" var="idProduct">
                     <a style="margin-left: 30px;height: 35px" class="btn btn-sm btn-danger" href="/zephyr/favourite-detail/add?id=${idProduct.id}"
