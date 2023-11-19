@@ -1,19 +1,13 @@
 package com.example.demo.controller;
 
+
 import com.example.demo.entity.Client;
-import com.example.demo.entity.Color;
 import com.example.demo.entity.DetailedShoppingCart;
-import com.example.demo.entity.Product;
 import com.example.demo.entity.ProductDetails;
-import com.example.demo.entity.Size;
-import com.example.demo.repository.ProductDetailsRepository;
 import com.example.demo.service.DetailedShoppingCartService;
 import com.example.demo.service.ProductDetailsService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,24 +31,16 @@ public class DetailShopController {
     public String index(@RequestParam("id") Long id,
                         Model model
     ) {
-
         ProductDetails idProductDetails = productDetailsService.detail(id);
         List<ProductDetails> list = productDetailsService.findAllByProductDetail(id);
-
-
         for (ProductDetails productDetails : list) {
-
-
             model.addAttribute("listProductDetails", productDetailsService.getFindAll());
             model.addAttribute("images", productDetails.getImages());
             model.addAttribute("nameProduct", productDetails.getProduct().getName());
             model.addAttribute("price", productDetails.getPrice());
             model.addAttribute("listSizeShopDetail", productDetailsService.findAllByProductDetail(id));
-
             model.addAttribute("listProductShopDetail", productDetailsService.findAllByProduct(id));
             model.addAttribute("listColorShopDetail", productDetailsService.findAllByProductDetail(id));
-
-
         }
 
 
@@ -68,13 +54,33 @@ public class DetailShopController {
                        @RequestParam("size") Long idSize,
                        @RequestParam("color") Long idColor,
                        @RequestParam("quantity") Integer quantity,
+                       @RequestParam("id") Long id,
                        HttpSession session,
                        Model model) {
 
         LocalDate localDate = LocalDate.now();
         List<ProductDetails> list = productDetailsService.findAllByProductAndColorAndSize(idProduct, idSize, idColor);
+
         Client client = (Client) session.getAttribute("clientSession");
 
+        if (String.valueOf(client).equalsIgnoreCase("null")) {
+
+            ProductDetails details = list.isEmpty() ? null : list.get(0);
+
+            DetailedShoppingCart shoppingCartNull = DetailedShoppingCart.builder()
+                    .quantity(quantity)
+                    .unitPrice(details.getPrice())
+                    .dateCreate(localDate)
+                    .status(1)
+                    .productDetails(details)
+                    .build();
+            detailedShoppingCartService.add(shoppingCartNull);
+
+            System.out.println("aaaaaaaaaaaaaaaaaaa             " + shoppingCartNull.getProductDetails().getProduct().getName());
+            session.setAttribute("clientNullSession", shoppingCartNull);
+
+            return "redirect:/zephyr/shop/shop-detail?id=" + id;
+        }
 
         for (ProductDetails productDetails : list) {
             DetailedShoppingCart detailedShoppingCart = DetailedShoppingCart.builder()
@@ -90,4 +96,38 @@ public class DetailShopController {
 
         return "redirect:/zephyr/shop";
     }
+
+    @GetMapping("/addToCart")
+    public String addToCart(@RequestParam("product") Long idProduct,
+                            @RequestParam("size") Long idSize,
+                            @RequestParam("color") Long idColor,
+                            @RequestParam("quantity") Integer quantity,
+                            HttpSession session) {
+
+        LocalDate localDate = LocalDate.now();
+        List<ProductDetails> list = productDetailsService.findAllByProductAndColorAndSize(idProduct, idSize, idColor);
+
+        Client client = (Client) session.getAttribute("clientSession");
+        if (String.valueOf(client).equalsIgnoreCase("null")) {
+
+            return "redirect:/zephyr/shop/shop-detail?id=";
+        }
+
+        System.out.println("aaaaaaaaaaaaaaaaaaaaaaaa             " + idProduct);
+        System.out.println("bbbbbbbbbbbbbbbbbbbbbbbb             " + idSize);
+        System.out.println("cccccccccccccccccccccccc             " + idColor);
+        System.out.println("dddddddddddddddddddddddd             " + quantity);
+        return "redirect:/zephyr/shop/shop-detail?id=" + 2;
+    }
+
+    @GetMapping("/list")
+    public String list(@RequestParam("productData") List<String> productData, Model model) {
+        System.out.println("eeeeeeeeeeeeeeeeeeeeeeee                " + productData);
+
+
+        System.out.println("eeeeeeeeeeeeeeeeeeeeeeee                " + productData);
+
+        return "redirect:/zephyr/shop/shop-detail?id=" + 2;
+    }
+
 }
