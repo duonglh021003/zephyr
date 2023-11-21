@@ -75,5 +75,24 @@ public interface ProductDetailsRepository extends JpaRepository<ProductDetails, 
 
     Page<ProductDetails> findAllByStatus(int status, Pageable pageable);
 
+    @Query(value = "select *\n" +
+            "from\n" +
+            "product_details pd\n" +
+            "where pd.product_details_status = 1 \n" +
+            "ORDER BY pd.id DESC" , nativeQuery = true)
+    Page<ProductDetails> findAllOrderByIdProductDetail(Pageable pageable);
+
+    @Query(value = "select *\n" +
+            "from\n" +
+            "product_details pd\n" +
+            "where pd.product_details_status = 0 \n" +
+            "ORDER BY pd.id DESC" , nativeQuery = true)
+    List<ProductDetails> findAllOrderByIdProductDetailStatus0();
+
+    @Query(value = "select *\n" +
+            "from\n" +
+            "product_details pd\n" +
+            "where pd.inventory = 0" , nativeQuery = true)
+    List<ProductDetails> findAllByInventory0();
 
 }

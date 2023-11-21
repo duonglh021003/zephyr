@@ -34,6 +34,7 @@ public class DetailVoucherClientController {
         model.addAttribute("listDetailVoucherClient", list);
         model.addAttribute("viewClient", "/WEB-INF/view/include/detail-voucher.jsp");
         return "layout/client";
+
     }
 
 }

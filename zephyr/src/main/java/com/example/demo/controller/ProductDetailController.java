@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Controller
 @RequestMapping(value = "/zephyr/admin/product-detail")
@@ -45,23 +46,24 @@ public class ProductDetailController {
 
     @GetMapping("/index")
     public String index(@RequestParam(defaultValue = "0", name = "page") Integer number,
-                        Model model) {
-        Pageable pageable = PageRequest.of(number, 6);
-        Page<ProductDetails> pageProductDetail = productDetailsService.findAllByStatus(pageable);
-        model.addAttribute("listProductDetail", pageProductDetail);
-        model.addAttribute("view", "/WEB-INF/view/product_detail/index.jsp");
-        return "home/staff";
-    }
-
-    @GetMapping("/view-add")
-    public String viewAdd(Model model, HttpSession session) {
-
+                        Model model,HttpSession session) {
         Staff staff = (Staff) session.getAttribute("staffSession");
         if (String.valueOf(staff).equalsIgnoreCase("null")) {
             return "redirect:/zephyr/admin/login";
         }
         LocalDate localDate = LocalDate.now();
         model.addAttribute("dateUpdate", localDate);
+
+        List<ProductDetails> list = productDetailsService.findAllByInventory0();
+        for(ProductDetails details : list){
+            details.setStatus(0);
+            productDetailsService.update(details, details.getId());
+        }
+
+        Pageable pageable = PageRequest.of(number, 10);
+        Page<ProductDetails> pageProductDetail = productDetailsService.findAllOrderByIdProductDetail(pageable);
+        model.addAttribute("listProductDetail", pageProductDetail);
+        model.addAttribute("listProductDetailStatus0", productDetailsService.findAllOrderByIdProductDetailStatus0());
         String staffName = (String) session.getAttribute("staffSession.name");
         model.addAttribute("staffSession", staffName);
         model.addAttribute("productDetail", new ProductDetails());
@@ -70,14 +72,66 @@ public class ProductDetailController {
         model.addAttribute("listOrigin", originSerivce.getAll());
         model.addAttribute("listColor", colorService.getAll());
         model.addAttribute("listSize", sizeService.getAll());
-        model.addAttribute("view", "/WEB-INF/view/product_detail/view-add.jsp");
+        model.addAttribute("view", "/WEB-INF/view/product_detail/index.jsp");
         return "home/staff";
     }
 
     @PostMapping("/add")
     public String add(@Valid @ModelAttribute("productDetail") ProductDetails productDetails) {
-
         productDetailsService.add(productDetails);
         return "redirect:/zephyr/admin/product-detail/index";
     }
+
+    @GetMapping("/delete")
+    public String delete(@RequestParam("id") Long id){
+
+        ProductDetails details = productDetailsService.detail(id);
+        details.setStatus(0);
+        productDetailsService.update(details, details.getId());
+        return "redirect:/zephyr/admin/product-detail/index";
+    }
+
+    @GetMapping("/restore")
+    public String restore(@RequestParam("id") Long id,
+                          @RequestParam("inventory") Integer inventory){
+        ProductDetails details = productDetailsService.detail(id);
+        details.setInventory(inventory);
+        details.setStatus(1);
+        productDetailsService.update(details, details.getId());
+        return "redirect:/zephyr/admin/product-detail/index";
+    }
+
+    @GetMapping("/view-update")
+    public String viewupdate(@RequestParam("id") Long id,
+                             Model model,
+                             HttpSession session) {
+
+        LocalDate localDate = LocalDate.now();
+        model.addAttribute("dateUpdate", localDate);
+        String staffName = (String) session.getAttribute("staffSession.name");
+        model.addAttribute("staffSession", staffName);
+
+        ProductDetails  productDetails = productDetailsService.detail(id);
+        model.addAttribute("productDetail", productDetails);
+        model.addAttribute("listProduct", productService.getAll());
+        model.addAttribute("listOrigin", originSerivce.getAll());
+        model.addAttribute("listColor", colorService.getAll());
+        model.addAttribute("listSize", sizeService.getAll());
+        model.addAttribute("view", "/WEB-INF/view/product_detail/view-update.jsp");
+        return "home/staff";
+    }
+
+    @PostMapping("/update")
+    public String update(@Valid @ModelAttribute("productDetail") ProductDetails productDetails,
+                         @RequestParam("id") Long id,
+                         HttpSession session, Model model
+    ) {
+
+        String staffName = (String) session.getAttribute("staffSession.name");
+        model.addAttribute("staffSession", staffName);
+        productDetailsService.update(productDetails, id);
+        return "redirect:/zephyr/admin/product-detail/index";
+    }
+
+
 }

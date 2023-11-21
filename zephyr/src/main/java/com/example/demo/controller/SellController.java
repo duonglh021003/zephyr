@@ -16,6 +16,12 @@ import com.example.demo.service.ProductDetailsService;
 import com.example.demo.service.SizeService;
 import com.example.demo.service.VoucherService;
 import jakarta.servlet.http.HttpSession;
+import org.apache.poi.xwpf.usermodel.ParagraphAlignment;
+import org.apache.poi.xwpf.usermodel.XWPFDocument;
+import org.apache.poi.xwpf.usermodel.XWPFParagraph;
+import org.apache.poi.xwpf.usermodel.XWPFRun;
+import org.apache.poi.xwpf.usermodel.XWPFTable;
+import org.apache.poi.xwpf.usermodel.XWPFTableRow;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,9 +30,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.ZoneId;
+import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
@@ -385,7 +395,7 @@ public class SellController {
                                 @RequestParam("clientGiveMoney") Double clientGiveMoney,
                                 @RequestParam("returnClientMoney") Double returnClientMoney,
                                 @RequestParam("note") String note,
-                                Model model, HttpSession session){
+                                Model model, HttpSession session) {
 
         Invoice invoice = invoiceService.detailCode(code);
 
@@ -398,10 +408,151 @@ public class SellController {
         invoice.setStatus(5);
         invoiceService.update(invoice, invoice.getId());
 
-        Voucher voucher = voucherService.detail(invoice.getVoucher().getId());
-        voucher.setQuantity(voucher.getQuantity() - 1);
-        voucherService.update(voucher, voucher.getId());
-
+        exportToWord(invoice);
         return "redirect:/zephyr/admin/sell/index";
     }
+
+    public void exportToWord(Invoice invoice) {
+        List<DetailedInvoice> list = detailedInvoiceService.findAllByIdInvoice(invoice.getId());
+
+        XWPFDocument document = new XWPFDocument();
+
+        XWPFParagraph title1 = document.createParagraph();
+        title1.setAlignment(ParagraphAlignment.CENTER);
+        XWPFRun titleRun1 = title1.createRun();
+        titleRun1.setText("Z E P H Y R");
+        titleRun1.setBold(true);
+        titleRun1.setFontSize(30);
+        titleRun1.setColor("00FF00");
+
+        document.createParagraph().setSpacingAfter(10);
+
+        XWPFParagraph infoParagraphZEPhYR = document.createParagraph();
+        XWPFRun infoRunZ = infoParagraphZEPhYR.createRun();
+        infoRunZ.setText("................................................................................" +
+                "........................................................................................");
+
+        document.createParagraph().setSpacingAfter(10);
+
+        XWPFParagraph infoParagraphAddress = document.createParagraph();
+        infoParagraphAddress.setAlignment(ParagraphAlignment.CENTER);
+        XWPFRun infoRunAddress = infoParagraphAddress.createRun();
+        infoRunAddress.setText("Toà nhà FPT Polytechnic, Phố Trịnh Văn Bô, Nam Từ Liêm, Hà Nội");
+
+        document.createParagraph().setSpacingAfter(20);
+
+        XWPFParagraph title = document.createParagraph();
+        title.setAlignment(ParagraphAlignment.CENTER);
+        XWPFRun titleRun = title.createRun();
+        titleRun.setText("Hóa đơn bán hàng");
+        titleRun.setBold(true);
+        titleRun.setFontSize(16);
+
+        document.createParagraph().setSpacingAfter(20);
+
+        XWPFParagraph infoParagraph = document.createParagraph();
+        XWPFRun infoRun = infoParagraph.createRun();
+        infoRun.setText("Hóa đơn: " + invoice.getCode() + "\t\t\t\t\t\t\t");
+        infoRun.setText("Ngày Bán: " + invoice.getDateCreate() + " " + invoice.getHourMinute());
+
+        XWPFParagraph infoParagraph1 = document.createParagraph();
+        XWPFRun infoRun1 = infoParagraph1.createRun();
+        infoRun1.setText("NVBH: " + invoice.getStaff().getId() + "\t\t\t\t");
+
+        XWPFTable table = document.createTable();
+        XWPFTableRow row1 = table.getRow(0);
+        row1.getCell(0).setText("Mặt hàng" + "\t\t");
+        row1.addNewTableCell().setText("Đơn giá" + "\t\t");
+        row1.addNewTableCell().setText("Số lượng" + "\t\t");
+        row1.addNewTableCell().setText("Thành Tiền");
+
+        for (DetailedInvoice  detailedInvoice : list) {
+            XWPFTableRow row = table.createRow();
+            row.getCell(0).setText(detailedInvoice.getProductDetails().getProduct().getName() + "( " +
+                    detailedInvoice.getProductDetails().getSize().getName() + ", " +
+                    detailedInvoice.getProductDetails().getColor().getName() + " )" + "\t\t");
+            row.getCell(1).setText(detailedInvoice.getProductDetails().getPrice() + "00" + "\t\t");
+            row.getCell(2).setText(detailedInvoice.getQuantity() + "\t\t");
+            row.getCell(3).setText(detailedInvoice.getCapitalSum() + "00");
+        }
+
+        document.createParagraph().setSpacingAfter(10);
+
+        XWPFParagraph infoParagraphIntomoney = document.createParagraph();
+        XWPFRun infoRunIntomoney = infoParagraphIntomoney.createRun();
+        infoRunIntomoney.setText("................................................................................" +
+                "........................................................................................");
+
+        XWPFParagraph infoParagraph3 = document.createParagraph();
+        infoParagraph3.setAlignment(ParagraphAlignment.RIGHT);
+        XWPFRun infoRun3 = infoParagraph3.createRun();
+        infoRun3.setText("Tổng tiền hóa đơn: " );
+        infoRun3.setText("\t\t" + invoice.getTotalInvoice() + "00");
+
+        if(!(String.valueOf(invoice.getPoint()).equalsIgnoreCase("0.0"))) {
+            XWPFParagraph infoParagraph4 = document.createParagraph();
+            infoParagraph4.setAlignment(ParagraphAlignment.RIGHT);
+            XWPFRun infoRun4 = infoParagraph4.createRun();
+            infoRun4.setText("Điểm sử dụng: ");
+            infoRun4.setText("\t\t\t" + "-" + invoice.getPoint() + "00");
+        }
+
+        if(!(String.valueOf(invoice.getVoucher()).equalsIgnoreCase("null"))){
+            XWPFParagraph infoParagraph5 = document.createParagraph();
+            infoParagraph5.setAlignment(ParagraphAlignment.RIGHT);
+            XWPFRun infoRun5 = infoParagraph5.createRun();
+            infoRun5.setText("Giảm giá: " );
+            infoRun5.setText("\t\t\t" + "-" + invoice.getVoucher().getReducedPrice() + "00");
+        }
+
+        XWPFParagraph infoParagraph10 = document.createParagraph();
+        infoParagraph10.setAlignment(ParagraphAlignment.RIGHT);
+        XWPFRun infoRun10 = infoParagraph10.createRun();
+        infoRun10.setText("Thành tiền: " );
+        infoRun10.setText("\t\t\t" + invoice.getIntoMoney() + "00");
+
+        XWPFParagraph infoParagraph6 = document.createParagraph();
+        infoParagraph6.setAlignment(ParagraphAlignment.RIGHT);
+        XWPFRun infoRun6 = infoParagraph6.createRun();
+        infoRun6.setText("Tổng tiền khách trả: " );
+        infoRun6.setText("\t\t" + invoice.getClientGiveMoney() + "00");
+
+        XWPFParagraph infoParagraph7 = document.createParagraph();
+        infoParagraph7.setAlignment(ParagraphAlignment.RIGHT);
+        XWPFRun infoRun7 = infoParagraph7.createRun();
+        infoRun7.setText("Tổng tiền trả lại: " );
+        infoRun7.setText("\t\t" + invoice.getReturnClientMoney() + "00");
+
+        document.createParagraph().setSpacingAfter(20);
+
+        XWPFParagraph infoParagraphENDIntomoney = document.createParagraph();
+        XWPFRun infoRunENDIntomoney = infoParagraphENDIntomoney.createRun();
+        infoRunENDIntomoney.setText("................................................................................" +
+                "........................................................................................");
+
+        document.createParagraph().setSpacingAfter(10);
+
+        XWPFParagraph infoParagraph8 = document.createParagraph();
+        infoParagraph8.setAlignment(ParagraphAlignment.CENTER);
+        XWPFRun infoRun8 = infoParagraph8.createRun();
+        infoRun8.setText("CẢM ƠN QUÝ KHÁCH VÀ HẸN GẶP LẠI " );
+
+        XWPFParagraph infoParagraph9 = document.createParagraph();
+        infoParagraph9.setAlignment(ParagraphAlignment.CENTER);
+        XWPFRun infoRun9 = infoParagraph9.createRun();
+        infoRun9.setText("Hotline: 0898629635 - Website: www.zephyr.com" );
+
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmss");
+        String timestamp = sdf.format(new Date());
+        String fileName = "invoice_" + timestamp + ".docx";
+
+        try (FileOutputStream out = new FileOutputStream("C:\\Users\\BXT\\Desktop\\invoice\\" + fileName)) {
+            document.write(out);
+            System.out.println("Hóa đơn đã được xuất ra file Word thành công: " + fileName);
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("Lỗi khi xuất hóa đơn ra file Word.");
+        }
+    }
+
 }

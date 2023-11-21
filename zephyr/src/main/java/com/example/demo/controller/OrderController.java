@@ -23,6 +23,9 @@ import com.example.demo.service.ShoppingCartService;
 import com.example.demo.service.VoucherClientService;
 import com.example.demo.service.VoucherService;
 import jakarta.servlet.http.HttpSession;
+import org.apache.poi.xwpf.usermodel.XWPFDocument;
+import org.apache.poi.xwpf.usermodel.XWPFParagraph;
+import org.apache.poi.xwpf.usermodel.XWPFRun;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,10 +34,16 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.ZoneId;
+import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
@@ -231,7 +240,6 @@ public class OrderController {
 
         clientService.update(client, client.getId());
         invoiceService.update(invoice, invoice01.getId());
-
         return "redirect:/zephyr/shop";
     }
 
@@ -329,79 +337,6 @@ public class OrderController {
         return "redirect:/zephyr/shop/order";
     }
 
-
-//    import java.util.*;
-//import java.time.LocalTime;
-//import java.time.ZoneId;
-//
-//
-//    public class Main {
-//        public static void main(String[] args) throws Exception {
-//            // Your code here!
-//
-//            ZoneId zoneId = ZoneId.of("Asia/Ho_Chi_Minh");
-//
-//// Lấy giờ và phút hiện tại theo múi giờ Việt Nam
-//            LocalTime currentTime = LocalTime.now(zoneId);
-//
-//// In giờ và phút hiện tại
-//            System.out.println(currentTime.getHour() + ":" + currentTime.getMinute());
-//
-//        }
-//    }
-
-    @GetMapping("/order/by-now")
-    public String byNow(@RequestParam("product") Long idProduct,
-                        @RequestParam("size") Long idSize,
-                        @RequestParam("color") Long idColor,
-                        @RequestParam("quantity") Integer quantity,
-                        Model model, HttpSession session) {
-
-        Double intoMoney = 0.0;
-        Double total = 0.0;
-        Double price = 0.0;
-        Double getCapitalSum = 0.0;
-
-        List<ProductDetails> list = productDetailsService.findAllByProductAndColorAndSize(idProduct, idSize, idColor);
-        Client client = (Client) session.getAttribute("clientSession");
-        if (String.valueOf(client).equalsIgnoreCase("null")) {
-            return "redirect:/zephyr/login";
-        }
-        List<Address> addresses = clientService.findAllByIdAndStatus(client.getId());
-        Address address = addresses.isEmpty() ? null : addresses.get(0);
-        intoMoney = total - 15.00;
-        Invoice invoice = Invoice.builder()
-                .code(generateRandomString())
-                .dateCreate(localDate)
-                .totalInvoice(total)
-                .point(0.00)
-                .shippingMoney(15.00)
-                .intoMoney(intoMoney)
-                .status(1)
-                .client(client)
-                .address(address)
-                .build();
-        invoiceService.add(invoice);
-
-        for (ProductDetails productDetails : list) {
-            getCapitalSum = quantity * productDetails.getPrice();
-            price = productDetails.getPrice();
-
-            DetailedInvoice detailedInvoice = DetailedInvoice.builder()
-                    .quantity(quantity)
-                    .unitPrice(price)
-                    .capitalSum(getCapitalSum)
-                    .status(1)
-                    .invoice(invoice)
-                    .productDetails(productDetails)
-                    .build();
-
-        }
-
-
-        model.addAttribute("viewClient", "/WEB-INF/view/include/order.jsp");
-        return "layout/client";
-    }
 
 
 }

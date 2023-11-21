@@ -26,6 +26,16 @@ public class ProductDetailsServiceImpl implements ProductDetailsService {
     }
 
     @Override
+    public Page<ProductDetails> findAllOrderByIdProductDetail(Pageable pageable) {
+        return productDetailsRepository.findAllOrderByIdProductDetail(pageable);
+    }
+
+    @Override
+    public List<ProductDetails> findAllOrderByIdProductDetailStatus0() {
+        return productDetailsRepository.findAllOrderByIdProductDetailStatus0();
+    }
+
+    @Override
     public List<ProductDetails> findAllByAll(Double minPrice, Double maxPrice, String nameColor, String nameSize) {
         return productDetailsRepository.findAllByAll(minPrice, maxPrice, nameColor, nameSize);
     }
@@ -46,8 +56,18 @@ public class ProductDetailsServiceImpl implements ProductDetailsService {
     }
 
     @Override
+    public void delete(Long id) {
+        productDetailsRepository.deleteById(id);
+    }
+
+    @Override
     public List<ProductDetails> getFindAll() {
         return productDetailsRepository.findAll();
+    }
+
+    @Override
+    public List<ProductDetails> findAllByInventory0() {
+        return productDetailsRepository.findAllByInventory0();
     }
 
     @Override
