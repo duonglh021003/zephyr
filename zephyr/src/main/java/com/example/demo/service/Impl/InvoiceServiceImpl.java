@@ -4,6 +4,9 @@ import com.example.demo.entity.Client;
 import com.example.demo.entity.Invoice;
 import com.example.demo.repository.InvoiceRepository;
 import com.example.demo.service.InvoiceService;
+import org.apache.poi.xwpf.usermodel.XWPFDocument;
+import org.apache.poi.xwpf.usermodel.XWPFParagraph;
+import org.apache.poi.xwpf.usermodel.XWPFRun;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -191,6 +194,10 @@ public class InvoiceServiceImpl implements InvoiceService {
     public List<Integer> findAllStatisticalQuantitySearchYear(Integer year) {
         return invoiceRepository.findAllStatisticalQuantitySearchYear(year);
     }
+
+
+
+
 
 
 }

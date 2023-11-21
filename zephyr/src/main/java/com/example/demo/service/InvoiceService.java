@@ -73,4 +73,7 @@ public interface InvoiceService {
     List<Invoice> findAllStatisticalInvoiceSearchYear(Integer year);
 
     List<Integer> findAllStatisticalQuantitySearchYear(Integer year);
+
+
+
 }

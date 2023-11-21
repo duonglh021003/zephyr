@@ -16,6 +16,10 @@ public interface ProductDetailsService {
 
     Page<ProductDetails> getAll(Pageable pageable);
 
+    Page<ProductDetails> findAllOrderByIdProductDetail(Pageable pageable);
+
+    List<ProductDetails> findAllOrderByIdProductDetailStatus0();
+
     List<ProductDetails> findAllByAll(Double minPrice, Double maxPrice, String nameColor, String nameSize);
 
     ProductDetails detail(Long id);
@@ -24,7 +28,11 @@ public interface ProductDetailsService {
 
     void update(ProductDetails productDetails, Long id);
 
+    void delete(Long id);
+
     List<ProductDetails> getFindAll();
+
+    List<ProductDetails> findAllByInventory0();
 
     List<ProductDetails> findAllByProductDetail(Long id);
 
