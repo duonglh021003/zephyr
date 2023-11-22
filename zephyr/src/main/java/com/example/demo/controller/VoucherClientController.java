@@ -2,15 +2,12 @@ package com.example.demo.controller;
 
 import com.example.demo.entity.Client;
 import com.example.demo.entity.DetailVoucherClient;
-import com.example.demo.entity.ProductDetails;
 import com.example.demo.entity.VoucherClient;
 import com.example.demo.repository.DetailVoucherClientRepository;
 import com.example.demo.service.DetailVoucherClientService;
 import com.example.demo.service.VoucherClientService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -35,6 +32,7 @@ public class VoucherClientController {
     private DetailVoucherClientRepository repository;
 
     private static final Random random = new Random();
+
     public static String generateRandomStringDetailVoucherClient() {
         StringBuilder sb = new StringBuilder(11);
         sb.append("voucher");
@@ -47,7 +45,6 @@ public class VoucherClientController {
 
     @GetMapping()
     public String index(Model model, HttpSession session) {
-
         Client client = (Client) session.getAttribute("clientSession");
         if (String.valueOf(client).equalsIgnoreCase("null")) {
             return "redirect:/zephyr/login";
@@ -90,7 +87,6 @@ public class VoucherClientController {
             voucherClientService.update(voucherClient, voucherClient.getId());
             return "redirect:/zephyr/voucher";
         } else {
-            System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
             model.addAttribute("errorMessage", "bạn đã có hoặc đã sử phiếu này rồi!!! vui lòng chọn phiếu giảm giá khác.");
         }
 

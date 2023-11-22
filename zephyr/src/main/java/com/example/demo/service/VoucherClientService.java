@@ -1,6 +1,8 @@
 package com.example.demo.service;
 
 import com.example.demo.entity.VoucherClient;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 
@@ -19,4 +21,8 @@ public interface VoucherClientService {
     VoucherClient detail(Long id);
 
     List<VoucherClient> findAllIdClientDuplicate(Long id, Long client);
+
+    Page<VoucherClient> findAllByStatus1(Pageable pageable);
+
+    List<VoucherClient> findAllByStatus0();
 }

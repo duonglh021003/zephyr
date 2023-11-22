@@ -272,11 +272,11 @@
                         <td>${i.index+1}</td>
                         <td class="align-middle"><img src="/assets/images/client/${productDetailStatus0.images}" alt="" >
                                 ${productDetailStatus0.product.name}(${productDetailStatus0.size.name}, ${productDetailStatus0.color.name})</td>
-                        <td class="align-middle">${productDetailStatus0.inventory}</td>
                         <td class="align-middle">
                             <input type="hidden" name="id" value="${productDetailStatus0.id}">
                             <input type="number" style="width: 70px" name="inventory" value="${productDetailStatus0.inventory}" />
                         </td>
+                        <td class="align-middle">${productDetailStatus0.importPrice}00</td>
                         <td class="align-middle">${productDetailStatus0.price}00</td>
                         <td class="align-middle">${productDetailStatus0.dateCreate}</td>
                         <td class="align-middle">${productDetailStatus0.dateUpdate}</td>

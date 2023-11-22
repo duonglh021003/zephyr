@@ -62,4 +62,18 @@ public class VoucherClient {
 
     @Column(name = "voucher_client_status")
     private Integer status;
+
+    public String getRankVoucher(){
+        String inRanks;
+        if(inRank == 1){
+            inRanks = "Đồng hành";
+        }else if(inRank == 2){
+            inRanks = "Thân thiết";
+        }else if(inRank == 3){
+            inRanks = "Tri kỷ";
+        }else {
+            inRanks = "Vip";
+        }
+        return inRanks;
+    }
 }
