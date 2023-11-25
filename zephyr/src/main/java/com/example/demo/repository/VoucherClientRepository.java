@@ -17,7 +17,7 @@ public interface VoucherClientRepository extends JpaRepository<VoucherClient, Lo
     @Query(value = "select vc.*\n" +
             "from\n" +
             "voucher_client vc \n" +
-            "where vc.in_ranks = ?1", nativeQuery = true)
+            "where vc.in_ranks <= ?1", nativeQuery = true)
     List<VoucherClient> findAllInRank(@Param("rank") Long rank);
 
     @Query(value = "select vc.*\n" +

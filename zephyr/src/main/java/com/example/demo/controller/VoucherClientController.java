@@ -51,6 +51,7 @@ public class VoucherClientController {
         }
         List<VoucherClient> list = voucherClientService.findAllByInRank(client.getRank().getId());
 
+        System.out.println("aaaaaaaaaaaaaa          "+client.getRank().getId());
         model.addAttribute("listVoucherClient", list);
         model.addAttribute("viewClient", "/WEB-INF/view/include/voucher.jsp");
         return "layout/client";

@@ -54,7 +54,7 @@
                                 <td class="align-middle">${voucherClient.dateEnd}</td>
                                 <td class="align-middle">${voucherClient.reducedPrice}</td>
                                 <td class="align-middle">${voucherClient.dateCreate}</td>
-                                <td class="align-middle">${voucherClient.inRank}</td>
+                                <td class="align-middle">${voucherClient.getRankVoucher()}</td>
                                 <td class="align-middle">${voucherClient.status == 1 ? "đang hoạt động" : "ngừng hoạt động"}</td>
                                 <td class="align-middle">
                                     <a  href="/zephyr/voucher/add?id=${voucherClient.id}" methods="get"
