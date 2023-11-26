@@ -215,5 +215,10 @@ public class InvoiceServiceImpl implements InvoiceService {
         return invoiceRepository.findAllStatisticalQuantitySearchMonth(month, year);
     }
 
+    @Override
+    public String findMaxCodeOrder() {
+        return invoiceRepository.findMaxCodeOrder();
+    }
+
 
 }

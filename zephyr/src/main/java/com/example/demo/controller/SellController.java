@@ -65,17 +65,18 @@ public class SellController {
     @Autowired
     private ColorService colorService;
 
+    private String incrementCodeOrder(String codeOrder) {
+        String prefix = codeOrder.substring(0, 2);
+        int number = Integer.parseInt(codeOrder.substring(2));
+        number++;
+        String nextCodeOrder = String.format("%s%05d", prefix, number);
+        return nextCodeOrder;
+    }
 
-    private static final Random random = new Random();
-
-    public static String generateRandomString() {
-        StringBuilder sb = new StringBuilder(10);
-        sb.append("ZN");
-        for (int i = 0; i < 5; i++) {
-            int rndNum = random.nextInt(10);
-            sb.append(rndNum);
-        }
-        return sb.toString();
+    private String getNextCode() {
+        String currentCodeOrder = invoiceService.findMaxCodeOrder();
+        String nextCodeOrder = incrementCodeOrder(currentCodeOrder);
+        return nextCodeOrder;
     }
 
     @GetMapping("/index")
@@ -109,7 +110,7 @@ public class SellController {
         int count = list.size();
         for (int i = 0; count < 5; i++) {
             Invoice invoice = Invoice.builder()
-                    .code(generateRandomString())
+                    .code(getNextCode())
                     .hourMinute(currentTime.getHour() + ":" + currentTime.getMinute())
                     .dateCreate(localDate)
                     .status(0)
@@ -413,6 +414,12 @@ public class SellController {
         invoiceService.update(invoice, invoice.getId());
 
         exportToWord(invoice);
+        return "redirect:/zephyr/admin/sell/index";
+    }
+
+    @GetMapping("/invoice/delete")
+    public String invoiceDelete(@RequestParam("id") Long id){
+        invoiceService.delete(id);
         return "redirect:/zephyr/admin/sell/index";
     }
 

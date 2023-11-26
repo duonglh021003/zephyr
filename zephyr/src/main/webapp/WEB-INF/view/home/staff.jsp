@@ -108,10 +108,10 @@
                 <div class="collapse" id="product">
                     <ul class="nav flex-column sub-menu">
                         <li class="nav-item"><a class="nav-link" href="/zephyr/admin/product-detail/index"> index </a></li>
-                        <li class="nav-item"><a class="nav-link" href="/zephyr/admin/product-detail/view-add"> index product </a></li>
-                        <li class="nav-item"><a class="nav-link" href="/zephyr/admin/product-detail/view-add"> index origin </a></li>
-                        <li class="nav-item"><a class="nav-link" href="/zephyr/admin/product-detail/view-add"> index size </a></li>
-                        <li class="nav-item"><a class="nav-link" href="/zephyr/admin/product-detail/view-add"> index color </a></li>
+                        <li class="nav-item"><a class="nav-link" href="/zephyr/admin/product/index"> index product </a></li>
+                        <li class="nav-item"><a class="nav-link" href="/zephyr/admin/origin/index"> index origin </a></li>
+                        <li class="nav-item"><a class="nav-link" href="/zephyr/admin/size/index"> index size </a></li>
+                        <li class="nav-item"><a class="nav-link" href="/zephyr/admin/color/index"> index color </a></li>
                     </ul>
                 </div>
             </li>

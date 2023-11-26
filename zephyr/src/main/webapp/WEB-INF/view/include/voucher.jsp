@@ -62,7 +62,6 @@
                                         <img class="img-xs rounded-circle" style="width: 20px;height: 20px;"
                                              src="${pageContext.request.contextPath}/assets/images/client/voucher.png" alt="">
                                     </a>
-
                                 </td>
                             </tr>
                         </c:forEach>

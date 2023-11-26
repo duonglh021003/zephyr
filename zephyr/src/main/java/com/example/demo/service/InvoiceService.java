@@ -82,5 +82,6 @@ public interface InvoiceService {
 
     List<Integer> findAllStatisticalQuantitySearchMonth(Integer month, Integer year);
 
+    String findMaxCodeOrder();
 
 }

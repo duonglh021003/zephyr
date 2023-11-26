@@ -221,4 +221,7 @@ public interface InvoiceRepository extends JpaRepository<Invoice, Long> {
     List<Invoice> findAllByStaffStatus0(@Param("idStaff") Long idStaff);
 
     // END SELL OFF
+
+    @Query(value = "select max(code) from invoice", nativeQuery = true)
+    String findMaxCodeOrder();
 }

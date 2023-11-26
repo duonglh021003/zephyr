@@ -36,15 +36,6 @@ public class Voucher {
     @Column(name = "voucher_name")
     private String name;
 
-    @Column(name = "quantity")
-    private Integer quantity;
-
-    @Column(name = "date_begin")
-    private LocalDate dateBegin;
-
-    @Column(name = "date_end")
-    private LocalDate dateEnd;
-
     @Column(name = "minimum_price")
     private Double minPrice;
 

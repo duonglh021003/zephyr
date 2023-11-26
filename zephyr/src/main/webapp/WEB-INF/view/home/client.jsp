@@ -22,14 +22,13 @@
                 <div class="carousel-inner">
                     <div class="carousel-item position-relative active" style="height: 430px;">
                         <img class="position-absolute w-100 h-100"
-                             src="${pageContext.request.contextPath}/assets/img/carousel-1.jpg"
+                             src="${pageContext.request.contextPath}/assets/img/carousel-2.jpg"
                              style="object-fit: cover;">
                         <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
                             <div class="p-3" style="max-width: 700px;">
-                                <h1 class="display-4 text-white mb-3 animate__animated animate__fadeInDown">Men
+                                <h1 class="display-4 text-white mb-3 animate__animated animate__fadeInDown">Female
                                     Fashion</h1>
-                                <p class="mx-md-5 px-5 animate__animated animate__bounceIn">Lorem rebum magna amet lorem
-                                    magna erat diam stet. Sadips duo stet amet amet ndiam elitr ipsum diam</p>
+
                                 <a class="btn btn-outline-light py-2 px-4 mt-3 animate__animated animate__fadeInUp"
                                    href="#">Shop Now</a>
                             </div>
@@ -37,14 +36,12 @@
                     </div>
                     <div class="carousel-item position-relative" style="height: 430px;">
                         <img class="position-absolute w-100 h-100"
-                             src="${pageContext.request.contextPath}/assets/img/carousel-2.jpg"
+                             src="${pageContext.request.contextPath}/assets/img/offer-1.jpg"
                              style="object-fit: cover;">
                         <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
                             <div class="p-3" style="max-width: 700px;">
-                                <h1 class="display-4 text-white mb-3 animate__animated animate__fadeInDown">Women
+                                <h1 class="display-4 text-white mb-3 animate__animated animate__fadeInDown">Female
                                     Fashion</h1>
-                                <p class="mx-md-5 px-5 animate__animated animate__bounceIn">Lorem rebum magna amet lorem
-                                    magna erat diam stet. Sadips duo stet amet amet ndiam elitr ipsum diam</p>
                                 <a class="btn btn-outline-light py-2 px-4 mt-3 animate__animated animate__fadeInUp"
                                    href="#">Shop Now</a>
                             </div>
@@ -56,10 +53,8 @@
                              style="object-fit: cover;">
                         <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
                             <div class="p-3" style="max-width: 700px;">
-                                <h1 class="display-4 text-white mb-3 animate__animated animate__fadeInDown">Kids
+                                <h1 class="display-4 text-white mb-3 animate__animated animate__fadeInDown">Female
                                     Fashion</h1>
-                                <p class="mx-md-5 px-5 animate__animated animate__bounceIn">Lorem rebum magna amet lorem
-                                    magna erat diam stet. Sadips duo stet amet amet ndiam elitr ipsum diam</p>
                                 <a class="btn btn-outline-light py-2 px-4 mt-3 animate__animated animate__fadeInUp"
                                    href="#">Shop Now</a>
                             </div>
@@ -109,7 +104,7 @@
         <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
             <div class="d-flex align-items-center bg-light mb-4" style="padding: 30px;">
                 <h1 class="fas fa-exchange-alt text-primary m-0 mr-3"></h1>
-                <h5 class="font-weight-semi-bold m-0">14-Day Return</h5>
+                <h5 class="font-weight-semi-bold m-0">7-Day Return</h5>
             </div>
         </div>
         <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
