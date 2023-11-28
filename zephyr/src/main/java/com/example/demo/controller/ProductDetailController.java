@@ -53,7 +53,6 @@ public class ProductDetailController {
         }
         LocalDate localDate = LocalDate.now();
         model.addAttribute("dateUpdate", localDate);
-
         List<ProductDetails> list = productDetailsService.findAllByInventory0();
         for(ProductDetails details : list){
             details.setStatus(0);

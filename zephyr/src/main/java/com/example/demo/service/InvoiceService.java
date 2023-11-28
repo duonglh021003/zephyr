@@ -22,6 +22,8 @@ public interface InvoiceService {
 
     List<Invoice> findAllByStatus0();
 
+    List<Invoice> findAllByStaffStatus0(Long idStaff);
+
     List<Invoice> findByInvoiceStatusAll(Long id);
 
     List<Invoice> findByInvoiceStatus1(Long id);
@@ -74,6 +76,12 @@ public interface InvoiceService {
 
     List<Integer> findAllStatisticalQuantitySearchYear(Integer year);
 
+    List<Double> findAllStatisticalSearchMonth(Integer month, Integer year);
 
+    List<Invoice> findAllStatisticalInvoiceSearchMonth(Integer month, Integer year);
+
+    List<Integer> findAllStatisticalQuantitySearchMonth(Integer month, Integer year);
+
+    String findMaxCodeOrder();
 
 }

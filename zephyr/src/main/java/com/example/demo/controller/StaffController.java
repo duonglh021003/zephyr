@@ -1,10 +1,12 @@
 package com.example.demo.controller;
 
+import com.example.demo.config.GoogleUtils;
 import com.example.demo.entity.Staff;
 import com.example.demo.repository.PositionRepository;
 import com.example.demo.service.StaffService;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
+import jakarta.validation.Validation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -18,6 +20,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Random;
 
@@ -30,7 +33,6 @@ public class StaffController {
 
     @Autowired
     private PositionRepository positionRepository;
-
 
 
     @GetMapping("/index")
@@ -82,8 +84,6 @@ public class StaffController {
                       BindingResult result,
                       Model model,
                       HttpSession session) {
-
-
         if (result.hasErrors()) {
             LocalDate localDate = LocalDate.now();
             model.addAttribute("dateUpdate", localDate);

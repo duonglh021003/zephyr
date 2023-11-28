@@ -3,7 +3,7 @@ package com.example.demo.controller;
 import com.example.demo.entity.Client;
 import com.example.demo.entity.GooglePojo;
 import com.example.demo.service.ClientService;
-import config.GoogleUtils;
+import com.example.demo.config.GoogleUtils;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

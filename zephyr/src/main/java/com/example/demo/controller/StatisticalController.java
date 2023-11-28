@@ -152,6 +152,41 @@ public class StatisticalController {
         return "home/staff";
     }
 
+    @GetMapping("/revenue-in-month/search")
+    public String searchMonth(@RequestParam("month") Integer month,
+                              @RequestParam("year") Integer year,
+                             Model model){
+
+        List<Integer> listDay = invoiceService.findAllStatisticalProductDay();
+        Integer productDay = listDay.get(0);
+        List<Double> listDayPresent = invoiceService.findAllStatisticalIntoMoneyDAYPresent();
+        Double intoMoneyDayPresent = listDayPresent.get(0);
+
+        List<Double> listMonthPresent = invoiceService.findAllStatisticalSearchMonth(month, year);
+        Double intoMoneyMonthPresent = listMonthPresent.get(0);
+        List<Integer> listQuantityMonthPresent = invoiceService.findAllStatisticalQuantitySearchMonth(month, year);
+        Integer quantityMonthPresent = listQuantityMonthPresent.get(0);
+
+        List<Double> listYearPresent = invoiceService.findAllStatisticalIntoMoneyYEARPresent();
+        Double intoMoneyYearPresent = listYearPresent.get(0);
+        List<Integer> listQuantityYearPresent = invoiceService.findAllStatisticalQuantityYEARPresent();
+        Integer quantityYearPresent = listQuantityYearPresent.get(0);
+
+        model.addAttribute("productDay", productDay);
+        model.addAttribute("IntoMoneyDayPresent", intoMoneyDayPresent);
+
+        model.addAttribute("IntoMoneyMonthPresent", intoMoneyMonthPresent);
+        model.addAttribute("quantityMonthPresent", quantityMonthPresent);
+
+        model.addAttribute("IntoMoneyYearPresent", intoMoneyYearPresent);
+        model.addAttribute("quantityYearPresent", quantityYearPresent);
+
+        model.addAttribute("listInvoice", invoiceService.findAllStatisticalInvoiceSearchMonth(month, year));
+
+        model.addAttribute("view", "/WEB-INF/view/statistical/month.jsp");
+        return "home/staff";
+    }
+
     @GetMapping("/revenue-in-year")
     public String year(Model model){
 

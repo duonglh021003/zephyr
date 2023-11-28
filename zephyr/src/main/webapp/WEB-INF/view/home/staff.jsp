@@ -108,8 +108,10 @@
                 <div class="collapse" id="product">
                     <ul class="nav flex-column sub-menu">
                         <li class="nav-item"><a class="nav-link" href="/zephyr/admin/product-detail/index"> index </a></li>
-                        <li class="nav-item"><a class="nav-link" href="/zephyr/admin/product-detail/view-add"> add </a></li>
-                        <li class="nav-item"><a class="nav-link" href=""> list delete </a></li>
+                        <li class="nav-item"><a class="nav-link" href="/zephyr/admin/product/index"> index product </a></li>
+                        <li class="nav-item"><a class="nav-link" href="/zephyr/admin/origin/index"> index origin </a></li>
+                        <li class="nav-item"><a class="nav-link" href="/zephyr/admin/size/index"> index size </a></li>
+                        <li class="nav-item"><a class="nav-link" href="/zephyr/admin/color/index"> index color </a></li>
                     </ul>
                 </div>
             </li>
@@ -188,31 +190,12 @@
                 </a>
                 <div class="collapse" id="voucher">
                     <ul class="nav flex-column sub-menu">
-                        <li class="nav-item"><a class="nav-link" href=""> index </a></li>
-                        <li class="nav-item"><a class="nav-link" href=""> add </a></li>
-                        <li class="nav-item"><a class="nav-link" href=""> list delete </a></li>
-
+                        <li class="nav-item"><a class="nav-link" href="/zephyr/admin/voucher-client/index"> index </a></li>
+                        <li class="nav-item"><a class="nav-link" href="/zephyr/admin/voucher-client-detail/index"> index client detail  </a></li>
                     </ul>
                 </div>
             </li>
 
-            <li class="nav-item menu-items">
-                <a class="nav-link" data-toggle="collapse" href="#exchange" aria-expanded="false" aria-controls="auth">
-              <span class="menu-icon">
-                <i class="mdi mdi-playlist-play"></i>
-              </span>
-                    <span class="menu-title">exchange</span>
-                    <i class="menu-arrow"></i>
-                </a>
-                <div class="collapse" id="exchange">
-                    <ul class="nav flex-column sub-menu">
-                        <li class="nav-item"><a class="nav-link" href=""> index </a></li>
-                        <li class="nav-item"><a class="nav-link" href=""> add </a></li>
-                        <li class="nav-item"><a class="nav-link" href=""> list delete </a></li>
-
-                    </ul>
-                </div>
-            </li>
 
             <li class="nav-item menu-items">
                 <a class="nav-link" href="/zephyr/admin/statistical/index">
@@ -223,23 +206,7 @@
                 </a>
             </li>
 
-            <li class="nav-item menu-items">
-                <a class="nav-link" href="index.html">
-              <span class="menu-icon">
-                <i class="mdi mdi-speedometer"></i>
-              </span>
-                    <span class="menu-title">delivery notes</span>
-                </a>
-            </li>
 
-            <li class="nav-item menu-items">
-                <a class="nav-link" href="/zephyr/admin/table">
-              <span class="menu-icon">
-                <i class="mdi mdi-table-large"></i>
-              </span>
-                    <span class="menu-title">Tables</span>
-                </a>
-            </li>
 
         </ul>
     </nav>

@@ -26,6 +26,15 @@
                                 </tr>
                             </a>
                         </c:forEach>
+                        <div>
+                            <c:forEach items="${ listInvoice }" var="invoice" varStatus="i">
+                                <br>
+                                <a type="button" class="btn btn-danger"
+                                   href="/zephyr/admin/sell/invoice/delete?id=${invoice.id}">
+                                    cancel invoice
+                                </a>
+                            </c:forEach>
+                        </div>
                     </div>
                 </div>
 
@@ -65,15 +74,17 @@
                             <c:forEach items="${ listInvoice }" var="invoice" varStatus="i">
                                 <div class="col-md-6">
                                     <div class="mb-3">
-                                        <input name="nameClient" class="form-control" value="${invoice.client.name}"
-                                               placeholder="name">
+                                        <input name="nameClient" style="color: black" class="form-control"
+                                               value="${invoice.client.name}"
+                                               placeholder="name" readonly="readonly">
                                     </div>
 
                                 </div>
                                 <div class="col-md-6">
                                     <div class="mb-3 d-flex">
-                                        <input name="nameClient" class="form-control" value="${invoice.client.pointUsr}"
-                                               placeholder="point use">
+                                        <input name="nameClient" style="color: black" class="form-control"
+                                               value="${invoice.client.pointUsr}"
+                                               placeholder="point use" readonly="readonly">
                                     </div>
                                 </div>
                             </c:forEach>
@@ -181,44 +192,44 @@
                                         <div class="d-flex justify-content-between mb-3">
                                             <h6>mã hoá đơn: </h6>
                                             <input style="border: none;outline: none;color: red" name="code"
-                                                   value="${invoice.code}">
+                                                   value="${invoice.code}" readonly="readonly">
                                         </div>
                                         <hr>
                                         <div class="d-flex justify-content-between mb-3">
                                             <p>giờ tạo: </p>
                                             <input style="border: none;outline: none;" name="hourMinute"
-                                                   value="${invoice.hourMinute}">
+                                                   value="${invoice.hourMinute}" readonly="readonly">
                                         </div>
                                         <hr>
                                         <div class="d-flex justify-content-between mb-3">
                                             <p>ngày tạo: </p>
                                             <input style="border: none;outline: none;" name="dateCreate"
-                                                   value="${invoice.dateCreate}">
+                                                   value="${invoice.dateCreate}" readonly="readonly">
                                         </div>
                                         <hr>
                                         <div class="d-flex justify-content-between mb-3">
                                             <p>tổng tiền hoá đơn: </p>
                                             <input style="border: none;outline: none;" name="totalInvoice"
-                                                   value="${totalInvoice}00">
+                                                   value="${totalInvoice}00" readonly="readonly">
                                         </div>
                                         <hr>
                                         <div class="d-flex justify-content-between mb-3">
                                             <p>điểm sử dụng: </p>
                                             <input style="border: none;outline: none;" name="point"
-                                                   value="${invoice.point}00">
+                                                   value="${invoice.point}00" readonly="readonly">
                                         </div>
                                         <hr>
                                         <div class="d-flex justify-content-between mb-3">
                                             <p>tiền phiếu giảm giá: </p>
                                             <input style="border: none;outline: none;"
-                                                   value="${invoice.voucher.reducedPrice}00">
+                                                   value="${invoice.voucher.reducedPrice}00" readonly="readonly">
                                         </div>
                                         <hr>
                                         <div class="d-flex justify-content-between mb-3">
                                             <h6>thành tiền: </h6>
                                             <input id="intoMoney" style="border: none;outline: none;color: red"
                                                    name="intoMoney"
-                                                   value="${invoice.intoMoney}00">
+                                                   value="${invoice.intoMoney}00" readonly="readonly">
                                         </div>
                                         <hr>
                                         <div class="d-flex justify-content-between mb-3">
@@ -281,50 +292,50 @@
                 <tbody class="align-middle">
 
                 <c:forEach items="${ listDetailProduct }" var="detailProduct" varStatus="i">
-                <form action="/zephyr/admin/sell/add-product?id=${detailProduct.product.id}">
-                    <tr>
-                        <td>${i.index + 1}</td>
-                        <td class="align-middle"><img
-                                src="/assets/images/client/${detailProduct.images}" alt="">
-                                ${detailProduct.product.name}
-                        </td>
-                        <td class="align-middle">
-                            <input type="number" style="width: 50px" name="quantity" value="1">
-                        </td>
-                        <td class="align-middle">${detailProduct.price}00</td>
+                    <form action="/zephyr/admin/sell/add-product?id=${detailProduct.product.id}">
+                        <tr>
+                            <td>${i.index + 1}</td>
+                            <td class="align-middle"><img
+                                    src="/assets/images/client/${detailProduct.images}" alt="">
+                                    ${detailProduct.product.name}
+                            </td>
+                            <td class="align-middle">
+                                <input type="number" style="width: 50px" name="quantity" value="1">
+                            </td>
+                            <td class="align-middle">${detailProduct.price}00</td>
 
 
-                        <input type="hidden" name="id" value="${detailProduct.product.id}">
+                            <input type="hidden" name="id" value="${detailProduct.product.id}">
 
 
-                        <td class="align-middle">
-                            <select name="size" class="form-select">
-                                <c:forEach items="${listSize}" var="size">
-                                    <option value="${size.id}">${size.name}</option>
-                                </c:forEach>
-                            </select>
-                        </td>
+                            <td class="align-middle">
+                                <select name="size" class="form-select">
+                                    <c:forEach items="${listSize}" var="size">
+                                        <option value="${size.id}">${size.name}</option>
+                                    </c:forEach>
+                                </select>
+                            </td>
 
-                        <td class="align-middle">
-                            <select name="color" class="form-select">
-                                <c:forEach items="${listColor}" var="color">
-                                    <option value="${color.id}">${color.name}</option>
-                                </c:forEach>
-                            </select>
-                        </td>
+                            <td class="align-middle">
+                                <select name="color" class="form-select">
+                                    <c:forEach items="${listColor}" var="color">
+                                        <option value="${color.id}">${color.name}</option>
+                                    </c:forEach>
+                                </select>
+                            </td>
 
-                        <c:forEach items="${ listInvoice }" var="invoice" varStatus="i">
-                            <input type="hidden" name="idInvoice" value="${invoice.id}">
-                        </c:forEach>
+                            <c:forEach items="${ listInvoice }" var="invoice" varStatus="i">
+                                <input type="hidden" name="idInvoice" value="${invoice.id}">
+                            </c:forEach>
 
-                        <td class="align-middle">
-                            <button class="btn btn-info">
-                                add
-                            </button>
-                        </td>
+                            <td class="align-middle">
+                                <button class="btn btn-info">
+                                    add
+                                </button>
+                            </td>
 
-                    </tr>
-                </form>
+                        </tr>
+                    </form>
                 </c:forEach>
 
                 </tbody>

@@ -175,6 +175,29 @@ public interface InvoiceRepository extends JpaRepository<Invoice, Long> {
             "FROM invoice i join detailed_invoice di on i.id = di.id_invoice\t\n" +
             "WHERE YEAR(date_create) = ?1 AND i.invoice_status = 5", nativeQuery = true)
     List<Integer> findAllStatisticalQuantitySearchYear(@Param("year") Integer year);
+
+    //thống kê tổng tiền trong 1 thang khi search
+    @Query(value = "SELECT SUM(into_money) AS total_amount\n" +
+            "FROM invoice i\n" +
+            "WHERE MONTH(date_create) = :month AND YEAR(date_create) = :year AND i.invoice_status = 5;", nativeQuery = true)
+    List<Double> findAllStatisticalSearchMonth(@Param("month") Integer month,
+                                               @Param("year") Integer year);
+
+    // số lượng hoá đơn trong 1 năm khi search
+    @Query(value = "SELECT i.*\n" +
+            "FROM invoice i\n" +
+            "WHERE MONTH(date_create) = :month AND YEAR(date_create) = :year AND i.invoice_status = 5", nativeQuery = true)
+    List<Invoice> findAllStatisticalInvoiceSearchMonth(@Param("month") Integer month,
+                                                       @Param("year") Integer year);
+
+    // số lượng sản phẩm trong 1 tháng search
+    @Query(value = "SELECT SUM(quantity)\n" +
+            "FROM invoice i join detailed_invoice di on i.id = di.id_invoice\n" +
+            "WHERE MONTH(date_create) = :month AND YEAR(date_create) = :year AND i.invoice_status = 5", nativeQuery = true)
+    List<Integer> findAllStatisticalQuantitySearchMonth(@Param("month") Integer month,
+                                                       @Param("year") Integer year);
+
+
     // END THỐNG KÊ
 
 
@@ -182,7 +205,7 @@ public interface InvoiceRepository extends JpaRepository<Invoice, Long> {
 
     @Query(value = "select i.*\n" +
             "from invoice i\n" +
-            "where i.invoice_status = 0", nativeQuery = true)
+            "where i.invoice_status = 0 ", nativeQuery = true)
     List<Invoice> findAllByStatus0();
 
     @Query(value = "select i.*\n" +
@@ -191,5 +214,14 @@ public interface InvoiceRepository extends JpaRepository<Invoice, Long> {
             "where di.id = ?1", nativeQuery = true)
     List<Invoice> findAllByIdDetailInvoice(@Param("id") Long id);
 
+    @Query(value = "select *\n" +
+            "from\n" +
+            "invoice i\n" +
+            "where i.invoice_status = 0 and i.id_staff = ?1 ", nativeQuery = true)
+    List<Invoice> findAllByStaffStatus0(@Param("idStaff") Long idStaff);
+
     // END SELL OFF
+
+    @Query(value = "select max(code) from invoice", nativeQuery = true)
+    String findMaxCodeOrder();
 }

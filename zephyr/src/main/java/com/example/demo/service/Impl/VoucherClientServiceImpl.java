@@ -5,6 +5,8 @@ import com.example.demo.entity.VoucherClient;
 import com.example.demo.repository.VoucherClientRepository;
 import com.example.demo.service.VoucherClientService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -49,5 +51,15 @@ public class VoucherClientServiceImpl implements VoucherClientService {
     @Override
     public List<VoucherClient> findAllIdClientDuplicate(Long id, Long client) {
         return voucherClientRepository.findAllIdClientDuplicate(id, client);
+    }
+
+    @Override
+    public Page<VoucherClient> findAllByStatus1(Pageable pageable) {
+        return voucherClientRepository.findAllByStatus1(pageable);
+    }
+
+    @Override
+    public List<VoucherClient> findAllByStatus0() {
+        return voucherClientRepository.findAllByStatus0();
     }
 }

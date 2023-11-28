@@ -64,6 +64,11 @@ public class InvoiceServiceImpl implements InvoiceService {
     }
 
     @Override
+    public List<Invoice> findAllByStaffStatus0(Long idStaff) {
+        return invoiceRepository.findAllByStaffStatus0(idStaff);
+    }
+
+    @Override
     public List<Invoice> findByInvoiceStatusAll(Long id) {
         return invoiceRepository.findByInvoiceStatusAll(id);
     }
@@ -195,9 +200,25 @@ public class InvoiceServiceImpl implements InvoiceService {
         return invoiceRepository.findAllStatisticalQuantitySearchYear(year);
     }
 
+    @Override
+    public List<Double> findAllStatisticalSearchMonth(Integer month, Integer year) {
+        return invoiceRepository.findAllStatisticalSearchMonth(month, year);
+    }
 
+    @Override
+    public List<Invoice> findAllStatisticalInvoiceSearchMonth(Integer month, Integer year) {
+        return invoiceRepository.findAllStatisticalInvoiceSearchMonth(month, year);
+    }
 
+    @Override
+    public List<Integer> findAllStatisticalQuantitySearchMonth(Integer month, Integer year) {
+        return invoiceRepository.findAllStatisticalQuantitySearchMonth(month, year);
+    }
 
+    @Override
+    public String findMaxCodeOrder() {
+        return invoiceRepository.findMaxCodeOrder();
+    }
 
 
 }

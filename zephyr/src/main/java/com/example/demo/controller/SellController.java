@@ -65,31 +65,32 @@ public class SellController {
     @Autowired
     private ColorService colorService;
 
+    private String incrementCodeOrder(String codeOrder) {
+        String prefix = codeOrder.substring(0, 2);
+        int number = Integer.parseInt(codeOrder.substring(2));
+        number++;
+        String nextCodeOrder = String.format("%s%05d", prefix, number);
+        return nextCodeOrder;
+    }
 
-    private static final Random random = new Random();
-
-    public static String generateRandomString() {
-        StringBuilder sb = new StringBuilder(10);
-        sb.append("ZN");
-        for (int i = 0; i < 5; i++) {
-            int rndNum = random.nextInt(10);
-            sb.append(rndNum);
-        }
-        return sb.toString();
+    private String getNextCode() {
+        String currentCodeOrder = invoiceService.findMaxCodeOrder();
+        String nextCodeOrder = incrementCodeOrder(currentCodeOrder);
+        return nextCodeOrder;
     }
 
     @GetMapping("/index")
-    public String index(Model model) {
-
-        List<Invoice> list = invoiceService.findAllByStatus0();
-
+    public String index(Model model, HttpSession session) {
+        Staff staff = (Staff) session.getAttribute("staffSession");
+        if (String.valueOf(staff).equalsIgnoreCase("null")) {
+            return "redirect:/zephyr/admin/login";
+        }
+        List<Invoice> list = invoiceService.findAllByStaffStatus0(staff.getId());
         int count = list.size();
-        System.out.println("aaaaaaaaaaaaaaaaaa          " + count);
         if (count == 5) {
-            System.out.println("bbbbbbbbbbbbbbbbbbbbbbb");
             model.addAttribute("errorMessage", "bạn chỉ có thể tạo đối đa 5 hoá đơn!");
         }
-        model.addAttribute("listInvoiceStatus0", invoiceService.findAllByStatus0());
+        model.addAttribute("listInvoiceStatus0", invoiceService.findAllByStaffStatus0(staff.getId()));
         model.addAttribute("view", "/WEB-INF/view/offline_sell/index.jsp");
         return "home/staff";
     }
@@ -104,12 +105,12 @@ public class SellController {
         LocalDate localDate = LocalDate.now();
         ZoneId zoneId = ZoneId.of("Asia/Ho_Chi_Minh");
         LocalTime currentTime = LocalTime.now(zoneId);
-        List<Invoice> list = invoiceService.findAllByStatus0();
+        List<Invoice> list = invoiceService.findAllByStaffStatus0(staff.getId());
 
         int count = list.size();
         for (int i = 0; count < 5; i++) {
             Invoice invoice = Invoice.builder()
-                    .code(generateRandomString())
+                    .code(getNextCode())
                     .hourMinute(currentTime.getHour() + ":" + currentTime.getMinute())
                     .dateCreate(localDate)
                     .status(0)
@@ -127,13 +128,17 @@ public class SellController {
 
     @GetMapping("/invoice")
     public String invoiceDetail(@RequestParam("id") Long id,
-                                Model model) {
+                                Model model,HttpSession session) {
+        Staff staff = (Staff) session.getAttribute("staffSession");
+        if (String.valueOf(staff).equalsIgnoreCase("null")) {
+            return "redirect:/zephyr/admin/login";
+        }
         Invoice invoice = invoiceService.detail(id);
 
         List<Double> listtotalInvoice = detailedInvoiceService.capitalSumDetailInvoice(id);
         Double totalInvoice = listtotalInvoice.get(0);
 
-        model.addAttribute("listInvoiceStatus0", invoiceService.findAllByStatus0());
+        model.addAttribute("listInvoiceStatus0", invoiceService.findAllByStaffStatus0(staff.getId()));
         model.addAttribute("listDetailProduct", productDetailsService.findAllByDisplaySell());
         model.addAttribute("listDetailInvoice", detailedInvoiceService.findAllByIdInvoice(id));
         model.addAttribute("listInvoice", invoiceService.findAllByInvoice(id));
@@ -409,6 +414,12 @@ public class SellController {
         invoiceService.update(invoice, invoice.getId());
 
         exportToWord(invoice);
+        return "redirect:/zephyr/admin/sell/index";
+    }
+
+    @GetMapping("/invoice/delete")
+    public String invoiceDelete(@RequestParam("id") Long id){
+        invoiceService.delete(id);
         return "redirect:/zephyr/admin/sell/index";
     }
 
