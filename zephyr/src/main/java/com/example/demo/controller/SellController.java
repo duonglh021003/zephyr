@@ -6,6 +6,7 @@ import com.example.demo.entity.DetailedInvoice;
 import com.example.demo.entity.DetailedShoppingCart;
 import com.example.demo.entity.Invoice;
 import com.example.demo.entity.ProductDetails;
+import com.example.demo.entity.Size;
 import com.example.demo.entity.Staff;
 import com.example.demo.entity.Voucher;
 import com.example.demo.service.ClientService;
@@ -139,7 +140,7 @@ public class SellController {
         Double totalInvoice = listtotalInvoice.get(0);
 
         model.addAttribute("listInvoiceStatus0", invoiceService.findAllByStaffStatus0(staff.getId()));
-        model.addAttribute("listDetailProduct", productDetailsService.findAllByDisplaySell());
+        model.addAttribute("listDetailProduct", productDetailsService.findAllByProductList());
         model.addAttribute("listDetailInvoice", detailedInvoiceService.findAllByIdInvoice(id));
         model.addAttribute("listInvoice", invoiceService.findAllByInvoice(id));
         model.addAttribute("totalInvoice", totalInvoice);
@@ -419,7 +420,9 @@ public class SellController {
 
     @GetMapping("/invoice/delete")
     public String invoiceDelete(@RequestParam("id") Long id){
-        invoiceService.delete(id);
+        Invoice invoice = invoiceService.detail(id);
+        invoice.setStatus(7);
+        invoiceService.update(invoice, invoice.getId());
         return "redirect:/zephyr/admin/sell/index";
     }
 

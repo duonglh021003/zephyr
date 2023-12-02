@@ -52,4 +52,14 @@ public class SizeServiceImpl implements SizeService {
     public Size detail(Long id) {
         return sizeRepository.getById(id);
     }
+
+    @Override
+    public Page<Size> findAllBySizeSearch(String inputSize, Pageable pageable) {
+        return sizeRepository.findAllBySizeSearch(inputSize, pageable);
+    }
+
+    @Override
+    public String findMaxCodeSize() {
+        return sizeRepository.findMaxCodeSize();
+    }
 }

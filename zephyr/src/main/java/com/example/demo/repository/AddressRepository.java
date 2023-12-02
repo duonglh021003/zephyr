@@ -15,4 +15,7 @@ public interface AddressRepository extends JpaRepository<Address, Long> {
             "invoice i join client_address ca on i.id_client_address = ca.id\n" +
             "where i.id = ?1", nativeQuery = true)
     List<Address> findAllAddress(@Param("id") Long id);
+
+    @Query(value = "select max(code) from client_address", nativeQuery = true)
+    String findMaxCodeAddress();
 }

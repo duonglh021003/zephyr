@@ -8,8 +8,12 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.NamedNativeQuery;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Null;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -35,18 +39,26 @@ public class ProductDetails {
     private Long id;
 
     @Column(name = "images")
+    @NotBlank(message = "images không được trống!")
     private String images;
 
     @Column(name = "describe")
+    @NotBlank(message = "mô tả không được trống!")
     private String describe;
 
     @Column(name = "inventory")
+    @NotNull(message = "Giá trị không được trống!")
+    @Min(value = 0, message = "Giá trị phải là một số không âm!")
     private Integer inventory;
 
     @Column(name = "import_price")
+    @NotNull(message = "Giá trị không được trống!")
+    @Min(value = 0, message = "Giá trị phải là một số không âm!")
     private Double importPrice;
 
     @Column(name = "price")
+    @NotNull(message = "Giá trị không được trống!")
+    @Min(value = 0, message = "Giá trị phải là một số không âm!")
     private Double price;
 
     @Column(name = "date_create")
@@ -63,9 +75,6 @@ public class ProductDetails {
 
     @Column(name = "product_details_status")
     private Integer status;
-
-    @Column(name = "display")
-    private Integer display;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_product", referencedColumnName = "id")

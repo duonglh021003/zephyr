@@ -38,15 +38,15 @@ public interface ProductDetailsService {
 
     List<Product> findAllByProduct(Long id);
 
-    List<ProductDetails> findGroupByProduct(Long id);
-
-    Page<ProductDetails> findAllByDisplay(Pageable pageable);
+    Page<ProductDetails> findAllByProductPage(Pageable pageable);
 
     Page<ProductDetails> findAllByStatus(Pageable pageable);
 
-    List<ProductDetails> findAllByDisplaySell();
+    List<ProductDetails> findAllByProductList();
 
 
     List<ProductDetails> findAllByProductAndColorAndSize(Long product, Long size, Long color);
+
+    void saveProductDetails(List<ProductDetails> productDetailsList);
 
 }

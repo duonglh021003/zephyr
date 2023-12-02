@@ -19,4 +19,6 @@ public interface AddressService {
     Address detail(Long id);
 
     List<Address> findAllAddress(Long id);
+
+    String findMaxCodeAddress();
 }

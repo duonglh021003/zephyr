@@ -1,8 +1,6 @@
 package com.example.demo.controller;
 
-import com.example.demo.entity.Client;
 import com.example.demo.entity.ProductDetails;
-import com.example.demo.entity.Staff;
 import com.example.demo.repository.ColorRepository;
 import com.example.demo.repository.OriginRepository;
 import com.example.demo.repository.ProductRepository;
@@ -18,8 +16,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
-import java.util.List;
 
 @Controller
 @RequestMapping(value = "/zephyr")
@@ -46,11 +42,8 @@ public class ShopController {
     ) {
 
         Pageable pageable = PageRequest.of(number, 9);
-        Page<ProductDetails> pageProductDetails = productDetailsService.findAllByDisplay(pageable);
+        Page<ProductDetails> pageProductDetails = productDetailsService.findAllByProductPage(pageable);
         model.addAttribute("listProductDetails", pageProductDetails);
-        for (ProductDetails productDetails : pageProductDetails) {
-            List<ProductDetails> list = productDetailsService.findAllByProductAndColorAndSize(productDetails.getProduct().getId(), 10L, 1L);
-        }
 
         model.addAttribute("viewClient", "/WEB-INF/view/include/shop.jsp");
 

@@ -7,11 +7,11 @@
 </head>
 <body>
 <div style="margin-bottom: 30px">
-    <span><a href="/zephyr/admin/product/index">product </a></span>
+    <span><a href="/zephyr/admin/color/index">color </a></span>
     <span style="color: #C0C0C0"> / add</span>
 </div>
 
-<form:form action="/zephyr/admin/product/add" method="POST" modelAttribute="product">
+<form:form action="/zephyr/admin/color/add" method="POST" modelAttribute="color">
     <div class="modal-body">
         <div class="row">
             <div class="col-md-6">
@@ -77,7 +77,6 @@
             <div class="col-md-3"></div>
         </div>
     </div>
-
 </form:form>
 
 </body>

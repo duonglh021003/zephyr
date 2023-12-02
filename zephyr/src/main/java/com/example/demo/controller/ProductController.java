@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import com.example.demo.entity.Product;
 import com.example.demo.entity.Staff;
+import com.example.demo.message.request.ProductRequest;
 import com.example.demo.service.ProductService;
 import com.example.demo.validation.Validates;
 import jakarta.servlet.http.HttpSession;
@@ -12,6 +13,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -60,16 +62,24 @@ public class ProductController {
     }
 
     @PostMapping("/add")
-    public String add(@RequestParam("name") String name,
+    public String add(@Valid @ModelAttribute("product") Product product,
+                      BindingResult result,
+                      @RequestParam("name") String name,
                       @RequestParam("dateCreate") LocalDate dateCreate,
                       @RequestParam("dateUpdate") LocalDate dateUpdate,
                       @RequestParam("userCreate") String userCreate,
                       @RequestParam("userUpdate") String userUpdate,
                       @RequestParam("status") Integer status,
-                      Model model) {
+                      Model model, HttpSession session) {
         String code = productService.getNextCode();
 
-        Product product = Product.builder()
+        if (result.hasErrors()) {
+            LocalDate localDate = LocalDate.now();
+            model.addAttribute("dateUpdate", localDate);
+            model.addAttribute("view", "/WEB-INF/view/product/view-add.jsp");
+            return "home/staff";
+        }
+        product = Product.builder()
                 .code(code)
                 .name(name)
                 .dateCreate(dateCreate)
@@ -96,7 +106,16 @@ public class ProductController {
     }
 
     @PostMapping("update")
-    public String update(@Valid @ModelAttribute("product") Product product) {
+    public String update(@Valid @ModelAttribute("product") Product product,
+                         BindingResult result,
+                         Model model) {
+        if (result.hasErrors()) {
+            LocalDate localDate = LocalDate.now();
+            model.addAttribute("dateUpdate", localDate);
+            model.addAttribute("view", "/WEB-INF/view/product/view-update.jsp");
+            return "home/staff";
+        }
+
         productService.update(product, product.getId());
         return "redirect:/zephyr/admin/product/index";
     }

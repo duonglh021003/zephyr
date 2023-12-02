@@ -84,17 +84,24 @@ public class OrderController {
 
     LocalDate localDate = LocalDate.now();
 
+    private String incrementCodeOrder(String code) {
+        String prefix = code.substring(0, 2);
+        int number = Integer.parseInt(code.substring(2));
+        number++;
+        String nextCode= String.format("%s%05d", prefix, number);
+        return nextCode;
+    }
 
-    private static final Random random = new Random();
+    private String getNextCodeInvoice() {
+        String currentCodeOrder = invoiceService.findMaxCodeOrder();
+        String nextCodeOrder = incrementCodeOrder(currentCodeOrder);
+        return nextCodeOrder;
+    }
 
-    public static String generateRandomString() {
-        StringBuilder sb = new StringBuilder(10);
-        sb.append("ZN");
-        for (int i = 0; i < 5; i++) {
-            int rndNum = random.nextInt(10);
-            sb.append(rndNum);
-        }
-        return sb.toString();
+    private String getNextCodeAddress() {
+        String currentCodeAddress = addressService.findMaxCodeAddress();
+        String nextCodeAddress = incrementCodeOrder(currentCodeAddress);
+        return nextCodeAddress;
     }
 
 
@@ -130,7 +137,7 @@ public class OrderController {
 
 
         Invoice invoice = Invoice.builder()
-                .code(generateRandomString())
+                .code(getNextCodeInvoice())
                 .hourMinute(currentTime.getHour() + ":" + currentTime.getMinute())
                 .dateCreate(localDate)
                 .totalInvoice(total)
@@ -264,7 +271,7 @@ public class OrderController {
             }
         }
         Address address = Address.builder()
-                .code(generateRandomString())
+                .code(getNextCodeAddress())
                 .name(name)
                 .phoneNumber(phoneNumber)
                 .city(city)

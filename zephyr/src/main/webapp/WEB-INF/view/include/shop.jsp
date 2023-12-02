@@ -180,7 +180,7 @@
                     <div class="product-item bg-light mb-4">
                         <div class="product-img position-relative overflow-hidden">
 
-                            <img class="img-fluid w-100" src="/assets/images/client/${productDetails.images}" alt="">
+                            <img class="img-fluid w-100" style="height: 400px" src="/assets/images/client/${productDetails.images}" alt="" >
                             <div class="product-action">
                                  <a class="btn btn-outline-dark btn-square" href="/zephyr/shopping-cart/add?id=${productDetails.id}" methods="get"
                                     onclick="if(!confirm('Bạn có muốn thêm sản phẩm vào giỏ hàng?')){return false}else{alert('thêm thành công');}"><i class="fa fa-shopping-cart"></i></a>
@@ -191,7 +191,6 @@
                             </div>
                         </div>
                         <div class="text-center py-4">
-                            <h6 class="h6 text-decoration-none text-truncate" >inventory: ${productDetails.inventory}</h6>
                             <a class="h6 text-decoration-none text-truncate" href="/zephyr/shop/shop-detail?id=${productDetails.product.id}">${productDetails.product.name}</a>
                             <div class="d-flex align-items-center justify-content-center mt-2">
                                 <h5>${productDetails.price}0</h5><h6 class="text-muted ml-2"><del>$123.00</del></h6>
