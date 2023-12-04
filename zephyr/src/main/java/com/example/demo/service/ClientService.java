@@ -31,4 +31,12 @@ public interface ClientService {
 
     Client detailPhoneNumber(String phoneNumber);
 
+    String SignIn(String gmail, String password);
+
+    List<Client> findAll();
+
+    String findMaxCodeClient();
+
+    List<Client> findAllByStatus0();
+
 }

@@ -91,6 +91,37 @@
     </div>
 </div>
 
+<%-- Model search--%>
+
+<div class="modal fade" id="myModalSearch" role="dialog">
+    <div class="modal-dialog ">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h4 class="modal-title">my let input</h4>
+            </div>
+            <form action="/zephyr/admin/product-detail/search" method="get">
+                <div class="modal-body">
+                    <div class="row" >
+                        <div class="col-md-12">
+                            <div class="mb-3">
+                                <input class="form-control" name="inputProductDetail" placeholder="input product detail">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer" style="margin-top: 70px">
+                    <button type="button" style="border: 1px solid #eeeeee" class="btn btn-default" data-dismiss="modal" data-toggle="modal" data-target="#myModal">Close</button>
+                    <button  class="btn btn-primary" style="color: white" >search</button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+
+<%-- End search--%>
+
 <%-- Model restore --%>
 
 <div class="modal fade" id="myModalRestore" role="dialog">

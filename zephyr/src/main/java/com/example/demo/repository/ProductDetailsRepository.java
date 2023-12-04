@@ -75,13 +75,6 @@ public interface ProductDetailsRepository extends JpaRepository<ProductDetails, 
             "ORDER BY subquery.id DESC", nativeQuery = true)
     List<ProductDetails> findAllByProductList();
 
-//    Page<ProductDetails> findAllByDisplay(int display, Pageable pageable);
-//
-//    @Query(value = "select pd.*\n" +
-//            "from product_details pd\n" +
-//            "where pd.display = 1", nativeQuery = true)
-//    List<ProductDetails> findAllByDisplaySell();
-
     Page<ProductDetails> findAllByStatus(int status, Pageable pageable);
 
     @Query(value = "select *\n" +
@@ -104,4 +97,25 @@ public interface ProductDetailsRepository extends JpaRepository<ProductDetails, 
             "where pd.inventory = 0", nativeQuery = true)
     List<ProductDetails> findAllByInventory0();
 
+    @Query(value = "select pd.id, pd.images, pd.describe, pd.inventory, pd.import_price, pd.price,\n" +
+            "pd.date_create, pd.date_update, pd.user_create, pd.user_update, pd.product_details_status,\n" +
+            "pd.id_product, pd.id_origin, pd.id_color, pd.id_size\n" +
+            "from\n" +
+            "product_details pd join product p on pd.id_product = p.id\n" +
+            "join origin o on pd.id_origin = o.id \n" +
+            "join color cl on pd.id_color = cl.id\n" +
+            "join size s on pd.id_size = s.id \n" +
+            "where pd.import_price like %?1% \n" +
+            "or pd.price like %?1% \n" +
+            "or pd.date_create like %?1% \n" +
+            "or pd.date_update like %?1% \n" +
+            "or pd.user_create like %?1%\n" +
+            "or pd.user_update like %?1% \n" +
+            "or p.product_name like %?1% \n" +
+            "or o.origin_name like %?1% \n" +
+            "or cl.color_name like %?1% \n" +
+            "or s.size_name like %?1% \n" +
+            "ORDER BY p.id DESC", nativeQuery = true)
+    Page<ProductDetails> findAllByProductDetailSearch(@Param("inputProductDetail") String inputProductDetail,
+                                         Pageable pageable);
 }

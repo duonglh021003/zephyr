@@ -153,9 +153,6 @@
                 <div class="collapse" id="staff">
                     <ul class="nav flex-column sub-menu">
                         <li class="nav-item"><a class="nav-link" href="/zephyr/admin/staff/index"> index </a></li>
-                        <li class="nav-item"><a class="nav-link" href="/zephyr/admin/staff/view-add"> add </a></li>
-                        <li class="nav-item"><a class="nav-link" href="/zephyr/admin/staff/list-delete"> list
-                            delete </a></li>
                         <li class="nav-item"><a class="nav-link" href=""> position </a></li>
                     </ul>
                 </div>
@@ -171,7 +168,7 @@
                 </a>
                 <div class="collapse" id="client">
                     <ul class="nav flex-column sub-menu">
-                        <li class="nav-item"><a class="nav-link" href="/zephyr/admin/client/index?id=1"> index </a></li>
+                        <li class="nav-item"><a class="nav-link" href="/zephyr/admin/client/index?id=1"> address </a></li>
                         <li class="nav-item"><a class="nav-link" href="/zephyr/admin/client/view-add"> add </a></li>
                         <li class="nav-item"><a class="nav-link" href="/zephyr/admin/client/list-delete?id=1"> list delete </a></li>
                         <li class="nav-item"><a class="nav-link" href=""> address </a></li>

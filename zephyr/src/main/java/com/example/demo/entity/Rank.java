@@ -37,7 +37,7 @@ public class Rank {
     @Column(name = "ranks_percent")
     private Double percent;
 
-    @Column(name = "staff_status")
+    @Column(name = "rank_status")
     private Integer status;
 
 }

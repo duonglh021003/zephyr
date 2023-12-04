@@ -26,7 +26,7 @@
         </form>
     </div>
     <div class="form-container sign-in">
-        <form>
+        <form action="/zephyr/sign-in">
             <h1>Sign In</h1>
             <div class="social-icons">
                 <a href="https://accounts.google.com/o/oauth2/auth?scope=email&redirect_uri=http://localhost:8080/zephyr/login-google&response_type=code
@@ -37,8 +37,10 @@
                 <a href="#" class="icon"><i class="fa-brands fa-linkedin-in"></i></a>
             </div>
             <span>or use your email password</span>
-            <input type="email" placeholder="Email">
-            <input type="password" placeholder="Password">
+            <input type="email" name="gmail" placeholder="Email">
+            <input type="password" name="password" placeholder="Password">
+            <h5 style="color: red">${errors}</h5>
+            <h5 style="color: #00a045">${errorsPass}</h5>
             <a href="/zephyr/forgot-password">Forget Your Password?</a>
             <button>Sign In</button>
         </form>

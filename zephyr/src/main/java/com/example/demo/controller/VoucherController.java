@@ -1,16 +1,20 @@
 package com.example.demo.controller;
 
+import com.example.demo.entity.Product;
 import com.example.demo.entity.Staff;
 import com.example.demo.entity.VoucherClient;
 import com.example.demo.service.VoucherClientService;
 import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -26,16 +30,18 @@ public class VoucherController {
     @Autowired
     private VoucherClientService voucherClientService;
 
-    private static final Random random = new Random();
+    private String incrementCodeOrder(String code) {
+        String prefix = code.substring(0, 2);
+        int number = Integer.parseInt(code.substring(2));
+        number++;
+        String nextCode = String.format("%s%05d", prefix, number);
+        return nextCode;
+    }
 
-    public static String generateRandomString() {
-        StringBuilder sb = new StringBuilder(10);
-        sb.append("VC");
-        for (int i = 0; i < 5; i++) {
-            int rndNum = random.nextInt(10);
-            sb.append(rndNum);
-        }
-        return sb.toString();
+    private String getNextCode() {
+        String currentCode = voucherClientService.findMaxCodeVoucherClient();
+        String nextCode = incrementCodeOrder(currentCode);
+        return nextCode;
     }
 
     @GetMapping("/index")
@@ -75,8 +81,7 @@ public class VoucherController {
     }
 
     @PostMapping("/add")
-    public String add(@RequestParam("code") String code,
-                      @RequestParam("quantity") Integer quantity,
+    public String add(@RequestParam("quantity") Integer quantity,
                       @RequestParam("dateBegin") LocalDate dateBegin,
                       @RequestParam("dateEnd") LocalDate dateEnd,
                       @RequestParam("reducedPrice") Double reducedPrice,
@@ -89,7 +94,7 @@ public class VoucherController {
     ) {
 
         VoucherClient voucherClient = VoucherClient.builder()
-                .code(generateRandomString())
+                .code(getNextCode())
                 .quantity(quantity)
                 .dateBegin(dateBegin)
                 .dateEnd(dateEnd)
@@ -102,6 +107,35 @@ public class VoucherController {
                 .status(status)
                 .build();
         voucherClientService.add(voucherClient);
+        return "redirect:/zephyr/admin/voucher-client/index";
+    }
+
+    @GetMapping("/view-update")
+    public String viewUpdate(@RequestParam("id") Long id,
+                             Model model){
+
+        LocalDate localDate = LocalDate.now();
+        VoucherClient voucherClient = voucherClientService.detail(id);
+        model.addAttribute("voucherClient", voucherClient);
+        model.addAttribute("dateUpdate", localDate);
+
+        model.addAttribute("view", "/WEB-INF/view/voucher/view-update.jsp");
+        return "home/staff";
+    }
+
+    @PostMapping("/update")
+    public String update(@Valid @ModelAttribute("voucherClient") VoucherClient voucherClient,
+                         BindingResult result,
+                         Model model) {
+
+        if (result.hasErrors()) {
+            LocalDate localDate = LocalDate.now();
+            model.addAttribute("dateUpdate", localDate);
+            model.addAttribute("view", "/WEB-INF/view/voucher/view-update.jsp");
+            return "home/staff";
+        }
+
+        voucherClientService.update(voucherClient, voucherClient.getId());
         return "redirect:/zephyr/admin/voucher-client/index";
     }
 

@@ -18,4 +18,5 @@ public interface VoucherRepository extends JpaRepository<Voucher, Long> {
             "where ?1 BETWEEN v.minimum_price AND v.maximum_price;\n", nativeQuery = true)
     List<Voucher> findAllByPrice(@Param("price") Double price);
 
+
 }

@@ -10,6 +10,7 @@ import org.apache.poi.xwpf.usermodel.XWPFRun;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -218,6 +219,21 @@ public class InvoiceServiceImpl implements InvoiceService {
     @Override
     public String findMaxCodeOrder() {
         return invoiceRepository.findMaxCodeOrder();
+    }
+
+    @Override
+    public List<Invoice> findAllByInvoiceSearch(String inputInvoice) {
+        return invoiceRepository.findAllByInvoiceSearch(inputInvoice);
+    }
+
+    @Override
+    public List<Invoice> findAllByStatusSearch(Integer status) {
+        return invoiceRepository.findAllByStatusSearch(status);
+    }
+
+    @Override
+    public List<Invoice> findAllByDateSearch(LocalDate dateBegin, LocalDate dateEnd) {
+        return invoiceRepository.findAllByDateSearch(dateBegin, dateEnd);
     }
 
 

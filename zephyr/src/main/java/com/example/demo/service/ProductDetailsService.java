@@ -49,4 +49,6 @@ public interface ProductDetailsService {
 
     void saveProductDetails(List<ProductDetails> productDetailsList);
 
+    Page<ProductDetails> findAllByProductDetailSearch(String inputProductDetail, Pageable pageable);
+
 }

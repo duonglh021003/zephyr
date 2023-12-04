@@ -25,4 +25,6 @@ public interface VoucherClientService {
     Page<VoucherClient> findAllByStatus1(Pageable pageable);
 
     List<VoucherClient> findAllByStatus0();
+
+    String findMaxCodeVoucherClient();
 }

@@ -107,7 +107,6 @@
                             <a href="/zephyr/home" class="nav-item nav-link active">Home</a>
                             <a href="/zephyr/shop" class="nav-item nav-link">Shop</a>
                             <a href="/zephyr/voucher" class="nav-item nav-link">zephyr voucher</a>
-                            <a href="contact.html" class="nav-item nav-link">Contact</a>
                             <a href="/zephyr/purchase-order" class="nav-item nav-link">purchase order</a>
                         </div>
                         <div class="navbar-nav ml-auto py-0 d-none d-lg-block">
@@ -203,12 +202,10 @@
         <div class="row border-top mx-xl-5 py-4" style="border-color: rgba(256, 256, 256, .1) !important;">
             <div class="col-md-6 px-xl-0">
                 <p class="mb-md-0 text-center text-md-left text-secondary">
-                    &copy; <a class="text-primary" href="#">Domain</a>
 
                 </p>
             </div>
             <div class="col-md-6 px-xl-0 text-center text-md-right">
-                <img class="img-fluid" src="img/payments.png" alt="">
             </div>
         </div>
     </div>

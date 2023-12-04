@@ -105,7 +105,7 @@ public class ProductController {
         return "home/staff";
     }
 
-    @PostMapping("update")
+    @PostMapping("/update")
     public String update(@Valid @ModelAttribute("product") Product product,
                          BindingResult result,
                          Model model) {

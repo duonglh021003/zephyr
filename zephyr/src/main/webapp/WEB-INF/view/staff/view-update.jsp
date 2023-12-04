@@ -115,7 +115,7 @@
                 <label class="form-label">chức vụ</label> <br>
                 <select name="position" ${staff.position.name} class="form-control">
                     <c:forEach items="${listPosition}" var="position">
-                        <option value="${position.id}">${position.name}</option>
+                        <option value="${position.id}" ${staff.position.id == position.id ? "selected" : ""}>${position.name}</option>
                     </c:forEach>
                 </select>
             </div>

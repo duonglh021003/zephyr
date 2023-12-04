@@ -1,7 +1,11 @@
 package com.example.demo.controller;
 
 import com.example.demo.entity.Client;
+import com.example.demo.entity.DetailDeliveryNotes;
+import com.example.demo.entity.DetailedInvoice;
 import com.example.demo.entity.Invoice;
+import com.example.demo.service.DetailDeliveryNotesService;
+import com.example.demo.service.DetailedInvoiceService;
 import com.example.demo.service.InvoiceService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,12 +16,20 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.List;
+
 @Controller
 @RequestMapping(value = "/zephyr/purchase-order")
 public class PurchaseOrderController {
 
     @Autowired
     private InvoiceService invoiceService;
+
+    @Autowired
+    private DetailDeliveryNotesService detailDeliveryNotesService;
+
+    @Autowired
+    private DetailedInvoiceService detailedInvoiceService;
 
     @GetMapping()
     public String index(Model model, HttpSession session){
@@ -47,4 +59,23 @@ public class PurchaseOrderController {
         return "redirect:/zephyr/purchase-order";
     }
 
+    @GetMapping("/detail")
+    public String detail(@RequestParam("id") Long id,
+                         Model model){
+        Invoice invoice = invoiceService.detail(id);
+        List<DetailDeliveryNotes> list = detailDeliveryNotesService.findAllDetailDeliveryNotesMax(id);
+
+        for (DetailDeliveryNotes notes : list) {
+            model.addAttribute("images", notes.getProgress());
+        }
+        model.addAttribute("listDate", detailDeliveryNotesService.findAllByIdInvoice(id));
+        model.addAttribute("codeInvoice", invoice.getCode());
+        model.addAttribute("statusInvoice", invoice.getByStatus());
+        model.addAttribute("listDetailInvoice", detailedInvoiceService.findAllByIdInvoice(id));
+        model.addAttribute("listInvoice", invoiceService.findAllByInvoice(id));
+
+
+        model.addAttribute("viewClient", "/WEB-INF/view/include/detail-purchase-order.jsp");
+        return "layout/client";
+    }
 }

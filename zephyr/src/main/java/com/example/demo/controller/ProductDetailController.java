@@ -3,6 +3,7 @@ package com.example.demo.controller;
 import com.example.demo.entity.Color;
 import com.example.demo.entity.Product;
 import com.example.demo.entity.ProductDetails;
+import com.example.demo.entity.Size;
 import com.example.demo.entity.Staff;
 import com.example.demo.service.ColorService;
 import com.example.demo.service.OriginSerivce;
@@ -183,6 +184,18 @@ public class ProductDetailController {
         model.addAttribute("staffSession", staffName);
         productDetailsService.update(productDetails, id);
         return "redirect:/zephyr/admin/product-detail/index";
+    }
+
+    @GetMapping("/search")
+    public String search(@RequestParam("inputProductDetail") String inputProductDetail,
+                         @RequestParam(defaultValue = "0", name = "page") Integer number,
+                         Model model) {
+        Pageable pageable = PageRequest.of(number, 10);
+        Page<ProductDetails> pageProductDetail = productDetailsService.findAllByProductDetailSearch(inputProductDetail, pageable);
+        model.addAttribute("listProductDetail", pageProductDetail);
+        model.addAttribute("listRestore", productDetailsService.findAllOrderByIdProductDetailStatus0());
+        model.addAttribute("view", "/WEB-INF/view/product_detail/index.jsp");
+        return "home/staff";
     }
 
 }

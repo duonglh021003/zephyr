@@ -58,5 +58,10 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
         shoppingCartRepository.save(shoppingCart);
     }
 
+    @Override
+    public String findMaxCodeShoppingCart() {
+        return shoppingCartRepository.findMaxCodeShoppingCart();
+    }
+
 
 }

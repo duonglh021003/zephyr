@@ -105,4 +105,9 @@ public class ProductDetailsServiceImpl implements ProductDetailsService {
     public void saveProductDetails(List<ProductDetails> productDetailsList) {
         productDetailsRepository.saveAll(productDetailsList);
     }
+
+    @Override
+    public Page<ProductDetails> findAllByProductDetailSearch(String inputProductDetail, Pageable pageable) {
+        return productDetailsRepository.findAllByProductDetailSearch(inputProductDetail, pageable);
+    }
 }

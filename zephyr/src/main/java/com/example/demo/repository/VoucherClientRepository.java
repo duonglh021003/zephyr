@@ -40,4 +40,7 @@ public interface VoucherClientRepository extends JpaRepository<VoucherClient, Lo
             "where vc.voucher_client_status = 0", nativeQuery = true)
     List<VoucherClient> findAllByStatus0();
 
+    @Query(value = "select max(code) from voucher_client", nativeQuery = true)
+    String findMaxCodeVoucherClient();
+
 }
