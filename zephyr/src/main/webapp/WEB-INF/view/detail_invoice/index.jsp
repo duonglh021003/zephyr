@@ -112,14 +112,7 @@
                 </table>
             </div>
 
-            <div>
-                <c:forEach items="${ listInvoice }" var="invoice">
-                    <a type="button" href="/zephyr/admin/invoice/update-status-2?id=${invoice.id}"
-                       class="btn btn-success" style="margin-left: 60%; margin-top: 30px"
-                       onclick="if(!confirm('Bạn có chắc chắn muốn xác nhận đơn hàng này không?')){return false}else{alert('xác nhận thành công');}"
-                    >confirm invoice</a>
-                </c:forEach>
-            </div>
+
         </div>
     </div>
 </div>

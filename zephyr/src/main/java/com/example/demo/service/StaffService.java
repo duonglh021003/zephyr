@@ -17,12 +17,14 @@ public interface StaffService {
 
     Page<Staff> getAll(Pageable pageable);
 
-    Page<Staff> listDelete(Pageable pageable);
+    List<Staff> listDelete();
 
     void add(Staff staff);
 
     void update(Staff staff, Long id);
 
     Staff detail(Long id);
+
+    String findMaxCodeStaff();
 
 }

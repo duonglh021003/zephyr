@@ -15,13 +15,6 @@
     <div class="row">
         <div class="col-md-3">
             <div class="mb-3">
-                <label class="form-label">mã</label>
-                <form:input path="code" class="form-control"/>
-                <form:errors path="code" cssClass="errors"/><br>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="mb-3">
                 <label class="form-label">tên</label>
                 <form:input path="name" class="form-control"/>
                 <form:errors path="name" cssClass="errors"/><br>
@@ -40,9 +33,6 @@
                 <form:errors path="phoneNumber" cssClass="errors"/><br>
             </div>
         </div>
-    </div>
-
-    <div class="row">
         <div class="col-md-3">
             <div class="mb-3">
                 <label class="form-label">gmail</label>
@@ -50,6 +40,9 @@
                 <form:errors path="gmail" cssClass="errors"/><br>
             </div>
         </div>
+    </div>
+
+    <div class="row">
         <div class="col-md-3">
             <div class="mb-3">
                 <label class="form-label">giới tính</label> <br>
@@ -69,9 +62,6 @@
                 <input type="text" name="accumulatedScore" class="form-control" value="0"/>
             </div>
         </div>
-    </div>
-
-    <div class="row">
         <div class="col-md-3">
             <div class="mb-3">
                 <label class="form-label">password</label>
@@ -79,6 +69,9 @@
                 <form:errors path="password" cssClass="errors"/><br>
             </div>
         </div>
+    </div>
+
+    <div class="row">
         <div class="col-md-3">
             <div class="mb-3">
                 <label class="form-label">trạng thái</label> <br>
@@ -92,6 +85,9 @@
                 <input type="text" class="form-control" name="rank" value="1"/>
 
             </div>
+        </div>
+        <div class="col-md-3">
+
         </div>
         <div class="col-md-3">
 

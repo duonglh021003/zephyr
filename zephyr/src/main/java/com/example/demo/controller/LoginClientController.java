@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import com.example.demo.entity.Client;
 import com.example.demo.entity.GooglePojo;
+import com.example.demo.entity.Staff;
 import com.example.demo.service.ClientService;
 import com.example.demo.config.GoogleUtils;
 import jakarta.servlet.http.HttpSession;
@@ -52,5 +53,25 @@ public class LoginClientController {
         return clientService.login(gmail);
     }
 
+    @GetMapping("/sign-in")
+    public String signIn(@RequestParam("gmail") String gmail,
+                         @RequestParam("password") String password,
+                         Model model,
+                         HttpSession session){
+
+        Client client = clientService.detailGmail(gmail);
+
+        if(gmail.isEmpty() || password.isEmpty()){
+            model.addAttribute("errors", "email hoặc password trống!");
+            return "login/client";
+        }
+        if(!(gmail.equalsIgnoreCase(client.getGmail())) || !(password.equalsIgnoreCase(client.getPassword()))){
+            model.addAttribute("errors", "email hoặc password bạn nhập sai!");
+        }
+        model.addAttribute("clientSession", client);
+        session.setAttribute("clientSession", client);
+        model.addAttribute("viewClient", "/WEB-INF/view/home/client.jsp");
+        return clientService.SignIn(gmail, password);
+    }
 
 }

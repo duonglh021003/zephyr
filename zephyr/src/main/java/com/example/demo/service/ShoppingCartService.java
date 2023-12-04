@@ -23,4 +23,6 @@ public interface ShoppingCartService {
 
     void add(ShoppingCart shoppingCart);
 
+    String findMaxCodeShoppingCart();
+
 }

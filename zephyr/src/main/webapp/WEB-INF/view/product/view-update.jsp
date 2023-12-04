@@ -25,8 +25,8 @@
         <div class="col-md-4">
             <div class="mb-3">
                 <label class="form-label">name</label>
-                <form:input path="name" class="form-control"/>
-                <form:errors path="name" cssClass="errors"/><br>
+                <form:input path="name" class="form-control" />
+                <form:errors path="name" cssStyle="color: red"/><br>
             </div>
         </div>
         <div class="col-md-4">
@@ -44,14 +44,13 @@
         <div class="col-md-6">
             <div class="mb-3">
                 <label class="form-label">ngày tạo</label>
-                <form:input path="dateCreate" class="form-control"/>
-                <form:errors path="dateCreate" cssClass="errors"/><br>
+                <form:input path="dateCreate" class="form-control" readonly="true" cssStyle="color: black"/>
             </div>
         </div>
         <div class="col-md-6">
             <div class="mb-3">
                 <label class="form-label">ngày sửa</label>
-                <input type="text" name="dateUpdate" class="form-control" value="${dateUpdate}"/>
+                <input type="text" name="dateUpdate" class="form-control" value="${dateUpdate}" readonly="readonly" style="color: black"/>
             </div>
         </div>
     </div>
@@ -60,14 +59,13 @@
         <div class="col-md-6">
             <div class="mb-3">
                 <label class="form-label">người tạo</label>
-                <form:input path="userCreate" class="form-control"/>
-                <form:errors path="userCreate" cssClass="errors"/><br>
+                <form:input path="userCreate" class="form-control" readonly="true" cssStyle="color: black"/>
             </div>
         </div>
         <div class="col-md-6">
             <div class="mb-3">
                 <label class="form-label">người sửa</label>
-                <input type="text" name="userUpdate" class="form-control" value="${staffSession.name}"/>
+                <input type="text" name="userUpdate" class="form-control" value="${staffSession.name}" readonly="readonly" style="color: black"/>
             </div>
         </div>
     </div>
@@ -76,7 +74,10 @@
         <div class="col-md-3"></div>
         <div class="col-md-6">
             <div class="mb-3">
-                <form:button type="submit" class="btn btn-primary" onclick="add()">update</form:button>
+                <form:button type="submit" class="btn btn-primary"
+                             onclick="if(!confirm('Bạn có muốn sửa?')){return false}else{alert('sửa thành công');}">
+                    update
+                </form:button>
             </div>
         </div>
         <div class="col-md-3"></div>

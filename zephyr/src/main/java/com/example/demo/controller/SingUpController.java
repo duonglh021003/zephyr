@@ -7,9 +7,12 @@ import com.example.demo.entity.ShoppingCart;
 import com.example.demo.repository.FavouriteRepository;
 import com.example.demo.repository.RankRepository;
 import com.example.demo.service.ClientService;
+import com.example.demo.service.FavouriteService;
 import com.example.demo.service.ShoppingCartService;
+import com.example.demo.validation.Until;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,53 +35,87 @@ public class SingUpController {
     private ShoppingCartService shoppingCartService;
 
     @Autowired
-    private FavouriteRepository favouriteRepository;
+    private FavouriteService favouriteService;
 
 
     LocalDate localDate = LocalDate.now();
-    private static final Random random = new Random();
 
-    public static String generateRandomStringClient() {
-        StringBuilder sb = new StringBuilder(10);
-        sb.append("CE");
-        for (int i = 0; i < 5; i++) {
-            int rndNum = random.nextInt(10);
-            sb.append(rndNum);
-        }
-        return sb.toString();
+    private String incrementCode(String code) {
+        String prefix = code.substring(0, 2);
+        int number = Integer.parseInt(code.substring(2));
+        number++;
+        String nextCode= String.format("%s%05d", prefix, number);
+        return nextCode;
     }
 
-    public static String generateRandomStringShoppingCart() {
-        StringBuilder sb = new StringBuilder(10);
-        sb.append("SC");
-        for (int i = 0; i < 5; i++) {
-            int rndNum = random.nextInt(10);
-            sb.append(rndNum);
-        }
-        return sb.toString();
+    private String getNextCodeClient() {
+        String currentCodeClient = clientService.findMaxCodeClient();
+        String nextCodeClient = incrementCode(currentCodeClient);
+        return nextCodeClient;
     }
 
-    public static String generateRandomStringFavourite() {
-        StringBuilder sb = new StringBuilder(10);
-        sb.append("FR");
-        for (int i = 0; i < 5; i++) {
-            int rndNum = random.nextInt(10);
-            sb.append(rndNum);
-        }
-        return sb.toString();
+    private String getNextCodeShoppingCart() {
+        String currentCodeShoppingCart = shoppingCartService.findMaxCodeShoppingCart();
+        String nextCodeShoppingCart = incrementCode(currentCodeShoppingCart);
+        return nextCodeShoppingCart;
+    }
+
+    private String getNextCodeFavourite() {
+        String currentCodeFavourite = shoppingCartService.findMaxCodeShoppingCart();
+        String nextCodeFavourite = incrementCode(currentCodeFavourite);
+        return nextCodeFavourite;
     }
 
     @PostMapping()
     public String add(@RequestParam("name") String name,
                       @RequestParam("gmail") String gmail,
-                      @RequestParam("password") String password) {
+                      @RequestParam("password") String password,
+                      Model model) {
 
-        System.out.println("aaaaaaaaaaaaaaaaaa          " + name);
-        System.out.println("bbbbbbbbbbbbbbbbbb          " + gmail);
-        System.out.println("cccccccccccccccccc          " + password);
+        String PASSWORD = "^(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$";
+
+        for (Client clientErrors : clientService.findAll()){
+            if(name.isEmpty()){
+                model.addAttribute("errors", "name không được để trống!");
+                return "login/client";
+            }
+            if(gmail.isEmpty()){
+                model.addAttribute("errors", "email không được để trống!");
+                return "login/client";
+            }
+            if(password.isEmpty()){
+                model.addAttribute("errors", "password không được để trống!");
+                return "login/client";
+            }
+            if(!(gmail.matches(Until.GMAIL))){
+                model.addAttribute("errors", "email không đúng định dạng!");
+                return "login/client";
+            }
+            if(gmail.equalsIgnoreCase(clientErrors.getGmail())){
+                model.addAttribute("errors", "email đã tồn tại!");
+                return "login/client";
+            }
+            if(!(password.matches(PASSWORD))){
+                model.addAttribute("errors", "Chữ cái đầu phải viết hoa, length password phải lớn hơn 8, phải có ký tự đặc biệt");
+                return "login/client";
+            }
+        }
+
+        ShoppingCart shoppingCart = ShoppingCart.builder()
+                .code(getNextCodeShoppingCart())
+                .totalShoppingCart(0.0)
+                .status(1)
+                .build();
+        shoppingCartService.add(shoppingCart);
+
+        Favourite favourite = Favourite.builder()
+                .code(getNextCodeFavourite())
+                .status(1)
+                .build();
+        favouriteService.add(favourite);
 
         Client client = Client.builder()
-                .code(generateRandomStringClient())
+                .code(getNextCodeClient())
                 .name(name)
                 .gmail(gmail)
                 .pointUsr(0.0)
@@ -90,32 +127,14 @@ public class SingUpController {
                 .password(password)
                 .status(1)
                 .rank(rankRepository.getById(1L))
+                .shoppingCart(shoppingCart)
+                .favourite(favourite)
                 .build();
         clientService.add(client);
 
-        Client clientUpdate = clientService.detailGmail(gmail);
+        model.addAttribute("errorsPass", "đăng ký thành công");
 
-        ShoppingCart shoppingCart = ShoppingCart.builder()
-                .code(generateRandomStringShoppingCart())
-                .totalShoppingCart(0.0)
-                .status(1)
-                .build();
-        shoppingCartService.add(shoppingCart);
-
-        Favourite favourite = Favourite.builder()
-                .code(generateRandomStringFavourite())
-                .status(1)
-                .build();
-        favouriteRepository.save(favourite);
-
-        System.out.println("aaaaaaaaaaaaaaaaaa      "+shoppingCart);
-        System.out.println("bbbbbbbbbbbbbbbbbb      "+favourite);
-        clientUpdate.setShoppingCart(shoppingCart);
-        clientUpdate.setFavourite(favourite);
-        clientService.update(clientUpdate, clientUpdate.getId());
-
-
-        return "redirect:/zephyr/login";
+        return "login/client";
     }
 
 

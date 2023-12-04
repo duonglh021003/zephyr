@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import com.example.demo.entity.Origin;
 import com.example.demo.entity.Size;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -21,4 +22,8 @@ public interface SizeService {
     void update(Size size, Long id);
 
     Size detail(Long id);
+
+    Page<Size> findAllBySizeSearch(String inputSize, Pageable pageable);
+
+    String findMaxCodeSize();
 }

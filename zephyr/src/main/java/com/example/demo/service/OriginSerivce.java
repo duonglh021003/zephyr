@@ -21,4 +21,7 @@ public interface OriginSerivce {
 
     Origin detail(Long id);
 
+    Page<Origin> findAllByOriginSearch(String inputOrigin,Pageable pageable);
+
+    String findMaxCodeOrigin();
 }

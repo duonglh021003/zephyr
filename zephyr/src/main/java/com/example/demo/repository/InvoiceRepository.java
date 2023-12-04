@@ -3,12 +3,16 @@ package com.example.demo.repository;
 import com.example.demo.entity.DetailVoucherClient;
 import com.example.demo.entity.DetailedShoppingCart;
 import com.example.demo.entity.Invoice;
+import com.example.demo.entity.Product;
 import com.example.demo.entity.ProductDetails;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Repository
@@ -29,7 +33,7 @@ public interface InvoiceRepository extends JpaRepository<Invoice, Long> {
     @Query(value = "select i.*\n" +
             "from\n" +
             "invoice i\n" +
-            "where i.id_client = ?1 ", nativeQuery = true)
+            "where i.id_client = ?1 and i.id_payment = 1 ", nativeQuery = true)
     List<Invoice> findByInvoiceStatusAll(@Param("id") Long id);
 
     @Query(value = "select i.*\n" +
@@ -59,7 +63,8 @@ public interface InvoiceRepository extends JpaRepository<Invoice, Long> {
     @Query(value = "select i.*\n" +
             "from\n" +
             "invoice i\n" +
-            "where i.id_client = ?1 and i.invoice_status = '5'", nativeQuery = true)
+            "where i.id_client = ?1 and i.invoice_status = '5' \n" +
+            "ORDER BY i.id DESC", nativeQuery = true)
     List<Invoice> findByInvoiceStatus5(@Param("id") Long id);
 
     @Query(value = "select i.*\n" +
@@ -83,17 +88,23 @@ public interface InvoiceRepository extends JpaRepository<Invoice, Long> {
 
     @Query(value = "select i.*\n" +
             "from invoice i\n" +
-            "where i.id_staff = ?1 AND i.invoice_status != '5'", nativeQuery = true)
+            "where i.id_staff = ?1 " +
+            "AND i.invoice_status != '0' " +
+            "AND i.invoice_status != '5' " +
+            "AND i.invoice_status != '6' " +
+            "AND i.invoice_status != '7'", nativeQuery = true)
     List<Invoice> findAllByIdStaff(@Param("id") Long id);
 
     @Query(value = "select i.*\n" +
             "from invoice i\n" +
-            "where i.id_staff = ?1 AND i.invoice_status = '5'", nativeQuery = true)
+            "where i.id_staff = ?1 AND i.invoice_status = '5' \n" +
+            "ORDER BY i.id DESC", nativeQuery = true)
     List<Invoice> findAllByIdStaffStatus5(@Param("id") Long id);
 
     @Query(value = "select i.*\n" +
             "from invoice i\n" +
-            "where i.id_staff = ?1", nativeQuery = true)
+            "where i.id_staff = ?1 \n " +
+            "ORDER BY i.id DESC", nativeQuery = true)
     List<Invoice> findAllByIdStaffStatusAll(@Param("id") Long id);
 
 
@@ -217,9 +228,31 @@ public interface InvoiceRepository extends JpaRepository<Invoice, Long> {
     @Query(value = "select *\n" +
             "from\n" +
             "invoice i\n" +
-            "where i.invoice_status = 0 and i.id_staff = ?1 ", nativeQuery = true)
+            "where i.invoice_status = 0 and i.id_staff = ?1 \n" +
+            "ORDER BY i.id DESC", nativeQuery = true)
     List<Invoice> findAllByStaffStatus0(@Param("idStaff") Long idStaff);
 
+    @Query(value = "select *\n" +
+            "from\n" +
+            "invoice i\n" +
+            "where i.code like %?1% \n" +
+            "ORDER BY i.id DESC", nativeQuery = true)
+    List<Invoice> findAllByInvoiceSearch(@Param("inputInvoice") String inputInvoice);
+
+    @Query(value = "select *\n" +
+            "from\n" +
+            "invoice i\n" +
+            "where i.invoice_status = ?1 \n" +
+            "ORDER BY i.id DESC", nativeQuery = true)
+    List<Invoice> findAllByStatusSearch(@Param("status") Integer status);
+
+    @Query(value = "select *\n" +
+            "from\n" +
+            "invoice i\n" +
+            "where :dateBegin <= i.date_create and :dateEnd >= i.date_create \n" +
+            "ORDER BY i.id DESC", nativeQuery = true)
+    List<Invoice> findAllByDateSearch(@Param("dateBegin") LocalDate dateBegin,
+                                      @Param("dateEnd") LocalDate dateEnd);
     // END SELL OFF
 
     @Query(value = "select max(code) from invoice", nativeQuery = true)

@@ -28,7 +28,6 @@
             <button class="tablink" onclick="openPage('4', this, 'FFD333')">chờ giao hàng</button>
             <button class="tablink" onclick="openPage('5', this, 'FFD333')">đã nhận hàng</button>
             <button class="tablink" onclick="openPage('7', this, 'FFD333')">đã huỷ</button>
-            <button class="tablink" onclick="openPage('8', this, 'FFD333')">đổi hàng</button>
 
             <div id="All" class="tabcontent">
                 <div class="bg-light p-30 mb-5">
@@ -239,10 +238,7 @@
                 </div>
             </div>
 
-            <div id="8" class="tabcontent">
-                <h3>7</h3>
-                <p>Who we are and what we do.</p>
-            </div>
+
         </div>
     </div>
 </div>

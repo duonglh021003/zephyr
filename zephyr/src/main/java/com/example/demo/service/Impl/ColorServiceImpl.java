@@ -27,7 +27,34 @@ public class ColorServiceImpl implements ColorService {
     }
 
     @Override
-    public Page<Color> findAllByStatus0(Pageable pageable) {
-        return colorRepository.findAllByStatus0(pageable);
+    public List<Color> findAllByStatus0() {
+        return colorRepository.findAllByStatus0();
     }
+
+    @Override
+    public String findMaxCodeColor() {
+        return colorRepository.findMaxCodeColor();
+    }
+
+    @Override
+    public void add(Color color) {
+        colorRepository.save(color);
+    }
+
+    @Override
+    public void update(Color color) {
+        colorRepository.save(color);
+    }
+
+    @Override
+    public Color detail(Long id) {
+        return colorRepository.getById(id);
+    }
+
+    @Override
+    public Page<Color> findAllByColorSearch(String inputColor, Pageable pageable) {
+        return colorRepository.findAllByColorSearch(inputColor, pageable);
+    }
+
+
 }

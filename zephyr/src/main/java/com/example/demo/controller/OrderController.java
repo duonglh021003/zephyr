@@ -82,25 +82,32 @@ public class OrderController {
     @Autowired
     private DetailVoucherClientService detailVoucherClientService;
 
-    LocalDate localDate = LocalDate.now();
 
 
-    private static final Random random = new Random();
+    private String incrementCodeOrder(String code) {
+        String prefix = code.substring(0, 2);
+        int number = Integer.parseInt(code.substring(2));
+        number++;
+        String nextCode= String.format("%s%05d", prefix, number);
+        return nextCode;
+    }
 
-    public static String generateRandomString() {
-        StringBuilder sb = new StringBuilder(10);
-        sb.append("ZN");
-        for (int i = 0; i < 5; i++) {
-            int rndNum = random.nextInt(10);
-            sb.append(rndNum);
-        }
-        return sb.toString();
+    private String getNextCodeInvoice() {
+        String currentCodeOrder = invoiceService.findMaxCodeOrder();
+        String nextCodeOrder = incrementCodeOrder(currentCodeOrder);
+        return nextCodeOrder;
+    }
+
+    private String getNextCodeAddress() {
+        String currentCodeAddress = addressService.findMaxCodeAddress();
+        String nextCodeAddress = incrementCodeOrder(currentCodeAddress);
+        return nextCodeAddress;
     }
 
 
     @GetMapping("/order/add")
     public String orderAdd(Model model, HttpSession session) {
-
+        LocalDate localDate = LocalDate.now();
         Long idShopping;
         Double intoMoney = 0.00;
         Double total = 0.00;
@@ -130,7 +137,7 @@ public class OrderController {
 
 
         Invoice invoice = Invoice.builder()
-                .code(generateRandomString())
+                .code(getNextCodeInvoice())
                 .hourMinute(currentTime.getHour() + ":" + currentTime.getMinute())
                 .dateCreate(localDate)
                 .totalInvoice(total)
@@ -229,16 +236,6 @@ public class OrderController {
             }
         }
 
-        Client client0001 = clientService.detail(client.getId());
-        Double getPoints = intoMoney / 100 + intoMoney*(client.getRank().getPercent() / 100);
-        Double getPointUsrs = getPoints + (client0001.getPointUsr() - point);
-
-        Double accumulatedScore = intoMoney / 100;
-        Double getAccumulatedScores = accumulatedScore + client0001.getAccumulatedScore();
-        client.setPointUsr(getPointUsrs);
-        client.setAccumulatedScore(getAccumulatedScores);
-
-        clientService.update(client, client.getId());
         invoiceService.update(invoice, invoice01.getId());
         return "redirect:/zephyr/shop";
     }
@@ -253,7 +250,7 @@ public class OrderController {
                                   @RequestParam("status") Integer status,
                                   HttpSession session) {
 
-
+        LocalDate localDate = LocalDate.now();
         Client client = (Client) session.getAttribute("clientSession");
         List<Address> list = clientService.findAllById(client.getId());
         for (Address p : list) {
@@ -264,7 +261,7 @@ public class OrderController {
             }
         }
         Address address = Address.builder()
-                .code(generateRandomString())
+                .code(getNextCodeAddress())
                 .name(name)
                 .phoneNumber(phoneNumber)
                 .city(city)
@@ -301,11 +298,9 @@ public class OrderController {
             intoMoney = invoice1.getTotalInvoice() - detailVoucherClient.getReducedPrice() + invoice1.getShippingMoney() - point;
             invoice1.setIntoMoney(intoMoney);
             invoice1.setDetailVoucherClient(detailVoucherClient);
-            System.out.println("aaaaaaaaaaaaaaaaaaaaaaa     " + invoice1);
             invoiceService.update(invoice1, invoice1.getId());
         }
 
-        System.out.println("bbbbbbbbbbbbbbbbbbbbbbb     " + codeVoucher);
         return "redirect:/zephyr/shop/order";
     }
 

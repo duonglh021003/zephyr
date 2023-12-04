@@ -7,6 +7,10 @@
 
 </head>
 <body>
+<div style="margin-bottom: 30px">
+    <span><a href="/zephyr/admin/origin/index">origin </a></span>
+    <span style="color: #C0C0C0"> / update</span>
+</div>
 <form:form action="/zephyr/admin/origin/update?id=${origin.id}" method="POST" modelAttribute="origin">
     <div class="row">
         <div class="col-md-4">
@@ -21,7 +25,7 @@
             <div class="mb-3">
                 <label class="form-label">name</label>
                 <form:input path="name" class="form-control"/>
-                <form:errors path="name" cssClass="errors"/><br>
+                <form:errors path="name" cssStyle="color: red"/><br>
             </div>
         </div>
         <div class="col-md-4">

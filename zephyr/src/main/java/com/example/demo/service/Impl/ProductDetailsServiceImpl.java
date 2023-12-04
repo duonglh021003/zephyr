@@ -81,13 +81,8 @@ public class ProductDetailsServiceImpl implements ProductDetailsService {
     }
 
     @Override
-    public List<ProductDetails> findGroupByProduct(Long id) {
-        return productDetailsRepository.findGroupByProduct(id);
-    }
-
-    @Override
-    public Page<ProductDetails> findAllByDisplay(Pageable pageable) {
-        return productDetailsRepository.findAllByDisplay(1, pageable);
+    public Page<ProductDetails> findAllByProductPage(Pageable pageable) {
+        return productDetailsRepository.findAllByProductPage(pageable);
     }
 
     @Override
@@ -96,13 +91,23 @@ public class ProductDetailsServiceImpl implements ProductDetailsService {
     }
 
     @Override
-    public List<ProductDetails> findAllByDisplaySell() {
-        return productDetailsRepository.findAllByDisplaySell();
+    public List<ProductDetails> findAllByProductList() {
+        return productDetailsRepository.findAllByProductList();
     }
 
 
     @Override
     public List<ProductDetails> findAllByProductAndColorAndSize(Long product, Long size, Long color) {
         return productDetailsRepository.findAllByProductAndColorAndSize(product, size, color);
+    }
+
+    @Override
+    public void saveProductDetails(List<ProductDetails> productDetailsList) {
+        productDetailsRepository.saveAll(productDetailsList);
+    }
+
+    @Override
+    public Page<ProductDetails> findAllByProductDetailSearch(String inputProductDetail, Pageable pageable) {
+        return productDetailsRepository.findAllByProductDetailSearch(inputProductDetail, pageable);
     }
 }

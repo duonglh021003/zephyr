@@ -16,9 +16,12 @@
     <div class="row">
         <div class="col-md-3">
             <div class="mb-3">
-                <label class="form-label">mã</label>
-                <form:input path="code" class="form-control"/>
-                <form:errors path="code" cssClass="errors"/><br>
+                <label class="form-label">chức vụ</label> <br>
+                <select name="position" ${staff.position.name} class="form-control">
+                    <c:forEach items="${listPosition}" var="position">
+                        <option value="${position.id}">${position.name}</option>
+                    </c:forEach>
+                </select>
             </div>
         </div>
         <div class="col-md-3">
@@ -107,27 +110,6 @@
                 hoạt động
             </div>
         </div>
-    </div>
-
-
-    <div class="row">
-        <div class="col-md-3">
-            <div class="mb-3">
-                <label class="form-label">chức vụ</label> <br>
-                <select name="position" ${staff.position.name} class="form-control">
-                    <c:forEach items="${listPosition}" var="position">
-                        <option value="${position.id}">${position.name}</option>
-                    </c:forEach>
-                </select>
-            </div>
-        </div>
-        <div class="col-md-3">
-
-        </div>
-        <div class="col-md-3">
-
-        </div>
-        <div class="col-md-3"></div>
     </div>
 
     <div class="row">

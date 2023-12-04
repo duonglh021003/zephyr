@@ -58,7 +58,7 @@ public class Client {
     @Column(name = "accumulated_score")
     private Double accumulatedScore;
 
-    @Column(name = "staff_password")
+    @Column(name = "client_password")
     private String password;
 
     @Column(name = "date_create")
@@ -73,7 +73,7 @@ public class Client {
     @Column(name = "user_update")
     private String userUpdate;
 
-    @Column(name = "staff_status")
+    @Column(name = "client_status")
     private Integer status;
 
     @ManyToOne(fetch = FetchType.EAGER)

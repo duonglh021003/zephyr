@@ -52,8 +52,8 @@ public class StaffServiceImpl implements StaffService {
     }
 
     @Override
-    public Page<Staff> listDelete(Pageable pageable) {
-        return staffRepository.findAllByStatus(0,pageable);
+    public List<Staff> listDelete() {
+        return staffRepository.findAllByStatus0();
     }
 
     @Override
@@ -69,6 +69,11 @@ public class StaffServiceImpl implements StaffService {
     @Override
     public Staff detail(Long id) {
         return staffRepository.getById(id);
+    }
+
+    @Override
+    public String findMaxCodeStaff() {
+        return staffRepository.findMaxCodeStaff();
     }
 
 

@@ -72,7 +72,7 @@
                         <c:forEach begin="0" end="${ listProduct.totalPages -1}" varStatus="loop">
                             <li class="page-item">
                                 <a class="page-link"
-                                   href="/zephyr/admin/product-detail/index?page=${loop.begin + loop.count - 1}">
+                                   href="/zephyr/admin/product/index?page=${loop.begin + loop.count - 1}">
                                         ${loop.begin + loop.count }
                                 </a>
                             </li>
@@ -146,7 +146,8 @@
                         <td class="align-middle">${restore.userUpdate}</td>
                         <td class="align-middle">${restore.status == 1 ? "đang hoạt động" : "ngừng hoạt động"}</td>
                         <td class="align-middle">
-                            <a class="btn btn-info" href="/zephyr/admin/product/restore?id=${restore.id}">
+                            <a class="btn btn-info" href="/zephyr/admin/product/restore?id=${restore.id}"
+                               onclick="if(!confirm('Bạn có muốn khôi phục ?')){return false}else{alert('khôi phục thành công');}">
                                 restore
                             </a>
                         </td>
@@ -158,8 +159,6 @@
         </div>
     </div>
 </div>
-
-<%--<script src="${pageContext.request.contextPath}/assets/jsSell/img.js"></script>--%>
 
 <%-- End restore--%>
 </body>

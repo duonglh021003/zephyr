@@ -1,14 +1,19 @@
 package com.example.demo.controller;
 
 import com.example.demo.entity.Address;
+import com.example.demo.entity.Client;
 import com.example.demo.entity.DeliveryNotes;
 import com.example.demo.entity.DetailDeliveryNotes;
+import com.example.demo.entity.DetailedInvoice;
 import com.example.demo.entity.Invoice;
+import com.example.demo.entity.ProductDetails;
 import com.example.demo.service.AddressService;
+import com.example.demo.service.ClientService;
 import com.example.demo.service.DeliveryNotesService;
 import com.example.demo.service.DetailDeliveryNotesService;
 import com.example.demo.service.DetailedInvoiceService;
 import com.example.demo.service.InvoiceService;
+import com.example.demo.service.ProductDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -39,6 +44,12 @@ public class DetailDeliveryNotesController {
 
     @Autowired
     private DeliveryNotesService deliveryNotesService;
+
+    @Autowired
+    private ClientService clientService;
+
+    @Autowired
+    private ProductDetailsService productDetailsService;
 
     @GetMapping("/detail")
     public String detail(@RequestParam("id") Long id,
@@ -86,8 +97,28 @@ public class DetailDeliveryNotesController {
             getprogresss = "6.png";
             status = 6;
         }
-
         Invoice invoice = invoiceService.detail(deliveryNotes.getInvoice().getId());
+
+        if(invoice.getStatus() == 5){
+            if (String.valueOf(invoice.getClient()).equalsIgnoreCase("null") == false) {
+                Client client = clientService.detail(invoice.getClient().getId());
+                Double getPoints = invoice.getIntoMoney() / 100 + invoice.getIntoMoney() * (client.getRank().getPercent() / 100);
+                Double getPointUsrs = getPoints + (client.getPointUsr() - invoice.getPoint());
+
+                Double accumulatedScore = invoice.getIntoMoney() / 100;
+                Double getAccumulatedScores = accumulatedScore + client.getAccumulatedScore();
+                client.setPointUsr(getPointUsrs);
+                client.setAccumulatedScore(getAccumulatedScores);
+                clientService.update(client, client.getId());
+            }
+
+            for (DetailedInvoice detailedInvoice : detailedInvoiceService.findAllByIdInvoice(invoice.getId())) {
+                ProductDetails productDetails = productDetailsService.detail(detailedInvoice.getProductDetails().getId());
+                productDetails.setInventory(productDetails.getInventory() - detailedInvoice.getQuantity());
+                productDetailsService.update(productDetails, productDetails.getId());
+            }
+        }
+
         invoice.setStatus(status);
         DeliveryNotes notes = deliveryNotesService.detail(deliveryNotes.getDeliveryNotes().getId());
         notes.setStatus(status);

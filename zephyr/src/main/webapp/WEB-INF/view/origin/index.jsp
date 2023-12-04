@@ -7,18 +7,23 @@
 </head>
 <body>
 <div style="margin-bottom: 30px">
-    <span><a href="/zephyr/admin/staff/index">Product </a></span>
+    <span><a href="/zephyr/admin/origin/index">origin </a></span>
     <span style="color: #C0C0C0"> / index</span>
 </div>
 <div class="col-lg-12 grid-margin stretch-card">
     <div class="card">
         <div class="card-body">
-            <a type="button" class="btn btn-success" data-toggle="modal"
-               data-target="#myModalAddOrigin"
-               style="margin-bottom: 20px">add</a>
+            <a style="margin-bottom: 20px" type="button" class="btn btn-success"
+               href="/zephyr/admin/origin/view-add">
+                add
+            </a>
             <a  type="button" class="btn btn-warning" data-toggle="modal"
                 data-target="#myModalRestore" style="margin-bottom: 20px; margin-left: 10px">
                 restore
+            </a>
+            <a type="button" class="btn btn-primary" data-toggle="modal"
+               data-target="#myModalSearch" style="margin-bottom: 20px; margin-left: 10px">
+                search
             </a>
 
             <div class="table-responsive">
@@ -66,7 +71,7 @@
                     <ul class="pagination" >
                         <c:forEach begin="0" end="${ listOrigin.totalPages -1}" varStatus="loop" >
                             <li class="page-item"  >
-                                <a class="page-link" href="/zephyr/admin/product-detail/index?page=${loop.begin + loop.count - 1}" >
+                                <a class="page-link" href="/zephyr/admin/origin/index?page=${loop.begin + loop.count - 1}" >
                                         ${loop.begin + loop.count }
                                 </a>
                             </li>
@@ -78,79 +83,37 @@
     </div>
 </div>
 
-<%-- Model prodct--%>
+<%-- Model search--%>
 
-<div class="modal fade" id="myModalAddOrigin" role="dialog">
+<div class="modal fade" id="myModalSearch" role="dialog">
     <div class="modal-dialog ">
         <div class="modal-content">
 
-            <form:form action="/zephyr/admin/origin/add" method="POST" modelAttribute="origin">
+            <div class="modal-header">
+                <h4 class="modal-title">my let input</h4>
+            </div>
+            <form action="/zephyr/admin/origin/search" method="get">
                 <div class="modal-body">
-                    <div class="row">
-                        <div class="col-md-6">
+                    <div class="row" >
+                        <div class="col-md-12">
                             <div class="mb-3">
-                                <label class="form-label">name</label>
-                                <form:input path="name" class="form-control"/>
-                                <form:errors path="name" cssClass="errors"/><br>
-
+                                <input class="form-control" name="inputOrigin" placeholder="input origin">
                             </div>
                         </div>
-                        <div class="col-md-6">
-                            <div class="mb-3">
-                                <label class="form-label">status</label>  <br>
-                                <input type="radio"  name="status" value="1" ${origin.status == "1" ? "checked" : ""} checked=""/>đang
-                                hoạt động
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="mb-3">
-                                <label class="form-label">ngày tạo</label>
-                                <input type="text" name="dateCreate" class="form-control" value="${dateUpdate}"/>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="mb-3">
-                                <label class="form-label">ngày sửa</label>
-                                <input type="text" name="dateUpdate" class="form-control" value="${dateUpdate}"/>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="mb-3">
-                                <label class="form-label">người tạo</label>
-                                <input type="text" name="userCreate" class="form-control" value="${staffSession.name}"/>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="mb-3">
-                                <label class="form-label">người sửa</label>
-                                <input type="text" name="userUpdate" class="form-control" value="${staffSession.name}"/>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-3"></div>
-                        <div class="col-md-6">
-                            <div class="mb-3">
-                                <form:button type="submit" class="btn btn-primary" onclick="add()">Add</form:button>
-                            </div>
-                        </div>
-                        <div class="col-md-3"></div>
                     </div>
                 </div>
-            </form:form>
+                <div class="modal-footer" style="margin-top: 70px">
+                    <button type="button" style="border: 1px solid #eeeeee" class="btn btn-default" data-dismiss="modal" data-toggle="modal" data-target="#myModal">Close</button>
+                    <button  class="btn btn-primary" style="color: white" >search</button>
+                </div>
+            </form>
 
         </div>
     </div>
 </div>
 
-<%-- End product--%>
+<%-- End search--%>
+
 <%-- Model restore --%>
 
 <div class="modal fade" id="myModalRestore" role="dialog">

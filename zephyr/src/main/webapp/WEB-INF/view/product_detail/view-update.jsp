@@ -7,36 +7,39 @@
 
 </head>
 <body>
+<div style="margin-bottom: 30px">
+    <span><a href="/zephyr/admin/product-detail/index">product detail </a></span>
+    <span style="color: #C0C0C0"> / update</span>
+</div>
 <form:form action="/zephyr/admin/product-detail/update?id=${productDetail.id}" method="POST" modelAttribute="productDetail">
-
     <div class="row">
         <div class="col-md-3">
             <div class="mb-3">
                 <label class="form-label">images</label>
                 <input type="file" name="images" id="imageInput" value="${productDetail.images}" onchange="previewImage(event)">
                 <img  id="imagePreview" src="/assets/images/client/${productDetail.images}" alt="" style="width: 82px">
-
+                <form:errors path="images" cssStyle="color: red"/><br>
             </div>
         </div>
         <div class="col-md-3">
             <div class="mb-3">
                 <label class="form-label">inventory</label>
                 <form:input path="inventory" class="form-control"/>
-                <form:errors path="inventory" cssClass="errors"/><br>
+                <form:errors path="inventory" cssStyle="color: red"/><br>
             </div>
         </div>
         <div class="col-md-3">
             <div class="mb-3">
                 <label class="form-label">importPrice</label> <br>
                 <form:input path="importPrice" class="form-control"/>
-                <form:errors path="importPrice" cssClass="errors"/><br>
+                <form:errors path="importPrice" cssStyle="color: red"/><br>
             </div>
         </div>
         <div class="col-md-3">
             <div class="mb-3">
                 <label class="form-label">price</label>
                 <form:input path="price" class="form-control"/>
-                <form:errors path="price" cssClass="errors"/><br>
+                <form:errors path="price" cssStyle="color: red"/><br>
             </div>
         </div>
     </div>
@@ -46,7 +49,7 @@
             <div class="mb-3">
                 <label class="form-label">describe</label>
                 <form:input path="describe" class="form-control"/>
-                <form:errors path="describe" cssClass="errors"/><br>
+                <form:errors path="describe" cssStyle="color: red"/><br>
             </div>
         </div>
         <div class="col-md-3">
@@ -56,12 +59,8 @@
                 hoạt động
             </div>
         </div>
-        <div class="col-md-3">
-
-        </div>
-        <div class="col-md-3">
-
-        </div>
+        <div class="col-md-3"></div>
+        <div class="col-md-3"></div>
     </div>
 
     <div class="row">
@@ -149,9 +148,7 @@
         <div class="col-md-3"></div>
     </div>
 
-
 </form:form>
-
 <script src="${pageContext.request.contextPath}/assets/jsSell/img.js"></script>
 
 </body>

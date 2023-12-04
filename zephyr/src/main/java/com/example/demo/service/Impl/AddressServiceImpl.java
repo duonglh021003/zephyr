@@ -45,4 +45,9 @@ public class AddressServiceImpl implements AddressService {
     public List<Address> findAllAddress(Long id) {
         return addressRepository.findAllAddress(id);
     }
+
+    @Override
+    public String findMaxCodeAddress() {
+        return addressRepository.findMaxCodeAddress();
+    }
 }

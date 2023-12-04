@@ -2,6 +2,7 @@ package com.example.demo.service.Impl;
 
 import com.example.demo.entity.Address;
 import com.example.demo.entity.Client;
+import com.example.demo.entity.Staff;
 import com.example.demo.repository.ClientRepository;
 import com.example.demo.service.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -85,6 +86,33 @@ public class ClientServiceImpl implements ClientService {
             }
         }
         return null;
+    }
+
+    @Override
+    public String SignIn(String gmail, String password) {
+        Client client = clientRepository.findClientByGmailAndPassword(gmail,password);
+        if (client == null) {
+            return "login/client";
+        } else if (gmail.equalsIgnoreCase(client.getGmail()) && password.equalsIgnoreCase(client.getPassword())) {
+            return "redirect:/zephyr/home";
+        } else {
+            return "login/client";
+        }
+    }
+
+    @Override
+    public List<Client> findAll() {
+        return clientRepository.findAll();
+    }
+
+    @Override
+    public String findMaxCodeClient() {
+        return clientRepository.findMaxCodeClient();
+    }
+
+    @Override
+    public List<Client> findAllByStatus0() {
+        return clientRepository.findAllByStatus0();
     }
 
 

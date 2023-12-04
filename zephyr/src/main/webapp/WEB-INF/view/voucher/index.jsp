@@ -52,7 +52,7 @@
                             <td class="align-middle">${voucherClient.quantity}</td>
                             <td class="align-middle">${voucherClient.dateBegin}</td>
                             <td class="align-middle">${voucherClient.dateEnd}</td>
-                            <td class="align-middle">${voucherClient.reducedPrice}</td>
+                            <td class="align-middle">${voucherClient.reducedPrice}00</td>
                             <td class="align-middle">${voucherClient.dateCreate}</td>
                             <td class="align-middle">${voucherClient.dateUpdate}</td>
                             <td class="align-middle">${voucherClient.userCreate}</td>
@@ -93,46 +93,37 @@
 <div class="modal fade" id="myModalAddVoucherClient" role="dialog">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
-
             <form:form action="/zephyr/admin/voucher-client/add" method="POST" modelAttribute="voucherClient">
-
                 <div class="row">
                     <div class="col-md-3">
                         <div class="mb-3">
-                            <label class="form-label">code</label>
-                            <form:input path="code" class="form-control"/>
-                            <form:errors path="code" cssClass="errors"/><br>
+                            <label class="form-label">giá giảm</label>
+                            <form:input path="reducedPrice" class="form-control"/>
+                            <form:errors path="reducedPrice" cssClass="errors"/><br>
                         </div>
                     </div>
                     <div class="col-md-3">
                         <div class="mb-3">
-                            <label class="form-label">quantity</label>
+                            <label class="form-label">số lượng</label>
                             <form:input path="quantity" class="form-control"/>
                             <form:errors path="quantity" cssClass="errors"/><br>
                         </div>
                     </div>
                     <div class="col-md-3">
                         <div class="mb-3">
-                            <label class="form-label">dateBegin</label> <br>
+                            <label class="form-label">ngày bắt đầu</label> <br>
                             <input type="date" name="dateBegin" class="form-control"/>
                         </div>
                     </div>
                     <div class="col-md-3">
                         <div class="mb-3">
-                            <label class="form-label">dateEnd</label> <br>
+                            <label class="form-label">ngày kết thúc</label> <br>
                             <input type="date" name="dateEnd" class="form-control"/>
                         </div>
                     </div>
                 </div>
 
                 <div class="row">
-                    <div class="col-md-3">
-                        <div class="mb-3">
-                            <label class="form-label">reducedPrice</label>
-                            <form:input path="reducedPrice" class="form-control"/>
-                            <form:errors path="reducedPrice" cssClass="errors"/><br>
-                        </div>
-                    </div>
                     <div class="col-md-3">
                         <div class="mb-3">
                             <label class="form-label">inRank</label> <br>
@@ -150,7 +141,8 @@
                         hoạt động
                     </div>
                     <div class="col-md-3">
-
+                    </div>
+                    <div class="col-md-3">
                     </div>
                 </div>
 
@@ -190,8 +182,6 @@
                     </div>
                     <div class="col-md-3"></div>
                 </div>
-
-
             </form:form>
 
         </div>
@@ -216,8 +206,6 @@
                     <th> reducedPrice </th>
                     <th> dateCreate </th>
                     <th> dateUpdate </th>
-                    <th> userCreate </th>
-                    <th> userUpdate </th>
                     <th> inRank </th>
                     <th> status </th>
                     <th> restore </th>
@@ -244,8 +232,7 @@
                         <td class="align-middle">${voucherClientStatus0.reducedPrice}</td>
                         <td class="align-middle">${voucherClientStatus0.dateCreate}</td>
                         <td class="align-middle">${voucherClientStatus0.dateUpdate}</td>
-                        <td class="align-middle">${voucherClientStatus0.userCreate}</td>
-                        <td class="align-middle">${voucherClientStatus0.userUpdate}</td>
+
                         <td class="align-middle">${voucherClientStatus0.getRankVoucher()}</td>
                         <td class="align-middle">${voucherClientStatus0.status == 1 ? "đang hoạt động" : "ngừng hoạt động"}</td>
                         <td class="align-middle">

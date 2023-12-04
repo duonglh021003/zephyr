@@ -12,5 +12,15 @@ public interface ColorService {
 
     Page<Color> findAllByStatus1(Pageable pageable);
 
-    Page<Color> findAllByStatus0(Pageable pageable);
+    List<Color> findAllByStatus0();
+
+    String findMaxCodeColor();
+
+    void add(Color color);
+
+    void update(Color color);
+
+    Color detail(Long id);
+
+    Page<Color> findAllByColorSearch(String inputColor, Pageable pageable);
 }

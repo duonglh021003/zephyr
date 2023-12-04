@@ -6,6 +6,7 @@ import com.example.demo.entity.DetailedInvoice;
 import com.example.demo.entity.DetailedShoppingCart;
 import com.example.demo.entity.Invoice;
 import com.example.demo.entity.ProductDetails;
+import com.example.demo.entity.Size;
 import com.example.demo.entity.Staff;
 import com.example.demo.entity.Voucher;
 import com.example.demo.service.ClientService;
@@ -128,7 +129,7 @@ public class SellController {
 
     @GetMapping("/invoice")
     public String invoiceDetail(@RequestParam("id") Long id,
-                                Model model,HttpSession session) {
+                                Model model, HttpSession session) {
         Staff staff = (Staff) session.getAttribute("staffSession");
         if (String.valueOf(staff).equalsIgnoreCase("null")) {
             return "redirect:/zephyr/admin/login";
@@ -139,7 +140,7 @@ public class SellController {
         Double totalInvoice = listtotalInvoice.get(0);
 
         model.addAttribute("listInvoiceStatus0", invoiceService.findAllByStaffStatus0(staff.getId()));
-        model.addAttribute("listDetailProduct", productDetailsService.findAllByDisplaySell());
+        model.addAttribute("listDetailProduct", productDetailsService.findAllByProductList());
         model.addAttribute("listDetailInvoice", detailedInvoiceService.findAllByIdInvoice(id));
         model.addAttribute("listInvoice", invoiceService.findAllByInvoice(id));
         model.addAttribute("totalInvoice", totalInvoice);
@@ -343,11 +344,6 @@ public class SellController {
             invoice.setIntoMoney(intoMoney);
             invoiceService.update(invoice, idInvoice);
 
-            ProductDetails productDetails = productDetailsService.detail(detailedInvoice.getProductDetails().getId());
-            productDetails.setInventory(productDetails.getInventory() - quantity);
-            productDetailsService.update(productDetails, productDetails.getId());
-
-
         }
         return "redirect:/zephyr/admin/sell/invoice?id=" + invoice.getId();
     }
@@ -381,11 +377,6 @@ public class SellController {
         invoice.setIntoMoney(intoMoney);
         invoiceService.update(invoice, invoice.getId());
 
-        ProductDetails productDetails = productDetailsService.detail(detailedInvoice.getProductDetails().getId());
-        productDetails.setInventory(productDetails.getInventory() + detailedInvoice.getQuantity());
-        productDetailsService.update(productDetails, productDetails.getId());
-
-
         detailedInvoiceService.delete(id);
         return "redirect:/zephyr/admin/sell/invoice?id=" + invoice.getId();
     }
@@ -413,13 +404,33 @@ public class SellController {
         invoice.setStatus(5);
         invoiceService.update(invoice, invoice.getId());
 
+        if (String.valueOf(invoice.getClient()).equalsIgnoreCase("null") == false) {
+            Client client = clientService.detail(invoice.getClient().getId());
+            Double getPoints = intoMoney / 100 + intoMoney * (client.getRank().getPercent() / 100);
+            Double getPointUsrs = getPoints + (client.getPointUsr() - point);
+
+            Double accumulatedScore = intoMoney / 100;
+            Double getAccumulatedScores = accumulatedScore + client.getAccumulatedScore();
+            client.setPointUsr(getPointUsrs);
+            client.setAccumulatedScore(getAccumulatedScores);
+            clientService.update(client, client.getId());
+        }
+
+        for (DetailedInvoice detailedInvoice : detailedInvoiceService.findAllByIdInvoice(invoice.getId())) {
+            ProductDetails productDetails = productDetailsService.detail(detailedInvoice.getProductDetails().getId());
+            productDetails.setInventory(productDetails.getInventory() - detailedInvoice.getQuantity());
+            productDetailsService.update(productDetails, productDetails.getId());
+        }
+
         exportToWord(invoice);
         return "redirect:/zephyr/admin/sell/index";
     }
 
     @GetMapping("/invoice/delete")
-    public String invoiceDelete(@RequestParam("id") Long id){
-        invoiceService.delete(id);
+    public String invoiceDelete(@RequestParam("id") Long id) {
+        Invoice invoice = invoiceService.detail(id);
+        invoice.setStatus(7);
+        invoiceService.update(invoice, invoice.getId());
         return "redirect:/zephyr/admin/sell/index";
     }
 
@@ -477,7 +488,7 @@ public class SellController {
         row1.addNewTableCell().setText("Số lượng" + "\t\t");
         row1.addNewTableCell().setText("Thành Tiền");
 
-        for (DetailedInvoice  detailedInvoice : list) {
+        for (DetailedInvoice detailedInvoice : list) {
             XWPFTableRow row = table.createRow();
             row.getCell(0).setText(detailedInvoice.getProductDetails().getProduct().getName() + "( " +
                     detailedInvoice.getProductDetails().getSize().getName() + ", " +
@@ -497,10 +508,10 @@ public class SellController {
         XWPFParagraph infoParagraph3 = document.createParagraph();
         infoParagraph3.setAlignment(ParagraphAlignment.RIGHT);
         XWPFRun infoRun3 = infoParagraph3.createRun();
-        infoRun3.setText("Tổng tiền hóa đơn: " );
+        infoRun3.setText("Tổng tiền hóa đơn: ");
         infoRun3.setText("\t\t" + invoice.getTotalInvoice() + "00");
 
-        if(!(String.valueOf(invoice.getPoint()).equalsIgnoreCase("0.0"))) {
+        if (!(String.valueOf(invoice.getPoint()).equalsIgnoreCase("0.0"))) {
             XWPFParagraph infoParagraph4 = document.createParagraph();
             infoParagraph4.setAlignment(ParagraphAlignment.RIGHT);
             XWPFRun infoRun4 = infoParagraph4.createRun();
@@ -508,30 +519,30 @@ public class SellController {
             infoRun4.setText("\t\t\t" + "-" + invoice.getPoint() + "00");
         }
 
-        if(!(String.valueOf(invoice.getVoucher()).equalsIgnoreCase("null"))){
+        if (!(String.valueOf(invoice.getVoucher()).equalsIgnoreCase("null"))) {
             XWPFParagraph infoParagraph5 = document.createParagraph();
             infoParagraph5.setAlignment(ParagraphAlignment.RIGHT);
             XWPFRun infoRun5 = infoParagraph5.createRun();
-            infoRun5.setText("Giảm giá: " );
+            infoRun5.setText("Giảm giá: ");
             infoRun5.setText("\t\t\t" + "-" + invoice.getVoucher().getReducedPrice() + "00");
         }
 
         XWPFParagraph infoParagraph10 = document.createParagraph();
         infoParagraph10.setAlignment(ParagraphAlignment.RIGHT);
         XWPFRun infoRun10 = infoParagraph10.createRun();
-        infoRun10.setText("Thành tiền: " );
+        infoRun10.setText("Thành tiền: ");
         infoRun10.setText("\t\t\t" + invoice.getIntoMoney() + "00");
 
         XWPFParagraph infoParagraph6 = document.createParagraph();
         infoParagraph6.setAlignment(ParagraphAlignment.RIGHT);
         XWPFRun infoRun6 = infoParagraph6.createRun();
-        infoRun6.setText("Tổng tiền khách trả: " );
+        infoRun6.setText("Tổng tiền khách trả: ");
         infoRun6.setText("\t\t" + invoice.getClientGiveMoney() + "00");
 
         XWPFParagraph infoParagraph7 = document.createParagraph();
         infoParagraph7.setAlignment(ParagraphAlignment.RIGHT);
         XWPFRun infoRun7 = infoParagraph7.createRun();
-        infoRun7.setText("Tổng tiền trả lại: " );
+        infoRun7.setText("Tổng tiền trả lại: ");
         infoRun7.setText("\t\t" + invoice.getReturnClientMoney() + "00");
 
         document.createParagraph().setSpacingAfter(20);
@@ -546,12 +557,12 @@ public class SellController {
         XWPFParagraph infoParagraph8 = document.createParagraph();
         infoParagraph8.setAlignment(ParagraphAlignment.CENTER);
         XWPFRun infoRun8 = infoParagraph8.createRun();
-        infoRun8.setText("CẢM ƠN QUÝ KHÁCH VÀ HẸN GẶP LẠI " );
+        infoRun8.setText("CẢM ƠN QUÝ KHÁCH VÀ HẸN GẶP LẠI ");
 
         XWPFParagraph infoParagraph9 = document.createParagraph();
         infoParagraph9.setAlignment(ParagraphAlignment.CENTER);
         XWPFRun infoRun9 = infoParagraph9.createRun();
-        infoRun9.setText("Hotline: 0898629635 - Website: www.zephyr.com" );
+        infoRun9.setText("Hotline: 0898629635 - Website: www.zephyr.com");
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmss");
         String timestamp = sdf.format(new Date());

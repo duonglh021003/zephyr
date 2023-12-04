@@ -34,6 +34,19 @@ public class StaffController {
     @Autowired
     private PositionRepository positionRepository;
 
+    private String incrementCodeOrder(String code) {
+        String prefix = code.substring(0, 2);
+        int number = Integer.parseInt(code.substring(2));
+        number++;
+        String nextCode = String.format("%s%05d", prefix, number);
+        return nextCode;
+    }
+
+    private String getNextCode() {
+        String currentCode = staffService.findMaxCodeStaff();
+        String nextCode = incrementCodeOrder(currentCode);
+        return nextCode;
+    }
 
     @GetMapping("/index")
     public String index(@RequestParam(defaultValue = "0", name = "page") Integer number,
@@ -42,26 +55,12 @@ public class StaffController {
 
         Staff staff = (Staff) session.getAttribute("staffSession");
         model.addAttribute("staffSession", staff);
-        System.out.println("MMMMMMMMMMMMMMMMMMMMMMM: " + staff);
-        Pageable pageable = PageRequest.of(number, 6);
+        Pageable pageable = PageRequest.of(number, 10);
         Page<Staff> pageStaff = staffService.getAll(pageable);
         model.addAttribute("listStaff", pageStaff);
+        model.addAttribute("listRestore", staffService.listDelete());
         model.addAttribute("view", "/WEB-INF/view/staff/index.jsp");
 
-        return "home/staff";
-    }
-
-    @GetMapping("/list-delete")
-    public String listDelete(@RequestParam(defaultValue = "0", name = "page") Integer number,
-                             Model model,
-                             HttpSession session) {
-
-        String staffName = (String) session.getAttribute("staffSession.name");
-        model.addAttribute("staffSession", staffName);
-        Pageable pageable = PageRequest.of(number, 6);
-        Page<Staff> pageStaff = staffService.listDelete(pageable);
-        model.addAttribute("listStaff", pageStaff);
-        model.addAttribute("view", "/WEB-INF/view/staff/list-delete.jsp");
         return "home/staff";
     }
 
@@ -93,6 +92,7 @@ public class StaffController {
             model.addAttribute("view", "/WEB-INF/view/staff/view-add.jsp");
             return "home/staff";
         } else {
+            staff.setCode(getNextCode());
             staffService.add(staff);
         }
 
@@ -137,7 +137,7 @@ public class StaffController {
         Staff staff = staffService.detail(Long.valueOf(id));
         staff.setStatus(1);
         staffService.update(staff, Long.valueOf(id));
-        return "redirect:/zephyr/admin/staff/list-delete";
+        return "redirect:/zephyr/admin/staff/index";
     }
 
     @GetMapping("/delete")
@@ -153,6 +153,5 @@ public class StaffController {
         return "redirect:/zephyr/admin/staff/index";
 
     }
-
 
 }

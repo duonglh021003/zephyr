@@ -13,6 +13,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -29,16 +30,18 @@ public class OriginController {
     @Autowired
     private OriginSerivce originSerivce;
 
-    private static final Random random = new Random();
+    private String incrementCodeOrder(String code) {
+        String prefix = code.substring(0, 2);
+        int number = Integer.parseInt(code.substring(2));
+        number++;
+        String nextCode = String.format("%s%05d", prefix, number);
+        return nextCode;
+    }
 
-    public static String generateRandomString() {
-        StringBuilder sb = new StringBuilder(10);
-        sb.append("product");
-        for (int i = 0; i < 5; i++) {
-            int rndNum = random.nextInt(10);
-            sb.append(rndNum);
-        }
-        return sb.toString();
+    private String getNextCode() {
+        String currentCode = originSerivce.findMaxCodeOrigin();
+        String nextCode = incrementCodeOrder(currentCode);
+        return nextCode;
     }
 
     @GetMapping("/index")
@@ -60,16 +63,35 @@ public class OriginController {
         return "home/staff";
     }
 
+    @GetMapping("/view-add")
+    public String viewAdd(Model model){
+        LocalDate localDate = LocalDate.now();
+        model.addAttribute("dateUpdate", localDate);
+        model.addAttribute("origin", new Origin());
+        model.addAttribute("view", "/WEB-INF/view/origin/view-add.jsp");
+        return "home/staff";
+    }
+
     @PostMapping("/add")
-    public String add(@RequestParam("name") String name,
+    public String add(@Valid @ModelAttribute("origin") Origin origin,
+                      BindingResult result,
+                      @RequestParam("name") String name,
                       @RequestParam("dateCreate") LocalDate dateCreate,
                       @RequestParam("dateUpdate") LocalDate dateUpdate,
                       @RequestParam("userCreate") String userCreate,
                       @RequestParam("userUpdate") String userUpdate,
-                      @RequestParam("status") Integer status) {
+                      @RequestParam("status") Integer status,
+                      Model model) {
 
-        Origin origin = Origin.builder()
-                .code(generateRandomString())
+        if (result.hasErrors()) {
+            LocalDate localDate = LocalDate.now();
+            model.addAttribute("dateUpdate", localDate);
+            model.addAttribute("view", "/WEB-INF/view/origin/view-add.jsp");
+            return "home/staff";
+        }
+
+        origin = Origin.builder()
+                .code(getNextCode())
                 .name(name)
                 .dateCreate(dateCreate)
                 .dateUpdate(dateUpdate)
@@ -94,7 +116,17 @@ public class OriginController {
     }
 
     @PostMapping("/update")
-    public String update(@Valid @ModelAttribute("origin") Origin origin){
+    public String update(@Valid @ModelAttribute("origin") Origin origin,
+                         BindingResult result,
+                         Model model){
+
+        if (result.hasErrors()) {
+            LocalDate localDate = LocalDate.now();
+            model.addAttribute("dateUpdate", localDate);
+            model.addAttribute("view", "/WEB-INF/view/origin/view-update.jsp");
+            return "home/staff";
+        }
+
         originSerivce.update(origin, origin.getId());
         return "redirect:/zephyr/admin/origin/index";
     }
@@ -115,5 +147,18 @@ public class OriginController {
         origin.setStatus(0);
         originSerivce.update(origin, origin.getId());
         return "redirect:/zephyr/admin/origin/index";
+    }
+
+    @GetMapping("/search")
+    public String search(@RequestParam("inputOrigin") String inputOrigin,
+                         @RequestParam(defaultValue = "0", name = "page") Integer number,
+                         Model model){
+        Pageable pageable = PageRequest.of(number, 10);
+        Page<Origin> pageOrigin = originSerivce.findAllByOriginSearch(inputOrigin, pageable);
+        model.addAttribute("listOrigin", pageOrigin);
+        model.addAttribute("listRestore", originSerivce.findAllByStatus0());
+
+        model.addAttribute("view", "/WEB-INF/view/origin/index.jsp");
+        return "home/staff";
     }
 }

@@ -62,4 +62,9 @@ public class VoucherClientServiceImpl implements VoucherClientService {
     public List<VoucherClient> findAllByStatus0() {
         return voucherClientRepository.findAllByStatus0();
     }
+
+    @Override
+    public String findMaxCodeVoucherClient() {
+        return voucherClientRepository.findMaxCodeVoucherClient();
+    }
 }

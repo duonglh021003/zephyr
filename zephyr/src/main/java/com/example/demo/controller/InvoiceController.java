@@ -84,7 +84,6 @@ public class InvoiceController {
         model.addAttribute("view", "/WEB-INF/view/invoice/status-5.jsp");
         return "home/staff";
     }
-
     @GetMapping("/update-status-2")
     public String updateStatus2(@RequestParam("id") Long id,
                                 Model model, HttpSession session) {
@@ -149,6 +148,44 @@ public class InvoiceController {
         exportToWord(invoice);
 
         return "redirect:/zephyr/admin/invoice/wait-for-confirmation";
+    }
+
+    @GetMapping("/search")
+    public String search(@RequestParam("inputInvoice") String inputInvoice,
+                         Model model){
+        model.addAttribute("listInvoiceStatusAll", invoiceService.findAllByInvoiceSearch(inputInvoice));
+        model.addAttribute("view", "/WEB-INF/view/invoice/status-all.jsp");
+        return "home/staff";
+    }
+
+    @GetMapping("/search-status")
+    public String searchStatus(@RequestParam("status") Integer status,
+                               Model model){
+
+        model.addAttribute("listInvoiceStatusAll", invoiceService.findAllByStatusSearch(status));
+        model.addAttribute("view", "/WEB-INF/view/invoice/status-all.jsp");
+        return "home/staff";
+    }
+
+    @GetMapping("/search-date")
+    public String searchDate(@RequestParam("dateBegin") LocalDate dateBegin,
+                             @RequestParam("dateEnd") LocalDate dateEnd,
+                             Model model){
+
+        LocalDate localDate = LocalDate.now();
+
+        if (dateEnd.isBefore(dateBegin)) {
+            model.addAttribute("error", "Ngày kết thúc phải lớn hơn ngày bắt đầu.");
+            model.addAttribute("view", "/WEB-INF/view/invoice/status-all.jsp");
+            return "home/staff";
+        }else if (dateEnd.isAfter(localDate)) {
+            model.addAttribute("error", "Ngày kết thúc phải nhỏ hơn hoặc bằng ngày hiện tại.");
+            model.addAttribute("view", "/WEB-INF/view/invoice/status-all.jsp");
+            return "home/staff";
+        }
+        model.addAttribute("listInvoiceStatusAll", invoiceService.findAllByDateSearch(dateBegin, dateEnd));
+        model.addAttribute("view", "/WEB-INF/view/invoice/status-all.jsp");
+        return "home/staff";
     }
 
 

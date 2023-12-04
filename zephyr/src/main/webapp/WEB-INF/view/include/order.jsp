@@ -168,7 +168,8 @@
                         <c:forEach items="${ listDetailShoppingCart }" var="detailShopping" varStatus="i">
                             <tr>
                                 <td>${i.index + 1}</td>
-                                <td class="align-middle"><img src="/assets/images/client/${detailShopping.productDetails.images}" alt="" style="width: 50px;"> ${detailShopping.productDetails.product.name}</td>
+                                <td class="align-middle"><img src="/assets/images/client/${detailShopping.productDetails.images}" alt="" style="width: 50px;">
+                                        ${detailShopping.productDetails.product.name}(${detailShopping.productDetails.size.name}, ${detailShopping.productDetails.color.name})</td>
                                 <td class="align-middle">${detailShopping.unitPrice}00</td>
                                 <td class="align-middle">
                                     <div class="input-group quantity mx-auto" style="width: 100px;">

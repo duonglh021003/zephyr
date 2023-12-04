@@ -33,12 +33,16 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     @Query(value = "select *\n" +
             "from\n" +
             "product p\n" +
-            "where p.code = ?1 \n" +
-            "or p.product_name = ?1 \n" +
-            "or p.user_create = ?1\n" +
-            "or p.user_update = ?1" +
+            "where p.code like %?1% \n" +
+            "or p.product_name like %?1% \n" +
+            "or p.date_create like %?1% \n" +
+            "or p.date_update like %?1% \n" +
+            "or p.user_create like %?1%\n" +
+            "or p.user_update like %?1% \n" +
             "ORDER BY p.id DESC", nativeQuery = true)
     Page<Product> findAllByProductSearch(@Param("inputProduct") String inputProduct,
                                          Pageable pageable);
+
+
 
 }

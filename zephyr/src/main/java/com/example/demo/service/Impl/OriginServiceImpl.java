@@ -45,4 +45,15 @@ public class OriginServiceImpl implements OriginSerivce {
     public Origin detail(Long id) {
         return originRepository.getById(id);
     }
+
+    @Override
+    public Page<Origin> findAllByOriginSearch(String inputOrigin, Pageable pageable) {
+        return originRepository.findAllByOriginSearch(inputOrigin, pageable);
+    }
+
+    @Override
+    public String findMaxCodeOrigin() {
+        return originRepository.findMaxCodeOrigin();
+    }
+
 }

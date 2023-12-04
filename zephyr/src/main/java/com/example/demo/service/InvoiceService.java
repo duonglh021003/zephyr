@@ -2,6 +2,7 @@ package com.example.demo.service;
 
 import com.example.demo.entity.Invoice;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public interface InvoiceService {
@@ -84,4 +85,9 @@ public interface InvoiceService {
 
     String findMaxCodeOrder();
 
+    List<Invoice> findAllByInvoiceSearch(String inputInvoice);
+
+    List<Invoice> findAllByStatusSearch(Integer status);
+
+    List<Invoice> findAllByDateSearch(LocalDate dateBegin, LocalDate dateEnd);
 }
