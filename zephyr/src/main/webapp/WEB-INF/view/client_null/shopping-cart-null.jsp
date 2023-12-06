@@ -39,7 +39,7 @@
                         <td>${i.index + 1}</td>
                         <td class="align-middle"><img src="/assets/images/client/${clientNullSession.productDetails.images}" alt="" style="width: 50px">
                                 ${clientNullSession.productDetails.product.name}(${clientNullSession.productDetails.size.name}, ${clientNullSession.productDetails.color.name})</td>
-                        <td class="align-middle">${clientNullSession.unitPrice}00</td>
+                        <td class="align-middle">${clientNullSession.unitPrice}00 đ</td>
                         <td class="align-middle">
                             <div class="input-group quantity mx-auto" style="width: 100px;">
                                 <div class="input-group-btn">
@@ -61,7 +61,7 @@
                                 </div>
                             </div>
                         </td>
-                        <td class="align-middle">${clientNullSession.subTotal()}00</td>
+                        <td class="align-middle">${clientNullSession.subTotal()}00 đ</td>
                         <td class="align-middle">
 
                             <a href="/zephyr/shopping-cart/delete?id=${clientNullSession.id}"
@@ -89,7 +89,7 @@
 
                         <table>
                             <tr>
-                                <td><h6>${clientNullSession.subTotal()}00</h6></td>
+                                <td><h6>${clientNullSession.subTotal()}00 đ</h6></td>
                             </tr>
                         </table>
                     </div>
@@ -99,10 +99,10 @@
                 <div class="pt-2">
                     <div class="d-flex justify-content-between mt-2">
                         <h5>Total</h5>
-                        <h5>${clientNullSession.subTotal()}00</h5>
+                        <h5>${clientNullSession.subTotal()}00 đ</h5>
 
                     </div>
-                    <a class="btn btn-block btn-primary font-weight-bold my-3 py-3" href="/zephyr/shop/order/add">order</a>
+                    <a class="btn btn-block btn-primary font-weight-bold my-3 py-3" href="/zephyr/order-null/add">order</a>
                 </div>
 
             </div>

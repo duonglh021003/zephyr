@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Random;
 
 @Controller
@@ -44,7 +45,7 @@ public class SingUpController {
         String prefix = code.substring(0, 2);
         int number = Integer.parseInt(code.substring(2));
         number++;
-        String nextCode= String.format("%s%05d", prefix, number);
+        String nextCode = String.format("%s%05d", prefix, number);
         return nextCode;
     }
 
@@ -66,6 +67,15 @@ public class SingUpController {
         return nextCodeFavourite;
     }
 
+    public Boolean byGmail(String gmail) {
+        for (Client client : clientService.findAll()) {
+            if (gmail.equalsIgnoreCase(client.getGmail())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     @PostMapping()
     public String add(@RequestParam("name") String name,
                       @RequestParam("gmail") String gmail,
@@ -74,31 +84,21 @@ public class SingUpController {
 
         String PASSWORD = "^(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$";
 
-        for (Client clientErrors : clientService.findAll()){
-            if(name.isEmpty()){
-                model.addAttribute("errors", "name không được để trống!");
-                return "login/client";
-            }
-            if(gmail.isEmpty()){
-                model.addAttribute("errors", "email không được để trống!");
-                return "login/client";
-            }
-            if(password.isEmpty()){
-                model.addAttribute("errors", "password không được để trống!");
-                return "login/client";
-            }
-            if(!(gmail.matches(Until.GMAIL))){
-                model.addAttribute("errors", "email không đúng định dạng!");
-                return "login/client";
-            }
-            if(gmail.equalsIgnoreCase(clientErrors.getGmail())){
-                model.addAttribute("errors", "email đã tồn tại!");
-                return "login/client";
-            }
-            if(!(password.matches(PASSWORD))){
-                model.addAttribute("errors", "Chữ cái đầu phải viết hoa, length password phải lớn hơn 8, phải có ký tự đặc biệt");
-                return "login/client";
-            }
+        if (name.isEmpty() || gmail.isEmpty() || password.isEmpty()) {
+            model.addAttribute("errors", "name, email, password  không được để trống!");
+            return "login/client";
+        }
+        if (!(gmail.matches(Until.GMAIL))) {
+            model.addAttribute("errors", "email không đúng định dạng!");
+            return "login/client";
+        }
+        if (byGmail(gmail)) {
+            model.addAttribute("errors", "email đã tồn tại!");
+            return "login/client";
+        }
+        if (!(password.matches(PASSWORD))) {
+            model.addAttribute("errors", "Chữ cái đầu phải viết hoa, length password phải lớn hơn 8, phải có ký tự đặc biệt");
+            return "login/client";
         }
 
         ShoppingCart shoppingCart = ShoppingCart.builder()

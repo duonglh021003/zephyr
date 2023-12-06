@@ -99,7 +99,7 @@ public class DetailDeliveryNotesController {
         }
         Invoice invoice = invoiceService.detail(deliveryNotes.getInvoice().getId());
 
-        if(invoice.getStatus() == 5){
+        if(invoice.getStatus() == 4){
             if (String.valueOf(invoice.getClient()).equalsIgnoreCase("null") == false) {
                 Client client = clientService.detail(invoice.getClient().getId());
                 Double getPoints = invoice.getIntoMoney() / 100 + invoice.getIntoMoney() * (client.getRank().getPercent() / 100);

@@ -21,4 +21,6 @@ public interface AddressService {
     List<Address> findAllAddress(Long id);
 
     String findMaxCodeAddress();
+
+    List<Address> findAllClientNull();
 }

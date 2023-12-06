@@ -50,4 +50,9 @@ public class AddressServiceImpl implements AddressService {
     public String findMaxCodeAddress() {
         return addressRepository.findMaxCodeAddress();
     }
+
+    @Override
+    public List<Address> findAllClientNull() {
+        return addressRepository.findAllClientNull();
+    }
 }

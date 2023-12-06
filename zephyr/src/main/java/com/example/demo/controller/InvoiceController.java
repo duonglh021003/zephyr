@@ -153,6 +153,7 @@ public class InvoiceController {
     @GetMapping("/search")
     public String search(@RequestParam("inputInvoice") String inputInvoice,
                          Model model){
+
         model.addAttribute("listInvoiceStatusAll", invoiceService.findAllByInvoiceSearch(inputInvoice));
         model.addAttribute("view", "/WEB-INF/view/invoice/status-all.jsp");
         return "home/staff";

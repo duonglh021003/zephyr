@@ -1,6 +1,7 @@
 package com.example.demo.repository;
 
 import com.example.demo.entity.Address;
+import com.example.demo.entity.Client;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -18,4 +19,14 @@ public interface AddressRepository extends JpaRepository<Address, Long> {
 
     @Query(value = "select max(code) from client_address", nativeQuery = true)
     String findMaxCodeAddress();
+
+    @Query(value = "select *\n" +
+            "from\n" +
+            "client_address ca \n" +
+            "where ca.id_client is null and ca.id = (\n" +
+            "\t select max(id)\n" +
+            "\t from\n" +
+            "\t client_address\n" +
+            "\t where address_status = 1)", nativeQuery = true)
+    List<Address> findAllClientNull();
 }

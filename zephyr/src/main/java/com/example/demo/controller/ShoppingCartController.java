@@ -49,7 +49,7 @@ public class ShoppingCartController {
 
         Client client = (Client) session.getAttribute("clientSession");
         if(String.valueOf(client).equalsIgnoreCase("null")){
-            return "redirect:/zephyr/client-null/shopping-cart-null";
+            return "redirect:/zephyr/shopping-cart-null";
         }
         idShopping = client.getShoppingCart().getId();
         List<DetailedShoppingCart> list = detailedShoppingCartService.findAllById(idShopping);
@@ -66,7 +66,6 @@ public class ShoppingCartController {
         for(Invoice invoice02 : invoiceService.findByInvoiceStatus1(client.getId())){
             invoiceService.delete(invoice02.getId());
         }
-
 
         model.addAttribute("viewClient", "/WEB-INF/view/include/shopping-cart.jsp");
         return "layout/client";
