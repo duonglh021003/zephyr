@@ -107,6 +107,17 @@ public interface InvoiceRepository extends JpaRepository<Invoice, Long> {
             "ORDER BY i.id DESC", nativeQuery = true)
     List<Invoice> findAllByIdStaffStatusAll(@Param("id") Long id);
 
+    @Query(value = "select *\n" +
+            "from\n" +
+            "invoice i\n" +
+            "where i.invoice_status = 2 and i.id = (\n" +
+            "  SELECT MAX(id)\n" +
+            "  FROM invoice\n" +
+            "  where id_client is null)", nativeQuery = true)
+    List<Invoice> findAllInvoiceClientNull();
+
+
+
 
     // BEGIN THỐNG KÊ
 

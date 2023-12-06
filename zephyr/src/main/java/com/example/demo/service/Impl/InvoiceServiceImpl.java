@@ -236,5 +236,10 @@ public class InvoiceServiceImpl implements InvoiceService {
         return invoiceRepository.findAllByDateSearch(dateBegin, dateEnd);
     }
 
+    @Override
+    public List<Invoice> findAllInvoiceClientNull() {
+        return invoiceRepository.findAllInvoiceClientNull();
+    }
+
 
 }

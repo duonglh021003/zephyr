@@ -27,15 +27,13 @@
         <div class="col-lg-3 col-md-4">
             <!-- Price Start -->
             <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Filter by price</span></h5>
+            <form action="/zephyr/shop/search" method="get">
             <div class="bg-light p-4 mb-30">
-                <form action="/zephyr/shop/search" method="get">
-                    <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                        <input type="checkbox" name="price" value="01"  class="custom-control-input" checked id="price-all">
-                        <label class="custom-control-label" for="price-all">All Price</label>
-                        <span class="badge border font-weight-normal">1000</span>
-                    </div>
+
+
                     <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
                         <input type="checkbox" name="minPrice" value="0"  class="custom-control-input" id="price-1">
+                        <input type="hidden" name="minPrice" value="100"  class="custom-control-input" id="price-1">
                         <label class="custom-control-label" for="price-1">$0 - $100</label>
                         <span class="badge border font-weight-normal">150</span>
                     </div>
@@ -60,57 +58,50 @@
                         <label class="custom-control-label" for="price-5">$400 - $500</label>
                         <span class="badge border font-weight-normal">168</span>
                     </div>
-                </form>
+                    <button> search </button>
+
             </div>
             <!-- Price End -->
 
             <!-- Color Start -->
             <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Filter by color</span></h5>
             <div class="bg-light p-4 mb-30">
-                <form>
+
+
                     <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                        <input type="checkbox" class="custom-control-input" checked id="color-all">
-                        <label class="custom-control-label" for="price-all">All Color</label>
-                        <span class="badge border font-weight-normal">1000</span>
-                    </div>
-                    <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                        <input type="checkbox" class="custom-control-input" id="color-1">
+                        <input type="checkbox" name="color" value="1" class="custom-control-input" id="color-1">
                         <label class="custom-control-label" for="color-1">Black</label>
                         <span class="badge border font-weight-normal">150</span>
                     </div>
                     <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                        <input type="checkbox" class="custom-control-input" id="color-2">
+                        <input type="checkbox" name="color" value="2" class="custom-control-input" id="color-2">
                         <label class="custom-control-label" for="color-2">White</label>
                         <span class="badge border font-weight-normal">295</span>
                     </div>
                     <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                        <input type="checkbox" class="custom-control-input" id="color-3">
+                        <input type="checkbox" name="color" value="3" class="custom-control-input" id="color-3">
                         <label class="custom-control-label" for="color-3">Red</label>
                         <span class="badge border font-weight-normal">246</span>
                     </div>
                     <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                        <input type="checkbox" class="custom-control-input" id="color-4">
+                        <input type="checkbox" name="color" value="4" class="custom-control-input" id="color-4">
                         <label class="custom-control-label" for="color-4">Blue</label>
                         <span class="badge border font-weight-normal">145</span>
                     </div>
                     <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between">
-                        <input type="checkbox" class="custom-control-input" id="color-5">
+                        <input type="checkbox" name="color" value="5" class="custom-control-input" id="color-5">
                         <label class="custom-control-label" for="color-5">Green</label>
                         <span class="badge border font-weight-normal">168</span>
                     </div>
-                </form>
+
             </div>
             <!-- Color End -->
 
             <!-- Size Start -->
             <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Filter by size</span></h5>
             <div class="bg-light p-4 mb-30">
-                <form >
-                    <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                        <input type="checkbox" class="custom-control-input" checked id="size-all">
-                        <label class="custom-control-label" for="size-all">All Size</label>
-                        <span class="badge border font-weight-normal">1000</span>
-                    </div>
+
+
                     <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
                         <input type="checkbox" name="nameSize" value="" class="custom-control-input" id="size-1">
                         <label class="custom-control-label" for="size-1">XS</label>
@@ -136,9 +127,10 @@
                         <label class="custom-control-label" for="size-5">XL</label>
                         <span class="badge border font-weight-normal">168</span>
                     </div>
-                </form>
+
 
             </div>
+            </form>
             <!-- Size End -->
         </div>
         <!-- Shop Sidebar End -->
@@ -193,7 +185,7 @@
                         <div class="text-center py-4">
                             <a class="h6 text-decoration-none text-truncate" href="/zephyr/shop/shop-detail?id=${productDetails.product.id}">${productDetails.product.name}</a>
                             <div class="d-flex align-items-center justify-content-center mt-2">
-                                <h5>${productDetails.price}0</h5><h6 class="text-muted ml-2"><del>$123.00</del></h6>
+                                <h5>${productDetails.price}00 đ</h5><h6 class="text-muted ml-2"><del>900.000 đ</del></h6>
                             </div>
                             <div class="d-flex align-items-center justify-content-center mb-1">
 

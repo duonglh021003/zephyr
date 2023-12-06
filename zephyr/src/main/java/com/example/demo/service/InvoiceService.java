@@ -90,4 +90,6 @@ public interface InvoiceService {
     List<Invoice> findAllByStatusSearch(Integer status);
 
     List<Invoice> findAllByDateSearch(LocalDate dateBegin, LocalDate dateEnd);
+
+    List<Invoice> findAllInvoiceClientNull();
 }

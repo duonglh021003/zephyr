@@ -24,7 +24,7 @@ public interface DetailedShoppingCartRepository extends JpaRepository<DetailedSh
             "where detailShopping.shoppingCart = :idShopping " +
             "AND detailShopping.productDetails = :idProductdetail")
     List<DetailedShoppingCart> findByIDProduct(@Param("idShopping") ShoppingCart idShopping,
-                                               @Param("idProductdetail")ProductDetails idProductdetail);
+                                               @Param("idProductdetail") ProductDetails idProductdetail);
 
 
     @Query(value = "select shoppingDetail.*\n" +

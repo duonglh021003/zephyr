@@ -41,4 +41,18 @@ public class DetailInvoiceController {
         return "home/staff";
     }
 
+    @GetMapping("/wait-for-confirmation")
+    public String Status2(@RequestParam("id") Long id,
+                         Model model){
+
+        Invoice invoice = invoiceService.detail(id);
+
+        model.addAttribute("listDetailInvoice", detailedInvoiceService.findAllByIdInvoice(id));
+        model.addAttribute("listAddress", addressService.findAllAddress(id));
+        model.addAttribute("listInvoice", invoiceService.findAllByInvoice(id));
+        model.addAttribute("codeInvoice", invoice.getCode());
+        model.addAttribute("view", "/WEB-INF/view/detail_invoice/index-status-2.jsp");
+        return "home/staff";
+    }
+
 }

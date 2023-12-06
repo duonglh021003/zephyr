@@ -3,8 +3,10 @@ package com.example.demo.controller;
 
 import com.example.demo.entity.Client;
 import com.example.demo.entity.DetailedShoppingCart;
+import com.example.demo.entity.Invoice;
 import com.example.demo.entity.ProductDetails;
 import com.example.demo.service.DetailedShoppingCartService;
+import com.example.demo.service.InvoiceService;
 import com.example.demo.service.ProductDetailsService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +17,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -26,6 +31,8 @@ public class DetailShopController {
 
     @Autowired
     private DetailedShoppingCartService detailedShoppingCartService;
+
+
 
     @GetMapping("/shop-detail")
     public String index(@RequestParam("id") Long id,
@@ -64,9 +71,8 @@ public class DetailShopController {
         Client client = (Client) session.getAttribute("clientSession");
 
         if (String.valueOf(client).equalsIgnoreCase("null")) {
-
+            List<DetailedShoppingCart> listShoppingCart = new ArrayList<>();
             ProductDetails details = list.isEmpty() ? null : list.get(0);
-
             DetailedShoppingCart shoppingCartNull = DetailedShoppingCart.builder()
                     .quantity(quantity)
                     .unitPrice(details.getPrice())
@@ -74,12 +80,11 @@ public class DetailShopController {
                     .status(1)
                     .productDetails(details)
                     .build();
-            detailedShoppingCartService.add(shoppingCartNull);
-
-            System.out.println("aaaaaaaaaaaaaaaaaaa             " + shoppingCartNull.getProductDetails().getProduct().getName());
+            listShoppingCart.add(shoppingCartNull);
             session.setAttribute("clientNullSession", shoppingCartNull);
 
-            return "redirect:/zephyr/shop/shop-detail?id=" + id;
+
+            return "redirect:/zephyr/shopping-cart-null";
         }
 
         for (ProductDetails productDetails : list) {

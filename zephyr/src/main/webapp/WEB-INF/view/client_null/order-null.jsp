@@ -8,7 +8,11 @@
 <div class="container-fluid" >
     <div class="row px-xl-5">
         <div class="col-12">
-            <label style="color: red"><strong>BILLING ADDRESS</strong></label>
+            <a  type="button" class="btn btn-success" data-toggle="modal"
+                data-target="#myModalAddress" style="margin-bottom: 20px; margin-left: 10px">
+                thêm địa chỉ
+            </a>
+
             <nav class="breadcrumb bg-light mb-30">
 
                 <c:forEach items="${ listAddress }" var="address" varStatus="i">
@@ -25,66 +29,18 @@
                         <button class="btn btn-default" type="button" data-toggle="modal" data-target="#myModal" style="color: blue; margin-left: 50px" href="/zephyr/admin/client/index?id=${client.id}" >thay đổi</button>
                     </form>
                 </c:forEach>
-
-
             </nav>
         </div>
     </div>
 </div>
-<!-- Breadcrumb End -->
 
-<%--model 1--%>
-<div class="modal fade" id="myModal" role="dialog">
-
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title">my address</h4>
-            </div>
-
-            <form action="/zephyr/shop/order-address/update?id=${addressId}" method="post">
-                <div class="modal-body">
-                    <c:forEach items="${listAddresOrder}" var="address">
-                        <div style="margin-left: 30px">
-                            <input type="radio" name="address" ${address.status == "1" ? "checked" : ""} value="${address.id}">
-                            <label><p style="color: black">${address.name} |</p></label>
-                            <td>${address.phoneNumber}</td>
-                            <td>
-                                <a onclick="handleClick('${address.id}')" class="btn btn-default" style="color: blue; margin-left: 100px" href="/zephyr/shop/path/to/java/endpoint?id=${address.id}" data-dismiss="modal" data-toggle="modal" data-target="#myModalUpdate">update</a>
-                            </td><br>
-                            <p style="margin-top: -20px">
-                            <td>${address.clientAddress}</td> <br>
-                            <td>${address.commune},  </td>
-                            <td>${address.district},  </td>
-                            <td>${address.city} </td> <br>
-                            <td><span style="color: red; border: 1px solid red; ">
-                                    ${address.status == 1 ? "mặc định" : "💒"}
-                            </span></td>
-                            </p>
-                            <hr>
-                        </div>
-                    </c:forEach>
-                    <button  style="border: 1px solid #eeeeee" class="btn btn-default" type="button" data-dismiss="modal" data-toggle="modal" data-target="#myModalAdd">
-                        <a style="font-size: 20px">+</a> add address</button>
-                </div>
-                <div class="modal-footer" style="margin-top: 70px">
-                    <button type="button" style="border: 1px solid #eeeeee" class="btn btn-default" data-dismiss="modal" >Close</button>
-                    <a class="btn btn-default" style="background: red;color: white" href="/zephyr/shop/order-address/update?id=${address.id}" >confirm</a>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-
-<%--model 2 add address--%>
-
-<div class="modal fade" id="myModalAdd" role="dialog">
+<div class="modal fade" id="myModalAddress" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title">add address</h4>
             </div>
-            <form action="/zephyr/shop/order-address/add" method="post">
+            <form action="/zephyr/order-null/address-null/add" method="post">
                 <div class="modal-body">
 
                     <div class="row">
@@ -128,8 +84,6 @@
                         </div>
                     </div>
 
-                    <input type="radio" name="status" value="1" checked ${address.status == "1" ? "checked" : ""} /> đặt làm địa chỉ mặc định<br>
-                    <input type="radio" name="status" value="0" ${address.status == "0" ? "checked" : ""} /> bỏ chọn<br>
                 </div>
                 <div class="modal-footer" style="margin-top: 70px">
                     <button type="button" style="border: 1px solid #eeeeee" class="btn btn-default" data-dismiss="modal" data-toggle="modal" data-target="#myModal">Close</button>
@@ -163,47 +117,43 @@
                         </tr>
                         </thead>
                         <tbody class="align-middle">
-
-
-                        <c:forEach items="${ listDetailShoppingCart }" var="detailShopping" varStatus="i">
-                            <tr>
-                                <td>${i.index + 1}</td>
-                                <td class="align-middle"><img src="/assets/images/client/${detailShopping.productDetails.images}" alt="" style="width: 50px;"> ${detailShopping.productDetails.product.name}</td>
-                                <td class="align-middle">${detailShopping.unitPrice}00</td>
-                                <td class="align-middle">
-                                    <div class="input-group quantity mx-auto" style="width: 100px;">
-                                        <div class="input-group-btn">
-                                            <form action="/zephyr/shopping-cart/less?id=${detailShopping.id}" method="post">
-                                                <button class="btn btn-sm btn-primary btn-minus" >
-                                                    <i class="fa fa-minus"></i>
-                                                </button>
-                                            </form>
-                                        </div>
-
-                                        <input  type="text" name="quantity" class="form-control form-control-sm bg-secondary border-0 text-center"
-                                                value="${detailShopping.quantity}">
-                                        <div class="input-group-btn">
-                                            <form action="/zephyr/shopping-cart/plus?id=${detailShopping.id}" method="post">
-                                                <button class="btn btn-sm btn-primary btn-plus">
-                                                    <i class="fa fa-plus"></i>
-                                                </button>
-                                            </form>
-                                        </div>
+                        <tr>
+                            <td>${i.index + 1}</td>
+                            <td class="align-middle"><img src="/assets/images/client/${clientNullSession.productDetails.images}" alt="" style="width: 50px">
+                                ${clientNullSession.productDetails.product.name}(${clientNullSession.productDetails.size.name}, ${clientNullSession.productDetails.color.name})</td>
+                            <td class="align-middle">${clientNullSession.unitPrice}00 đ</td>
+                            <td class="align-middle">
+                                <div class="input-group quantity mx-auto" style="width: 100px;">
+                                    <div class="input-group-btn">
+                                        <form action="/zephyr/shopping-cart/less?id=${clientNullSession.id}" method="post">
+                                            <button class="btn btn-sm btn-primary btn-minus" >
+                                                <i class="fa fa-minus"></i>
+                                            </button>
+                                        </form>
                                     </div>
-                                </td>
-                                <td class="align-middle">${detailShopping.subTotal()}00</td>
-                                <td class="align-middle">
 
-                                    <a href="/zephyr/shopping-cart/delete?id=${detailShopping.id}"
-                                       onclick="if(!confirm('Bạn có xoá sản phẩm khỏi giỏ hàng?')){return false}else{alert('xoá thành công');}">
-                                        <button class="btn btn-sm btn-danger"><i class="fa fa-times"></i></button>
-                                    </a>
-                                </td>
-                            </tr>
-                        </c:forEach>
+                                    <input  type="text" name="quantity" class="form-control form-control-sm bg-secondary border-0 text-center"
+                                            value="${clientNullSession.quantity}">
+                                    <div class="input-group-btn">
+                                        <form action="/zephyr/shopping-cart/plus?id=${clientNullSession.id}" method="post">
+                                            <button class="btn btn-sm btn-primary btn-plus">
+                                                <i class="fa fa-plus"></i>
+                                            </button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="align-middle">${clientNullSession.subTotal()}00 đ</td>
+                            <td class="align-middle">
+
+                                <a href="/zephyr/shopping-cart/delete?id=${clientNullSession.id}"
+                                   onclick="if(!confirm('Bạn có xoá sản phẩm khỏi giỏ hàng?')){return false}else{alert('xoá thành công');}">
+                                    <button class="btn btn-sm btn-danger"><i class="fa fa-times"></i></button>
+                                </a>
+                            </td>
+                        </tr>
                         </tbody>
                     </table>
-
 
                 </div>
             </div>
@@ -217,31 +167,9 @@
         </div>
 
         <div class="col-lg-4">
-
-            <form class="mb-30" action="/zephyr/shop/order/voucher/add" method="post">
-                <div class="input-group">
-                    <input type="text" class="form-control border-0 p-4" name="voucher" placeholder="mã giảm giá">
-                    <div class="input-group-append">
-                        <button class="btn btn-primary">Apply Coupon</button>
-                    </div>
-                </div>
-            </form>
-            <p>điểm bạn hiện có: </p>
-            <form class="mb-30" action="/zephyr/shop/order/point-usr/add" method="post">
-                <div class="input-group">
-                    <c:forEach items="${ listInvoice }" var="idInvoice">
-                        <input type="text" class="form-control border-0 p-4"  style="border: none;outline: none;" name="point" value="${idInvoice.client.pointUsr}">
-                        <div class="input-group-append">
-                            <button class="btn btn-primary">USE</button>
-                        </div>
-                    </c:forEach>
-                </div>
-            </form>
-
-            <form action="/zephyr/shop/order/update" method="post">
+            <form action="/zephyr/order-null/update" method="post">
                 <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Order Total</span></h5>
                 <div class="bg-light p-30 mb-5">
-
                     <c:forEach items="${ listInvoice }" var="invoice" varStatus="i">
                         <div class="border-bottom pt-3 pb-2" style="margin-top: -20px;line-height: 10px">
 
