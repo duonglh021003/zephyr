@@ -19,7 +19,6 @@
 </div>
 <!-- Breadcrumb End -->
 
-
 <!-- Shop Start -->
 <div class="container-fluid">
     <div class="row px-xl-5">
@@ -29,7 +28,6 @@
             <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Filter by price</span></h5>
             <form action="/zephyr/shop/search" method="get">
             <div class="bg-light p-4 mb-30">
-
 
                     <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
                         <input type="checkbox" name="minPrice" value="0"  class="custom-control-input" id="price-1">
@@ -225,8 +223,6 @@
 </div>
 
 <%--<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>--%>
-
-
 
 </body>
 </html>

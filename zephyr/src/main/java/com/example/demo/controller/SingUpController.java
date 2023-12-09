@@ -133,9 +133,7 @@ public class SingUpController {
         clientService.add(client);
 
         model.addAttribute("errorsPass", "đăng ký thành công");
-
         return "login/client";
     }
-
 
 }
