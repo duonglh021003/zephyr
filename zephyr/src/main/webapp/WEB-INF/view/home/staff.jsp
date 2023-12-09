@@ -129,6 +129,9 @@
                         <li class="nav-item"><a class="nav-link" href="/zephyr/admin/invoice/status-all"> All </a></li>
                         <li class="nav-item"><a class="nav-link" href="/zephyr/admin/invoice/wait-for-confirmation"> wait for confirmation</a></li>
                         <li class="nav-item"><a class="nav-link" href="/zephyr/admin/invoice/received/status-5"> received </a></li>
+                        <li class="nav-item"><a class="nav-link" href="/zephyr/admin/invoice/online/status-all"> online </a></li>
+                        <li class="nav-item"><a class="nav-link" href="/zephyr/admin/invoice/online-no-account/status-all"> online no account </a></li>
+                        <li class="nav-item"><a class="nav-link" href="/zephyr/admin/invoice/received/status-5"> offline </a></li>
                     </ul>
                 </div>
             </li>
