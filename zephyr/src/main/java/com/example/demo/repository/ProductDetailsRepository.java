@@ -118,4 +118,18 @@ public interface ProductDetailsRepository extends JpaRepository<ProductDetails, 
             "ORDER BY p.id DESC", nativeQuery = true)
     Page<ProductDetails> findAllByProductDetailSearch(@Param("inputProductDetail") String inputProductDetail,
                                          Pageable pageable);
+
+    @Query(value = "select pd.id, pd.images, pd.describe, pd.inventory, pd.import_price, pd.price,\n" +
+            "pd.date_create, pd.date_update, pd.user_create, pd.user_update, pd.product_details_status,\n" +
+            "pd.id_product, pd.id_origin, pd.id_color, pd.id_size\n" +
+            "from product_details pd inner join ( \n" +
+            "select id_product, max(id) as MaxId \n" +
+            "from product_details \n" +
+            "group by id_product) temp \n" +
+            "on pd.id_product = temp.id_product and pd.id = temp.MaxId \n" +
+            "inner join product on pd.id_product = product.id \n" +
+            "where product.product_name like %?1% \n" +
+            "order by pd.id_product DESC", nativeQuery = true)
+    Page<ProductDetails> findAllByProductDetailSearchProduct(@Param("inputProductDetail") String inputProductDetail,
+                                                      Pageable pageable);
 }

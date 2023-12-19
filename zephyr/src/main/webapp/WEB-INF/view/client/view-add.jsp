@@ -64,9 +64,11 @@
         </div>
         <div class="col-md-3">
             <div class="mb-3">
-                <label class="form-label">password</label>
-                <form:input path="password" class="form-control"/>
-                <form:errors path="password" cssClass="errors"/><br>
+                <div class="mb-3">
+                    <label class="form-label">trạng thái</label> <br>
+                    <input type="radio" name="status" value="1" ${client.status == "1" ? "checked" : ""} checked=""/>đang
+                    hoạt động <br>
+                </div>
             </div>
         </div>
     </div>
@@ -74,17 +76,13 @@
     <div class="row">
         <div class="col-md-3">
             <div class="mb-3">
-                <label class="form-label">trạng thái</label> <br>
-                <input type="radio" name="status" value="1" ${client.status == "1" ? "checked" : ""} checked=""/>đang
-                hoạt động <br>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="mb-3">
                 <label class="form-label">rank</label> <br>
                 <input type="text" class="form-control" name="rank" value="1"/>
 
             </div>
+        </div>
+        <div class="col-md-3">
+            <input type="hidden" class="form-control" name="password" value="abc"/>
         </div>
         <div class="col-md-3">
 

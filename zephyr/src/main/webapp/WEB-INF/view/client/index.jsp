@@ -40,10 +40,6 @@
                         <th> pointUsr</th>
                         <th> accumulatedScore</th>
                         <th> password</th>
-                        <th> dateCreate</th>
-                        <th> dateUpdate</th>
-                        <th> userCreate</th>
-                        <th> userUpdate</th>
                         <th> status</th>
                         <th> rank</th>
                         <th> acction</th>
@@ -64,10 +60,6 @@
                             <td>${client.pointUsr}</td>
                             <td>${client.accumulatedScore}</td>
                             <td>${client.password}</td>
-                            <td>${client.dateCreate}</td>
-                            <td>${client.dateUpdate}</td>
-                            <td>${client.userCreate}</td>
-                            <td>${client.userUpdate}</td>
                             <td>${client.status == 1 ? "đang hoạt động" : "ngừng hoạt động"}</td>
                             <td>${client.clickRank()}</td>
 
@@ -75,7 +67,7 @@
                                 <a class="btn btn-default" href="/zephyr/admin/client/index?id=${client.id}">show</a>
                                 <a class="btn btn-default" href="/zephyr/admin/client/view-update?id=${client.id}">update</a>
                                 <a class="btn btn-default" href="/zephyr/admin/client/delete?id=${client.id}"
-                                   onclick="if(!confirm('Bạn có muốn xoá?')){return false}else{alert('xoá thành công');}">delete</a>
+                                   onclick="if(!confirm('Bạn có muốn xoá?')){return false}else{alert('xoá thành công');}">cancel</a>
                             </td>
                         </tr>
                     </c:forEach>

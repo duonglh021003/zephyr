@@ -50,5 +50,10 @@ public class DetailedInvoiceServiceImpl implements DetailedInvoiceService {
         return detailedInvoiceRepository.capitalSumDetailInvoice(id);
     }
 
+    @Override
+    public DetailedInvoice findAllByIdInvoiceAndProductDetails(Long idInvoice, Long idProductDetail) {
+        return detailedInvoiceRepository.findAllByIdInvoiceAndProductDetails(idInvoice, idProductDetail);
+    }
+
 
 }

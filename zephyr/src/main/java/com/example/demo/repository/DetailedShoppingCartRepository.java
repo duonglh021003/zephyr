@@ -1,5 +1,6 @@
 package com.example.demo.repository;
 
+import com.example.demo.entity.DetailedInvoice;
 import com.example.demo.entity.DetailedShoppingCart;
 import com.example.demo.entity.Product;
 import com.example.demo.entity.ProductDetails;
@@ -34,4 +35,10 @@ public interface DetailedShoppingCartRepository extends JpaRepository<DetailedSh
             "where c.id = ?1", nativeQuery = true)
     List<DetailedShoppingCart> findAllShoppingDetail(@Param("id") Long id);
 
+    @Query(value = "select dsc.*\n" +
+            "from detailed_shopping_cart dsc join shopping_cart sc on sc.id = dsc.id_shopping_cart\n" +
+            "where sc.id = :idShoppingCart \n" +
+            "and dsc.id_product_details = :idProductDetail", nativeQuery = true)
+    DetailedShoppingCart findAllByIdShoppingCartAndProductDetails(@Param("idShoppingCart") Long idShoppingCart,
+                                                        @Param("idProductDetail") Long idProductDetail);
 }

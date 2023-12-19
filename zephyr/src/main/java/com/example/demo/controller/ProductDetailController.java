@@ -5,6 +5,7 @@ import com.example.demo.entity.Product;
 import com.example.demo.entity.ProductDetails;
 import com.example.demo.entity.Size;
 import com.example.demo.entity.Staff;
+import com.example.demo.repository.ProductDetailsRepository;
 import com.example.demo.service.ColorService;
 import com.example.demo.service.OriginSerivce;
 import com.example.demo.service.ProductDetailsService;
@@ -61,6 +62,9 @@ public class ProductDetailController {
     @Autowired
     private SizeService sizeService;
 
+    @Autowired
+    private ProductDetailsRepository productDetailsRepository;
+
     @GetMapping("/index")
     public String index(@RequestParam(defaultValue = "0", name = "page") Integer number,
                         Model model, HttpSession session) {
@@ -101,6 +105,17 @@ public class ProductDetailController {
         return "home/staff";
     }
 
+    public Boolean byCode(Long idProduct,Long idSize,Long idColor){
+        for(ProductDetails productDetails : productDetailsRepository.findAll()){
+            if (productDetails.getProduct().getId().equals(idProduct)
+                    && productDetails.getSize().getId().equals(idSize)
+                    && productDetails.getColor().getId().equals(idColor)){
+                return true;
+            }
+        }
+        return false;
+    }
+
     @PostMapping("/add")
     public String add(@Valid @ModelAttribute("productDetail") ProductDetails productDetails,
                       BindingResult result,
@@ -109,7 +124,6 @@ public class ProductDetailController {
         if (result.hasErrors()) {
             LocalDate localDate = LocalDate.now();
             model.addAttribute("dateUpdate", localDate);
-
             model.addAttribute("listProduct", productService.getAll());
             model.addAttribute("listOrigin", originSerivce.getAll());
             model.addAttribute("listColor", colorService.getAll());
@@ -118,6 +132,18 @@ public class ProductDetailController {
             return "home/staff";
         }
 
+        if(byCode(productDetails.getProduct().getId(), productDetails.getSize().getId(), productDetails.getColor().getId())){
+
+            model.addAttribute("errorProductDetail", "sản phẩm đã tồn tại");
+            LocalDate localDate = LocalDate.now();
+            model.addAttribute("dateUpdate", localDate);
+            model.addAttribute("listProduct", productService.getAll());
+            model.addAttribute("listOrigin", originSerivce.getAll());
+            model.addAttribute("listColor", colorService.getAll());
+            model.addAttribute("listSize", sizeService.getAll());
+            model.addAttribute("view", "/WEB-INF/view/product_detail/view-add.jsp");
+            return "home/staff";
+        }
         productDetailsService.add(productDetails);
         return "redirect:/zephyr/admin/product-detail/index";
     }
@@ -197,5 +223,4 @@ public class ProductDetailController {
         model.addAttribute("view", "/WEB-INF/view/product_detail/index.jsp");
         return "home/staff";
     }
-
 }

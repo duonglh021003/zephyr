@@ -324,25 +324,52 @@ public class SellController {
             voucher = invoice.getVoucher().getReducedPrice();
         }
 
-
         for (ProductDetails details : list) {
             Double sum = quantity * details.getPrice();
             Double total = sum + nullTotal;
 
-            DetailedInvoice detailedInvoice = DetailedInvoice.builder()
-                    .quantity(quantity)
-                    .unitPrice(details.getPrice())
-                    .capitalSum(sum)
-                    .status(1)
-                    .invoice(invoice)
-                    .productDetails(details)
-                    .build();
-            detailedInvoiceService.add(detailedInvoice);
 
-            Double intoMoney = total - point - voucher;
-            invoice.setTotalInvoice(total);
-            invoice.setIntoMoney(intoMoney);
-            invoiceService.update(invoice, idInvoice);
+            DetailedInvoice detailedInvoice01 = detailedInvoiceService.findAllByIdInvoiceAndProductDetails(invoice.getId(), details.getId());
+            if(String.valueOf(detailedInvoice01).equalsIgnoreCase("null")){
+                DetailedInvoice detailedInvoice = DetailedInvoice.builder()
+                        .quantity(quantity)
+                        .unitPrice(details.getPrice())
+                        .capitalSum(sum)
+                        .status(1)
+                        .invoice(invoice)
+                        .productDetails(details)
+                        .build();
+                detailedInvoiceService.add(detailedInvoice);
+
+                Double intoMoney = total - point - voucher;
+                invoice.setTotalInvoice(total);
+                invoice.setIntoMoney(intoMoney);
+                invoiceService.update(invoice, idInvoice);
+                return "redirect:/zephyr/admin/sell/invoice?id=" + invoice.getId();
+            }
+
+            if(detailedInvoice01.getProductDetails().getId().equals(details.getId())){
+                DetailedInvoice detailedInvoice = DetailedInvoice.builder()
+                        .id(detailedInvoice01.getId())
+                        .quantity(detailedInvoice01.getQuantity() + quantity)
+                        .unitPrice(details.getPrice())
+                        .capitalSum(sum + detailedInvoice01.getCapitalSum())
+                        .status(1)
+                        .invoice(invoice)
+                        .productDetails(details)
+                        .build();
+                detailedInvoiceService.add(detailedInvoice);
+                Double intoMoney = total - point - voucher;
+                invoice.setTotalInvoice(total);
+                invoice.setIntoMoney(intoMoney);
+                invoiceService.update(invoice, idInvoice);
+                return "redirect:/zephyr/admin/sell/invoice?id=" + invoice.getId();
+            }
+//
+//            Double intoMoney = total - point - voucher;
+//            invoice.setTotalInvoice(total);
+//            invoice.setIntoMoney(intoMoney);
+//            invoiceService.update(invoice, idInvoice);
 
         }
         return "redirect:/zephyr/admin/sell/invoice?id=" + invoice.getId();

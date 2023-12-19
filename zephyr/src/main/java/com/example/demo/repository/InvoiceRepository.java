@@ -117,8 +117,6 @@ public interface InvoiceRepository extends JpaRepository<Invoice, Long> {
     List<Invoice> findAllInvoiceClientNull();
 
 
-
-
     // BEGIN THỐNG KÊ
 
     @Query(value = "SELECT SUM(quantity)\n" +
