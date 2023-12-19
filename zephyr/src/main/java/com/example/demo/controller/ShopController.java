@@ -70,4 +70,20 @@ public class ShopController {
         return "layout/client";
     }
 
+    @GetMapping("/shop/search-product")
+    public String searchColor(@RequestParam("inputProductDetail") String inputProductDetail,
+                              @RequestParam(defaultValue = "0", name = "page") Integer number,
+                              Model model){
+
+
+        Pageable pageable = PageRequest.of(number, 9);
+        Page<ProductDetails> pageProductDetails = productDetailsService.findAllByProductDetailSearchProduct(inputProductDetail, pageable);
+        if(String.valueOf(pageProductDetails).equalsIgnoreCase("Page 1 of 0 containing UNKNOWN instances")){
+            return "redirect:/zephyr/shop";
+        }
+        model.addAttribute("listProductDetails", pageProductDetails);
+
+        model.addAttribute("viewClient", "/WEB-INF/view/include/shop.jsp");
+        return "layout/client";
+    }
 }

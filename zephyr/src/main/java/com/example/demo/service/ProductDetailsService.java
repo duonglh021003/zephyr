@@ -51,4 +51,5 @@ public interface ProductDetailsService {
 
     Page<ProductDetails> findAllByProductDetailSearch(String inputProductDetail, Pageable pageable);
 
+    Page<ProductDetails> findAllByProductDetailSearchProduct(String inputProductDetail, Pageable pageable);
 }

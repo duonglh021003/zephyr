@@ -4,11 +4,13 @@ import com.example.demo.entity.DeliveryNotes;
 import com.example.demo.entity.DetailDeliveryNotes;
 import com.example.demo.entity.DetailedInvoice;
 import com.example.demo.entity.Invoice;
+import com.example.demo.entity.ProductDetails;
 import com.example.demo.entity.Staff;
 import com.example.demo.service.DeliveryNotesService;
 import com.example.demo.service.DetailDeliveryNotesService;
 import com.example.demo.service.DetailedInvoiceService;
 import com.example.demo.service.InvoiceService;
+import com.example.demo.service.ProductDetailsService;
 import jakarta.servlet.http.HttpSession;
 import org.apache.poi.xwpf.usermodel.ParagraphAlignment;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
@@ -48,6 +50,9 @@ public class InvoiceController {
     @Autowired
     private DetailedInvoiceService detailedInvoiceService;
 
+    @Autowired
+    private ProductDetailsService productDetailsService;
+
     @GetMapping("/status-all")
     public String statusAll(Model model, HttpSession session) {
 
@@ -84,6 +89,7 @@ public class InvoiceController {
         model.addAttribute("view", "/WEB-INF/view/invoice/status-5.jsp");
         return "home/staff";
     }
+
     @GetMapping("/update-status-2")
     public String updateStatus2(@RequestParam("id") Long id,
                                 Model model, HttpSession session) {
@@ -145,6 +151,12 @@ public class InvoiceController {
                 .deliveryNotes(deliveryNotes)
                 .build();
         detailDeliveryNotesService.add(detailDeliveryNotesStatus3);
+
+        for (DetailedInvoice detailedInvoice : detailedInvoiceService.findAllByIdInvoice(invoice.getId())) {
+            ProductDetails productDetails = productDetailsService.detail(detailedInvoice.getProductDetails().getId());
+            productDetails.setInventory(productDetails.getInventory() - detailedInvoice.getQuantity());
+            productDetailsService.update(productDetails, productDetails.getId());
+        }
         exportToWord(invoice);
 
         return "redirect:/zephyr/admin/invoice/wait-for-confirmation";
@@ -152,7 +164,7 @@ public class InvoiceController {
 
     @GetMapping("/search")
     public String search(@RequestParam("inputInvoice") String inputInvoice,
-                         Model model){
+                         Model model) {
 
         model.addAttribute("listInvoiceStatusAll", invoiceService.findAllByInvoiceSearch(inputInvoice));
         model.addAttribute("view", "/WEB-INF/view/invoice/status-all.jsp");
@@ -161,7 +173,7 @@ public class InvoiceController {
 
     @GetMapping("/search-status")
     public String searchStatus(@RequestParam("status") Integer status,
-                               Model model){
+                               Model model) {
 
         model.addAttribute("listInvoiceStatusAll", invoiceService.findAllByStatusSearch(status));
         model.addAttribute("view", "/WEB-INF/view/invoice/status-all.jsp");
@@ -171,7 +183,7 @@ public class InvoiceController {
     @GetMapping("/search-date")
     public String searchDate(@RequestParam("dateBegin") LocalDate dateBegin,
                              @RequestParam("dateEnd") LocalDate dateEnd,
-                             Model model){
+                             Model model) {
 
         LocalDate localDate = LocalDate.now();
 
@@ -179,7 +191,7 @@ public class InvoiceController {
             model.addAttribute("error", "Ngày kết thúc phải lớn hơn ngày bắt đầu.");
             model.addAttribute("view", "/WEB-INF/view/invoice/status-all.jsp");
             return "home/staff";
-        }else if (dateEnd.isAfter(localDate)) {
+        } else if (dateEnd.isAfter(localDate)) {
             model.addAttribute("error", "Ngày kết thúc phải nhỏ hơn hoặc bằng ngày hiện tại.");
             model.addAttribute("view", "/WEB-INF/view/invoice/status-all.jsp");
             return "home/staff";

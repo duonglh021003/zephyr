@@ -30,4 +30,5 @@ public interface DetailedShoppingCartService {
 
     List<DetailedShoppingCart> findByIdProduct(ShoppingCart shoppingCart, ProductDetails productDetails);
 
+    DetailedShoppingCart findAllByIdShoppingCartAndProductDetails(Long idShoppingCart, Long idProductDetail);
 }

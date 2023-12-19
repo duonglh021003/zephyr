@@ -25,45 +25,12 @@
         <!-- Shop Sidebar Start -->
         <div class="col-lg-3 col-md-4">
             <!-- Price Start -->
-            <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Filter by price</span></h5>
-            <form action="/zephyr/shop/search" method="get">
-            <div class="bg-light p-4 mb-30">
 
-                    <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                        <input type="checkbox" name="minPrice" value="0"  class="custom-control-input" id="price-1">
-                        <input type="hidden" name="minPrice" value="100"  class="custom-control-input" id="price-1">
-                        <label class="custom-control-label" for="price-1">$0 - $100</label>
-                        <span class="badge border font-weight-normal">150</span>
-                    </div>
+                <!-- Price End -->
 
-                    <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                        <input type="checkbox" name="maxPrice" value="100" class="custom-control-input" id="price-2">
-                        <label class="custom-control-label" for="price-2">$100 - $200</label>
-                        <span class="badge border font-weight-normal">295</span>
-                    </div>
-                    <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                        <input type="checkbox" class="custom-control-input" id="price-3">
-                        <label class="custom-control-label" for="price-3">$200 - $300</label>
-                        <span class="badge border font-weight-normal">246</span>
-                    </div>
-                    <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                        <input type="checkbox" class="custom-control-input" id="price-4">
-                        <label class="custom-control-label" for="price-4">$300 - $400</label>
-                        <span class="badge border font-weight-normal">145</span>
-                    </div>
-                    <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between">
-                        <input type="checkbox" class="custom-control-input" id="price-5">
-                        <label class="custom-control-label" for="price-5">$400 - $500</label>
-                        <span class="badge border font-weight-normal">168</span>
-                    </div>
-                    <button> search </button>
-
-            </div>
-            <!-- Price End -->
-
-            <!-- Color Start -->
-            <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Filter by color</span></h5>
-            <div class="bg-light p-4 mb-30">
+                <!-- Color Start -->
+                <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Filter by color</span></h5>
+                <div class="bg-light p-4 mb-30">
 
 
                     <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
@@ -92,12 +59,12 @@
                         <span class="badge border font-weight-normal">168</span>
                     </div>
 
-            </div>
-            <!-- Color End -->
+                </div>
+                <!-- Color End -->
 
-            <!-- Size Start -->
-            <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Filter by size</span></h5>
-            <div class="bg-light p-4 mb-30">
+                <!-- Size Start -->
+                <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Filter by size</span></h5>
+                <div class="bg-light p-4 mb-30">
 
 
                     <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
@@ -127,7 +94,7 @@
                     </div>
 
 
-            </div>
+                </div>
             </form>
             <!-- Size End -->
         </div>
@@ -170,9 +137,9 @@
                     <div class="product-item bg-light mb-4">
                         <div class="product-img position-relative overflow-hidden">
 
-                            <img class="img-fluid w-100" style="height: 400px" src="/assets/images/client/${productDetails.images}" alt="" >
+                            <img class="img-fluid w-100"  src="/assets/images/client/${productDetails.images}" alt="" >
                             <div class="product-action">
-                                 <a class="btn btn-outline-dark btn-square" href="/zephyr/shopping-cart/add?id=${productDetails.id}" methods="get"
+                                <a class="btn btn-outline-dark btn-square" href="/zephyr/shopping-cart/add?id=${productDetails.id}" methods="get"
                                     onclick="if(!confirm('Bạn có muốn thêm sản phẩm vào giỏ hàng?')){return false}else{alert('thêm thành công');}"><i class="fa fa-shopping-cart"></i></a>
                                 <a class="btn btn-outline-dark btn-square" href="/zephyr/favourite-detail/add?id=${productDetails.id}" methods="get"
                                    onclick="if(!confirm('Bạn có muốn thêm sản phẩm vào danh sách yêu thích?')){return false}else{alert('thêm thành công');}"><i class="far fa-heart"></i></a>

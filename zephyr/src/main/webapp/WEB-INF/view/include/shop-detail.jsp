@@ -13,6 +13,7 @@
                 <a class="breadcrumb-item text-dark" href="#">Home</a>
                 <a class="breadcrumb-item text-dark" href="#">Shop</a>
                 <span class="breadcrumb-item active">Shop Detail</span>
+                <span style="color: red; margin-left: 200px"> ${errorInventory} </span>
             </nav>
         </div>
     </div>

@@ -10,6 +10,8 @@
 <div style="margin-bottom: 30px">
     <span><a href="/zephyr/admin/product-detail/index">product detail </a></span>
     <span style="color: #C0C0C0"> / add</span>
+    <span style="color: red; margin-left: 200px"> ${errorProductDetail} </span>
+
 </div>
 
 <form:form action="/zephyr/admin/product-detail/add" method="POST" modelAttribute="productDetail">

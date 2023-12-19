@@ -61,7 +61,7 @@
                             </td>
                             <td class="align-middle">
                                 <a  class="btn btn-danger" href="/zephyr/admin/size/delete?id=${size.id}"
-                                    onclick="if(!confirm('Bạn có muốn xoá?')){return false}else{alert('xoá thành công');}">delete</a>
+                                    onclick="if(!confirm('Bạn có muốn xoá?')){return false}else{alert('xoá thành công');}">cancel</a>
                             </td>
 
                         </tr>

@@ -12,6 +12,8 @@
             <nav class="breadcrumb bg-light mb-30">
                 <a class="breadcrumb-item text-dark" href="#">Home</a>
                 <span class="breadcrumb-item active">Shopping Cart</span>
+                <span style="color: red; margin-left: 200px"> ${errorPlus} </span>
+
             </nav>
         </div>
     </div>

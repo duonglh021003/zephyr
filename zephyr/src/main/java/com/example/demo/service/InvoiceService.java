@@ -92,4 +92,5 @@ public interface InvoiceService {
     List<Invoice> findAllByDateSearch(LocalDate dateBegin, LocalDate dateEnd);
 
     List<Invoice> findAllInvoiceClientNull();
+
 }

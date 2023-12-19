@@ -62,4 +62,9 @@ public class DetailedShoppingCartServiceImpl implements DetailedShoppingCartServ
     public List<DetailedShoppingCart> findByIdProduct(ShoppingCart shoppingCart, ProductDetails productDetails) {
         return detailedShoppingCartRepository.findByIDProduct(shoppingCart,productDetails);
     }
+
+    @Override
+    public DetailedShoppingCart findAllByIdShoppingCartAndProductDetails(Long idShoppingCart, Long idProductDetail) {
+        return detailedShoppingCartRepository.findAllByIdShoppingCartAndProductDetails(idShoppingCart, idProductDetail);
+    }
 }

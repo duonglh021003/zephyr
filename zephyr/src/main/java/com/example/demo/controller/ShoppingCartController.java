@@ -48,7 +48,7 @@ public class ShoppingCartController {
         Double total = 0.00;
 
         Client client = (Client) session.getAttribute("clientSession");
-        if(String.valueOf(client).equalsIgnoreCase("null")){
+        if (String.valueOf(client).equalsIgnoreCase("null")) {
             return "redirect:/zephyr/shopping-cart-null";
         }
         idShopping = client.getShoppingCart().getId();
@@ -63,7 +63,7 @@ public class ShoppingCartController {
         model.addAttribute("listDetailShoppingCart", list);
         model.addAttribute("listSubTotal", list);
 
-        for(Invoice invoice02 : invoiceService.findByInvoiceStatus1(client.getId())){
+        for (Invoice invoice02 : invoiceService.findByInvoiceStatus1(client.getId())) {
             invoiceService.delete(invoice02.getId());
         }
 
@@ -84,19 +84,44 @@ public class ShoppingCartController {
             return "redirect:/zephyr/shopping-cart";
         }
         detailedShoppingCartService.update(detailedShoppingCart, id);
-
         return "redirect:/zephyr/shopping-cart";
     }
 
     @PostMapping("/shopping-cart/plus")
     public String plus(@RequestParam("id") Long id,
-                       Model model) {
-
+                       Model model,HttpSession session) {
         Integer getQuantity = 0;
         DetailedShoppingCart detailedShoppingCart = detailedShoppingCartService.detail(id);
+        if(detailedShoppingCart.getQuantity() == 10){
+            Long idShopping;
+            Double total = 0.00;
+            Client client = (Client) session.getAttribute("clientSession");
+            if (String.valueOf(client).equalsIgnoreCase("null")) {
+                return "redirect:/zephyr/shopping-cart-null";
+            }
+            idShopping = client.getShoppingCart().getId();
+            List<DetailedShoppingCart> list = detailedShoppingCartService.findAllById(idShopping);
+            for (DetailedShoppingCart cart : list) {
+                total += cart.subTotal();
+            }
+            int listSize = list.size();
+            model.addAttribute("listSize", listSize);
+            session.setAttribute("listSize", listSize);
+            model.addAttribute("totalShoppingCart", total);
+            model.addAttribute("listDetailShoppingCart", list);
+            model.addAttribute("listSubTotal", list);
+            model.addAttribute("errorPlus", "số lượng mua phải nhỏ hơn hoặc bằng 10");
+            model.addAttribute("viewClient", "/WEB-INF/view/include/shopping-cart.jsp");
+            return "layout/client";
+        }
         getQuantity = detailedShoppingCart.getQuantity() + 1;
         detailedShoppingCart.setQuantity(getQuantity);
         detailedShoppingCartService.update(detailedShoppingCart, id);
+
+
+//        ProductDetails productDetails = productDetailsService.detail(detailedShoppingCart.getProductDetails().getId());
+//        productDetails.setInventory(productDetails.getInventory() - 1);
+//        productDetailsService.update(productDetails, productDetails.getId());
 
         return "redirect:/zephyr/shopping-cart";
     }
@@ -108,13 +133,11 @@ public class ShoppingCartController {
         LocalDate localDate = LocalDate.now();
         DetailedShoppingCart iddetailedShoppingCart = detailedShoppingCartService.detail(id);
         ProductDetails idProductDetails = productDetailsService.detail(id);
-        System.out.println("nnnnnnnnnnnnnnn  ll   "+idProductDetails);
         Client client = (Client) session.getAttribute("clientSession");
-        if(String.valueOf(client).equalsIgnoreCase("null")){
+        if (String.valueOf(client).equalsIgnoreCase("null")) {
             return "redirect:/zephyr/login";
         }
         List<DetailedShoppingCart> list = detailedShoppingCartService.findByIdProduct(client.getShoppingCart(), idProductDetails);
-        System.out.println("hhhhhhhhhhhhhhhhhhh     "+list);
         for (DetailedShoppingCart cart : list) {
             Integer getQuanti = cart.getQuantity() + 1;
             cart = DetailedShoppingCart.builder()
@@ -149,7 +172,14 @@ public class ShoppingCartController {
     }
 
     @GetMapping("/shopping-cart/delete")
-    public String delete(@RequestParam("id") Long id){
+    public String delete(@RequestParam("id") Long id) {
+
+//        DetailedShoppingCart detailedShoppingCart = detailedShoppingCartService.detail(id);
+//        System.out.println("aaaaaaaaaaaa    "+detailedShoppingCart);
+//        ProductDetails productDetails = productDetailsService.detail(detailedShoppingCart.getProductDetails().getId());
+//        productDetails.setInventory(productDetails.getInventory() + detailedShoppingCart.getQuantity());
+//        productDetailsService.update(productDetails, productDetails.getId());
+
         detailedShoppingCartService.delete(id);
         return "redirect:/zephyr/shopping-cart";
     }

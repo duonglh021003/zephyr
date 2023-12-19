@@ -235,6 +235,17 @@ public class OrderController {
             }
         }
 
+        if (String.valueOf(invoice.getClient()).equalsIgnoreCase("null") == false) {
+            Double getPoints = invoice.getIntoMoney() / 100 + invoice.getIntoMoney() * (client.getRank().getPercent() / 100);
+            Double getPointUsrs = getPoints + (client.getPointUsr() - invoice.getPoint());
+
+            Double accumulatedScore = invoice.getIntoMoney() / 100;
+            Double getAccumulatedScores = accumulatedScore + client.getAccumulatedScore();
+            client.setPointUsr(getPointUsrs);
+            client.setAccumulatedScore(getAccumulatedScores);
+            clientService.update(client, client.getId());
+        }
+
         invoiceService.update(invoice, invoice01.getId());
         return "redirect:/zephyr/shop";
     }

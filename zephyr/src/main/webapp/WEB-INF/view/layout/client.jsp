@@ -38,14 +38,16 @@
             </a>
         </div>
         <div class="col-lg-4 col-6 text-left">
-            <form action="">
+            <form action="/zephyr/shop/search-product">
                 <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Search for products">
-                    <div class="input-group-append">
+                        <input type="text" class="form-control" name="inputProductDetail" placeholder="Search for products">
+                        <div class="input-group-append">
                             <span class="input-group-text bg-transparent text-primary">
+                                <button>
                                 <i class="fa fa-search"></i>
+                                </button>
                             </span>
-                    </div>
+                        </div>
                 </div>
             </form>
         </div>
@@ -212,19 +214,19 @@
     <!-- Footer End -->
 </div>
 
-    <!-- Back to Top -->
-    <a href="#" class="btn btn-primary back-to-top"><i class="fa fa-angle-double-up"></i></a>
+<!-- Back to Top -->
+<a href="#" class="btn btn-primary back-to-top"><i class="fa fa-angle-double-up"></i></a>
 
 
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
-    <script src="${pageContext.request.contextPath}/assets/lib/easing/easing.min.js"></script>
-    <script src="${pageContext.request.contextPath}/assets/lib/owlcarousel/owl.carousel.min.js"></script>
-    <script src="${pageContext.request.contextPath}/assets/mail/jqBootstrapValidation.min.js"></script>
-    <script src="${pageContext.request.contextPath}/assets/mail/contact.js"></script>
-    <script src="${pageContext.request.contextPath}/assets/js/clientHome.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" referrerpolicy="no-referrer"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
-    <script src="${pageContext.request.contextPath}/assets/js/apiAddress.js"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/lib/easing/easing.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/lib/owlcarousel/owl.carousel.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/mail/jqBootstrapValidation.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/mail/contact.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/clientHome.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/apiAddress.js"></script>
 </body>
 </html>

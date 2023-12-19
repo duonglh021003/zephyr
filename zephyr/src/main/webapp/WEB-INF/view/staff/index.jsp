@@ -82,7 +82,7 @@
                             <td>
                                 <a class="btn btn-danger" href="/zephyr/admin/staff/delete?id=${staff.id}"
                                    onclick="if(!confirm('Bạn có muốn xoá?')){return false}else{alert('xoá thành công');}">
-                                    delete
+                                    cancel
                                 </a>
                             </td>
                         </tr>

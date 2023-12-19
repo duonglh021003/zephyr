@@ -19,7 +19,7 @@
             </a>
             <a  type="button" class="btn btn-warning" data-toggle="modal"
                 data-target="#myModalRestore" style="margin-bottom: 20px; margin-left: 10px" >
-                restore
+                khôi phục
             </a>
             <a type="button" class="btn btn-primary" data-toggle="modal"
                data-target="#myModalSearch" style="margin-bottom: 20px; margin-left: 10px">
@@ -31,18 +31,14 @@
                     <thead>
                     <tr>
                         <th> # </th>
-                        <th> product </th>
-                        <th> inventory </th>
-                        <th> importPrice </th>
-                        <th> price </th>
-                        <th> dateCreate </th>
-                        <th> dateUpdate </th>
-                        <th> userCreate </th>
-                        <th> userUpdate </th>
-                        <th> origin </th>
-                        <th> status </th>
+                        <th> sản phẩm </th>
+                        <th> số lượng </th>
+                        <th> giá nhập </th>
+                        <th> gía bán </th>
+                        <th> xuất xứ </th>
+                        <th> trạng thái </th>
                         <th> update </th>
-                        <th> delete </th>
+                        <th> cencal </th>
 
                     </tr>
                     </thead>
@@ -56,10 +52,6 @@
                             <td class="align-middle">${productDetail.inventory}</td>
                             <td class="align-middle">${productDetail.importPrice}00</td>
                             <td class="align-middle">${productDetail.price}00</td>
-                            <td class="align-middle">${productDetail.dateCreate}</td>
-                            <td class="align-middle">${productDetail.dateUpdate}</td>
-                            <td class="align-middle">${productDetail.userCreate}</td>
-                            <td class="align-middle">${productDetail.userUpdate}</td>
                             <td class="align-middle">${productDetail.origin.name}</td>
                             <td class="align-middle">${productDetail.status == 1 ? "đang hoạt động" : "ngừng hoạt động"}</td>
                             <td class="align-middle">
@@ -69,7 +61,7 @@
                             </td>
                             <td class="align-middle">
                                 <a  class="btn btn-danger" href="/zephyr/admin/product-detail/delete?id=${productDetail.id}"
-                                   onclick="if(!confirm('Bạn có muốn xoá?')){return false}else{alert('xoá thành công');}">delete</a>
+                                   onclick="if(!confirm('Bạn có muốn xoá?')){return false}else{alert('xoá thành công');}">cancel</a>
                             </td>
                         </tr>
                     </c:forEach>

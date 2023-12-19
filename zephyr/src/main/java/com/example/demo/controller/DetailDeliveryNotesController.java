@@ -99,25 +99,13 @@ public class DetailDeliveryNotesController {
         }
         Invoice invoice = invoiceService.detail(deliveryNotes.getInvoice().getId());
 
-        if(invoice.getStatus() == 4){
-            if (String.valueOf(invoice.getClient()).equalsIgnoreCase("null") == false) {
-                Client client = clientService.detail(invoice.getClient().getId());
-                Double getPoints = invoice.getIntoMoney() / 100 + invoice.getIntoMoney() * (client.getRank().getPercent() / 100);
-                Double getPointUsrs = getPoints + (client.getPointUsr() - invoice.getPoint());
-
-                Double accumulatedScore = invoice.getIntoMoney() / 100;
-                Double getAccumulatedScores = accumulatedScore + client.getAccumulatedScore();
-                client.setPointUsr(getPointUsrs);
-                client.setAccumulatedScore(getAccumulatedScores);
-                clientService.update(client, client.getId());
-            }
-
-            for (DetailedInvoice detailedInvoice : detailedInvoiceService.findAllByIdInvoice(invoice.getId())) {
-                ProductDetails productDetails = productDetailsService.detail(detailedInvoice.getProductDetails().getId());
-                productDetails.setInventory(productDetails.getInventory() - detailedInvoice.getQuantity());
-                productDetailsService.update(productDetails, productDetails.getId());
-            }
-        }
+//        if(invoice.getStatus() == 3){
+//            for (DetailedInvoice detailedInvoice : detailedInvoiceService.findAllByIdInvoice(invoice.getId())) {
+//                ProductDetails productDetails = productDetailsService.detail(detailedInvoice.getProductDetails().getId());
+//                productDetails.setInventory(productDetails.getInventory() - detailedInvoice.getQuantity());
+//                productDetailsService.update(productDetails, productDetails.getId());
+//            }
+//        }
 
         invoice.setStatus(status);
         DeliveryNotes notes = deliveryNotesService.detail(deliveryNotes.getDeliveryNotes().getId());
