@@ -121,4 +121,11 @@ public class LoginClientController {
         return clientService.SignIn(gmail, password);
     }
 
+    @GetMapping("/sign-out")
+    public String signOut(Model model, HttpSession session){
+        Client client = (Client) session.getAttribute("clientSession");
+        session.removeAttribute("clientSession");
+        return "redirect:/zephyr/shop";
+    }
+
 }

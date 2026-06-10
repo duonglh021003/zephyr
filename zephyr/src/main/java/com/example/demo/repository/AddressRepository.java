@@ -11,6 +11,7 @@ import java.util.List;
 
 @Repository
 public interface AddressRepository extends JpaRepository<Address, Long> {
+
     @Query(value = "select ca.*\n" +
             "from\n" +
             "invoice i join client_address ca on i.id_client_address = ca.id\n" +

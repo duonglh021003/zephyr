@@ -1,7 +1,5 @@
 package com.example.demo.controller;
 
-import com.example.demo.entity.Address;
-import com.example.demo.entity.Client;
 import com.example.demo.entity.DeliveryNotes;
 import com.example.demo.entity.DetailDeliveryNotes;
 import com.example.demo.entity.DetailedInvoice;
@@ -14,6 +12,7 @@ import com.example.demo.service.DetailDeliveryNotesService;
 import com.example.demo.service.DetailedInvoiceService;
 import com.example.demo.service.InvoiceService;
 import com.example.demo.service.ProductDetailsService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -92,7 +91,7 @@ public class DetailDeliveryNotesController {
             name = "Đã Nhận Được Hàng ";
             getprogresss = "5.png";
             status = 5;
-        }else if (deliveryNotes.getStatus() == 5) {
+        } else if (deliveryNotes.getStatus() == 5) {
             name = "Đơn Hàng Hoàn Thành ";
             getprogresss = "6.png";
             status = 6;
@@ -124,5 +123,19 @@ public class DetailDeliveryNotesController {
         Long idInvoice = deliveryNotes.getInvoice().getId();
         return "redirect:/zephyr/admin/detail-delivery-notes/detail?id=" + idInvoice;
 
+    }
+
+    @GetMapping("/cancel")
+    public String invoiceDelete(@RequestParam("id") Long id, HttpSession session) {
+        Invoice invoice = invoiceService.detail(id);
+        invoice.setStatus(7);
+        for (DetailedInvoice detailedInvoice : detailedInvoiceService.findAllByIdInvoice(invoice.getId())) {
+            ProductDetails productDetails = productDetailsService.detail(detailedInvoice.getProductDetails().getId());
+            productDetails.setInventory(productDetails.getInventory() + detailedInvoice.getQuantity());
+            productDetailsService.update(productDetails, productDetails.getId());
+        }
+        invoiceService.update(invoice, invoice.getId());
+
+        return "redirect:/zephyr/admin/sell/index";
     }
 }

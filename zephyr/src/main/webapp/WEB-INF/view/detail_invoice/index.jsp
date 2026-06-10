@@ -28,7 +28,6 @@
                                 <th>Price</th>
                                 <th>Quantity</th>
                                 <th>Sub total</th>
-                                <th>status</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -42,7 +41,6 @@
                                     <td class="align-middle">${detailInvoice.unitPrice}00</td>
                                     <td class="align-middle">${detailInvoice.quantity}</td>
                                     <td class="align-middle">${detailInvoice.capitalSum}00</td>
-                                    <td class="align-middle">${detailInvoice.status}</td>
 
                                 </tr>
                             </c:forEach>
@@ -111,7 +109,6 @@
                     </c:forEach>
                 </table>
             </div>
-
 
         </div>
     </div>

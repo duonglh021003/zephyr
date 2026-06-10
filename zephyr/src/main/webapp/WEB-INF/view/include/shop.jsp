@@ -150,7 +150,7 @@
                         <div class="text-center py-4">
                             <a class="h6 text-decoration-none text-truncate" href="/zephyr/shop/shop-detail?id=${productDetails.product.id}">${productDetails.product.name}</a>
                             <div class="d-flex align-items-center justify-content-center mt-2">
-                                <h5>${productDetails.price}00 đ</h5><h6 class="text-muted ml-2"><del>900.000 đ</del></h6>
+                                <h5>${productDetails.price}00 đ</h5>
                             </div>
                             <div class="d-flex align-items-center justify-content-center mb-1">
 

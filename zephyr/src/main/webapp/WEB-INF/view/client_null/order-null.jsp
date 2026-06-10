@@ -5,6 +5,16 @@
     <title>Title</title>
 </head>
 <body>
+<div class="container-fluid">
+    <div class="row px-xl-5">
+        <div class="col-12">
+            <nav class="breadcrumb bg-light mb-30">
+
+                <span style="color: red; margin-left: 500px"> ${errorInvoice} </span>
+            </nav>
+        </div>
+    </div>
+</div>
 <div class="container-fluid" >
     <div class="row px-xl-5">
         <div class="col-12">
@@ -191,16 +201,6 @@
                             <div class="d-flex justify-content-between mb-3">
                                 <p>tổng tiền hoá đơn: </p>
                                 <input style="border: none;outline: none;" name="totalInvoice" value="${invoice.totalInvoice}00">
-                            </div>
-                            <hr>
-                            <div class="d-flex justify-content-between mb-3">
-                                <p>điểm sử dụng: </p>
-                                <input style="border: none;outline: none;" name="point" value="${invoice.point}00">
-                            </div>
-                            <hr>
-                            <div class="d-flex justify-content-between mb-3">
-                                <p>tiền phiếu giảm giá: </p>
-                                <input style="border: none;outline: none;"  value="${invoice.detailVoucherClient.reducedPrice}00">
                             </div>
                             <hr>
                             <div class="d-flex justify-content-between mb-3">

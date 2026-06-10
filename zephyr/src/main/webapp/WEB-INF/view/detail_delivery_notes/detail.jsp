@@ -52,6 +52,16 @@
     </div>
 </div>
 <div style="margin-left: 80%; margin-top: 20px;margin-bottom: 20px">
+    <c:forEach items="${ listInvoice }" var="invoice" varStatus="i">
+        <br>
+        <a type="button" class="btn btn-danger"
+           href="/zephyr/admin/detail-delivery-notes/cancel?id=${invoice.id}"
+           onclick="if(!confirm('Bạn có chắc chắn muốn huỷ đơn hàng này không?')){return false}else{alert('huỷ thành công');}">
+            cancel
+        </a>
+    </c:forEach>
+</div>
+<div style="margin-left: 80%; margin-top: 20px;margin-bottom: 20px">
     <c:forEach items="${ listDetailDeliveryNote }" var="detailDeliceryNote">
     <a class="btn btn-success" type="button" href="/zephyr/admin/detail-delivery-notes/add?id=${detailDeliceryNote.id}"
        onclick="if(!confirm('Bạn có muốn sang bước kế tiếp?')){return false}else{alert('thành công');}">
@@ -130,7 +140,7 @@
                         <thead>
                         <tr>
                             <th>totalInvoice</th>
-                            <th>${invoice.totalInvoice}</th>
+                            <th>${invoice.totalInvoice}00</th>
                         </tr>
                         </thead>
 
@@ -165,6 +175,7 @@
                 </table>
             </div>
         </div>
+
     </div>
 </div>
 

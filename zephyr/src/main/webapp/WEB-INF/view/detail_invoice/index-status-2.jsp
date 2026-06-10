@@ -28,7 +28,6 @@
                                 <th>Price</th>
                                 <th>Quantity</th>
                                 <th>Sub total</th>
-                                <th>status</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -42,7 +41,6 @@
                                     <td class="align-middle">${detailInvoice.unitPrice}00</td>
                                     <td class="align-middle">${detailInvoice.quantity}</td>
                                     <td class="align-middle">${detailInvoice.capitalSum}00</td>
-                                    <td class="align-middle">${detailInvoice.status}</td>
 
                                 </tr>
                             </c:forEach>
@@ -77,7 +75,7 @@
                         <thead>
                         <tr>
                             <th>totalInvoice</th>
-                            <th>${invoice.totalInvoice}</th>
+                            <th>${invoice.totalInvoice}00</th>
                         </tr>
                         </thead>
 
@@ -111,7 +109,16 @@
                     </c:forEach>
                 </table>
             </div>
-
+            <div>
+                <c:forEach items="${ listInvoice }" var="invoice" varStatus="i">
+                    <br>
+                    <a type="button" class="btn btn-danger"
+                       href="/zephyr/admin/invoice/wait-for-confirmation/cancel?id=${invoice.id}"
+                       onclick="if(!confirm('Bạn có chắc chắn muốn huỷ đơn hàng này không?')){return false}else{alert('huỷ thành công');}">
+                        cancel
+                    </a>
+                </c:forEach>
+            </div>
             <div>
                 <c:forEach items="${ listInvoice }" var="invoice">
                     <a type="button" href="/zephyr/admin/invoice/update-status-2?id=${invoice.id}"

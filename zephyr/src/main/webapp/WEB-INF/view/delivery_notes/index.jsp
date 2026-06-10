@@ -32,7 +32,7 @@
                             <td class="align-middle">${invoiceStaff.code}</td>
                             <td class="align-middle">${invoiceStaff.hourMinute}</td>
                             <td class="align-middle">${invoiceStaff.dateCreate}</td>
-                            <td class="align-middle">${invoiceStaff.intoMoney}</td>
+                            <td class="align-middle">${invoiceStaff.intoMoney}00</td>
                             <td class="align-middle">${invoiceStaff.getByStatus()}</td>
                             <td class="align-middle">
                                 <a href="/zephyr/admin/detail-delivery-notes/detail?id=${invoiceStaff.id}">

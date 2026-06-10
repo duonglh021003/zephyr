@@ -62,10 +62,10 @@
 
                     <div class="dropdown-menu dropdown-menu-right">
                         <a class="dropdown-item" href="/zephyr/account">
-                            <span><i class="mdi mdi-account-circle"></i></span>
                             <span>account</span>
                         </a>
                         <a class="dropdown-item" href="/zephyr/login">Sign in</a>
+                        <a class="dropdown-item" href="/zephyr/sign-out">Sign out</a>
                     </div>
                 </div>
             </div>

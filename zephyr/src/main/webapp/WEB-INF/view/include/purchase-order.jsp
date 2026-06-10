@@ -101,6 +101,10 @@
                                                     onclick="if(!confirm('Bạn có muốn huỷ đơn hàng này không?')){return false}else{alert('huỷ thành công');}">cancel invoice
                                             </button>
                                         </a>
+
+                                        <a href="/zephyr/purchase-order/update?id=${invoiceStatus1.id}">
+                                            <button class="btn btn-info">update</button>
+                                        </a>
                                     </td>
 
                                 </tr>

@@ -75,7 +75,7 @@ public class ClientNullController {
         DetailedShoppingCart shoppingCartNull = (DetailedShoppingCart) session.getAttribute("clientNullSession");
 
         Double getCapitalSum = shoppingCartNull.getQuantity() * shoppingCartNull.getUnitPrice();
-        Double intoMoney = getCapitalSum - 15.0;
+        Double intoMoney = getCapitalSum + 15.0;
 
         Invoice invoice = Invoice.builder()
                 .code(getNextCode())
@@ -106,7 +106,6 @@ public class ClientNullController {
                                   @RequestParam("hourMinute") String hourMinute,
                                   @RequestParam("dateCreate") LocalDate dateCreate,
                                   @RequestParam("totalInvoice") Double totalInvoice,
-                                  @RequestParam("point") Double point,
                                   @RequestParam("shippingMoney") Double shippingMoney,
                                   @RequestParam("intoMoney") Double intoMoney,
                                   @RequestParam("note") String note,
@@ -116,6 +115,16 @@ public class ClientNullController {
         Invoice invoice = invoiceService.detailCode(code);
         List<Address> list = addressService.findAllClientNull();
         Address address = list.isEmpty() ? null : list.get(0);
+        System.out.println("aaaaaaaaaaaaaaaa            "+address);
+        if(String.valueOf(invoice.getAddress()).equalsIgnoreCase("null")){
+
+            model.addAttribute("errorInvoice", "bạn chưa nhập địa chỉ");
+            List<Invoice> listInvoice = invoiceService.findAllInvoiceClientNull();
+            model.addAttribute("listInvoice", listInvoice);
+
+            model.addAttribute("viewClient", "/WEB-INF/view/client_null/order-null.jsp");
+            return "layout/client";
+        }
         Payment payment01 = paymentService.detail(payment);
         DetailedShoppingCart detailedShoppingCart = (DetailedShoppingCart)  session.getAttribute("clientNullSession");
 
@@ -173,8 +182,13 @@ public class ClientNullController {
         addressService.add(address);
 
         List<Invoice> listInvoice = invoiceService.findAllInvoiceClientNull();
+        Invoice invoice = listInvoice.isEmpty() ? null : listInvoice.get(0);
+        invoice.setAddress(address);
+        invoiceService.update(invoice, invoice.getId());
         model.addAttribute("listInvoice", listInvoice);
         model.addAttribute("listAddress", addressService.findAllClientNull());
+
+
         model.addAttribute("viewClient", "/WEB-INF/view/client_null/order-null.jsp");
         return "layout/client";
 

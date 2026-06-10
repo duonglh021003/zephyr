@@ -201,6 +201,16 @@ public class InvoiceController {
         return "home/staff";
     }
 
+    @GetMapping("/wait-for-confirmation/cancel")
+    public String invoiceDelete(@RequestParam("id") Long id,HttpSession session) {
+        Staff staff = (Staff) session.getAttribute("staffSession");
+        Invoice invoice = invoiceService.detail(id);
+        invoice.setStatus(7);
+        invoice.setStaff(staff);
+        invoiceService.update(invoice, invoice.getId());
+
+        return "redirect:/zephyr/admin/sell/index";
+    }
 
     public void exportToWord(Invoice invoice) {
         List<DetailedInvoice> list = detailedInvoiceService.findAllByIdInvoice(invoice.getId());
